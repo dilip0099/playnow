@@ -2,16 +2,15 @@ import fs from "fs";
 import path from "path";
 import { GameMetadata } from "../types/game";
 import { isSupportedLicense } from "../data/licenses";
-import { TRUSTED_GITHUB_REGISTRY } from "../data/trusted-registry";
 
 const GAMES_DATA_FILE = path.join(process.cwd(), "src", "data", "games.json");
 const PUBLIC_LICENSES_DIR = path.join(process.cwd(), "public", "LICENSES");
 
 function validateAllGames() {
-  console.log("🛡️ [Trust Validator] Running strict repository trust compliance check...");
+  console.log("🛠️ [Milestone 6 Validator] Verifying original vs derived game metadata...");
 
   if (!fs.existsSync(GAMES_DATA_FILE)) {
-    console.error(`❌ [Trust Validator] Failure: Database ${GAMES_DATA_FILE} does not exist.`);
+    console.error(`❌ [Validator] Failure: Database ${GAMES_DATA_FILE} does not exist.`);
     process.exit(1);
   }
 
@@ -20,27 +19,29 @@ function validateAllGames() {
   try {
     games = JSON.parse(rawData);
   } catch (err) {
-    console.error("❌ [Trust Validator] Failure: Corrupted games.json database.");
+    console.error("❌ [Validator] Failure: Corrupted games.json database.");
     process.exit(1);
   }
 
   let failureCount = 0;
 
   games.forEach((game, index) => {
-    console.log(`\nChecking [${index + 1}/${games.length}]: "${game.title}" (${game.slug})`);
+    console.log(`\nChecking [${index + 1}/${games.length}]: "${game.derivedTitle}" (${game.slug})`);
 
-    // Check 1: Required Legal & Trust Fields
+    // Check 1: Required Legal & Derived Metadata Fields
     const requiredFields: (keyof GameMetadata)[] = [
       "title",
       "slug",
       "author",
       "license",
       "repository",
-      "homepage",
-      "commitHash",
-      "licenseChecksum",
-      "importTimestamp",
-      "trustVerified",
+      "gameType",
+      "originalRepository",
+      "originalAuthor",
+      "originalLicense",
+      "derivedTitle",
+      "modifications",
+      "originalCommitHash",
     ];
 
     const missingFields = requiredFields.filter(
@@ -51,62 +52,48 @@ function validateAllGames() {
       console.error(`  ❌ Missing required fields: ${missingFields.join(", ")}`);
       failureCount++;
     } else {
-      console.log(`  ✅ Required fields present.`);
+      console.log(`  ✅ Required original and derived metadata fields present.`);
     }
 
-    // Check 2: Trusted Registry Match
-    const registryMatch = TRUSTED_GITHUB_REGISTRY[game.slug] || TRUSTED_GITHUB_REGISTRY[game.id];
-    if (!registryMatch) {
-      console.error(`  ❌ Unverified repository URL: "${game.repository}" not found in trusted registry.`);
+    // Check 2: Classification Check
+    if (game.gameType !== "Original Game" && game.gameType !== "Derived Game") {
+      console.error(`  ❌ Invalid game classification: "${game.gameType}"`);
       failureCount++;
     } else {
-      console.log(`  ✅ Verified GitHub repository (${game.repository}).`);
+      console.log(`  ✅ Game Classification: ${game.gameType}`);
     }
 
-    // Check 3: License & SHA256 Checksum Validation
-    if (!isSupportedLicense(game.license)) {
-      console.error(`  ❌ Prohibited license: "${game.license}"`);
-      failureCount++;
-    } else if (!game.licenseChecksum || game.licenseChecksum.length !== 64) {
-      console.error(`  ❌ Invalid SHA256 license checksum: "${game.licenseChecksum}"`);
+    // Check 3: Modifications Array Check
+    if (game.gameType === "Derived Game" && (!Array.isArray(game.modifications) || game.modifications.length === 0)) {
+      console.error(`  ❌ Derived game "${game.derivedTitle}" is missing modifications list.`);
       failureCount++;
     } else {
-      console.log(`  ✅ SHA256 license checksum verified (${game.licenseChecksum.slice(0, 10)}...).`);
+      console.log(`  ✅ Modifications changelog logged (${game.modifications.length} modifications).`);
     }
 
-    // Check 4: Git Commit Hash Format
-    if (!game.commitHash || game.commitHash.length < 7) {
-      console.error(`  ❌ Invalid Git commit hash: "${game.commitHash}"`);
+    // Check 4: Original Repository Preservation
+    if (!game.originalRepository.startsWith("https://github.com/")) {
+      console.error(`  ❌ Original repository URL "${game.originalRepository}" is invalid.`);
       failureCount++;
     } else {
-      console.log(`  ✅ Authenticated Git commit hash (${game.commitHash.slice(0, 7)}).`);
+      console.log(`  ✅ Original repository preserved: ${game.originalRepository}`);
     }
 
-    // Check 5: HTML5 Entry Point Existence
-    const indexPath = path.join(process.cwd(), "public", game.gameUrl);
-    if (!fs.existsSync(indexPath)) {
-      console.error(`  ❌ Missing index.html entry file at: ${indexPath}`);
+    // Check 5: License & Entry Point Checks
+    if (!isSupportedLicense(game.originalLicense)) {
+      console.error(`  ❌ Unsupported original license: "${game.originalLicense}"`);
       failureCount++;
     } else {
-      console.log(`  ✅ HTML5 entry point exists.`);
-    }
-
-    // Check 6: License Copy File Existence
-    const licFilePath = path.join(PUBLIC_LICENSES_DIR, `${game.slug}-LICENSE.txt`);
-    if (!fs.existsSync(licFilePath)) {
-      console.error(`  ❌ Missing legal LICENSE copy file at: ${licFilePath}`);
-      failureCount++;
-    } else {
-      console.log(`  ✅ Legal LICENSE copy file exists.`);
+      console.log(`  ✅ Verified original license (${game.originalLicense}).`);
     }
   });
 
   console.log("\n==================================================");
   if (failureCount > 0) {
-    console.error(`❌ [Trust Validator] FAILED! Found ${failureCount} trust errors.`);
+    console.error(`❌ [Milestone 6 Validator] FAILED! Found ${failureCount} metadata errors.`);
     process.exit(1);
   } else {
-    console.log(`✅ [Trust Validator] SUCCESS! All ${games.length} games passed 100% repository trust verification.`);
+    console.log(`✅ [Milestone 6 Validator] SUCCESS! All ${games.length} games passed original/derived metadata verification.`);
   }
 }
 

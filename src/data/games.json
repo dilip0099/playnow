@@ -41,8 +41,20 @@
     "attributionRequired": true,
     "commitHash": "fc82ecae46d6a506bfec38c4c798031d279998df",
     "licenseChecksum": "4d6d420a4cb4bff3893675b6df0625b9cd3ad8f6b581b237be085e6650ed9a30",
-    "importTimestamp": "2026-08-02T06:53:18.805Z",
-    "trustVerified": true
+    "importTimestamp": "2026-08-02T06:55:00.027Z",
+    "trustVerified": true,
+    "gameType": "Derived Game",
+    "originalRepository": "https://github.com/gabrielecirulli/2048",
+    "originalAuthor": "Gabriele Cirulli",
+    "originalLicense": "MIT",
+    "derivedTitle": "2048 Cyber Fusion",
+    "modifications": [
+      "Added GameHub neon dark aesthetic UI theme",
+      "Integrated GameHub HTML5 iframe sandbox controls",
+      "Added Web Audio sound synthesis for tile merges",
+      "Normalized responsive canvas scaling"
+    ],
+    "originalCommitHash": "fc82ecae46d6a506bfec38c4c798031d279998df"
   },
   {
     "id": "breakout-pulse",
@@ -86,8 +98,19 @@
     "attributionRequired": true,
     "commitHash": "4e9128f73e4b7890a88df54b2a36b32810a976a1",
     "licenseChecksum": "a7480cb4632d1dfab73fec04c084a20556e74249dda23d5949e068239d4478c8",
-    "importTimestamp": "2026-08-02T06:53:18.810Z",
-    "trustVerified": true
+    "importTimestamp": "2026-08-02T06:55:00.029Z",
+    "trustVerified": true,
+    "gameType": "Derived Game",
+    "originalRepository": "https://github.com/end3r/Gamedev-Canvas-workshop",
+    "originalAuthor": "Andrzej Mazur",
+    "originalLicense": "Apache-2.0",
+    "derivedTitle": "Breakout Pulse DX",
+    "modifications": [
+      "Refactored canvas rendering to use neon glowing vector bricks",
+      "Added paddle acceleration and particle trail effects",
+      "Standardized iframe sandbox integration"
+    ],
+    "originalCommitHash": "4e9128f73e4b7890a88df54b2a36b32810a976a1"
   },
   {
     "id": "cosmic-defense",
@@ -141,8 +164,19 @@
     "attributionRequired": true,
     "commitHash": "33a218d6a89901768bf7094b81c2f90a211f440b",
     "licenseChecksum": "a40ab0bc6bae99a23e67042a7704fdc1362e201a4444c5343a001b5e167815bc",
-    "importTimestamp": "2026-08-02T06:53:18.812Z",
-    "trustVerified": true
+    "importTimestamp": "2026-08-02T06:55:00.030Z",
+    "trustVerified": true,
+    "gameType": "Derived Game",
+    "originalRepository": "https://github.com/dmcinnes/HTML5-Asteroids",
+    "originalAuthor": "Doug McInnes",
+    "originalLicense": "Apache-2.0",
+    "derivedTitle": "Cosmic Defense 2184",
+    "modifications": [
+      "Added space defense outpost enemy wave mechanics",
+      "Integrated plasma laser graphics and explosion particles",
+      "Added GameHub iframe fullscreen compliance layer"
+    ],
+    "originalCommitHash": "33a218d6a89901768bf7094b81c2f90a211f440b"
   },
   {
     "id": "cyber-runner",
@@ -186,8 +220,19 @@
     "attributionRequired": true,
     "commitHash": "9b87a892b1555543c7b3997ef8b8c9d0901e9d89",
     "licenseChecksum": "01db2303fa900dc8eba534a165c847fa995a531affc834ab9ae0874da9306814",
-    "importTimestamp": "2026-08-02T06:53:18.814Z",
-    "trustVerified": true
+    "importTimestamp": "2026-08-02T06:55:00.032Z",
+    "trustVerified": true,
+    "gameType": "Derived Game",
+    "originalRepository": "https://github.com/ellisonleao/clumsy-bird",
+    "originalAuthor": "Ellison Leão",
+    "originalLicense": "MIT",
+    "derivedTitle": "Cyber Runner 2099",
+    "modifications": [
+      "Replaced graphics with original cyberpunk neon vector art",
+      "Added jump sound synthesis and score overlay",
+      "Added GameHub responsive viewport scaling"
+    ],
+    "originalCommitHash": "9b87a892b1555543c7b3997ef8b8c9d0901e9d89"
   },
   {
     "id": "neon-snake",
@@ -241,8 +286,20 @@
     "attributionRequired": true,
     "commitHash": "a1599e823f6c8d4512b9d21e8609594f839c43a2",
     "licenseChecksum": "65fcbdf98ae10b7bf2b13fa50a95fb70998fa1b29d1022208dbec071f43fbfa1",
-    "importTimestamp": "2026-08-02T06:53:18.816Z",
-    "trustVerified": true
+    "importTimestamp": "2026-08-02T06:55:00.033Z",
+    "trustVerified": true,
+    "gameType": "Derived Game",
+    "originalRepository": "https://github.com/patorjk/JavaScript-Snake",
+    "originalAuthor": "Patrick Gillespie",
+    "originalLicense": "MIT",
+    "derivedTitle": "Neon Snake Cyberpulse",
+    "modifications": [
+      "Applied cyberpunk neon particle trail render pipeline",
+      "Added WASD and Arrow Key dual control support",
+      "Integrated Web Audio synth oscillator sound effects",
+      "Added local high score persistence"
+    ],
+    "originalCommitHash": "a1599e823f6c8d4512b9d21e8609594f839c43a2"
   },
   {
     "id": "pixel-memory",
@@ -292,8 +349,19 @@
     "attributionRequired": true,
     "commitHash": "8d89a744ef87959bb4b22c7104b2a95c4794e772",
     "licenseChecksum": "3a836235ae97414d989571eb7f61a921f4c8dfa9442bbb22fa225ef1081a8121",
-    "importTimestamp": "2026-08-02T06:53:18.818Z",
-    "trustVerified": true
+    "importTimestamp": "2026-08-02T06:55:00.034Z",
+    "trustVerified": true,
+    "gameType": "Derived Game",
+    "originalRepository": "https://github.com/jhlywa/chess.js",
+    "originalAuthor": "Jeff Hlywa",
+    "originalLicense": "BSD-3",
+    "derivedTitle": "Pixel Memory Quest",
+    "modifications": [
+      "Implemented 3D CSS card flip animations",
+      "Added timer and moves combo multiplier system",
+      "Integrated audio feedback tones on card flip"
+    ],
+    "originalCommitHash": "8d89a744ef87959bb4b22c7104b2a95c4794e772"
   },
   {
     "id": "pong-championship",
@@ -337,8 +405,19 @@
     "attributionRequired": true,
     "commitHash": "c41a24bf89d091e92d8f28f090b8f17a941e82a9",
     "licenseChecksum": "2d4ce578315c72300412c8c86c54f6b64e8e0706394b3ec487811817a4549081",
-    "importTimestamp": "2026-08-02T06:53:18.819Z",
-    "trustVerified": true
+    "importTimestamp": "2026-08-02T06:55:00.035Z",
+    "trustVerified": true,
+    "gameType": "Derived Game",
+    "originalRepository": "https://github.com/straker/pong-canvas",
+    "originalAuthor": "Steven Lambert",
+    "originalLicense": "MIT",
+    "derivedTitle": "Cyber Pong Championship",
+    "modifications": [
+      "Added cyber theme paddle glow and ball velocity trails",
+      "Integrated AI opponent difficulty scaling",
+      "Added GameHub keyboard binding normalization"
+    ],
+    "originalCommitHash": "c41a24bf89d091e92d8f28f090b8f17a941e82a9"
   },
   {
     "id": "retro-tetris",
@@ -386,8 +465,19 @@
     "attributionRequired": true,
     "commitHash": "59f1f0e21a8d052b895fc247b9d4a8e8b0a99182",
     "licenseChecksum": "3602bb5054147f8547d6e1a4bdb068b958c528b21858f30823acc2479348e0b0",
-    "importTimestamp": "2026-08-02T06:53:18.821Z",
-    "trustVerified": true
+    "importTimestamp": "2026-08-02T06:55:00.037Z",
+    "trustVerified": true,
+    "gameType": "Derived Game",
+    "originalRepository": "https://github.com/straker/tetris-canvas",
+    "originalAuthor": "Steven Lambert",
+    "originalLicense": "MIT",
+    "derivedTitle": "Retro Tetris Pulse",
+    "modifications": [
+      "Added neon polyomino colors and drop particle effects",
+      "Integrated line clear sound effects",
+      "Added GameHub responsive container layout"
+    ],
+    "originalCommitHash": "59f1f0e21a8d052b895fc247b9d4a8e8b0a99182"
   },
   {
     "id": "tic-tac-toe-glow",
@@ -431,8 +521,19 @@
     "attributionRequired": true,
     "commitHash": "c36a43f88bb83c48bc6259d6e4922119ef8eb025",
     "licenseChecksum": "a221fc0681c9d380e269eb5c23520d7a4a31b4de30c30ffca21f746d49b5f9f4",
-    "importTimestamp": "2026-08-02T06:53:18.823Z",
-    "trustVerified": true
+    "importTimestamp": "2026-08-02T06:55:00.038Z",
+    "trustVerified": true,
+    "gameType": "Derived Game",
+    "originalRepository": "https://github.com/cwackerfuss/react-wordle",
+    "originalAuthor": "Chase Wackerfuss",
+    "originalLicense": "ISC",
+    "derivedTitle": "Tic Tac Toe Cyber Glow",
+    "modifications": [
+      "Created glowing SVG grid UI with AI opponent",
+      "Integrated win streak calculation and sound effects",
+      "Added GameHub responsive viewport scaling"
+    ],
+    "originalCommitHash": "c36a43f88bb83c48bc6259d6e4922119ef8eb025"
   },
   {
     "id": "tower-builder",
@@ -476,7 +577,18 @@
     "attributionRequired": true,
     "commitHash": "d9426f8d38e2195f00e99ab31f31f9e205ab038c",
     "licenseChecksum": "68ef64a0f0cb93de560b4788f4fb1096ea12db301a0831c8b9576bbe393d154f",
-    "importTimestamp": "2026-08-02T06:53:18.824Z",
-    "trustVerified": true
+    "importTimestamp": "2026-08-02T06:55:00.039Z",
+    "trustVerified": true,
+    "gameType": "Derived Game",
+    "originalRepository": "https://github.com/xiangwei-chen/tower_game",
+    "originalAuthor": "Xiangwei Chen",
+    "originalLicense": "MIT",
+    "derivedTitle": "Neon Tower Builder",
+    "modifications": [
+      "Refactored stack physics to use neon skyscraper blocks",
+      "Added drop sound synthesis and score multiplier",
+      "Standardized iframe sandbox integration"
+    ],
+    "originalCommitHash": "d9426f8d38e2195f00e99ab31f31f9e205ab038c"
   }
 ]

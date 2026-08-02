@@ -1,12 +1,11 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ChevronRight, Home, Star, Eye, Calendar, User, Tag } from "lucide-react";
+import { ChevronRight, Home, Star, Eye, Calendar, User, Tag, GitBranch, ExternalLink, ShieldCheck } from "lucide-react";
 import { getGameBySlug, getRelatedGames, getAllGames } from "@/lib/games";
 import { GamePlayer } from "@/components/games/GamePlayer";
 import { GameControls } from "@/components/games/GameControls";
 import { GameCard } from "@/components/games/GameCard";
-import { GameMetadata } from "@/types/game";
 
 interface GamePageProps {
   params: Promise<{ slug: string }>;
@@ -28,20 +27,14 @@ export async function generateMetadata({ params }: GamePageProps): Promise<Metad
   }
 
   return {
-    title: `${game.title} - Play Free HTML5 Game`,
+    title: `${game.derivedTitle || game.title} - Play Free HTML5 Game`,
     description: game.description,
     keywords: [game.title, game.category, ...game.tags, "free browser game", "play online"],
     openGraph: {
-      title: `${game.title} - GameHub`,
+      title: `${game.derivedTitle || game.title} - GameHub`,
       description: game.description,
       type: "website",
       images: [{ url: game.thumbnailUrl, width: 600, height: 400, alt: game.title }],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: `${game.title} - GameHub`,
-      description: game.description,
-      images: [game.thumbnailUrl],
     },
   };
 }
@@ -56,16 +49,15 @@ export default async function GameDetailPage({ params }: GamePageProps) {
 
   const relatedGames = getRelatedGames(game, 4);
 
-  // JSON-LD VideoGame Schema
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "VideoGame",
-    "name": game.title,
+    "name": game.derivedTitle || game.title,
     "description": game.description,
     "genre": game.category,
     "author": {
-      "@type": "Organization",
-      "name": game.author,
+      "@type": "Person",
+      "name": game.originalAuthor || game.author,
     },
     "image": game.thumbnailUrl,
     "aggregateRating": {
@@ -103,7 +95,7 @@ export default async function GameDetailPage({ params }: GamePageProps) {
             {game.category}
           </Link>
           <ChevronRight className="h-3 w-3" />
-          <span className="text-foreground font-bold truncate max-w-[200px]">{game.title}</span>
+          <span className="text-foreground font-bold truncate max-w-[200px]">{game.derivedTitle || game.title}</span>
         </nav>
 
         {/* Game Player Iframe */}
@@ -118,10 +110,15 @@ export default async function GameDetailPage({ params }: GamePageProps) {
               
               <div className="flex flex-wrap items-center justify-between gap-4 border-b border-border/40 pb-4">
                 <div>
-                  <h1 className="text-2xl sm:text-3xl font-black text-foreground">{game.title}</h1>
-                  <p className="text-xs text-muted-foreground capitalize mt-1">
-                    Category: <span className="font-semibold text-purple-400">{game.category}</span>
-                  </p>
+                  <div className="flex items-center space-x-2 mb-1">
+                    <span className="rounded-full bg-purple-500/10 px-2.5 py-0.5 text-[11px] font-bold text-purple-400 border border-purple-500/20">
+                      {game.gameType || "Derived Game"}
+                    </span>
+                    <span className="rounded-full bg-cyan-500/10 px-2.5 py-0.5 text-[11px] font-bold text-cyan-400 border border-cyan-500/20 uppercase">
+                      {game.license}
+                    </span>
+                  </div>
+                  <h1 className="text-2xl sm:text-3xl font-black text-foreground">{game.derivedTitle || game.title}</h1>
                 </div>
 
                 <div className="flex items-center space-x-3 text-xs font-bold">
@@ -150,6 +147,24 @@ export default async function GameDetailPage({ params }: GamePageProps) {
                 )}
               </div>
 
+              {/* Modifications Changelog */}
+              {game.modifications && game.modifications.length > 0 && (
+                <div className="rounded-xl bg-slate-900/60 p-4 border border-purple-500/20 space-y-2">
+                  <h4 className="text-xs font-bold text-purple-400 uppercase tracking-wider flex items-center space-x-1.5">
+                    <GitBranch className="h-3.5 w-3.5" />
+                    <span>GameHub Modifications & Enhancements</span>
+                  </h4>
+                  <ul className="space-y-1 text-xs text-muted-foreground">
+                    {game.modifications.map((mod, idx) => (
+                      <li key={idx} className="flex items-start space-x-1.5">
+                        <span className="text-cyan-400 mt-0.5">•</span>
+                        <span>{mod}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
               {/* Tags List */}
               {game.tags && game.tags.length > 0 && (
                 <div className="flex flex-wrap items-center gap-2 pt-2">
@@ -169,29 +184,46 @@ export default async function GameDetailPage({ params }: GamePageProps) {
             </div>
           </div>
 
-          {/* Right Sidebar: Controls & Metadata */}
+          {/* Right Sidebar: Original Author & Provenance Info */}
           <div className="space-y-6">
             <GameControls controls={game.controls} />
 
             <div className="rounded-2xl border border-border/60 bg-card/60 p-5 shadow-lg backdrop-blur-md space-y-3 text-xs text-muted-foreground">
-              <h3 className="font-bold text-foreground uppercase tracking-wider text-xs mb-2">Game Info</h3>
-              <div className="flex items-center justify-between py-1 border-b border-border/30">
+              <h3 className="font-bold text-foreground uppercase tracking-wider text-xs mb-2 flex items-center justify-between">
+                <span>Original Provenance</span>
+                <ShieldCheck className="h-4 w-4 text-emerald-400" />
+              </h3>
+
+              <div className="flex items-center justify-between py-1.5 border-b border-border/30">
                 <span className="flex items-center space-x-1.5">
                   <User className="h-3.5 w-3.5" />
-                  <span>Developer</span>
+                  <span>Original Author</span>
                 </span>
-                <span className="font-semibold text-foreground">{game.author}</span>
+                <span className="font-bold text-foreground">{game.originalAuthor || game.author}</span>
               </div>
-              <div className="flex items-center justify-between py-1 border-b border-border/30">
-                <span className="flex items-center space-x-1.5">
-                  <Calendar className="h-3.5 w-3.5" />
-                  <span>Release Date</span>
-                </span>
-                <span className="font-semibold text-foreground">{game.releaseDate}</span>
+
+              <div className="flex items-center justify-between py-1.5 border-b border-border/30">
+                <span>Original License</span>
+                <span className="font-bold text-purple-400">{game.originalLicense || game.license}</span>
               </div>
-              <div className="flex items-center justify-between py-1">
-                <span>Version</span>
-                <span className="font-semibold text-foreground">v{game.version}</span>
+
+              <div className="flex items-center justify-between py-1.5 border-b border-border/30">
+                <span>Git Commit</span>
+                <code className="font-mono text-[11px] text-cyan-400 bg-slate-900 px-1.5 py-0.5 rounded">
+                  {(game.originalCommitHash || game.commitHash || "").slice(0, 7)}
+                </code>
+              </div>
+
+              <div className="pt-1">
+                <a
+                  href={game.originalRepository || game.repository}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center space-x-2 w-full rounded-xl bg-slate-900 border border-border/60 py-2 text-xs font-bold text-purple-300 hover:bg-slate-800 transition-colors"
+                >
+                  <span>View Original GitHub Repo</span>
+                  <ExternalLink className="h-3.5 w-3.5" />
+                </a>
               </div>
             </div>
           </div>

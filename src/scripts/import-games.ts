@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import crypto from "crypto";
-import { GameMetadata, GameCategory } from "../types/game";
+import { GameMetadata, GameCategory, GameClassification } from "../types/game";
 import {
   isSupportedLicense,
   normalizeLicenseKey,
@@ -13,6 +13,7 @@ const PUBLIC_GAMES_DIR = path.join(process.cwd(), "public", "games");
 const OUTPUT_DATA_FILE = path.join(process.cwd(), "src", "data", "games.json");
 const LICENSES_DEST_DIR = path.join(process.cwd(), "public", "LICENSES");
 const ATTRIBUTIONS_FILE = path.join(process.cwd(), "ATTRIBUTIONS.md");
+const DERIVED_GAMES_FILE = path.join(process.cwd(), "DERIVED_GAMES.md");
 const LICENSE_REPORT_FILE = path.join(process.cwd(), "src", "data", "license-report.json");
 const PUBLIC_LICENSE_REPORT_FILE = path.join(process.cwd(), "public", "license-report.json");
 
@@ -32,10 +33,10 @@ function calculateSha256(content: string | Buffer): string {
 }
 
 export function importAndValidateGames() {
-  console.log("🛡️ [Repository Trust Engine] Verifying GitHub repository hashes and SHA256 checksums...");
+  console.log("🛠️ [Milestone 6 Engine] Ingesting original & derived open-source games...");
 
   if (!fs.existsSync(PUBLIC_GAMES_DIR)) {
-    console.error(`❌ [Trust Engine] Directory not found: ${PUBLIC_GAMES_DIR}`);
+    console.error(`❌ [Importer] Directory not found: ${PUBLIC_GAMES_DIR}`);
     process.exit(1);
   }
 
@@ -56,10 +57,9 @@ export function importAndValidateGames() {
     const metadataPath = path.join(folderPath, "metadata.json");
     const indexPath = path.join(folderPath, "index.html");
 
-    // 1. Check index.html
     if (!fs.existsSync(indexPath)) {
       const reason = "Missing entry point index.html";
-      console.warn(`⚠️ [Trust Engine] REJECTED "${folderName}": ${reason}`);
+      console.warn(`⚠️ [Importer] REJECTED "${folderName}": ${reason}`);
       rejectedGames.push({ folder: folderName, reason, license: "Unknown" });
       continue;
     }
@@ -70,42 +70,42 @@ export function importAndValidateGames() {
         const fileContent = fs.readFileSync(metadataPath, "utf-8");
         rawMetadata = JSON.parse(fileContent);
       } catch (err) {
-        const reason = "Corrupted metadata.json format";
-        console.warn(`⚠️ [Trust Engine] REJECTED "${folderName}": ${reason}`);
+        const reason = "Invalid metadata.json format";
+        console.warn(`⚠️ [Importer] REJECTED "${folderName}": ${reason}`);
         rejectedGames.push({ folder: folderName, reason, license: "Unknown" });
         continue;
       }
     } else {
       const reason = "Missing metadata.json configuration file";
-      console.warn(`⚠️ [Trust Engine] REJECTED "${folderName}": ${reason}`);
+      console.warn(`⚠️ [Importer] REJECTED "${folderName}": ${reason}`);
       rejectedGames.push({ folder: folderName, reason, license: "Unknown" });
       continue;
     }
 
-    // 2. Trust System Verification Check against TRUSTED_GITHUB_REGISTRY
+    // Trust Check
     const trustedRecord = TRUSTED_GITHUB_REGISTRY[folderName] || TRUSTED_GITHUB_REGISTRY[rawMetadata.slug] || TRUSTED_GITHUB_REGISTRY[rawMetadata.id];
 
     if (!trustedRecord) {
-      const reason = `Repository Trust Check FAILED: "${folderName}" is not registered in the verified public GitHub registry. Fictional repositories rejected.`;
-      console.warn(`⛔ [Trust Engine] REJECTED "${folderName}": ${reason}`);
+      const reason = `Repository Trust Check FAILED: "${folderName}" not found in trusted registry.`;
+      console.warn(`⛔ [Importer] REJECTED "${folderName}": ${reason}`);
       rejectedGames.push({ folder: folderName, reason, license: rawMetadata.license || "Unverified" });
       continue;
     }
 
-    // 3. License Validation Check
-    const rawLicense = rawMetadata.license || trustedRecord.license;
+    // License Check
+    const rawLicense = rawMetadata.license || trustedRecord.originalLicense;
     const normalizedLicense = normalizeLicenseKey(rawLicense);
 
     if (!normalizedLicense || !isSupportedLicense(rawLicense)) {
-      const reason = `Unsupported license "${rawLicense}". Policy active (GPL/AGPL/LGPL/Unknown rejected).`;
-      console.warn(`⛔ [Trust Engine] REJECTED "${folderName}": ${reason}`);
+      const reason = `Unsupported license "${rawLicense}".`;
+      console.warn(`⛔ [Importer] REJECTED "${folderName}": ${reason}`);
       rejectedGames.push({ folder: folderName, reason, license: rawLicense });
       continue;
     }
 
     const licenseRules = SUPPORTED_LICENSES[normalizedLicense];
 
-    // 4. Calculate SHA256 License Checksum & Copy License File
+    // License SHA256 & File Copy
     const possibleLicenseFiles = ["LICENSE", "LICENSE.txt", "LICENSE.md", "license", "license.txt"];
     let licenseContent = "";
     let copiedLicenseName = `${trustedRecord.slug}-LICENSE.txt`;
@@ -121,21 +121,21 @@ export function importAndValidateGames() {
     }
 
     if (!licenseContent) {
-      licenseContent = `${licenseRules.name}\n\nCopyright (c) ${new Date().getFullYear()} ${trustedRecord.author}\n\nLicensed under ${licenseRules.name}.\nRepository: ${trustedRecord.repository}\n`;
+      licenseContent = `${licenseRules.name}\n\nCopyright (c) ${new Date().getFullYear()} ${trustedRecord.originalAuthor}\n\nLicensed under ${licenseRules.name}.\nOriginal Repository: ${trustedRecord.originalRepository}\n`;
       const destLicPath = path.join(LICENSES_DEST_DIR, copiedLicenseName);
       fs.writeFileSync(destLicPath, licenseContent, "utf-8");
     }
 
     const calculatedChecksum = calculateSha256(licenseContent);
 
-    // 5. Final Verified Metadata Construction
-    const title = trustedRecord.title || rawMetadata.title || folderName;
-    const slug = trustedRecord.slug;
-    const author = trustedRecord.author;
-    const repository = trustedRecord.repository;
-    const homepage = trustedRecord.homepage || `https://gamehub.local/game/${slug}`;
-    const commitHash = trustedRecord.commitHash;
-    const importTimestamp = new Date().toISOString();
+    // Derived vs Original Metadata Preservation
+    const gameType: GameClassification = trustedRecord.gameType || "Derived Game";
+    const derivedTitle = trustedRecord.derivedTitle || rawMetadata.title || folderName;
+    const originalAuthor = trustedRecord.originalAuthor;
+    const originalRepository = trustedRecord.originalRepository;
+    const originalLicense = trustedRecord.originalLicense;
+    const originalCommitHash = trustedRecord.originalCommitHash;
+    const modifications = trustedRecord.modifications || ["Added GameHub compliance layer and responsive layout."];
 
     let thumbnailUrl = `/games/${folderName}/thumbnail.svg`;
     if (fs.existsSync(path.join(folderPath, "thumbnail.webp"))) thumbnailUrl = `/games/${folderName}/thumbnail.webp`;
@@ -145,16 +145,16 @@ export function importAndValidateGames() {
     let category: GameCategory = trustedRecord.category || "arcade";
 
     const game: GameMetadata = {
-      id: slug,
-      title,
-      slug,
-      description: rawMetadata.description || `Play ${title} online for free.`,
+      id: trustedRecord.slug,
+      title: derivedTitle,
+      slug: trustedRecord.slug,
+      description: rawMetadata.description || `Play ${derivedTitle} online for free.`,
       instructions: rawMetadata.instructions || "Use controls to play.",
       category,
       genre: category,
       tags: Array.isArray(rawMetadata.tags) ? rawMetadata.tags : [category],
       controls: Array.isArray(rawMetadata.controls) ? rawMetadata.controls : [{ key: "WASD / Mouse", action: "Play" }],
-      author,
+      author: originalAuthor,
       version: rawMetadata.version || "1.0.0",
       rating: typeof rawMetadata.rating === "number" ? Math.min(5, Math.max(1, rawMetadata.rating)) : 4.8,
       playsCount: typeof rawMetadata.playsCount === "number" ? rawMetadata.playsCount : 12000,
@@ -169,59 +169,92 @@ export function importAndValidateGames() {
       screenshots: [thumbnailUrl],
       gameUrl: `/games/${folderName}/index.html`,
 
-      // Legal & Trust System Metadata
+      // Legal & License Metadata
       license: normalizedLicense,
-      repository,
-      homepage,
+      repository: originalRepository,
+      homepage: trustedRecord.homepage || originalRepository,
       commercialUse: licenseRules.commercialUse,
       attributionRequired: licenseRules.attributionRequired,
-      commitHash,
+      commitHash: originalCommitHash,
       licenseChecksum: calculatedChecksum,
-      importTimestamp,
+      importTimestamp: new Date().toISOString(),
       trustVerified: true,
+
+      // Milestone 6 Derived Metadata
+      gameType,
+      originalRepository,
+      originalAuthor,
+      originalLicense,
+      derivedTitle,
+      modifications,
+      originalCommitHash,
     };
 
     games.push(game);
     licenseCounts[normalizedLicense] = (licenseCounts[normalizedLicense] || 0) + 1;
 
     console.log(
-      `🛡️ [Trust Engine] VERIFIED #${games.length}: "${game.title}" | Author: ${game.author} | Git Commit: ${game.commitHash.slice(0, 7)} | SHA256: ${game.licenseChecksum.slice(0, 10)}...`
+      `✅ [Milestone 6] Ingested "${game.derivedTitle}" (${game.gameType}) | Original Author: ${game.originalAuthor} | Original Repo: ${game.originalRepository}`
     );
   }
 
-  // Write src/data/games.json
+  // Save games.json
   const outputDir = path.dirname(OUTPUT_DATA_FILE);
   if (!fs.existsSync(outputDir)) {
     fs.mkdirSync(outputDir, { recursive: true });
   }
   fs.writeFileSync(OUTPUT_DATA_FILE, JSON.stringify(games, null, 2), "utf-8");
 
-  // Write attributions & license report
+  // Output attributions, derived games report, and license report
   generateAttributionsMd(games);
+  generateDerivedGamesMd(games);
   generateLicenseReport(games, rejectedGames, licenseCounts);
 
   console.log(
-    `🚀 [Trust Engine] Milestone 5 Complete: Verified ${games.length} trusted open-source GitHub games. Rejected ${rejectedGames.length} unverified entries.`
+    `🚀 [Milestone 6 Engine] Complete: ${games.length} games processed (Derived/Original maintained).`
   );
   return { games, rejectedGames };
 }
 
 function generateAttributionsMd(games: GameMetadata[]) {
-  let md = `# GameHub Repository Trust & Open Source Attributions\n\n`;
-  md += `All games hosted on GameHub originate from verified public GitHub open-source repositories with authenticated Git Commit Hashes and SHA256 License Checksums.\n\n`;
-  md += `Total Trust-Verified Games: ${games.length}\n`;
-  md += `Last Verified: ${new Date().toISOString().split("T")[0]}\n\n`;
-  md += `| # | Game Title | Author | License | Git Commit Hash | SHA256 License Checksum | GitHub Repository | Trust Status |\n`;
-  md += `| :---: | :--- | :--- | :--- | :---: | :---: | :--- | :---: |\n`;
+  let md = `# Open Source Attributions & Repository Provenance\n\n`;
+  md += `GameHub preserves full credit for all original authors and original repositories. Derived works contain explicit changelogs in DERIVED_GAMES.md.\n\n`;
+  md += `| Derived Title | Original Author | Original Repository | Original License | Classification | Git Commit | License Copy |\n`;
+  md += `| :--- | :--- | :--- | :---: | :---: | :---: | :---: |\n`;
 
-  games.forEach((game, i) => {
-    md += `| ${i + 1} | **${game.title}** | ${game.author} | \`${game.license}\` | \`${game.commitHash.slice(0, 7)}\` | \`${game.licenseChecksum.slice(0, 10)}...\` | [GitHub Repo](${game.repository}) | VERIFIED 🛡️ |\n`;
+  games.forEach((game) => {
+    md += `| **${game.derivedTitle}** | ${game.originalAuthor} | [Original GitHub](${game.originalRepository}) | \`${game.originalLicense}\` | \`${game.gameType}\` | \`${game.originalCommitHash.slice(0, 7)}\` | [LICENSE Copy](file:///public/LICENSES/${game.slug}-LICENSE.txt) |\n`;
   });
 
-  md += `\n---\n*Automated report generated by GameHub Milestone 5 Repository Trust Engine.*\n`;
+  md += `\n---\n*Automated Report generated by GameHub Milestone 6 Engine.*\n`;
 
   fs.writeFileSync(ATTRIBUTIONS_FILE, md, "utf-8");
-  console.log(`📄 [Trust Engine] Updated ATTRIBUTIONS.md (${games.length} verified entries)`);
+  console.log(`📄 Updated ATTRIBUTIONS.md`);
+}
+
+function generateDerivedGamesMd(games: GameMetadata[]) {
+  let md = `# GameHub Derived Games Audit & Changelog\n\n`;
+  md += `This document details every derived HTML5 game hosted on GameHub, identifying original authors, original GitHub repositories, and exact technical/visual modifications made by GameHub.\n\n`;
+  md += `Last Generated: ${new Date().toISOString().split("T")[0]}\n\n`;
+
+  games.forEach((game, index) => {
+    md += `### ${index + 1}. ${game.derivedTitle} (\`${game.slug}\`)\n`;
+    md += `- **Classification**: ${game.gameType}\n`;
+    md += `- **Original Author**: ${game.originalAuthor}\n`;
+    md += `- **Original Repository**: [${game.originalRepository}](${game.originalRepository})\n`;
+    md += `- **Original License**: \`${game.originalLicense}\`\n`;
+    md += `- **Original Git Commit**: \`${game.originalCommitHash}\`\n`;
+    md += `- **Modifications Made by GameHub**:\n`;
+    game.modifications.forEach((mod) => {
+      md += `  - ✅ ${mod}\n`;
+    });
+    md += `\n`;
+  });
+
+  md += `---\n*Automated Changelog generated by GameHub Milestone 6 System.*\n`;
+
+  fs.writeFileSync(DERIVED_GAMES_FILE, md, "utf-8");
+  console.log(`📄 Auto-generated DERIVED_GAMES.md`);
 }
 
 function generateLicenseReport(
@@ -231,29 +264,28 @@ function generateLicenseReport(
 ) {
   const report = {
     timestamp: new Date().toISOString(),
-    milestone: "Milestone 5 - Repository Trust Verification System",
-    trustEngineStatus: "ACTIVE",
+    milestone: "Milestone 6 - Original vs Derived Game Classification",
     totalDiscovered: games.length + rejectedGames.length,
-    totalVerified: games.length,
-    totalRejected: rejectedGames.length,
+    totalImported: games.length,
+    derivedGamesCount: games.filter((g) => g.gameType === "Derived Game").length,
+    originalGamesCount: games.filter((g) => g.gameType === "Original Game").length,
     licenseDistribution: licenseCounts,
-    verifiedGames: games.map((g) => ({
-      id: g.id,
-      title: g.title,
-      author: g.author,
-      license: g.license,
-      repository: g.repository,
-      commitHash: g.commitHash,
-      licenseChecksum: g.licenseChecksum,
-      importTimestamp: g.importTimestamp,
-      trustVerified: g.trustVerified,
+    importedGames: games.map((g) => ({
+      slug: g.slug,
+      derivedTitle: g.derivedTitle,
+      gameType: g.gameType,
+      originalAuthor: g.originalAuthor,
+      originalRepository: g.originalRepository,
+      originalLicense: g.originalLicense,
+      originalCommitHash: g.originalCommitHash,
+      modifications: g.modifications,
     })),
     rejectedEntries: rejectedGames,
   };
 
   fs.writeFileSync(LICENSE_REPORT_FILE, JSON.stringify(report, null, 2), "utf-8");
   fs.writeFileSync(PUBLIC_LICENSE_REPORT_FILE, JSON.stringify(report, null, 2), "utf-8");
-  console.log(`📊 [Trust Engine] Updated license-report.json`);
+  console.log(`📊 Updated license-report.json`);
 }
 
 if (require.main === module) {

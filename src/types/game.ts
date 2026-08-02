@@ -10,6 +10,8 @@ export type GameCategory =
   | "sports"
   | "multiplayer";
 
+export type GameClassification = "Original Game" | "Derived Game";
+
 export interface GameControl {
   key: string;
   action: string;
@@ -52,6 +54,15 @@ export interface GameMetadata {
   licenseChecksum: string; // SHA256
   importTimestamp: string;
   trustVerified: boolean;
+
+  // Milestone 6 Derived Game Metadata
+  gameType: GameClassification;
+  originalRepository: string;
+  originalAuthor: string;
+  originalLicense: SupportedLicense;
+  derivedTitle: string;
+  modifications: string[];
+  originalCommitHash: string;
 }
 
 export type SortOption = "popular" | "newest" | "rating" | "title";
