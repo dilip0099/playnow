@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-08-02T07:08:15.517Z",
-  "milestone": "Milestone 9.1 - Separate Game Provenance and Asset Provenance",
+  "timestamp": "2026-08-02T07:11:03.423Z",
+  "milestone": "Milestone 9.2 - Production Asset Licensing Cleanup",
   "totalImported": 10,
   "licenseDistribution": {
     "MIT": 6,
@@ -12,52 +12,52 @@
     {
       "slug": "2048-fusion",
       "title": "2048 Cyber Fusion",
-      "originalAuthor": "Gabriele Cirulli"
+      "commercialReady": true
     },
     {
       "slug": "breakout-pulse",
       "title": "Breakout Pulse DX",
-      "originalAuthor": "Andrzej Mazur"
+      "commercialReady": true
     },
     {
       "slug": "cosmic-defense",
       "title": "Cosmic Defense 2184",
-      "originalAuthor": "Doug McInnes"
+      "commercialReady": true
     },
     {
       "slug": "cyber-runner",
       "title": "Cyber Runner 2099",
-      "originalAuthor": "Ellison Leão"
+      "commercialReady": true
     },
     {
       "slug": "neon-snake",
       "title": "Neon Snake Cyberpulse",
-      "originalAuthor": "Patrick Gillespie"
+      "commercialReady": true
     },
     {
       "slug": "pixel-memory",
       "title": "Pixel Memory Quest",
-      "originalAuthor": "Jeff Hlywa"
+      "commercialReady": true
     },
     {
       "slug": "pong-championship",
       "title": "Cyber Pong Championship",
-      "originalAuthor": "Steven Lambert"
+      "commercialReady": true
     },
     {
       "slug": "retro-tetris",
       "title": "Retro Block Stack Pulse",
-      "originalAuthor": "Steven Lambert"
+      "commercialReady": true
     },
     {
       "slug": "tic-tac-toe-glow",
       "title": "Tic Tac Toe Cyber Glow",
-      "originalAuthor": "Chase Wackerfuss"
+      "commercialReady": true
     },
     {
       "slug": "tower-builder",
       "title": "Neon Tower Builder",
-      "originalAuthor": "Xiangwei Chen"
+      "commercialReady": true
     }
   ]
 }
