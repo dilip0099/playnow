@@ -35,6 +35,9 @@ export interface GameMetadata {
   version: string;
   rating: number; // 0.0 to 5.0
   playsCount: number;
+  views?: number;
+  plays?: number;
+  favorites?: number;
   featured?: boolean;
   trending?: boolean;
   isNew?: boolean;
@@ -68,7 +71,7 @@ export interface GameMetadata {
   modifications: string[];
   originalCommitHash: string;
 
-  // Milestone 7 Asset & Trademark Compliance
+  // Milestone 7 & 8 Provenance
   brandRisk: BrandRiskLevel;
   assetSource: AssetSourceType;
   commercialReady: boolean;

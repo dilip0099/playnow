@@ -1,0 +1,26 @@
+{
+  "totalPlays": 148500,
+  "totalViews": 320900,
+  "dailyPlays": [
+    { "date": "2026-07-27", "plays": 18200 },
+    { "date": "2026-07-28", "plays": 19400 },
+    { "date": "2026-07-29", "plays": 21500 },
+    { "date": "2026-07-30", "plays": 22100 },
+    { "date": "2026-07-31", "plays": 24800 },
+    { "date": "2026-08-01", "plays": 26900 },
+    { "date": "2026-08-02", "plays": 15600 }
+  ],
+  "popularGames": [
+    { "slug": "2048-fusion", "title": "2048 Cyber Fusion", "plays": 45200 },
+    { "slug": "cyber-runner", "title": "Cyber Runner 2099", "plays": 38100 },
+    { "slug": "neon-snake", "title": "Neon Snake Cyberpulse", "plays": 29400 },
+    { "slug": "breakout-pulse", "title": "Breakout Pulse DX", "plays": 19800 },
+    { "slug": "cosmic-defense", "title": "Cosmic Defense 2184", "plays": 16000 }
+  ],
+  "userEngagement": {
+    "averageSessionMinutes": 14.5,
+    "repeatPlayRatePercentage": 78.4,
+    "activeUsersDaily": 4200,
+    "activeUsersMonthly": 89000
+  }
+}

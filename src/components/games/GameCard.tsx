@@ -1,110 +1,119 @@
 "use client";
 
-import Link from "next/link";
+import { useState, useEffect } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
-import { Play, Heart, Star, Flame, Sparkles } from "lucide-react";
+import Link from "next/link";
+import { Play, Star, Heart, ShieldCheck, Flame } from "lucide-react";
 import { GameMetadata } from "@/types/game";
-import { useFavorites } from "@/hooks/useFavorites";
+import { Badge } from "@/components/ui/badge";
 
 interface GameCardProps {
   game: GameMetadata;
   priority?: boolean;
 }
 
-export function GameCard({ game, priority = false }: GameCardProps) {
-  const { isFavorite, toggleFavorite } = useFavorites();
-  const favorited = isFavorite(game.id);
+export function GameCard({ game, priority }: GameCardProps) {
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem(`fav_${game.id}`);
+      if (saved === "true") setIsFavorite(true);
+    } catch (e) {}
+  }, [game.id]);
+
+  const toggleFavorite = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const nextState = !isFavorite;
+    setIsFavorite(nextState);
+    try {
+      localStorage.setItem(`fav_${game.id}`, String(nextState));
+    } catch (e) {}
+  };
 
   return (
-    <motion.div
-      whileHover={{ y: -6, scale: 1.02 }}
-      transition={{ type: "spring", stiffness: 300, damping: 20 }}
-      className="group relative flex flex-col overflow-hidden rounded-2xl border border-border/60 bg-card/60 shadow-lg backdrop-blur-md hover:border-purple-500/50 hover:shadow-purple-500/10 transition-all duration-300"
-    >
+    <div className="group relative rounded-2xl border border-border/60 bg-card/60 p-3.5 shadow-lg backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-purple-500/50 hover:shadow-purple-500/10 flex flex-col justify-between">
+      
       {/* Thumbnail Container */}
-      <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-900">
+      <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl bg-slate-900">
         <Image
           src={game.thumbnailUrl}
           alt={game.title}
           fill
           priority={priority}
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          className="object-cover transition-transform duration-500 group-hover:scale-110"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          className="object-cover transition-transform duration-500 group-hover:scale-105"
         />
 
-        {/* Dark Vignette Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity" />
-
-        {/* Top Badges */}
-        <div className="absolute top-3 left-3 right-3 flex items-center justify-between z-10">
-          <span className="rounded-full bg-slate-950/70 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-cyan-400 border border-cyan-500/30 backdrop-blur-md">
-            {game.category}
-          </span>
-
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              toggleFavorite(game.id);
-            }}
-            title={favorited ? "Remove from Favorites" : "Add to Favorites"}
-            className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-950/70 border border-white/10 backdrop-blur-md hover:bg-slate-900 transition-transform active:scale-90"
+        {/* Overlay Dark Blur on Hover */}
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 flex items-center justify-center">
+          <Link
+            href={`/game/${game.slug}`}
+            className="flex items-center space-x-2 rounded-full bg-purple-600 px-4 py-2 text-xs font-black text-white shadow-lg shadow-purple-600/50 hover:bg-purple-500 transition-transform hover:scale-105"
           >
-            <Heart
-              className={`h-4 w-4 transition-colors ${
-                favorited ? "fill-pink-500 text-pink-500" : "text-white/70 hover:text-white"
-              }`}
-            />
-          </button>
+            <Play className="h-4 w-4 fill-white" />
+            <span>PLAY NOW</span>
+          </Link>
         </div>
 
-        {/* Play Overlay Button */}
-        <Link
-          href={`/game/${game.slug}`}
-          className="absolute inset-0 flex items-center justify-center z-10 opacity-0 group-hover:opacity-100 transition-opacity"
+        {/* Top Badges Row */}
+        <div className="absolute left-2.5 top-2.5 flex flex-wrap gap-1.5 z-10">
+          {game.trending && (
+            <Badge className="bg-rose-500/90 text-white font-bold text-[10px] px-2 py-0.5 shadow-md flex items-center space-x-0.5">
+              <Flame className="h-3 w-3 fill-white" />
+              <span>HOT</span>
+            </Badge>
+          )}
+
+          {game.trustVerified && (
+            <Badge className="bg-emerald-500/90 text-white font-bold text-[10px] px-2 py-0.5 shadow-md flex items-center space-x-0.5">
+              <ShieldCheck className="h-3 w-3" />
+              <span>VERIFIED</span>
+            </Badge>
+          )}
+        </div>
+
+        {/* Favorite Button */}
+        <button
+          onClick={toggleFavorite}
+          className="absolute right-2.5 top-2.5 h-8 w-8 rounded-full bg-slate-950/60 backdrop-blur-md flex items-center justify-center text-muted-foreground hover:text-rose-400 transition-all hover:scale-110 z-10 border border-white/10"
         >
-          <motion.div
-            initial={{ scale: 0.8 }}
-            whileHover={{ scale: 1.1 }}
-            className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-tr from-purple-600 to-cyan-400 text-white shadow-xl shadow-purple-500/40"
-          >
-            <Play className="h-6 w-6 fill-white ml-1" />
-          </motion.div>
-        </Link>
+          <Heart className={`h-4 w-4 ${isFavorite ? "fill-rose-500 text-rose-500" : ""}`} />
+        </button>
+
       </div>
 
-      {/* Card Info Details */}
-      <div className="flex flex-1 flex-col justify-between p-4">
-        <div>
-          <div className="flex items-center justify-between gap-2 mb-1">
-            <Link href={`/game/${game.slug}`}>
-              <h3 className="font-bold text-base text-foreground line-clamp-1 group-hover:text-purple-400 transition-colors">
-                {game.title}
-              </h3>
-            </Link>
-            {game.trending && (
-              <span className="flex items-center text-xs text-amber-400 font-semibold flex-shrink-0" title="Trending Game">
-                <Flame className="h-3.5 w-3.5 mr-0.5 fill-amber-400" />
-              </span>
-            )}
-          </div>
-          <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed mb-3">
-            {game.description}
-          </p>
-        </div>
-
-        {/* Card Footer Meta */}
-        <div className="flex items-center justify-between pt-2 border-t border-border/40 text-xs font-medium text-muted-foreground">
-          <div className="flex items-center space-x-1 text-amber-400 font-semibold">
+      {/* Game Details Body */}
+      <div className="mt-3 space-y-2">
+        <div className="flex items-center justify-between">
+          <span className="text-[11px] font-bold text-purple-400 uppercase tracking-wider">
+            {game.category}
+          </span>
+          <div className="flex items-center space-x-1 text-xs font-bold text-amber-400">
             <Star className="h-3.5 w-3.5 fill-amber-400" />
             <span>{game.rating.toFixed(1)}</span>
           </div>
-          <div>
-            <span>{(game.playsCount / 1000).toFixed(1)}k plays</span>
-          </div>
+        </div>
+
+        <Link href={`/game/${game.slug}`}>
+          <h3 className="font-extrabold text-foreground group-hover:text-cyan-300 transition-colors line-clamp-1 text-sm sm:text-base">
+            {game.derivedTitle || game.title}
+          </h3>
+        </Link>
+
+        <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed">
+          {game.description}
+        </p>
+
+        <div className="flex items-center justify-between pt-2 border-t border-border/40 text-[11px] text-muted-foreground font-semibold">
+          <span>By {game.originalAuthor || game.author}</span>
+          <Badge variant="outline" className="font-mono text-[9px] bg-purple-500/10 text-purple-300 border-purple-500/20">
+            {game.license}
+          </Badge>
         </div>
       </div>
-    </motion.div>
+
+    </div>
   );
 }
