@@ -1,10 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Image from "next/image";
 import Link from "next/link";
-import { Play, Star, Plus, Check } from "lucide-react";
+import { Play, Plus, Star, Users, Flame, ChevronRight } from "lucide-react";
 import { GameMetadata } from "@/types/game";
+import { useFavorites } from "@/hooks/useFavorites";
 
 interface CinematicHeroProps {
   games: GameMetadata[];
@@ -12,108 +12,107 @@ interface CinematicHeroProps {
 
 export function CinematicHero({ games }: CinematicHeroProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isSaved, setIsSaved] = useState(false);
+  const { isFavorite, toggleFavorite } = useFavorites();
+
+  const featuredGames = games.slice(0, 5);
+  const currentGame = featuredGames[currentIndex] || games[0];
 
   useEffect(() => {
-    if (!games || games.length <= 1) return;
+    if (featuredGames.length <= 1) return;
     const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % games.length);
-    }, 7000);
+      setCurrentIndex((prev) => (prev + 1) % featuredGames.length);
+    }, 8000);
     return () => clearInterval(timer);
-  }, [games]);
+  }, [featuredGames.length]);
 
-  if (!games || games.length === 0) return null;
+  if (!currentGame) return null;
 
-  const currentGame = games[currentIndex];
-  const title = currentGame.derivedTitle || currentGame.title;
+  const favorited = isFavorite(currentGame.id);
 
   return (
-    <section className="relative w-full h-[75vh] sm:h-[82vh] overflow-hidden bg-[#050505] rounded-3xl border border-white/5 shadow-2xl">
+    <section className="relative w-full h-[75vh] min-h-[500px] max-h-[750px] overflow-hidden bg-[#131313] rounded-3xl border border-white/10 shadow-2xl">
       
-      {/* Full-width High-Res Poster Image */}
-      <div className="absolute inset-0 w-full h-full">
-        <Image
-          src={currentGame.thumbnailUrl}
-          alt={title}
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover transition-all duration-1000 scale-105"
+      {/* Background Image with Ambient Overlay */}
+      <div className="absolute inset-0 z-0">
+        <img
+          src={currentGame.heroImage || currentGame.coverImage || currentGame.thumbnailUrl}
+          alt={currentGame.title}
+          className="h-full w-full object-cover object-center transition-all duration-1000 scale-105"
         />
-
-        {/* Dark Cinematic Gradient Overlay Masks */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/60 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#050505] via-[#050505]/80 to-transparent" />
+        {/* Directional Vignette Gradients */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#131313] via-[#131313]/60 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#131313] via-[#131313]/80 to-transparent w-full md:w-3/4" />
       </div>
 
-      {/* Hero Content Information */}
-      <div className="relative z-10 flex h-full max-w-7xl mx-auto items-end p-6 sm:p-14 pb-12">
-        <div className="max-w-2xl space-y-4">
-          
-          {/* Rating & Category Pill */}
-          <div className="flex items-center space-x-3 text-xs font-bold text-zinc-300">
-            <span className="rounded-full bg-purple-600/30 text-purple-300 border border-purple-500/30 px-3 py-1 uppercase tracking-wider">
-              {currentGame.category}
-            </span>
-            <div className="flex items-center space-x-1 text-amber-400">
-              <Star className="h-4 w-4 fill-amber-400" />
-              <span>{currentGame.rating.toFixed(1)} Rating</span>
-            </div>
-          </div>
+      {/* Content Container */}
+      <div className="relative z-10 mx-auto flex h-full max-w-7xl flex-col justify-end p-6 sm:p-10 md:p-14 space-y-4">
+        
+        {/* Top Badges */}
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="inline-flex items-center space-x-1.5 rounded-md bg-[#7701d0] px-3 py-1 font-mono text-[11px] font-bold text-white uppercase tracking-wider shadow-lg">
+            <Flame className="h-3.5 w-3.5 fill-white" />
+            <span>FEATURED SHOWCASE</span>
+          </span>
 
-          {/* Title */}
-          <h1 className="text-4xl sm:text-6xl font-black text-white tracking-tight leading-none drop-shadow-lg">
-            {title}
-          </h1>
+          <span className="inline-flex items-center space-x-1 rounded-md bg-[#201f1f] px-3 py-1 font-mono text-[11px] font-medium text-zinc-300 border border-white/10 capitalize">
+            {currentGame.category}
+          </span>
 
-          {/* Description */}
-          <p className="text-sm sm:text-base text-zinc-300 line-clamp-3 leading-relaxed max-w-xl">
-            {currentGame.description}
-          </p>
-
-          {/* Action Buttons */}
-          <div className="flex flex-wrap items-center gap-4 pt-2">
-            <Link href={`/game/${currentGame.slug}`}>
-              <button className="rounded-2xl bg-white hover:bg-zinc-200 text-black font-black px-8 py-4 text-sm sm:text-base flex items-center space-x-2.5 shadow-2xl transition-all hover:scale-105">
-                <Play className="h-5 w-5 fill-black" />
-                <span>PLAY NOW</span>
-              </button>
-            </Link>
-
-            <button
-              onClick={() => setIsSaved(!isSaved)}
-              className="rounded-2xl bg-zinc-900/90 hover:bg-zinc-800 border border-white/10 text-white font-bold px-6 py-4 text-sm sm:text-base flex items-center space-x-2 backdrop-blur-md transition-all"
-            >
-              {isSaved ? (
-                <>
-                  <Check className="h-5 w-5 text-emerald-400" />
-                  <span>IN LIBRARY</span>
-                </>
-              ) : (
-                <>
-                  <Plus className="h-5 w-5" />
-                  <span>ADD TO LIBRARY</span>
-                </>
-              )}
-            </button>
-          </div>
-
+          <span className="inline-flex items-center space-x-1 rounded-md bg-[#201f1f] px-2.5 py-1 font-mono text-[11px] font-bold text-[#c3f400] border border-white/10">
+            <Star className="h-3.5 w-3.5 fill-[#c3f400] text-[#c3f400]" />
+            <span>{currentGame.rating.toFixed(1)}</span>
+          </span>
         </div>
-      </div>
 
-      {/* Slide Navigation Dots */}
-      <div className="absolute right-6 bottom-8 z-20 flex items-center space-x-2">
-        {games.map((_, idx) => (
+        {/* Display Title */}
+        <h1 className="font-display text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-none max-w-3xl drop-shadow-md">
+          {currentGame.derivedTitle || currentGame.title}
+        </h1>
+
+        {/* Description */}
+        <p className="text-sm sm:text-base text-[#e5e2e1]/80 max-w-2xl line-clamp-2 leading-relaxed font-normal">
+          {currentGame.description}
+        </p>
+
+        {/* Primary & Secondary Action CTAs */}
+        <div className="flex flex-wrap items-center gap-4 pt-2">
+          <Link
+            href={`/game/${currentGame.slug}`}
+            className="btn-primary-lime inline-flex items-center space-x-2 px-8 py-4 text-sm tracking-wide shadow-xl"
+          >
+            <Play className="h-5 w-5 fill-[#161e00]" />
+            <span>PLAY NOW</span>
+          </Link>
+
           <button
-            key={idx}
-            onClick={() => setCurrentIndex(idx)}
-            className={`h-2 rounded-full transition-all duration-300 ${
-              idx === currentIndex ? "w-8 bg-purple-500" : "w-2 bg-zinc-700 hover:bg-zinc-500"
+            onClick={() => toggleFavorite(currentGame.id)}
+            className={`inline-flex items-center space-x-2 rounded-lg px-6 py-4 text-sm font-bold border transition-all ${
+              favorited
+                ? "bg-[#7701d0]/30 text-[#dcb8ff] border-[#7701d0]"
+                : "bg-[#201f1f]/90 text-white border-white/10 hover:bg-white/10"
             }`}
-          />
-        ))}
-      </div>
+          >
+            <Plus className={`h-4 w-4 ${favorited ? "rotate-45" : ""}`} />
+            <span>{favorited ? "IN LIBRARY" : "ADD TO FAVORITES"}</span>
+          </button>
+        </div>
 
+        {/* Carousel Slide Indicators */}
+        {featuredGames.length > 1 && (
+          <div className="flex items-center space-x-2 pt-4">
+            {featuredGames.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => setCurrentIndex(idx)}
+                className={`h-1.5 rounded-full transition-all duration-300 ${
+                  idx === currentIndex ? "w-8 bg-[#c3f400]" : "w-2 bg-white/20 hover:bg-white/40"
+                }`}
+              />
+            ))}
+          </div>
+        )}
+
+      </div>
     </section>
   );
 }

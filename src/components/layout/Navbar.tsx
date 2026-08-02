@@ -94,16 +94,16 @@ export function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-white/5 bg-[#050505]/90 backdrop-blur-xl">
+    <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-[#131313]/90 backdrop-blur-xl">
       <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         
         {/* Brand Logo & Main Nav Items */}
         <div className="flex items-center space-x-8">
           <Link href="/" className="flex items-center space-x-2 group">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-purple-600 text-white shadow-lg group-hover:scale-105 transition-transform">
-              <Gamepad2 className="h-5 w-5" />
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#c3f400] text-[#161e00] shadow-lg group-hover:scale-105 transition-transform">
+              <Gamepad2 className="h-5 w-5 fill-[#161e00]" />
             </div>
-            <span className="text-base font-black tracking-tight text-white group-hover:text-purple-300 transition-colors">
+            <span className="font-display text-base font-black tracking-tight text-white group-hover:text-[#c3f400] transition-colors">
               GAMEHUB
             </span>
           </Link>
@@ -147,12 +147,12 @@ export function Navbar() {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   onFocus={() => searchQuery.trim() && setIsSearchOpen(true)}
-                  className="w-full rounded-xl border border-white/10 bg-[#121215] py-1.5 pl-8 pr-16 text-xs font-medium text-white placeholder-zinc-500 focus:border-purple-500 focus:outline-none transition-all"
+                  className="w-full rounded-lg border border-white/10 bg-[#1c1b1b] py-1.5 pl-8 pr-16 text-xs font-medium text-white placeholder-zinc-500 focus:border-[#c3f400] focus:outline-none transition-all font-mono"
                 />
                 
                 {/* Hotkey Badge */}
                 {!searchQuery && (
-                  <kbd className="absolute right-2.5 hidden md:inline-flex items-center rounded border border-white/10 bg-zinc-900 px-1.5 py-0.5 text-[9px] font-mono text-zinc-400">
+                  <kbd className="absolute right-2.5 hidden md:inline-flex items-center rounded border border-white/10 bg-[#131313] px-1.5 py-0.5 text-[9px] font-mono text-zinc-400">
                     ⌘K
                   </kbd>
                 )}
@@ -171,18 +171,18 @@ export function Navbar() {
 
             {/* Dropdown Search Results */}
             {isSearchOpen && searchResults.length > 0 && (
-              <div className="absolute left-0 right-0 top-full mt-2 rounded-2xl border border-white/10 bg-[#121215] p-2 shadow-2xl backdrop-blur-xl z-50 space-y-1">
+              <div className="absolute left-0 right-0 top-full mt-2 rounded-xl border border-white/10 bg-[#1c1b1b] p-2 shadow-2xl backdrop-blur-xl z-50 space-y-1">
                 {searchResults.map((game) => (
                   <Link
                     key={game.id}
                     href={`/game/${game.slug}`}
                     onClick={() => setIsSearchOpen(false)}
-                    className="flex items-center space-x-3 rounded-xl p-2 hover:bg-zinc-800 transition-colors"
+                    className="flex items-center space-x-3 rounded-lg p-2 hover:bg-zinc-800 transition-colors"
                   >
                     <img src={game.thumbnailUrl} alt={game.title} className="h-8 w-12 rounded-md object-cover" />
                     <div className="flex flex-col truncate">
-                      <span className="text-xs font-bold text-white truncate">{game.derivedTitle || game.title}</span>
-                      <span className="text-[10px] text-zinc-400 capitalize">{game.category}</span>
+                      <span className="font-display text-xs font-bold text-white truncate">{game.derivedTitle || game.title}</span>
+                      <span className="font-mono text-[10px] text-zinc-400 capitalize">{game.category}</span>
                     </div>
                   </Link>
                 ))}
@@ -194,20 +194,20 @@ export function Navbar() {
           <button
             onClick={handleRandomGame}
             title="Random Game (Roll Dice)"
-            className="flex h-8 w-8 items-center justify-center rounded-xl bg-[#121215] border border-white/10 text-zinc-400 hover:bg-purple-600 hover:text-white transition-all shadow-md"
+            className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#1c1b1b] border border-white/10 text-zinc-400 hover:bg-[#c3f400] hover:text-[#161e00] transition-all shadow-md"
           >
-            <Dices className={`h-4 w-4 ${isSpinning ? "animate-spin text-white" : ""}`} />
+            <Dices className={`h-4 w-4 ${isSpinning ? "animate-spin text-[#161e00]" : ""}`} />
           </button>
 
           {/* Favorites Counter */}
           <Link
             href="/search?favorites=true"
-            className="relative flex h-8 items-center space-x-1.5 rounded-xl bg-[#121215] border border-white/10 px-3 text-xs font-bold text-zinc-300 hover:bg-zinc-800 transition-all"
+            className="relative flex h-8 items-center space-x-1.5 rounded-lg bg-[#1c1b1b] border border-white/10 px-3 text-xs font-bold text-zinc-300 hover:bg-zinc-800 transition-all font-mono"
           >
             <Heart className="h-3.5 w-3.5 text-rose-500 fill-rose-500" />
             <span className="hidden sm:inline">Saved</span>
             {mounted && favorites.length > 0 && (
-              <span className="ml-1 rounded-full bg-purple-600 text-white font-black text-[9px] px-1.5 py-0.2">
+              <span className="ml-1 rounded-full bg-[#c3f400] text-[#161e00] font-mono font-black text-[9px] px-1.5 py-0.2">
                 {favorites.length}
               </span>
             )}
@@ -216,7 +216,7 @@ export function Navbar() {
           {/* Mobile Menu Trigger */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden flex h-8 w-8 items-center justify-center rounded-xl bg-[#121215] border border-white/10 text-zinc-300"
+            className="md:hidden flex h-8 w-8 items-center justify-center rounded-lg bg-[#1c1b1b] border border-white/10 text-zinc-300"
           >
             <Menu className="h-4 w-4" />
           </button>
@@ -226,8 +226,8 @@ export function Navbar() {
 
       {/* Mobile Drawer Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden border-t border-white/5 bg-[#050505] p-4 space-y-3 font-bold text-xs">
-          <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className="block py-2 text-white">
+        <div className="md:hidden border-t border-white/10 bg-[#131313] p-4 space-y-3 font-bold text-xs">
+          <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className="block py-2 text-white font-display">
             Store
           </Link>
           <Link href="/discover" onClick={() => setIsMobileMenuOpen(false)} className="block py-2 text-zinc-400 hover:text-white">
