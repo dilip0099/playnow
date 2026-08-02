@@ -13,7 +13,8 @@ export type GameCategory =
 export type GameClassification = "Original Game" | "Derived Game";
 
 export type BrandRiskLevel = "LOW" | "MEDIUM" | "HIGH";
-export type AssetSourceType = "Original" | "Open Licensed" | "Unknown";
+export type AssetSourceType = "Original" | "CC0" | "MIT licensed" | "Open Licensed" | "Unknown";
+export type AssetVerificationStatus = "VERIFIED" | "REJECTED";
 
 export interface GameControl {
   key: string;
@@ -67,10 +68,13 @@ export interface GameMetadata {
   modifications: string[];
   originalCommitHash: string;
 
-  // Milestone 7 Asset and Trademark Compliance
+  // Milestone 7 Asset & Trademark Compliance
   brandRisk: BrandRiskLevel;
   assetSource: AssetSourceType;
   commercialReady: boolean;
+
+  // Milestone 8 Asset Provenance Verification
+  assetVerificationStatus: AssetVerificationStatus;
 }
 
 export type SortOption = "popular" | "newest" | "rating" | "title";

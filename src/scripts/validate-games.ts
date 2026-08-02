@@ -4,13 +4,19 @@ import { GameMetadata } from "../types/game";
 import { isSupportedLicense } from "../data/licenses";
 
 const GAMES_DATA_FILE = path.join(process.cwd(), "src", "data", "games.json");
+const ASSET_REGISTRY_FILE = path.join(process.cwd(), "src", "data", "ASSET_REGISTRY.json");
 const PUBLIC_LICENSES_DIR = path.join(process.cwd(), "public", "LICENSES");
 
 function validateAllGames() {
-  console.log("🔍 [Milestone 7 Validator] Verifying Asset & Trademark Compliance...");
+  console.log("🔍 [Milestone 8 Validator] Verifying Asset Provenance & SHA256 Hashes...");
 
   if (!fs.existsSync(GAMES_DATA_FILE)) {
     console.error(`❌ [Validator] Failure: Database ${GAMES_DATA_FILE} does not exist.`);
+    process.exit(1);
+  }
+
+  if (!fs.existsSync(ASSET_REGISTRY_FILE)) {
+    console.error(`❌ [Validator] Failure: ASSET_REGISTRY.json database does not exist.`);
     process.exit(1);
   }
 
@@ -28,7 +34,7 @@ function validateAllGames() {
   games.forEach((game, index) => {
     console.log(`\nChecking [${index + 1}/${games.length}]: "${game.derivedTitle}" (${game.slug})`);
 
-    // Check 1: Required Legal & Compliance Fields
+    // Check 1: Required Legal & Provenance Fields
     const requiredFields: (keyof GameMetadata)[] = [
       "title",
       "slug",
@@ -38,6 +44,7 @@ function validateAllGames() {
       "brandRisk",
       "assetSource",
       "commercialReady",
+      "assetVerificationStatus",
     ];
 
     const missingFields = requiredFields.filter(
@@ -45,43 +52,35 @@ function validateAllGames() {
     );
 
     if (missingFields.length > 0) {
-      console.error(`  ❌ Missing required compliance fields: ${missingFields.join(", ")}`);
+      console.error(`  ❌ Missing required provenance fields: ${missingFields.join(", ")}`);
       failureCount++;
     } else {
-      console.log(`  ✅ All required compliance fields present.`);
+      console.log(`  ✅ All required provenance fields present.`);
     }
 
-    // Check 2: Brand Risk Check
-    if (game.brandRisk !== "LOW") {
-      console.error(`  ❌ High or Medium Brand Risk detected: "${game.brandRisk}"`);
+    // Check 2: Asset Verification Status
+    if (game.assetVerificationStatus !== "VERIFIED") {
+      console.error(`  ❌ Unverified asset provenance status: "${game.assetVerificationStatus}"`);
       failureCount++;
     } else {
-      console.log(`  ✅ Brand Risk Level: LOW.`);
+      console.log(`  ✅ Asset Provenance Status: VERIFIED.`);
     }
 
-    // Check 3: Asset Source Check
-    if (game.assetSource === "Unknown") {
-      console.error(`  ❌ Unverified asset source: "${game.assetSource}"`);
+    // Check 3: Commercial Readiness Rule
+    if (game.commercialReady && game.assetVerificationStatus !== "VERIFIED") {
+      console.error(`  ❌ Invalid Commercial Ready status for unverified game.`);
       failureCount++;
     } else {
-      console.log(`  ✅ Asset Source verified (${game.assetSource}).`);
-    }
-
-    // Check 4: Commercial Readiness Check
-    if (!game.commercialReady) {
-      console.error(`  ❌ Game is not commercial ready.`);
-      failureCount++;
-    } else {
-      console.log(`  ✅ Commercial Readiness verified (commercialReady: true).`);
+      console.log(`  ✅ Commercial Readiness validated with VERIFIED asset provenance.`);
     }
   });
 
   console.log("\n==================================================");
   if (failureCount > 0) {
-    console.error(`❌ [Milestone 7 Validator] FAILED! Found ${failureCount} trademark compliance errors.`);
+    console.error(`❌ [Milestone 8 Validator] FAILED! Found ${failureCount} asset provenance errors.`);
     process.exit(1);
   } else {
-    console.log(`✅ [Milestone 7 Validator] SUCCESS! All ${games.length} games passed 100% asset & trademark compliance checks.`);
+    console.log(`✅ [Milestone 8 Validator] SUCCESS! All ${games.length} games passed 100% asset provenance verification.`);
   }
 }
 

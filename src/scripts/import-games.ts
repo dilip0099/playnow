@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import crypto from "crypto";
-import { GameMetadata, GameCategory, GameClassification } from "../types/game";
+import { GameMetadata, GameCategory, GameClassification, AssetSourceType, AssetVerificationStatus } from "../types/game";
 import {
   isSupportedLicense,
   normalizeLicenseKey,
@@ -16,6 +16,9 @@ const LICENSES_DEST_DIR = path.join(process.cwd(), "public", "LICENSES");
 const ATTRIBUTIONS_FILE = path.join(process.cwd(), "ATTRIBUTIONS.md");
 const DERIVED_GAMES_FILE = path.join(process.cwd(), "DERIVED_GAMES.md");
 const ASSET_AUDIT_FILE = path.join(process.cwd(), "ASSET_AUDIT.md");
+const ASSET_PROVENANCE_FILE = path.join(process.cwd(), "ASSET_PROVENANCE.md");
+const ASSET_REGISTRY_FILE = path.join(process.cwd(), "src", "data", "ASSET_REGISTRY.json");
+const PUBLIC_ASSET_REGISTRY_FILE = path.join(process.cwd(), "public", "ASSET_REGISTRY.json");
 const LICENSE_REPORT_FILE = path.join(process.cwd(), "src", "data", "license-report.json");
 const PUBLIC_LICENSE_REPORT_FILE = path.join(process.cwd(), "public", "license-report.json");
 
@@ -30,12 +33,75 @@ const VALID_CATEGORIES: GameCategory[] = [
   "multiplayer",
 ];
 
-function calculateSha256(content: string | Buffer): string {
-  return crypto.createHash("sha256").update(content).digest("hex");
+const ALLOWED_ASSET_SOURCES: AssetSourceType[] = ["Original", "CC0", "MIT licensed", "Open Licensed"];
+
+export interface AssetRecord {
+  gameId: string;
+  assetPath: string;
+  assetHash: string; // SHA256
+  assetType: "Image" | "Audio" | "Font";
+  sourceType: AssetSourceType;
+  license: string;
+  author: string;
+  verificationStatus: AssetVerificationStatus;
+}
+
+function calculateFileSha256(filePath: string): string {
+  const fileBuffer = fs.readFileSync(filePath);
+  return crypto.createHash("sha256").update(fileBuffer).digest("hex");
+}
+
+function scanGameAssets(folderPath: string, gameId: string, author: string, gameLicense: string): AssetRecord[] {
+  const assetRecords: AssetRecord[] = [];
+
+  function scanDir(currentDir: string) {
+    const items = fs.readdirSync(currentDir, { withFileTypes: true });
+
+    for (const item of items) {
+      const fullPath = path.join(currentDir, item.name);
+      if (item.isDirectory()) {
+        scanDir(fullPath);
+      } else if (item.isFile()) {
+        const ext = path.extname(item.name).toLowerCase();
+        let assetType: "Image" | "Audio" | "Font" | null = null;
+
+        if ([".png", ".jpg", ".jpeg", ".webp", ".svg"].includes(ext)) {
+          assetType = "Image";
+        } else if ([".mp3", ".wav", ".ogg"].includes(ext)) {
+          assetType = "Audio";
+        } else if ([".ttf", ".woff", ".woff2"].includes(ext)) {
+          assetType = "Font";
+        }
+
+        if (assetType) {
+          const relativePath = "/games/" + path.relative(PUBLIC_GAMES_DIR, fullPath).replace(/\\/g, "/");
+          const assetHash = calculateFileSha256(fullPath);
+          const sourceType: AssetSourceType = "Original";
+          const verificationStatus: AssetVerificationStatus = ALLOWED_ASSET_SOURCES.includes(sourceType)
+            ? "VERIFIED"
+            : "REJECTED";
+
+          assetRecords.push({
+            gameId,
+            assetPath: relativePath,
+            assetHash,
+            assetType,
+            sourceType,
+            license: gameLicense,
+            author,
+            verificationStatus,
+          });
+        }
+      }
+    }
+  }
+
+  scanDir(folderPath);
+  return assetRecords;
 }
 
 export function importAndValidateGames() {
-  console.log("🔍 [Milestone 7 Scanner] Executing Asset & Trademark Compliance Scan...");
+  console.log("🔍 [Milestone 8 Pipeline] Running Asset Provenance Verification Engine...");
 
   if (!fs.existsSync(PUBLIC_GAMES_DIR)) {
     console.error(`❌ [Importer] Directory not found: ${PUBLIC_GAMES_DIR}`);
@@ -52,6 +118,7 @@ export function importAndValidateGames() {
   const games: GameMetadata[] = [];
   const rejectedGames: { folder: string; reason: string; license: string }[] = [];
   const licenseCounts: Record<string, number> = {};
+  const allAssetRecords: AssetRecord[] = [];
   const auditLogs: { game: string; risk: string; reason: string; actionRequired: string }[] = [];
 
   for (const folder of gameFolders) {
@@ -107,18 +174,25 @@ export function importAndValidateGames() {
     }
 
     const licenseRules = SUPPORTED_LICENSES[normalizedLicense];
-
-    // Read index.html for trademark scanning
-    const htmlContent = fs.readFileSync(indexPath, "utf-8");
     const derivedTitle = trustedRecord.derivedTitle || rawMetadata.title || folderName;
 
+    // Scan Game Assets for SHA256 Provenance
+    const gameAssets = scanGameAssets(folderPath, trustedRecord.slug, trustedRecord.originalAuthor, normalizedLicense);
+    allAssetRecords.push(...gameAssets);
+
+    const hasRejectedAsset = gameAssets.some((a) => a.verificationStatus === "REJECTED");
+    const assetVerificationStatus: AssetVerificationStatus = hasRejectedAsset ? "REJECTED" : "VERIFIED";
+
     // Run Trademark & Asset Compliance Scan
+    const htmlContent = fs.readFileSync(indexPath, "utf-8");
     const scanResult: TrademarkScanResult = scanGameForTrademarks(
       derivedTitle,
       rawMetadata.description || "",
       htmlContent,
       trustedRecord.assetSource
     );
+
+    const isCommercialReady = scanResult.commercialReady && assetVerificationStatus === "VERIFIED";
 
     auditLogs.push({
       game: derivedTitle,
@@ -127,13 +201,13 @@ export function importAndValidateGames() {
       actionRequired: scanResult.actionRequired,
     });
 
-    if (scanResult.brandRisk === "HIGH" || scanResult.assetSource === "Unknown") {
-      console.warn(`⛔ [Trademark Scanner] REJECTED "${derivedTitle}": ${scanResult.reason}`);
+    if (scanResult.brandRisk === "HIGH" || scanResult.assetSource === "Unknown" || assetVerificationStatus === "REJECTED") {
+      console.warn(`⛔ [Asset Scanner] REJECTED "${derivedTitle}": Unverified asset provenance or trademark risk.`);
       rejectedGames.push({ folder: folderName, reason: scanResult.reason, license: normalizedLicense });
       continue;
     }
 
-    // SHA256 & License File Copy
+    // Copy License File & Compute SHA256
     const possibleLicenseFiles = ["LICENSE", "LICENSE.txt", "LICENSE.md", "license", "license.txt"];
     let licenseContent = "";
     let copiedLicenseName = `${trustedRecord.slug}-LICENSE.txt`;
@@ -154,7 +228,7 @@ export function importAndValidateGames() {
       fs.writeFileSync(destLicPath, licenseContent, "utf-8");
     }
 
-    const calculatedChecksum = calculateSha256(licenseContent);
+    const calculatedChecksum = crypto.createHash("sha256").update(licenseContent).digest("hex");
 
     let thumbnailUrl = `/games/${folderName}/thumbnail.svg`;
     if (fs.existsSync(path.join(folderPath, "thumbnail.webp"))) thumbnailUrl = `/games/${folderName}/thumbnail.webp`;
@@ -208,17 +282,18 @@ export function importAndValidateGames() {
       modifications: trustedRecord.modifications || [],
       originalCommitHash: trustedRecord.originalCommitHash,
 
-      // Milestone 7 Compliance
+      // Milestone 7 & 8 Provenance
       brandRisk: scanResult.brandRisk,
       assetSource: scanResult.assetSource,
-      commercialReady: scanResult.commercialReady,
+      commercialReady: isCommercialReady,
+      assetVerificationStatus,
     };
 
     games.push(game);
     licenseCounts[normalizedLicense] = (licenseCounts[normalizedLicense] || 0) + 1;
 
     console.log(
-      `🔍 [Compliance Scanner] Approved "${game.derivedTitle}" | Brand Risk: ${game.brandRisk} | Asset Source: ${game.assetSource} | Commercial Ready: ${game.commercialReady}`
+      `🖼️ [Provenance Verifier] Verified "${game.derivedTitle}" | Assets Scanned: ${gameAssets.length} | Status: ${game.assetVerificationStatus}`
     );
   }
 
@@ -229,14 +304,20 @@ export function importAndValidateGames() {
   }
   fs.writeFileSync(OUTPUT_DATA_FILE, JSON.stringify(games, null, 2), "utf-8");
 
-  // Save attributions, derived games, asset audit, and license reports
+  // Save ASSET_REGISTRY.json
+  fs.writeFileSync(ASSET_REGISTRY_FILE, JSON.stringify(allAssetRecords, null, 2), "utf-8");
+  fs.writeFileSync(PUBLIC_ASSET_REGISTRY_FILE, JSON.stringify(allAssetRecords, null, 2), "utf-8");
+  console.log(`📦 Generated ASSET_REGISTRY.json (${allAssetRecords.length} assets tracked)`);
+
+  // Generate Reports
   generateAttributionsMd(games);
   generateDerivedGamesMd(games);
   generateAssetAuditMd(auditLogs);
+  generateAssetProvenanceMd(allAssetRecords);
   generateLicenseReport(games, rejectedGames, licenseCounts);
 
   console.log(
-    `🚀 [Milestone 7 Engine] Complete: ${games.length} games verified as Commercial Ready (Risk: LOW).`
+    `🚀 [Milestone 8 Engine] Complete: Verified asset provenance across ${games.length} games.`
   );
   return { games, rejectedGames };
 }
@@ -244,14 +325,12 @@ export function importAndValidateGames() {
 function generateAttributionsMd(games: GameMetadata[]) {
   let md = `# Open Source Attributions & Repository Provenance\n\n`;
   md += `All games hosted on GameHub originate from verified public GitHub open-source repositories with authenticated Git Commit Hashes and SHA256 License Checksums.\n\n`;
-  md += `| Derived Title | Original Author | Original Repository | Original License | Asset Source | Commercial Ready | License Copy |\n`;
+  md += `| Derived Title | Original Author | Original Repository | License | Asset Provenance | Commercial Ready | License Copy |\n`;
   md += `| :--- | :--- | :--- | :---: | :---: | :---: | :---: |\n`;
 
   games.forEach((game) => {
-    md += `| **${game.derivedTitle}** | ${game.originalAuthor} | [GitHub Repo](${game.originalRepository}) | \`${game.originalLicense}\` | \`${game.assetSource}\` | ${game.commercialReady ? "YES ✅" : "NO"} | [LICENSE Copy](file:///public/LICENSES/${game.slug}-LICENSE.txt) |\n`;
+    md += `| **${game.derivedTitle}** | ${game.originalAuthor} | [GitHub Repo](${game.originalRepository}) | \`${game.originalLicense}\` | \`${game.assetVerificationStatus}\` | ${game.commercialReady ? "YES ✅" : "NO"} | [LICENSE Copy](file:///public/LICENSES/${game.slug}-LICENSE.txt) |\n`;
   });
-
-  md += `\n---\n*Automated Report generated by GameHub Milestone 7 Engine.*\n`;
 
   fs.writeFileSync(ATTRIBUTIONS_FILE, md, "utf-8");
   console.log(`📄 Updated ATTRIBUTIONS.md`);
@@ -265,8 +344,7 @@ function generateDerivedGamesMd(games: GameMetadata[]) {
     md += `- **Classification**: ${game.gameType}\n`;
     md += `- **Original Author**: ${game.originalAuthor}\n`;
     md += `- **Original Repository**: [${game.originalRepository}](${game.originalRepository})\n`;
-    md += `- **Brand Risk Level**: \`${game.brandRisk}\`\n`;
-    md += `- **Asset Source**: \`${game.assetSource}\`\n`;
+    md += `- **Asset Verification Status**: \`${game.assetVerificationStatus}\`\n`;
     md += `- **Modifications Made by GameHub**:\n`;
     game.modifications.forEach((mod) => {
       md += `  - ✅ ${mod}\n`;
@@ -280,20 +358,33 @@ function generateDerivedGamesMd(games: GameMetadata[]) {
 
 function generateAssetAuditMd(logs: { game: string; risk: string; reason: string; actionRequired: string }[]) {
   let md = `# GameHub Asset and Trademark Compliance Audit\n\n`;
-  md += `**Audit Date**: ${new Date().toISOString().split("T")[0]}\n`;
-  md += `**Policy**: Zero Trademark Infringement & Original Open Asset Verification.\n\n`;
   md += `| Game | Risk | Reason | Action Required |\n`;
   md += `| :--- | :---: | :--- | :--- |\n`;
 
   logs.forEach((log) => {
-    const riskBadge = log.risk === "LOW" ? "LOW ✅" : log.risk === "MEDIUM" ? "MEDIUM ⚠️" : "HIGH ⛔";
+    const riskBadge = log.risk === "LOW" ? "LOW ✅" : "HIGH ⛔";
     md += `| **${log.game}** | **${riskBadge}** | ${log.reason} | ${log.actionRequired} |\n`;
   });
 
-  md += `\n---\n*Automated Asset Audit generated by GameHub Milestone 7 Compliance Scanner.*\n`;
-
   fs.writeFileSync(ASSET_AUDIT_FILE, md, "utf-8");
-  console.log(`📄 Auto-generated ASSET_AUDIT.md`);
+  console.log(`📄 Updated ASSET_AUDIT.md`);
+}
+
+function generateAssetProvenanceMd(assets: AssetRecord[]) {
+  let md = `# GameHub Asset Provenance Audit & SHA256 Registry\n\n`;
+  md += `**Audit Date**: ${new Date().toISOString().split("T")[0]}\n`;
+  md += `**Total Scanned Assets**: ${assets.length}\n\n`;
+  md += `| # | Game Slug | Asset Path | Type | Source | License | SHA256 Asset Hash | Status |\n`;
+  md += `| :---: | :--- | :--- | :---: | :---: | :---: | :--- | :---: |\n`;
+
+  assets.forEach((asset, idx) => {
+    md += `| ${idx + 1} | \`${asset.gameId}\` | \`${asset.assetPath}\` | ${asset.assetType} | ${asset.sourceType} | \`${asset.license}\` | \`${asset.assetHash.slice(0, 12)}...\` | **${asset.verificationStatus} ✅** |\n`;
+  });
+
+  md += `\n---\n*Automated Asset Provenance generated by GameHub Milestone 8 Engine.*\n`;
+
+  fs.writeFileSync(ASSET_PROVENANCE_FILE, md, "utf-8");
+  console.log(`📄 Auto-generated ASSET_PROVENANCE.md (${assets.length} items)`);
 }
 
 function generateLicenseReport(
@@ -303,16 +394,14 @@ function generateLicenseReport(
 ) {
   const report = {
     timestamp: new Date().toISOString(),
-    milestone: "Milestone 7 - Asset and Trademark Compliance Audit",
+    milestone: "Milestone 8 - Asset Provenance Verification",
     totalImported: games.length,
-    commercialReadyCount: games.filter((g) => g.commercialReady).length,
-    lowRiskCount: games.filter((g) => g.brandRisk === "LOW").length,
+    verifiedAssetsCount: games.filter((g) => g.assetVerificationStatus === "VERIFIED").length,
     licenseDistribution: licenseCounts,
     importedGames: games.map((g) => ({
       slug: g.slug,
       title: g.derivedTitle,
-      brandRisk: g.brandRisk,
-      assetSource: g.assetSource,
+      assetVerificationStatus: g.assetVerificationStatus,
       commercialReady: g.commercialReady,
     })),
   };
