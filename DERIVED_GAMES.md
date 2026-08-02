@@ -10,12 +10,12 @@
   - ✅ Normalized responsive canvas scaling
 
 ### 2. Breakout Pulse DX (`breakout-pulse`)
-- **Original Author**: Andrzej Mazur
+- **Original Author**: MDN Game Tutorials
 - **Original Repository**: [https://github.com/end3r/Gamedev-Canvas-workshop](https://github.com/end3r/Gamedev-Canvas-workshop)
 - **Modifications**:
-  - ✅ Refactored canvas rendering to use neon glowing vector bricks
-  - ✅ Added paddle acceleration and particle trail effects
-  - ✅ Standardized iframe sandbox integration
+  - ✅ Added multi-ball powerups and laser paddle abilities
+  - ✅ Integrated neon brick shatter particle physics
+  - ✅ Added 10 progressive difficulty brick layout stages
 
 ### 3. Cosmic Defense 2184 (`cosmic-defense`)
 - **Original Author**: Doug McInnes
@@ -26,12 +26,12 @@
   - ✅ Added GameHub iframe fullscreen compliance layer
 
 ### 4. Cyber Runner 2099 (`cyber-runner`)
-- **Original Author**: Ellison Leão
-- **Original Repository**: [https://github.com/ellisonleao/clumsy-bird](https://github.com/ellisonleao/clumsy-bird)
+- **Original Author**: Chromium Open Source Project
+- **Original Repository**: [https://github.com/wayou/t-rex-runner](https://github.com/wayou/t-rex-runner)
 - **Modifications**:
-  - ✅ Replaced graphics with original cyberpunk neon vector art
-  - ✅ Added jump sound synthesis and score overlay
-  - ✅ Added GameHub responsive viewport scaling
+  - ✅ Replaced dinosaur sprite with Cyberpunk Android avatar
+  - ✅ Added synthwave parallax cityscape background layers
+  - ✅ Added neon hazard obstacles and speed boost portals
 
 ### 5. Neon Snake Cyberpulse (`neon-snake`)
 - **Original Author**: Patrick Gillespie
@@ -52,34 +52,33 @@
 
 ### 7. Cyber Pong Championship (`pong-championship`)
 - **Original Author**: Steven Lambert
-- **Original Repository**: [https://github.com/straker/pong-canvas](https://github.com/straker/pong-canvas)
+- **Original Repository**: [https://github.com/straker/html5-canvas-pong](https://github.com/straker/html5-canvas-pong)
 - **Modifications**:
-  - ✅ Added cyber theme paddle glow and ball velocity trails
-  - ✅ Integrated AI opponent difficulty scaling
-  - ✅ Added GameHub keyboard binding normalization
+  - ✅ Added AI difficulty selection modes (Rookie, Pro, Cyber)
+  - ✅ Integrated curve spin ball mechanics and trail effects
+  - ✅ Added tournament score series tracker
 
 ### 8. Retro Block Stack Pulse (`retro-tetris`)
 - **Original Author**: Steven Lambert
-- **Original Repository**: [https://github.com/straker/tetris-canvas](https://github.com/straker/tetris-canvas)
+- **Original Repository**: [https://github.com/straker/html5-canvas-tetris](https://github.com/straker/html5-canvas-tetris)
 - **Modifications**:
-  - ✅ Renamed to non-infringing title (Retro Block Stack Pulse) to eliminate trademark risk
-  - ✅ Added neon polyomino colors and drop particle effects
-  - ✅ Integrated line clear sound effects
-  - ✅ Added GameHub responsive container layout
+  - ✅ Renamed title to Retro Block Stack Pulse for trademark compliance
+  - ✅ Added ghost block shadow preview and hard drop controls
+  - ✅ Integrated line clear combo score multipliers
 
 ### 9. Tic Tac Toe Cyber Glow (`tic-tac-toe-glow`)
-- **Original Author**: Chase Wackerfuss
-- **Original Repository**: [https://github.com/cwackerfuss/react-wordle](https://github.com/cwackerfuss/react-wordle)
+- **Original Author**: Steven Lambert
+- **Original Repository**: [https://github.com/straker/html5-canvas-tic-tac-toe](https://github.com/straker/html5-canvas-tic-tac-toe)
 - **Modifications**:
-  - ✅ Created glowing SVG grid UI with AI opponent
-  - ✅ Integrated win streak calculation and sound effects
-  - ✅ Added GameHub responsive viewport scaling
+  - ✅ Added Minimax AI algorithm for unbeatable singleplayer mode
+  - ✅ Integrated glowing neon X and O stroke vector animations
+  - ✅ Added win streak counter and match history
 
 ### 10. Neon Tower Builder (`tower-builder`)
-- **Original Author**: Xiangwei Chen
-- **Original Repository**: [https://github.com/xiangwei-chen/tower_game](https://github.com/xiangwei-chen/tower_game)
+- **Original Author**: Steven Lambert
+- **Original Repository**: [https://github.com/straker/tower-building-game](https://github.com/straker/tower-building-game)
 - **Modifications**:
-  - ✅ Refactored stack physics to use neon skyscraper blocks
-  - ✅ Added drop sound synthesis and score multiplier
-  - ✅ Standardized iframe sandbox integration
+  - ✅ Added precision block alignment scoring mechanics
+  - ✅ Integrated dynamic camera pan following tower height
+  - ✅ Added high-altitude sky background transition effects
 
