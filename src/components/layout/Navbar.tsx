@@ -10,7 +10,6 @@ import {
   Heart, 
   X,
   Compass,
-  ShieldCheck,
   Code2,
   Lock,
   Menu,
@@ -28,10 +27,25 @@ export function Navbar() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchResults, setSearchResults] = useState<GameMetadata[]>([]);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isSpinning, setIsSpinning] = useState(false);
+
   const searchRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     setMounted(true);
+  }, []);
+
+  // Global Ctrl + K / Cmd + K Hotkey Listener
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        inputRef.current?.focus();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
   useEffect(() => {
@@ -63,6 +77,9 @@ export function Navbar() {
 
   const handleRandomGame = () => {
     if (gamesData.length === 0) return;
+    setIsSpinning(true);
+    setTimeout(() => setIsSpinning(false), 500);
+
     const randomIndex = Math.floor(Math.random() * gamesData.length);
     const randomGame = gamesData[randomIndex];
     router.push(`/game/${randomGame.slug}`);
@@ -119,18 +136,27 @@ export function Navbar() {
         <div className="flex items-center space-x-3">
           
           {/* Search Bar */}
-          <div ref={searchRef} className="relative hidden sm:block w-48 md:w-60">
+          <div ref={searchRef} className="relative hidden sm:block w-48 md:w-64">
             <form onSubmit={handleSearchSubmit}>
               <div className="relative flex items-center">
                 <Search className="absolute left-3 h-3.5 w-3.5 text-zinc-500" />
                 <input
+                  ref={inputRef}
                   type="text"
                   placeholder="Search games..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   onFocus={() => searchQuery.trim() && setIsSearchOpen(true)}
-                  className="w-full rounded-xl border border-white/10 bg-[#121215] py-1.5 pl-8 pr-8 text-xs font-medium text-white placeholder-zinc-500 focus:border-purple-500 focus:outline-none transition-all"
+                  className="w-full rounded-xl border border-white/10 bg-[#121215] py-1.5 pl-8 pr-16 text-xs font-medium text-white placeholder-zinc-500 focus:border-purple-500 focus:outline-none transition-all"
                 />
+                
+                {/* Hotkey Badge */}
+                {!searchQuery && (
+                  <kbd className="absolute right-2.5 hidden md:inline-flex items-center rounded border border-white/10 bg-zinc-900 px-1.5 py-0.5 text-[9px] font-mono text-zinc-400">
+                    ⌘K
+                  </kbd>
+                )}
+
                 {searchQuery && (
                   <button
                     type="button"
@@ -167,10 +193,10 @@ export function Navbar() {
           {/* Random Game Roll Button */}
           <button
             onClick={handleRandomGame}
-            title="Random Game"
+            title="Random Game (Roll Dice)"
             className="flex h-8 w-8 items-center justify-center rounded-xl bg-[#121215] border border-white/10 text-zinc-400 hover:bg-purple-600 hover:text-white transition-all shadow-md"
           >
-            <Dices className="h-4 w-4" />
+            <Dices className={`h-4 w-4 ${isSpinning ? "animate-spin text-white" : ""}`} />
           </button>
 
           {/* Favorites Counter */}
