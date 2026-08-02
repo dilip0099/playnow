@@ -44,7 +44,7 @@ export function ComplianceDashboardClient({ initialData }: ComplianceDashboardCl
   // Metrics Calculations
   const metrics = useMemo(() => {
     const totalGames = games.length;
-    const verifiedGames = games.filter((g) => Boolean(g?.trustVerified && g?.assetVerificationStatus === "VERIFIED")).length;
+    const verifiedGames = games.filter((g) => Boolean((g?.trustVerified ?? g?.commercialReady) && g?.assetVerificationStatus === "VERIFIED")).length;
     const rejectedGames = Number(licenseReport?.totalRejected) || 0;
 
     const licenseCounts = {

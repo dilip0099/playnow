@@ -21,6 +21,16 @@ export interface GameControl {
   action: string;
 }
 
+export interface GameFilterOptions {
+  category?: GameCategory | "all";
+  search?: string;
+  query?: string;
+  sortBy?: SortOption;
+  favoritesOnly?: boolean;
+  featuredOnly?: boolean;
+  trendingOnly?: boolean;
+}
+
 export interface GameMetadata {
   id: string;
   title: string;
@@ -46,6 +56,8 @@ export interface GameMetadata {
   mobileSupport: boolean;
   aspectRatio?: string;
   thumbnailUrl: string;
+  coverImage?: string;
+  heroImage?: string;
   screenshots: string[];
   gameUrl: string;
   
@@ -58,39 +70,31 @@ export interface GameMetadata {
 
   // Milestone 5 Repository Trust Metadata
   commitHash: string;
-  licenseChecksum: string; // SHA256
-  importTimestamp: string;
-  trustVerified: boolean;
+  originalCommitHash?: string;
+  licenseChecksum: string;
+  trustVerified?: boolean;
+  importTimestamp?: string;
 
-  // Milestone 6 Derived Game Metadata
+  // Milestone 6 Metadata
   gameType: GameClassification;
-  originalRepository: string;
-  originalAuthor: string;
-  originalLicense: SupportedLicense;
-  derivedTitle: string;
-  modifications: string[];
-  originalCommitHash: string;
+  derivedTitle?: string;
+  originalTitle?: string;
+  originalAuthor?: string;
+  originalRepository?: string;
+  originalLicense?: SupportedLicense;
+  modifications?: string[];
 
-  // Milestone 7 & 8 Provenance
-  brandRisk: BrandRiskLevel;
-  assetSource: AssetSourceType;
-  commercialReady: boolean;
-
-  // Milestone 8 Asset Provenance Verification
+  // Milestone 8 Asset Verification Metadata
   assetVerificationStatus: AssetVerificationStatus;
+  assetSource: AssetSourceType;
+  brandRisk: BrandRiskLevel;
+  commercialReady: boolean;
+  rejectionReason?: string;
 
-  // Milestone 13 Monetization Settings
-  monetizationEnabled: boolean;
-  adSupported: boolean;
+  // Milestone 13 Monetization & Revenue Metadata
+  monetizationEnabled?: boolean;
+  adSupported?: boolean;
   revenueShare?: number;
 }
 
-export type SortOption = "popular" | "newest" | "rating" | "title";
-
-export interface GameFilterOptions {
-  category?: GameCategory | "all";
-  query?: string;
-  sortBy?: SortOption;
-  featuredOnly?: boolean;
-  trendingOnly?: boolean;
-}
+export type SortOption = "popular" | "rating" | "newest" | "title";

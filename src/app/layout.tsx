@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { MobileBottomNav } from "@/components/layout/MobileBottomNav";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -61,17 +62,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} min-h-screen bg-background text-foreground flex flex-col antialiased`}>
+    <html lang="en" suppressHydrationWarning className="dark">
+      <body className={`${inter.className} min-h-screen bg-[#050505] text-white flex flex-col antialiased pb-16 md:pb-0`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
-          enableSystem
+          enableSystem={false}
           disableTransitionOnChange={false}
         >
           <Navbar />
           <main className="flex-1 w-full">{children}</main>
           <Footer />
+          <MobileBottomNav />
         </ThemeProvider>
       </body>
     </html>

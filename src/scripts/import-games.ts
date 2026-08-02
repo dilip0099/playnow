@@ -368,7 +368,7 @@ function generateDerivedGamesMd(games: GameMetadata[]) {
     md += `- **Original Author**: ${game.originalAuthor}\n`;
     md += `- **Original Repository**: [${game.originalRepository}](${game.originalRepository})\n`;
     md += `- **Modifications**:\n`;
-    game.modifications.forEach((mod) => { md += `  - ✅ ${mod}\n`; });
+    (game.modifications || []).forEach((mod) => { md += `  - ✅ ${mod}\n`; });
     md += `\n`;
   });
   fs.writeFileSync(DERIVED_GAMES_FILE, md, "utf-8");
@@ -399,7 +399,7 @@ function generateGameCreditsMd(games: GameMetadata[]) {
   md += `| # | Derived Title | Original Author | Original Repository | Game License | Git Commit Hash |\n`;
   md += `| :---: | :--- | :--- | :--- | :---: | :---: |\n`;
   games.forEach((game, idx) => {
-    md += `| ${idx + 1} | **${game.derivedTitle}** | ${game.originalAuthor} | [GitHub Repo](${game.originalRepository}) | \`${game.originalLicense}\` | \`${game.originalCommitHash.slice(0, 7)}\` |\n`;
+    md += `| ${idx + 1} | **${game.derivedTitle}** | ${game.originalAuthor} | [GitHub Repo](${game.originalRepository}) | \`${game.originalLicense}\` | \`${(game.originalCommitHash || game.commitHash || "").slice(0, 7)}\` |\n`;
   });
   fs.writeFileSync(GAME_CREDITS_FILE, md, "utf-8");
 }
