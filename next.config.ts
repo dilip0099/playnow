@@ -4,25 +4,14 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   images: {
     formats: ["image/avif", "image/webp"],
-    remotePatterns: [],
-    unoptimized: process.env.NODE_ENV === "development",
-  },
-  async headers() {
-    return [
+    // All game artwork (thumbnails, covers, hero images, screenshots) comes from GamePix's
+    // CDN — see higherResImage() in src/scripts/import-gamepix.ts.
+    remotePatterns: [
       {
-        source: "/games/:path*",
-        headers: [
-          {
-            key: "X-Frame-Options",
-            value: "SAMEORIGIN",
-          },
-          {
-            key: "Content-Security-Policy",
-            value: "frame-ancestors 'self'",
-          },
-        ],
+        protocol: "https",
+        hostname: "img.gamepix.com",
       },
-    ];
+    ],
   },
 };
 

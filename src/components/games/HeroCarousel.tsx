@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { ChevronLeft, ChevronRight, Play, Heart, Star } from "lucide-react";
 import { GameMetadata } from "@/types/game";
 import { useFavorites } from "@/hooks/useFavorites";
@@ -59,12 +60,15 @@ export function HeroCarousel({ games, intervalMs = 6500 }: HeroCarouselProps) {
               isActive ? "z-10 opacity-100" : "pointer-events-none z-0 opacity-0"
             }`}
           >
-            <img
-              src={game.heroImage || game.coverImage}
+            <Image
+              src={game.heroImage || game.coverImage || game.thumbnailUrl}
               alt=""
               aria-hidden="true"
-              fetchPriority={idx === 0 ? "high" : "low"}
-              className="absolute inset-0 h-full w-full object-cover object-center"
+              fill
+              sizes="100vw"
+              priority={idx === 0}
+              loading={idx === 0 ? undefined : "lazy"}
+              className="object-cover object-center"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
             <div className="absolute inset-0 bg-gradient-to-r from-background/90 via-background/50 to-transparent" />

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Star, Eye, Play } from "lucide-react";
 import { GameMetadata } from "@/types/game";
 import { ASPECT_RATIO_CLASS, GameAspectRatio } from "@/lib/aspect-ratio";
@@ -22,11 +23,14 @@ export function GameCard({ game, aspectRatio = "16/9", priority = false }: GameC
     >
       {/* Artwork Image Container */}
       <div className={`relative w-full overflow-hidden bg-background ${ASPECT_RATIO_CLASS[aspectRatio]}`}>
-        <img
-          src={game.thumbnailUrl || game.coverImage}
+        <Image
+          src={game.thumbnailUrl || game.coverImage || ""}
           alt={displayTitle}
-          className="h-full w-full object-cover object-center transition-transform duration-slow group-hover:scale-105"
-          loading={priority ? "eager" : "lazy"}
+          fill
+          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, (max-width: 1280px) 25vw, 20vw"
+          className="object-cover object-center transition-transform duration-slow group-hover:scale-105"
+          priority={priority}
+          loading={priority ? undefined : "lazy"}
         />
 
         {/* Hover Dark Overlay + Neon Lime Play Button */}

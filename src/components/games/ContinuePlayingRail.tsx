@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Clock, Play } from "lucide-react";
 import { GameMetadata } from "@/types/game";
 import { useRecentlyPlayed } from "@/hooks/useRecentlyPlayed";
@@ -59,7 +60,15 @@ export function ContinuePlayingRail({ allGames, emptyState = "show", limit = 3, 
           key={`continue-${game.id}`}
           className="rounded-2xl border border-border bg-card p-4 space-y-3 hover:border-primary/40 transition-all"
         >
-          <img src={game.thumbnailUrl} alt={game.title} className="aspect-[16/10] w-full rounded-xl object-cover" loading="lazy" />
+          <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl">
+            <Image
+              src={game.thumbnailUrl}
+              alt={game.title}
+              fill
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              className="object-cover"
+            />
+          </div>
           <div className="flex items-center justify-between">
             <div className="min-w-0">
               <h3 className="font-display text-sm font-bold text-foreground line-clamp-1">{game.derivedTitle || game.title}</h3>

@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import {
   Star,
@@ -242,8 +243,14 @@ export default async function GamePage({ params }: GamePageProps) {
 
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
             {(game.screenshots.length > 0 ? game.screenshots : [game.thumbnailUrl, game.coverImage || game.thumbnailUrl]).map((img, idx) => (
-              <div key={idx} className="overflow-hidden rounded-2xl border border-border bg-card aspect-[16/9]">
-                <img src={img} alt={`${displayTitle} screenshot ${idx + 1}`} className="h-full w-full object-cover hover:scale-105 transition-transform duration-slow" loading="lazy" />
+              <div key={idx} className="relative overflow-hidden rounded-2xl border border-border bg-card aspect-[16/9]">
+                <Image
+                  src={img}
+                  alt={`${displayTitle} screenshot ${idx + 1}`}
+                  fill
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 400px"
+                  className="object-cover hover:scale-105 transition-transform duration-slow"
+                />
               </div>
             ))}
           </div>

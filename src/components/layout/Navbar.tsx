@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import {
   Search,
@@ -184,7 +185,7 @@ export function Navbar() {
                     idx === activeIndex ? "bg-accent" : "hover:bg-accent"
                   }`}
                 >
-                  <img src={game.thumbnailUrl} alt="" className="h-8 w-12 rounded-md object-cover" />
+                  <Image src={game.thumbnailUrl} alt="" width={48} height={32} className="h-8 w-12 rounded-md object-cover" />
                   <div className="flex flex-col truncate">
                     <span className="font-display text-xs font-bold text-foreground truncate">{game.derivedTitle || game.title}</span>
                     <span className="font-mono text-[10px] text-muted-foreground capitalize">{game.category}</span>

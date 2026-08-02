@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
+import Image from "next/image";
 import {
   Maximize2,
   Minimize2,
@@ -104,12 +105,15 @@ export function GamePlayer({ game, onPlay }: GamePlayerProps) {
           {!isPlaying ? (
             <>
               {!isCoverLoaded && <Skeleton className="absolute inset-0 rounded-none" />}
-              <img
+              <Image
                 src={coverImage}
                 alt=""
                 aria-hidden="true"
+                fill
+                sizes="(max-width: 640px) 100vw, 900px"
+                priority
                 onLoad={() => setIsCoverLoaded(true)}
-                className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-slow ${
+                className={`object-cover transition-opacity duration-slow ${
                   isCoverLoaded ? "opacity-100" : "opacity-0"
                 }`}
               />
