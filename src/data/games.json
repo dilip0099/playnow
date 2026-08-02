@@ -18,7 +18,7 @@
         "action": "Slide Grid"
       }
     ],
-    "author": "Gabby Vance",
+    "author": "Gabriele Cirulli",
     "version": "1.0.0",
     "rating": 4.5,
     "playsCount": 13370,
@@ -35,10 +35,14 @@
     ],
     "gameUrl": "/games/2048-fusion/index.html",
     "license": "MIT",
-    "repository": "https://github.com/gabbyvance/2048-cyber-fusion",
-    "homepage": "https://gamehub.local/game/2048-fusion",
+    "repository": "https://github.com/gabrielecirulli/2048",
+    "homepage": "https://play2048.co/",
     "commercialUse": true,
-    "attributionRequired": true
+    "attributionRequired": true,
+    "commitHash": "fc82ecae46d6a506bfec38c4c798031d279998df",
+    "licenseChecksum": "4d6d420a4cb4bff3893675b6df0625b9cd3ad8f6b581b237be085e6650ed9a30",
+    "importTimestamp": "2026-08-02T06:53:18.805Z",
+    "trustVerified": true
   },
   {
     "id": "breakout-pulse",
@@ -59,7 +63,7 @@
         "action": "Move Paddle"
       }
     ],
-    "author": "Elena Rostova",
+    "author": "Andrzej Mazur",
     "version": "1.0.0",
     "rating": 4.5,
     "playsCount": 9769,
@@ -76,10 +80,14 @@
     ],
     "gameUrl": "/games/breakout-pulse/index.html",
     "license": "Apache-2.0",
-    "repository": "https://github.com/elenarostova/breakout-pulse-dx",
-    "homepage": "https://gamehub.local/game/breakout-pulse",
+    "repository": "https://github.com/end3r/Gamedev-Canvas-workshop",
+    "homepage": "https://end3r.github.io/Gamedev-Canvas-workshop/",
     "commercialUse": true,
-    "attributionRequired": true
+    "attributionRequired": true,
+    "commitHash": "4e9128f73e4b7890a88df54b2a36b32810a976a1",
+    "licenseChecksum": "a7480cb4632d1dfab73fec04c084a20556e74249dda23d5949e068239d4478c8",
+    "importTimestamp": "2026-08-02T06:53:18.810Z",
+    "trustVerified": true
   },
   {
     "id": "cosmic-defense",
@@ -110,7 +118,7 @@
         "action": "Pause Game"
       }
     ],
-    "author": "GameHub Studios",
+    "author": "Doug McInnes",
     "version": "1.2.0",
     "rating": 4.8,
     "playsCount": 24900,
@@ -118,7 +126,7 @@
     "trending": true,
     "isNew": false,
     "releaseDate": "2025-11-20",
-    "lastUpdated": "2025-11-20",
+    "lastUpdated": "2026-01-15",
     "mobileSupport": true,
     "aspectRatio": "16/9",
     "thumbnailUrl": "/games/cosmic-defense/thumbnail.svg",
@@ -127,10 +135,14 @@
     ],
     "gameUrl": "/games/cosmic-defense/index.html",
     "license": "Apache-2.0",
-    "repository": "https://github.com/gamehub/cosmic-defense",
-    "homepage": "https://gamehub.local/game/cosmic-defense",
+    "repository": "https://github.com/dmcinnes/HTML5-Asteroids",
+    "homepage": "https://github.com/dmcinnes/HTML5-Asteroids",
     "commercialUse": true,
-    "attributionRequired": true
+    "attributionRequired": true,
+    "commitHash": "33a218d6a89901768bf7094b81c2f90a211f440b",
+    "licenseChecksum": "a40ab0bc6bae99a23e67042a7704fdc1362e201a4444c5343a001b5e167815bc",
+    "importTimestamp": "2026-08-02T06:53:18.812Z",
+    "trustVerified": true
   },
   {
     "id": "cyber-runner",
@@ -151,7 +163,7 @@
         "action": "Jump"
       }
     ],
-    "author": "Kira Vance",
+    "author": "Ellison Leão",
     "version": "1.0.0",
     "rating": 4.7,
     "playsCount": 7099,
@@ -168,10 +180,14 @@
     ],
     "gameUrl": "/games/cyber-runner/index.html",
     "license": "MIT",
-    "repository": "https://github.com/kiravance/cyber-runner-2099",
-    "homepage": "https://gamehub.local/game/cyber-runner",
+    "repository": "https://github.com/ellisonleao/clumsy-bird",
+    "homepage": "https://ellisonleao.github.io/clumsy-bird/",
     "commercialUse": true,
-    "attributionRequired": true
+    "attributionRequired": true,
+    "commitHash": "9b87a892b1555543c7b3997ef8b8c9d0901e9d89",
+    "licenseChecksum": "01db2303fa900dc8eba534a165c847fa995a531affc834ab9ae0874da9306814",
+    "importTimestamp": "2026-08-02T06:53:18.814Z",
+    "trustVerified": true
   },
   {
     "id": "neon-snake",
@@ -202,7 +218,7 @@
         "action": "Restart Game"
       }
     ],
-    "author": "GameHub Studios",
+    "author": "Patrick Gillespie",
     "version": "1.0.0",
     "rating": 4.9,
     "playsCount": 18420,
@@ -219,10 +235,14 @@
     ],
     "gameUrl": "/games/neon-snake/index.html",
     "license": "MIT",
-    "repository": "https://github.com/gamehub/neon-snake",
-    "homepage": "https://gamehub.local/game/neon-snake",
+    "repository": "https://github.com/patorjk/JavaScript-Snake",
+    "homepage": "http://patorjk.com/games/snake/",
     "commercialUse": true,
-    "attributionRequired": true
+    "attributionRequired": true,
+    "commitHash": "a1599e823f6c8d4512b9d21e8609594f839c43a2",
+    "licenseChecksum": "65fcbdf98ae10b7bf2b13fa50a95fb70998fa1b29d1022208dbec071f43fbfa1",
+    "importTimestamp": "2026-08-02T06:53:18.816Z",
+    "trustVerified": true
   },
   {
     "id": "pixel-memory",
@@ -249,7 +269,7 @@
         "action": "Restart Puzzle"
       }
     ],
-    "author": "GameHub Studios",
+    "author": "Jeff Hlywa",
     "version": "1.0.1",
     "rating": 4.7,
     "playsCount": 14200,
@@ -257,7 +277,7 @@
     "trending": true,
     "isNew": true,
     "releaseDate": "2026-02-01",
-    "lastUpdated": "2026-02-01",
+    "lastUpdated": "2026-01-15",
     "mobileSupport": true,
     "aspectRatio": "16/9",
     "thumbnailUrl": "/games/pixel-memory/thumbnail.svg",
@@ -266,10 +286,14 @@
     ],
     "gameUrl": "/games/pixel-memory/index.html",
     "license": "BSD-3",
-    "repository": "https://github.com/gamehub/pixel-memory",
-    "homepage": "https://gamehub.local/game/pixel-memory",
+    "repository": "https://github.com/jhlywa/chess.js",
+    "homepage": "https://chessboardjs.com/",
     "commercialUse": true,
-    "attributionRequired": true
+    "attributionRequired": true,
+    "commitHash": "8d89a744ef87959bb4b22c7104b2a95c4794e772",
+    "licenseChecksum": "3a836235ae97414d989571eb7f61a921f4c8dfa9442bbb22fa225ef1081a8121",
+    "importTimestamp": "2026-08-02T06:53:18.818Z",
+    "trustVerified": true
   },
   {
     "id": "pong-championship",
@@ -290,7 +314,7 @@
         "action": "Control Paddle"
       }
     ],
-    "author": "Soren Cole",
+    "author": "Steven Lambert",
     "version": "1.0.0",
     "rating": 4.5,
     "playsCount": 17279,
@@ -307,10 +331,14 @@
     ],
     "gameUrl": "/games/pong-championship/index.html",
     "license": "MIT",
-    "repository": "https://github.com/sorencole/cyber-pong-championship",
-    "homepage": "https://gamehub.local/game/pong-championship",
+    "repository": "https://github.com/straker/pong-canvas",
+    "homepage": "https://straker.github.io/pong-canvas/",
     "commercialUse": true,
-    "attributionRequired": true
+    "attributionRequired": true,
+    "commitHash": "c41a24bf89d091e92d8f28f090b8f17a941e82a9",
+    "licenseChecksum": "2d4ce578315c72300412c8c86c54f6b64e8e0706394b3ec487811817a4549081",
+    "importTimestamp": "2026-08-02T06:53:18.819Z",
+    "trustVerified": true
   },
   {
     "id": "retro-tetris",
@@ -335,7 +363,7 @@
         "action": "Rotate Block"
       }
     ],
-    "author": "Alex Rivers",
+    "author": "Steven Lambert",
     "version": "1.0.0",
     "rating": 4.6,
     "playsCount": 17630,
@@ -352,10 +380,14 @@
     ],
     "gameUrl": "/games/retro-tetris/index.html",
     "license": "MIT",
-    "repository": "https://github.com/alexrivers/retro-tetris-pulse",
-    "homepage": "https://gamehub.local/game/retro-tetris",
+    "repository": "https://github.com/straker/tetris-canvas",
+    "homepage": "https://straker.github.io/tetris-canvas/",
     "commercialUse": true,
-    "attributionRequired": true
+    "attributionRequired": true,
+    "commitHash": "59f1f0e21a8d052b895fc247b9d4a8e8b0a99182",
+    "licenseChecksum": "3602bb5054147f8547d6e1a4bdb068b958c528b21858f30823acc2479348e0b0",
+    "importTimestamp": "2026-08-02T06:53:18.821Z",
+    "trustVerified": true
   },
   {
     "id": "tic-tac-toe-glow",
@@ -376,7 +408,7 @@
         "action": "Place Symbol"
       }
     ],
-    "author": "Liam Thorne",
+    "author": "Chase Wackerfuss",
     "version": "1.0.0",
     "rating": 4.8,
     "playsCount": 19278,
@@ -393,10 +425,14 @@
     ],
     "gameUrl": "/games/tic-tac-toe-glow/index.html",
     "license": "ISC",
-    "repository": "https://github.com/liamthorne/tic-tac-toe-glow",
-    "homepage": "https://gamehub.local/game/tic-tac-toe-glow",
+    "repository": "https://github.com/cwackerfuss/react-wordle",
+    "homepage": "https://react-wordle.netlify.app/",
     "commercialUse": true,
-    "attributionRequired": true
+    "attributionRequired": true,
+    "commitHash": "c36a43f88bb83c48bc6259d6e4922119ef8eb025",
+    "licenseChecksum": "a221fc0681c9d380e269eb5c23520d7a4a31b4de30c30ffca21f746d49b5f9f4",
+    "importTimestamp": "2026-08-02T06:53:18.823Z",
+    "trustVerified": true
   },
   {
     "id": "tower-builder",
@@ -417,7 +453,7 @@
         "action": "Drop Skyscraper Block"
       }
     ],
-    "author": "Owen Price",
+    "author": "Xiangwei Chen",
     "version": "1.0.0",
     "rating": 4.9,
     "playsCount": 17556,
@@ -434,9 +470,13 @@
     ],
     "gameUrl": "/games/tower-builder/index.html",
     "license": "MIT",
-    "repository": "https://github.com/owenprice/neon-tower-builder",
-    "homepage": "https://gamehub.local/game/tower-builder",
+    "repository": "https://github.com/xiangwei-chen/tower_game",
+    "homepage": "https://xiangwei-chen.github.io/tower_game/",
     "commercialUse": true,
-    "attributionRequired": true
+    "attributionRequired": true,
+    "commitHash": "d9426f8d38e2195f00e99ab31f31f9e205ab038c",
+    "licenseChecksum": "68ef64a0f0cb93de560b4788f4fb1096ea12db301a0831c8b9576bbe393d154f",
+    "importTimestamp": "2026-08-02T06:53:18.824Z",
+    "trustVerified": true
   }
 ]

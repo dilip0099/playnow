@@ -46,6 +46,12 @@ export interface GameMetadata {
   homepage: string;
   commercialUse: boolean;
   attributionRequired: boolean;
+
+  // Milestone 5 Repository Trust Metadata
+  commitHash: string;
+  licenseChecksum: string; // SHA256
+  importTimestamp: string;
+  trustVerified: boolean;
 }
 
 export type SortOption = "popular" | "newest" | "rating" | "title";
