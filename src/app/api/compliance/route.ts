@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 
+export const dynamic = "force-dynamic";
+
 export async function GET() {
   const gamesPath = path.join(process.cwd(), "src", "data", "games.json");
   const licenseReportPath = path.join(process.cwd(), "src", "data", "license-report.json");
@@ -32,7 +34,7 @@ export async function GET() {
   const licenseDistribution = {
     MIT: games.filter((g: any) => g.license === "MIT").length,
     "Apache-2.0": games.filter((g: any) => g.license === "Apache-2.0").length,
-    BSD: games.filter((g: any) => g.license.startsWith("BSD")).length,
+    BSD: games.filter((g: any) => String(g.license || "").startsWith("BSD")).length,
     ISC: games.filter((g: any) => g.license === "ISC").length,
     Owned: assetSources.filter((s: any) => s.ownershipStatus === "OWNED").length,
   };
@@ -44,7 +46,7 @@ export async function GET() {
   };
 
   const trademarkRisk = {
-    LOW: games.filter((g: any) => g.brandRisk === "LOW").length,
+    LOW: games.filter((g: any) => (g.brandRisk || "LOW") === "LOW").length,
     MEDIUM: games.filter((g: any) => g.brandRisk === "MEDIUM").length,
     HIGH: games.filter((g: any) => g.brandRisk === "HIGH").length,
   };

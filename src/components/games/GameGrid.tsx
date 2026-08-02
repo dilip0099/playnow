@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpDown, Frown, Sparkles, SlidersHorizontal } from "lucide-react";
+import { ArrowUpDown, Frown, SlidersHorizontal } from "lucide-react";
 import { GameCard } from "./GameCard";
 import { GameMetadata, SortOption } from "@/types/game";
 
@@ -26,15 +26,15 @@ export function GameGrid({
     const list = [...games];
     switch (sortBy) {
       case "popular":
-        return list.sort((a, b) => b.playsCount - a.playsCount);
+        return list.sort((a, b) => (b.playsCount || 0) - (a.playsCount || 0));
       case "rating":
-        return list.sort((a, b) => b.rating - a.rating);
+        return list.sort((a, b) => (b.rating || 0) - (a.rating || 0));
       case "newest":
         return list.sort(
-          (a, b) => new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime()
+          (a, b) => new Date(b.releaseDate || 0).getTime() - new Date(a.releaseDate || 0).getTime()
         );
       case "title":
-        return list.sort((a, b) => a.title.localeCompare(b.title));
+        return list.sort((a, b) => String(a.title || "").localeCompare(String(b.title || "")));
       default:
         return list;
     }
@@ -79,16 +79,22 @@ export function GameGrid({
 
       {/* Game Cards Grid */}
       {displayedGames.length > 0 ? (
-        <motion.div
-          layout
-          className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-        >
-          <AnimatePresence>
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <AnimatePresence mode="popLayout">
             {displayedGames.map((game, idx) => (
-              <GameCard key={game.id} game={game} priority={idx < 4} />
+              <motion.div
+                key={game.id || idx}
+                layout
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.2 }}
+              >
+                <GameCard game={game} priority={idx < 4} />
+              </motion.div>
             ))}
           </AnimatePresence>
-        </motion.div>
+        </div>
       ) : (
         /* Empty State */
         <div className="flex flex-col items-center justify-center rounded-3xl border border-dashed border-border p-12 text-center space-y-3">
@@ -102,18 +108,18 @@ export function GameGrid({
         </div>
       )}
 
-      {/* Infinite Scroll / Load More Button */}
+      {/* Load More Button */}
       {hasMore && (
-        <div className="flex justify-center pt-8">
+        <div className="flex justify-center pt-4">
           <button
-            onClick={() => setVisibleCount((prev) => prev + 12)}
-            className="flex items-center space-x-2 rounded-full border border-purple-500/30 bg-purple-500/10 px-8 py-3 text-xs font-bold text-purple-400 hover:bg-purple-500/20 transition-all hover:scale-105"
+            onClick={() => setVisibleCount((prev) => prev + 8)}
+            className="rounded-xl border border-purple-500/30 bg-purple-500/10 px-6 py-2.5 text-xs font-bold text-purple-300 hover:bg-purple-500/20 transition-all shadow-lg shadow-purple-500/10"
           >
-            <Sparkles className="h-4 w-4" />
-            <span>LOAD MORE GAMES ({sortedGames.length - visibleCount} remaining)</span>
+            Load More Games ({sortedGames.length - visibleCount} Remaining)
           </button>
         </div>
       )}
+
     </div>
   );
 }
