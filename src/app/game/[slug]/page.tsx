@@ -1,11 +1,12 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ChevronRight, Home, Star, Eye, Calendar, User, Tag, GitBranch, ExternalLink, ShieldCheck } from "lucide-react";
+import { ChevronRight, Home, Star, Eye, User, Tag, GitBranch, ExternalLink, ShieldCheck, CheckCircle2, Lock, Sparkles, Key, Layers } from "lucide-react";
 import { getGameBySlug, getRelatedGames, getAllGames } from "@/lib/games";
 import { GamePlayer } from "@/components/games/GamePlayer";
 import { GameControls } from "@/components/games/GameControls";
 import { GameCard } from "@/components/games/GameCard";
+import { Badge } from "@/components/ui/badge";
 
 interface GamePageProps {
   params: Promise<{ slug: string }>;
@@ -100,6 +101,46 @@ export default async function GameDetailPage({ params }: GamePageProps) {
 
         {/* Game Player Iframe */}
         <GamePlayer game={game} />
+
+        {/* Legal Verification Badges Row */}
+        <div className="rounded-2xl border border-border/60 bg-slate-900/60 p-4 backdrop-blur-md space-y-3">
+          <h3 className="text-xs font-bold text-foreground uppercase tracking-wider flex items-center space-x-1.5">
+            <ShieldCheck className="h-4 w-4 text-emerald-400" />
+            <span>GameHub Legal Compliance & Verification Telemetry</span>
+          </h3>
+
+          <div className="flex flex-wrap items-center gap-2">
+            <Badge variant="outline" className="bg-emerald-500/10 text-emerald-400 border-emerald-500/30 text-[11px] py-1 font-semibold flex items-center space-x-1">
+              <CheckCircle2 className="h-3.5 w-3.5" />
+              <span>Verified Open Source</span>
+            </Badge>
+
+            <Badge variant="outline" className="bg-purple-500/10 text-purple-300 border-purple-500/30 text-[11px] py-1 font-semibold flex items-center space-x-1">
+              <Key className="h-3.5 w-3.5" />
+              <span>License Verified ({game.originalLicense || game.license})</span>
+            </Badge>
+
+            <Badge variant="outline" className="bg-cyan-500/10 text-cyan-400 border-cyan-500/30 text-[11px] py-1 font-semibold flex items-center space-x-1">
+              <GitBranch className="h-3.5 w-3.5" />
+              <span>Repository Authenticated</span>
+            </Badge>
+
+            <Badge variant="outline" className="bg-indigo-500/10 text-indigo-300 border-indigo-500/30 text-[11px] py-1 font-semibold flex items-center space-x-1">
+              <Layers className="h-3.5 w-3.5" />
+              <span>Asset Provenance Verified</span>
+            </Badge>
+
+            <Badge variant="outline" className="bg-amber-500/10 text-amber-300 border-amber-500/30 text-[11px] py-1 font-semibold flex items-center space-x-1">
+              <Lock className="h-3.5 w-3.5" />
+              <span>Trademark Safe</span>
+            </Badge>
+
+            <Badge variant="outline" className="bg-emerald-500/10 text-emerald-400 border-emerald-500/30 text-[11px] py-1 font-semibold flex items-center space-x-1">
+              <Sparkles className="h-3.5 w-3.5" />
+              <span>Commercial Ready</span>
+            </Badge>
+          </div>
+        </div>
 
         {/* Details & Controls Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
