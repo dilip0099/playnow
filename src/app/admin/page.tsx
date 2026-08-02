@@ -2,34 +2,27 @@ import { Metadata } from "next";
 import Link from "next/link";
 import fs from "fs";
 import path from "path";
-import { ShieldCheck, Users, Gamepad2, Code2, TrendingUp, DollarSign, ArrowRight, Key, Layers, Lock } from "lucide-react";
+import { ShieldCheck, Gamepad2, ArrowRight, Lock, ExternalLink } from "lucide-react";
 import { Card } from "@/components/ui/card";
 
 export const metadata: Metadata = {
-  title: "Executive SaaS Dashboard - PlayNow Admin",
-  description: "Executive platform command center, SaaS metrics overview, and portal navigation.",
+  title: "Admin Overview - PlayNow Admin",
+  description: "Platform catalog CMS and legal audit navigation.",
 };
 
 function loadOverviewData() {
   const gamesPath = path.join(process.cwd(), "src", "data", "games.json");
-  const analyticsPath = path.join(process.cwd(), "src", "data", "analytics.json");
-  const adsPath = path.join(process.cwd(), "src", "data", "ads.json");
-
-  let games = [];
-  let analytics: any = {};
-  let adsData: any = {};
-
+  let games: any[] = [];
   try {
     if (fs.existsSync(gamesPath)) games = JSON.parse(fs.readFileSync(gamesPath, "utf-8"));
-    if (fs.existsSync(analyticsPath)) analytics = JSON.parse(fs.readFileSync(analyticsPath, "utf-8"));
-    if (fs.existsSync(adsPath)) adsData = JSON.parse(fs.readFileSync(adsPath, "utf-8"));
   } catch (e) {}
-
-  return { games, analytics, adsData };
+  return { games };
 }
 
 export default function AdminPage() {
-  const { games, analytics, adsData } = loadOverviewData();
+  const { games } = loadOverviewData();
+  const commercialReadyCount = games.filter((g) => g.commercialReady).length;
+  const newThisWeek = games.filter((g) => g.isNew).length;
 
   return (
     <div className="min-h-screen bg-background text-foreground py-10">
@@ -44,9 +37,9 @@ export default function AdminPage() {
                 <span>SaaS Control Center</span>
               </span>
             </div>
-            <h1 className="text-3xl font-black text-white">Executive Command Platform</h1>
+            <h1 className="text-3xl font-black text-white">Admin Overview</h1>
             <p className="text-sm text-slate-400 mt-1">
-              Manage platform catalog CMS, user accounts, developer publishing, telemetry analytics, and legal audits.
+              Catalog CMS and legal audit navigation. Real play/revenue analytics live in your GamePix publisher dashboard, not here.
             </p>
           </div>
 
@@ -58,39 +51,47 @@ export default function AdminPage() {
           </Link>
         </div>
 
-        {/* Executive Quick Metric Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Quick Metric Cards — every number here is derived from src/data/games.json, nothing invented */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
           <Card className="p-6 border-border/60 bg-card/60 backdrop-blur-md space-y-2">
             <div className="text-xs font-bold text-slate-400 uppercase">Active Games Catalog</div>
             <div className="text-3xl font-black text-white">{games.length} Titles</div>
-            <div className="text-xs text-emerald-400 font-semibold">100% Commercial Ready</div>
+            <div className="text-xs text-slate-400 font-semibold">Sourced via GamePix</div>
           </Card>
 
           <Card className="p-6 border-border/60 bg-card/60 backdrop-blur-md space-y-2">
-            <div className="text-xs font-bold text-slate-400 uppercase">Total Revenue</div>
-            <div className="text-3xl font-black text-emerald-400">${(adsData.totalRevenue || 4825.50).toFixed(2)}</div>
-            <div className="text-xs text-slate-400 font-semibold">Ad Impressions: 1.28M</div>
-          </Card>
-
-          <Card className="p-6 border-border/60 bg-card/60 backdrop-blur-md space-y-2">
-            <div className="text-xs font-bold text-slate-400 uppercase">Total Plays</div>
-            <div className="text-3xl font-black text-purple-300">{(analytics.totalPlays || 148500).toLocaleString()}</div>
-            <div className="text-xs text-slate-400 font-semibold">DAU: 4,200 Players</div>
+            <div className="text-xs font-bold text-slate-400 uppercase">New This Week</div>
+            <div className="text-3xl font-black text-purple-300">{newThisWeek} Titles</div>
+            <div className="text-xs text-slate-400 font-semibold">Refreshed weekly from GamePix</div>
           </Card>
 
           <Card className="p-6 border-border/60 bg-card/60 backdrop-blur-md space-y-2">
             <div className="text-xs font-bold text-slate-400 uppercase">Legal Status</div>
-            <div className="text-3xl font-black text-cyan-400">PASSED</div>
-            <div className="text-xs text-cyan-400 font-semibold">Zero Infringements</div>
+            <div className="text-3xl font-black text-cyan-400">{commercialReadyCount === games.length ? "PASSED" : "REVIEW NEEDED"}</div>
+            <div className="text-xs text-cyan-400 font-semibold">{commercialReadyCount} / {games.length} commercial-ready</div>
           </Card>
         </div>
+
+        {/* Real revenue/play data lives on GamePix's side, not ours — link out instead of faking it */}
+        <a
+          href="https://partners.gamepix.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-between rounded-2xl border border-border/60 bg-card/60 p-5 hover:bg-slate-800/60 transition-colors group"
+        >
+          <div>
+            <h3 className="text-sm font-bold text-white">Revenue & Play Analytics</h3>
+            <p className="text-xs text-slate-400 mt-0.5">Tracked in your GamePix publisher dashboard, not here — PlayNow doesn't run its own ad/analytics stack.</p>
+          </div>
+          <ExternalLink className="h-4 w-4 text-slate-400 group-hover:text-white transition-colors" />
+        </a>
 
         {/* Sub-Admin CMS Portals Grid */}
         <div className="space-y-4">
           <h2 className="text-2xl font-black text-white">Admin Management Modules</h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
             <Link href="/admin/games" className="group">
               <Card className="p-6 border-border/60 bg-card/60 hover:bg-slate-800/80 transition-all space-y-3 h-full">
                 <div className="h-10 w-10 rounded-2xl bg-purple-500/10 flex items-center justify-center text-purple-400 border border-purple-500/20 group-hover:scale-110 transition-transform">
@@ -101,52 +102,7 @@ export default function AdminPage() {
                   <ArrowRight className="h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </h3>
                 <p className="text-xs text-slate-400 leading-relaxed">
-                  Add, edit, remove, and manage metadata, categories, and monetization settings across the catalog.
-                </p>
-              </Card>
-            </Link>
-
-            <Link href="/admin/users" className="group">
-              <Card className="p-6 border-border/60 bg-card/60 hover:bg-slate-800/80 transition-all space-y-3 h-full">
-                <div className="h-10 w-10 rounded-2xl bg-cyan-500/10 flex items-center justify-center text-cyan-400 border border-cyan-500/20 group-hover:scale-110 transition-transform">
-                  <Users className="h-5 w-5" />
-                </div>
-                <h3 className="text-lg font-bold text-white group-hover:text-cyan-300 transition-colors flex items-center justify-between">
-                  <span>User Accounts</span>
-                  <ArrowRight className="h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity" />
-                </h3>
-                <p className="text-xs text-slate-400 leading-relaxed">
-                  Manage player accounts, roles, favorites, and recent gameplay history telemetry.
-                </p>
-              </Card>
-            </Link>
-
-            <Link href="/admin/developers" className="group">
-              <Card className="p-6 border-border/60 bg-card/60 hover:bg-slate-800/80 transition-all space-y-3 h-full">
-                <div className="h-10 w-10 rounded-2xl bg-emerald-500/10 flex items-center justify-center text-emerald-400 border border-emerald-500/20 group-hover:scale-110 transition-transform">
-                  <Code2 className="h-5 w-5" />
-                </div>
-                <h3 className="text-lg font-bold text-white group-hover:text-cyan-300 transition-colors flex items-center justify-between">
-                  <span>Developer Queue</span>
-                  <ArrowRight className="h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity" />
-                </h3>
-                <p className="text-xs text-slate-400 leading-relaxed">
-                  Review submitted game repositories and calculate 70% ad revenue share developer payouts.
-                </p>
-              </Card>
-            </Link>
-
-            <Link href="/admin/analytics" className="group">
-              <Card className="p-6 border-border/60 bg-card/60 hover:bg-slate-800/80 transition-all space-y-3 h-full">
-                <div className="h-10 w-10 rounded-2xl bg-amber-500/10 flex items-center justify-center text-amber-400 border border-amber-500/20 group-hover:scale-110 transition-transform">
-                  <TrendingUp className="h-5 w-5" />
-                </div>
-                <h3 className="text-lg font-bold text-white group-hover:text-cyan-300 transition-colors flex items-center justify-between">
-                  <span>Platform Analytics</span>
-                  <ArrowRight className="h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity" />
-                </h3>
-                <p className="text-xs text-slate-400 leading-relaxed">
-                  Track daily plays, retention rate, average session duration, and search queries.
+                  Browse metadata, categories, and licensing status across the catalog.
                 </p>
               </Card>
             </Link>

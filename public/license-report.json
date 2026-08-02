@@ -1,16 +1,16 @@
 {
-  "timestamp": "2026-08-02T15:21:10.946Z",
-  "totalImported": 56,
+  "timestamp": "2026-08-02T16:13:13.254Z",
+  "totalImported": 181,
   "sourceNetwork": "GamePix",
   "categoryDistribution": {
-    "action": 7,
-    "puzzle": 7,
-    "arcade": 7,
-    "racing": 7,
-    "adventure": 7,
-    "strategy": 7,
-    "sports": 7,
-    "multiplayer": 7
+    "action": 23,
+    "puzzle": 24,
+    "arcade": 23,
+    "racing": 22,
+    "adventure": 22,
+    "strategy": 23,
+    "sports": 22,
+    "multiplayer": 22
   },
   "rejectedForBrandRisk": [
     {
@@ -115,6 +115,165 @@
       "title": "Noob Huggy Winter",
       "conflicts": [
         "HUGGY"
+      ]
+    },
+    {
+      "title": "Mini Huggy - 2 Players",
+      "conflicts": [
+        "HUGGY"
+      ]
+    },
+    {
+      "title": "Pictures by Numbers - Nubik and Mobs Mine",
+      "conflicts": [
+        "MINECRAFT"
+      ]
+    },
+    {
+      "title": "Stickman Huggy 2",
+      "conflicts": [
+        "HUGGY"
+      ]
+    },
+    {
+      "title": "The dead among us",
+      "conflicts": [
+        "AMONG US"
+      ]
+    },
+    {
+      "title": "Roblox Flip",
+      "conflicts": [
+        "ROBLOX"
+      ]
+    },
+    {
+      "title": "Counter Craft Zombies",
+      "conflicts": [
+        "MINECRAFT"
+      ]
+    },
+    {
+      "title": "Stickman Huggy Escape",
+      "conflicts": [
+        "HUGGY"
+      ]
+    },
+    {
+      "title": "Noob Huggy",
+      "conflicts": [
+        "HUGGY"
+      ]
+    },
+    {
+      "title": "Granny GTA Vegas",
+      "conflicts": [
+        "GTA"
+      ]
+    },
+    {
+      "title": "Poppy Playtime Chapter 3 jigsaw puzzle",
+      "conflicts": [
+        "POPPY PLAYTIME"
+      ]
+    },
+    {
+      "title": "Super Huggie Bros",
+      "conflicts": [
+        "HUGGY WUGGY",
+        "HUGGY"
+      ]
+    },
+    {
+      "title": "Falling Blocks 2048 - 2D",
+      "conflicts": [
+        "TETRIS"
+      ]
+    },
+    {
+      "title": "Huggy Wuggy - Quiz",
+      "conflicts": [
+        "HUGGY WUGGY",
+        "HUGGY"
+      ]
+    },
+    {
+      "title": "Roblox Obbi Only Up",
+      "conflicts": [
+        "ROBLOX"
+      ]
+    },
+    {
+      "title": "Red and Blue Stickman Huggy 2",
+      "conflicts": [
+        "HUGGY"
+      ]
+    },
+    {
+      "title": "Huggy Wuggy Escape",
+      "conflicts": [
+        "HUGGY WUGGY",
+        "HUGGY"
+      ]
+    },
+    {
+      "title": "Rainbow Friends Among Survival Adventures",
+      "conflicts": [
+        "PAC-MAN"
+      ]
+    },
+    {
+      "title": "Stickman Huggy",
+      "conflicts": [
+        "HUGGY"
+      ]
+    },
+    {
+      "title": "Poppy Playtime Chapter 4 Safe Haven",
+      "conflicts": [
+        "POPPY PLAYTIME"
+      ]
+    },
+    {
+      "title": "Flappy FootChinko",
+      "conflicts": [
+        "FLAPPY BIRD"
+      ]
+    },
+    {
+      "title": "Brain IQ test Mincraft Quiz",
+      "conflicts": [
+        "MINECRAFT"
+      ]
+    },
+    {
+      "title": "Flappy Bird 3D",
+      "conflicts": [
+        "FLAPPY BIRD"
+      ]
+    },
+    {
+      "title": "Minecraft Drift Simulator",
+      "conflicts": [
+        "MINECRAFT"
+      ]
+    },
+    {
+      "title": "Flappy Bird 2D Game",
+      "conflicts": [
+        "FLAPPY BIRD"
+      ]
+    },
+    {
+      "title": "Chocolate Tetris Game",
+      "conflicts": [
+        "TETRIS"
+      ]
+    },
+    {
+      "title": "Roblox Halloween Costume Party",
+      "conflicts": [
+        "ROBLOX"
       ]
     }
   ]

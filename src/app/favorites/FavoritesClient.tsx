@@ -6,6 +6,7 @@ import { useFavorites } from "@/hooks/useFavorites";
 import { GameCard } from "@/components/games/GameCard";
 import { EmptyGamesState } from "@/components/games/EmptyGamesState";
 import { Skeleton } from "@/components/ui/skeleton";
+import { GAME_GRID_COLS } from "@/lib/game-grid";
 
 interface FavoritesClientProps {
   allGames: GameMetadata[];
@@ -17,7 +18,7 @@ export function FavoritesClient({ allGames }: FavoritesClientProps) {
 
   if (!isLoaded) {
     return (
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className={`grid gap-4 ${GAME_GRID_COLS}`}>
         {Array.from({ length: 4 }).map((_, i) => (
           <Skeleton key={i} className="aspect-[16/9] w-full" />
         ))}
@@ -38,7 +39,7 @@ export function FavoritesClient({ allGames }: FavoritesClientProps) {
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div className={`grid gap-4 ${GAME_GRID_COLS}`}>
       {favoritedGames.map((game, idx) => (
         <GameCard key={game.id} game={game} priority={idx < 4} />
       ))}

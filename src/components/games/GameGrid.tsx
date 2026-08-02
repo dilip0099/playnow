@@ -5,6 +5,7 @@ import { ArrowUpDown, Frown, SlidersHorizontal } from "lucide-react";
 import { GameCard } from "./GameCard";
 import { EmptyGamesState } from "./EmptyGamesState";
 import { GameMetadata, SortOption } from "@/types/game";
+import { GAME_GRID_COLS } from "@/lib/game-grid";
 
 interface GameGridProps {
   games: GameMetadata[];
@@ -79,7 +80,7 @@ export function GameGrid({
 
       {/* Game Cards Grid */}
       {displayedGames.length > 0 ? (
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div className={`grid gap-4 ${GAME_GRID_COLS}`}>
           {displayedGames.map((game, idx) => (
             <div key={game.id || idx} className="transition-all duration-300">
               <GameCard game={game} priority={idx < 4} />

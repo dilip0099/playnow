@@ -2,23 +2,17 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { 
-  LayoutDashboard, 
-  Gamepad2, 
-  Users, 
-  Code2, 
-  TrendingUp, 
-  ShieldCheck, 
+import {
+  LayoutDashboard,
+  Gamepad2,
+  ShieldCheck,
   Lock,
   ArrowLeft
 } from "lucide-react";
 
 const ADMIN_LINKS = [
-  { href: "/admin", label: "Executive Dashboard", icon: LayoutDashboard },
+  { href: "/admin", label: "Admin Overview", icon: LayoutDashboard },
   { href: "/admin/games", label: "Game Catalog CMS", icon: Gamepad2 },
-  { href: "/admin/users", label: "User Accounts", icon: Users },
-  { href: "/admin/developers", label: "Developer Queue", icon: Code2 },
-  { href: "/admin/analytics", label: "Platform Analytics", icon: TrendingUp },
   { href: "/admin/legal", label: "Legal & Provenance Audit", icon: ShieldCheck },
   { href: "/admin/compliance", label: "Compliance Telemetry", icon: Lock },
 ];

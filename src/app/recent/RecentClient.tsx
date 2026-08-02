@@ -6,6 +6,7 @@ import { useRecentlyPlayed } from "@/hooks/useRecentlyPlayed";
 import { GameCard } from "@/components/games/GameCard";
 import { EmptyGamesState } from "@/components/games/EmptyGamesState";
 import { Skeleton } from "@/components/ui/skeleton";
+import { GAME_GRID_COLS } from "@/lib/game-grid";
 
 interface RecentClientProps {
   allGames: GameMetadata[];
@@ -20,7 +21,7 @@ export function RecentClient({ allGames }: RecentClientProps) {
 
   if (!isLoaded) {
     return (
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className={`grid gap-4 ${GAME_GRID_COLS}`}>
         {Array.from({ length: 4 }).map((_, i) => (
           <Skeleton key={i} className="aspect-[16/9] w-full" />
         ))}
@@ -41,7 +42,7 @@ export function RecentClient({ allGames }: RecentClientProps) {
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div className={`grid gap-4 ${GAME_GRID_COLS}`}>
       {recentGames.map((game, idx) => (
         <GameCard key={game.id} game={game} priority={idx < 4} />
       ))}

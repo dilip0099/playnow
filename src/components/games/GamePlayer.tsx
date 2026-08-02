@@ -10,7 +10,8 @@ import {
   RotateCcw,
   Loader2,
   Play,
-  ShieldCheck
+  ShieldCheck,
+  Smartphone
 } from "lucide-react";
 import { GameMetadata } from "@/types/game";
 import { useFavorites } from "@/hooks/useFavorites";
@@ -34,18 +35,19 @@ export function GamePlayer({ game, onPlay }: GamePlayerProps) {
   const [isTheaterMode, setIsTheaterMode] = useState(false);
   const [isShareOpen, setIsShareOpen] = useState(false);
 
-  const { isFavorite, toggleFavorite } = useFavorites();
-  const { isFullscreen, toggleFullscreen } = useFullscreen(containerRef);
-  const { addRecentlyPlayed } = useRecentlyPlayed();
-  const favorited = isFavorite(game.id);
-  const coverImage = game.heroImage || game.coverImage || game.thumbnailUrl;
-
   // Play the game in its real shape — a portrait game (e.g. most "puzzle"/"casual"
   // titles from GamePix) forced into a landscape 16:9 box renders tiny and
   // unplayable. Portrait titles also get a narrower centered column instead of
   // stretching full-width-then-absurdly-tall on wide screens.
   const aspectRatio = resolveAspectRatio(game.aspectRatio);
   const isPortrait = aspectRatio === "3/4";
+  const isLandscapeGame = aspectRatio === "16/9";
+
+  const { isFavorite, toggleFavorite } = useFavorites();
+  const { isFullscreen, toggleFullscreen } = useFullscreen(containerRef, isLandscapeGame ? "landscape" : undefined);
+  const { addRecentlyPlayed } = useRecentlyPlayed();
+  const favorited = isFavorite(game.id);
+  const coverImage = game.heroImage || game.coverImage || game.thumbnailUrl;
 
   const handleStartPlay = () => {
     setIsPlaying(true);
@@ -60,7 +62,15 @@ export function GamePlayer({ game, onPlay }: GamePlayerProps) {
     }
   };
 
-  const widthClass = isTheaterMode
+  // Fullscreen overrides everything else: a fixed aspect-ratio box sized off the
+  // pre-rotation viewport width is what caused the reported "cut off at the bottom after
+  // rotating" bug — e.g. a 16:9 box computed from a 390px-wide portrait phone is ~219px
+  // tall, but after rotating to landscape the box stays 219px tall against a now much
+  // shorter *screen*, so the toolbar below it gets pushed off-screen. Filling all
+  // available space with flex instead of a fixed ratio makes it correct at any rotation.
+  const widthClass = isFullscreen
+    ? "max-w-none rounded-none border-none shadow-none"
+    : isTheaterMode
     ? "max-w-none rounded-none border-none shadow-none"
     : isPortrait
     ? "max-w-xs sm:max-w-sm mx-auto"
@@ -68,14 +78,27 @@ export function GamePlayer({ game, onPlay }: GamePlayerProps) {
 
   return (
     <>
+      {/* Rotate hint — only meaningful for landscape games viewed on a narrow portrait
+          screen; disappears the instant the device is actually rotated (pure CSS media
+          query, no JS orientation listener needed) or the viewport is desktop-sized. */}
+      {isLandscapeGame && (
+        <div className="mb-3 hidden items-center justify-center space-x-2 rounded-xl border border-border bg-muted px-4 py-2.5 text-xs text-muted-foreground portrait:flex md:!hidden">
+          <Smartphone className="h-4 w-4 rotate-90 text-primary" aria-hidden="true" />
+          <span>Rotate your device for the best experience</span>
+        </div>
+      )}
+
       <div
         ref={containerRef}
-        className={`relative w-full overflow-hidden rounded-3xl border border-border bg-background shadow-2xl transition-all duration-base ${widthClass}`}
+        className={`relative flex w-full flex-col overflow-hidden rounded-3xl border border-border bg-background shadow-2xl transition-all duration-base ${
+          isFullscreen ? "h-full" : ""
+        } ${widthClass}`}
       >
-        {/* Aspect Ratio Container — matches the real game's shape so portrait
-            titles aren't squeezed into a landscape box; reserves space up
-            front to avoid layout shift. */}
-        <div className={`relative w-full bg-background ${ASPECT_RATIO_CLASS[aspectRatio]}`}>
+        {/* Aspect Ratio Container — matches the real game's shape so portrait titles
+            aren't squeezed into a landscape box (reserves space up front to avoid layout
+            shift); in fullscreen it fills all remaining space instead, since a fixed
+            ratio is exactly what breaks on rotation (see note above). */}
+        <div className={`relative w-full bg-background ${isFullscreen ? "min-h-0 flex-1" : ASPECT_RATIO_CLASS[aspectRatio]}`}>
 
           {/* Pre-play Cover Overlay */}
           {!isPlaying ? (

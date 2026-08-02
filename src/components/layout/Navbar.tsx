@@ -5,11 +5,9 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
   Search,
-  Bell,
   Dices,
   Heart,
   X,
-  User,
   Gamepad2
 } from "lucide-react";
 import { gamesData } from "@/lib/games";
@@ -115,7 +113,7 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-30 w-full border-b border-border bg-background/90 backdrop-blur-xl">
-      <div className="mx-auto flex h-14 items-center gap-3 px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex h-14 items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
 
         {/* Mobile-only Brand Logo — Sidebar (which holds the real logo) is hidden below lg */}
         <Link href="/" className="group flex shrink-0 items-center space-x-2 lg:hidden">
@@ -197,14 +195,8 @@ export function Navbar() {
           )}
         </div>
 
-        {/* Right Controls & User Profile Badge */}
+        {/* Right Controls */}
         <div className="flex shrink-0 items-center space-x-2 sm:space-x-4">
-
-          {/* Notification Bell — hidden on mobile to reduce crowding */}
-          <button aria-label="Notifications" className="relative hidden h-8 w-8 items-center justify-center rounded-lg bg-card border border-border text-muted-foreground hover:text-foreground transition-colors sm:flex">
-            <Bell className="h-4 w-4" />
-            <span className="absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-primary" />
-          </button>
 
           {/* Random Roll Dice — hidden on mobile to reduce crowding */}
           <button
@@ -229,17 +221,6 @@ export function Navbar() {
                 {favorites.length}
               </span>
             )}
-          </Link>
-
-          {/* Commander_7 Profile Badge */}
-          <Link href="/profile" aria-label="Your profile" className="flex items-center space-x-2.5 rounded-xl border border-border bg-card px-2 py-1 hover:border-primary/40 transition-colors sm:px-3">
-            <div className="hidden flex-col text-right font-mono leading-none sm:flex">
-              <span className="text-xs font-bold text-foreground">Commander_7</span>
-              <span className="text-[9px] font-bold text-primary tracking-wider mt-0.5">LEVEL 42 ELITE</span>
-            </div>
-            <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-secondary text-secondary-foreground font-bold text-xs">
-              <User className="h-4 w-4" />
-            </div>
           </Link>
 
         </div>

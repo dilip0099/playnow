@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Sora, Inter, JetBrains_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import { ToastProvider } from "@/components/ui/toast";
@@ -7,6 +9,7 @@ import { Sidebar } from "@/components/layout/Sidebar";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { MobileBottomNav } from "@/components/layout/MobileBottomNav";
+import { SITE_URL, SITE_NAME } from "@/lib/site";
 
 const sora = Sora({ 
   subsets: ["latin"],
@@ -26,16 +29,30 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap"
 });
 
+const DEFAULT_DESCRIPTION =
+  "Play 180+ free HTML5 browser games instantly on PlayNow — no downloads, no installs. Action, puzzle, arcade, racing, strategy, sports and multiplayer games.";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "PlayNow - Kinetic Obsidian Gaming Marketplace",
     template: "%s | PlayNow Browser Games",
   },
-  description:
-    "Experience zero-latency HTML5 browser games on PlayNow. Instant play, smooth performance, action, puzzle, arcade, racing games and more.",
-  keywords: ["HTML5 games", "PlayNow", "browser games", "instant games"],
+  description: DEFAULT_DESCRIPTION,
+  keywords: ["HTML5 games", "PlayNow", "browser games", "instant games", "free online games"],
   authors: [{ name: "PlayNow Studios" }],
   creator: "PlayNow Studios",
+  openGraph: {
+    type: "website",
+    siteName: SITE_NAME,
+    title: "PlayNow - Kinetic Obsidian Gaming Marketplace",
+    description: DEFAULT_DESCRIPTION,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "PlayNow - Kinetic Obsidian Gaming Marketplace",
+    description: DEFAULT_DESCRIPTION,
+  },
   robots: {
     index: true,
     follow: true,
@@ -72,6 +89,8 @@ export default function RootLayout({
             </div>
           </ToastProvider>
         </ThemeProvider>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

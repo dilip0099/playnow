@@ -23,7 +23,7 @@ export function ShareModal({ game, isOpen, onClose }: ShareModalProps) {
   };
 
   const shareOnTwitter = () => {
-    const text = encodeURIComponent(`Play ${game.title} on PlayNow! 🎮🔥`);
+    const text = encodeURIComponent(`Play ${game.title} on PlayNow!`);
     window.open(`https://twitter.com/intent/tweet?text=${text}&url=${encodeURIComponent(currentUrl)}`, "_blank");
   };
 

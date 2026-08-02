@@ -5,6 +5,7 @@ import { ChevronRight, Home, Grid } from "lucide-react";
 import { getGamesByCategory, getAllGames } from "@/lib/games";
 import { GameGrid } from "@/components/games/GameGrid";
 import { GameCategory } from "@/types/game";
+import { SITE_URL } from "@/lib/site";
 
 interface CategoryPageProps {
   params: Promise<{ slug: string }>;
@@ -30,11 +31,21 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
   const { slug } = await params;
   const categoryName = slug.charAt(0).toUpperCase() + slug.slice(1);
+  const title = `Best Free ${categoryName} Games - Play Online on PlayNow`;
+  const description = `Discover the top free online ${categoryName} browser games. Play instantly in your web browser with zero installs or downloads.`;
 
   return {
-    title: `Best Free ${categoryName} Games - Play Online on PlayNow`,
-    description: `Discover the top free online ${categoryName} browser games. Play instantly in your web browser with zero installs or downloads.`,
+    title,
+    description,
+    alternates: { canonical: `/category/${slug}` },
     openGraph: {
+      title: `${categoryName} Games - PlayNow`,
+      description: `Free online ${categoryName} browser games on PlayNow.`,
+      type: "website",
+      url: `${SITE_URL}/category/${slug}`,
+    },
+    twitter: {
+      card: "summary_large_image",
       title: `${categoryName} Games - PlayNow`,
       description: `Free online ${categoryName} browser games on PlayNow.`,
     },

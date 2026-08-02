@@ -1,10 +1,11 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { LayoutGrid, List, Plus, Star, SlidersHorizontal } from "lucide-react";
+import { LayoutGrid, List, Star, SlidersHorizontal } from "lucide-react";
 import { GameMetadata, SortOption } from "@/types/game";
 import { GameCard } from "@/components/games/GameCard";
 import { Dialog } from "@/components/ui/dialog";
+import { GAME_GRID_COLS } from "@/lib/game-grid";
 
 interface DiscoverClientProps {
   initialGames: GameMetadata[];
@@ -76,7 +77,7 @@ export function DiscoverClient({ initialGames }: DiscoverClientProps) {
   const [topRatedOnly, setTopRatedOnly] = useState(false);
   const [sortBy, setSortBy] = useState<SortOption>("popular");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
-  const [visibleCount, setVisibleCount] = useState(8);
+  const [visibleCount, setVisibleCount] = useState(12);
   const [isFilterDialogOpen, setIsFilterDialogOpen] = useState(false);
 
   const activeFilterCount = (selectedGenre ? 1 : 0) + (topRatedOnly ? 1 : 0);
@@ -194,40 +195,20 @@ export function DiscoverClient({ initialGames }: DiscoverClientProps) {
           <div className="flex-1 min-w-0 space-y-6">
 
             {/* Game Cards Grid */}
-            <div className={`grid gap-5 ${viewMode === "grid" ? "grid-cols-1 sm:grid-cols-2 xl:grid-cols-3" : "grid-cols-1"}`}>
+            <div className={`grid gap-4 ${viewMode === "grid" ? GAME_GRID_COLS : "grid-cols-1"}`}>
               {visibleGames.map((game, idx) => (
                 <GameCard key={game.id} game={game} aspectRatio="16/9" priority={idx < 6} />
               ))}
-
-              {/* Submit Game Card */}
-              <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-border bg-card p-8 text-center space-y-3">
-                <div className="flex h-14 w-14 items-center justify-center rounded-full border border-border text-muted-foreground">
-                  <Plus className="h-6 w-6" aria-hidden="true" />
-                </div>
-                <h3 className="font-display text-sm font-bold text-foreground">Submit Game</h3>
-                <p className="font-mono text-[10px] text-muted-foreground uppercase tracking-wider">JOIN THE FLEET</p>
-              </div>
-            </div>
-
-            {/* Discord CTA */}
-            <div className="rounded-2xl border border-border bg-card p-6 flex items-center justify-between">
-              <div className="space-y-1">
-                <h3 className="font-display text-sm font-bold text-foreground">Join Discord</h3>
-                <p className="font-mono text-[10px] text-muted-foreground uppercase tracking-wider">COMMUNITY EVENTS</p>
-              </div>
-              <button className="rounded-lg bg-primary px-5 py-2.5 font-mono text-[10px] font-bold text-primary-foreground uppercase tracking-wider hover:bg-primary-hover transition-colors">
-                CONNECT NOW
-              </button>
             </div>
 
             {/* Load More */}
             {remainingCount > 0 && (
               <div className="space-y-3 text-center">
                 <button
-                  onClick={() => setVisibleCount((prev) => prev + 8)}
+                  onClick={() => setVisibleCount((prev) => prev + 12)}
                   className="w-full rounded-2xl border border-border bg-card py-4 font-mono text-xs font-bold text-foreground/80 hover:text-primary hover:border-primary/30 transition-all uppercase tracking-wider"
                 >
-                  LOAD {Math.min(remainingCount, 8)} MORE TITLES
+                  LOAD {Math.min(remainingCount, 12)} MORE TITLES
                 </button>
                 <p className="font-mono text-[10px] text-muted-foreground">
                   Showing {visibleCount} of {filteredGames.length} Games

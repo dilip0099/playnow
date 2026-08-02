@@ -10,9 +10,15 @@ const PUBLIC_LICENSE_REPORT_FILE = path.join(process.cwd(), "public", "license-r
 const ATTRIBUTIONS_FILE = path.join(process.cwd(), "ATTRIBUTIONS.md");
 
 const SID = process.env.GAMEPIX_SID;
-const PAGES_TO_FETCH = 6;
 const PAGE_SIZE = 96; // must be one of [12, 24, 48, 96] per GamePix feed API
-const TARGET_PER_CATEGORY = 7;
+// Verified live against the real feed: quality_score correlates with accumulated engagement,
+// so a deep quality-ranked pool is needed to fill every category well past a handful of picks.
+const MAIN_POOL_PAGES = 30;
+// A shallow pool sorted by publish date instead of quality — freshly-published games haven't
+// accumulated engagement yet, so this is the only way to surface genuinely new titles at all.
+const NEW_RELEASES_POOL_PAGES = 3;
+const TARGET_PER_CATEGORY = 22;
+const NEW_RELEASES_COUNT = 12;
 const QUALITY_THRESHOLD = 0.7;
 
 const VALID_CATEGORIES: GameCategory[] = [
@@ -92,14 +98,14 @@ function higherResImage(url: string, width: number): string {
   return url.replace(/([?&])w=\d+/, `$1w=${width}`);
 }
 
-async function fetchAllPages(): Promise<GamePixItem[]> {
+async function fetchPages(pages: number, order: "quality" | "pubdate"): Promise<GamePixItem[]> {
   const all: GamePixItem[] = [];
-  for (let p = 1; p <= PAGES_TO_FETCH; p++) {
+  for (let p = 1; p <= pages; p++) {
     const res = await fetch(
-      `https://feeds.gamepix.com/v2/json?sid=${SID}&pagination=${PAGE_SIZE}&page=${p}`
+      `https://feeds.gamepix.com/v2/json?sid=${SID}&pagination=${PAGE_SIZE}&page=${p}&order=${order}`
     );
     if (!res.ok) {
-      console.warn(`⚠️  GamePix feed page ${p} returned ${res.status}, stopping pagination.`);
+      console.warn(`⚠️  GamePix feed page ${p} (order=${order}) returned ${res.status}, stopping pagination.`);
       break;
     }
     const data = (await res.json()) as GamePixFeed;
@@ -109,71 +115,83 @@ async function fetchAllPages(): Promise<GamePixItem[]> {
   return all;
 }
 
+function dedupeByNamespace(items: GamePixItem[]): GamePixItem[] {
+  const seen = new Set<string>();
+  return items.filter((i) => {
+    if (seen.has(i.namespace)) return false;
+    seen.add(i.namespace);
+    return true;
+  });
+}
+
 export async function importGamePixCatalog() {
   if (!SID) {
     console.error("❌ GAMEPIX_SID is not set. Add it to .env.local (see GamePix publisher dashboard).");
     process.exit(1);
   }
 
-  console.log("🔍 Fetching real game catalog from GamePix...");
-  let items = await fetchAllPages();
-  console.log(`   Fetched ${items.length} raw entries across ${PAGES_TO_FETCH} pages.`);
-
-  // Dedup by namespace
-  const seen = new Set<string>();
-  items = items.filter((i) => {
-    if (seen.has(i.namespace)) return false;
-    seen.add(i.namespace);
-    return true;
-  });
-
-  // Quality + basic completeness filter
-  items = items.filter((i) => i.quality_score >= QUALITY_THRESHOLD && i.description && i.title);
-
-  // Trademark/brand-risk safety filter — these are GamePix's games, not ours,
-  // but we still don't want to host/link anything referencing third-party IP.
   const rejectedForBrandRisk: { title: string; conflicts: string[] }[] = [];
-  items = items.filter((i) => {
-    const conflicts = hasBrandRisk(`${i.title} ${i.description}`);
+
+  // Requiring a non-empty `description` up front silently drops good games — GamePix appears
+  // to backfill descriptions some time after a title first goes live (verified live: 8 of the
+  // freshest ~30 published titles score 0.83+ on quality but have no description yet). A
+  // fallback description is generated per-game below, so we only require a title + real score.
+  function qualifies(i: GamePixItem): boolean {
+    if (i.quality_score < QUALITY_THRESHOLD || !i.title) return false;
+    const conflicts = hasBrandRisk(`${i.title} ${i.description || ""}`);
     if (conflicts.length > 0) {
       rejectedForBrandRisk.push({ title: i.title, conflicts });
       return false;
     }
     return true;
-  });
-
-  console.log(`   ${items.length} candidates after quality + brand-risk filtering.`);
-  if (rejectedForBrandRisk.length > 0) {
-    console.log(`   Rejected ${rejectedForBrandRisk.length} for brand risk:`, rejectedForBrandRisk.map((r) => r.title));
   }
+
+  console.log("🔍 Fetching quality-ranked game pool from GamePix...");
+  const qualityPool = dedupeByNamespace(await fetchPages(MAIN_POOL_PAGES, "quality")).filter(qualifies);
+  console.log(`   ${qualityPool.length} candidates after quality + brand-risk filtering.`);
 
   // Group by our site category, keep the top N per category by quality_score
   const byCategory: Record<GameCategory, GamePixItem[]> = {
     action: [], puzzle: [], arcade: [], racing: [], adventure: [], strategy: [], sports: [], multiplayer: [],
   };
-  items.forEach((item) => {
+  qualityPool.forEach((item) => {
     byCategory[mapCategory(item.category)].push(item);
   });
 
   const selected: { item: GamePixItem; siteCategory: GameCategory }[] = [];
+  const selectedIds = new Set<string>();
   VALID_CATEGORIES.forEach((cat) => {
     const top = byCategory[cat].sort((a, b) => b.quality_score - a.quality_score).slice(0, TARGET_PER_CATEGORY);
-    top.forEach((item) => selected.push({ item, siteCategory: cat }));
+    top.forEach((item) => {
+      selected.push({ item, siteCategory: cat });
+      selectedIds.add(item.namespace);
+    });
   });
 
   console.log(`✅ Selected ${selected.length} real games across ${VALID_CATEGORIES.length} categories.`);
 
-  // "New Releases" needs a relative signal, not an absolute one — GamePix's whole catalog
-  // ages, so an absolute "published in the last 90 days" cutoff can (and did) match zero
-  // games once every selected title crossed that line, silently starving the homepage rail.
-  // Instead, mark the N most-recently-published titles among what we actually selected.
-  const NEW_RELEASES_COUNT = 8;
-  const newestIds = new Set(
-    [...selected]
-      .sort((a, b) => new Date(b.item.date_published).getTime() - new Date(a.item.date_published).getTime())
-      .slice(0, NEW_RELEASES_COUNT)
-      .map(({ item }) => item.namespace)
-  );
+  // "New Releases" needs titles that are ACTUALLY new, not just the most-recent survivors of a
+  // quality-sorted pool (which skews toward older, more-established games — verified live: none
+  // of the freshest 96 published titles clear our quality bar via the default/quality ordering,
+  // because GamePix's quality_score accumulates with engagement over time). Fetching by
+  // publish-date directly is the only way to surface genuinely new titles at all.
+  console.log("🔍 Fetching freshest-published games from GamePix...");
+  const freshPool = dedupeByNamespace(await fetchPages(NEW_RELEASES_POOL_PAGES, "pubdate")).filter(qualifies);
+  const freshTopN = freshPool.slice(0, NEW_RELEASES_COUNT); // already sorted newest-first by the feed itself
+  console.log(`   ${freshTopN.length} genuinely new titles clear the quality bar.`);
+
+  freshTopN.forEach((item) => {
+    if (!selectedIds.has(item.namespace)) {
+      selected.push({ item, siteCategory: mapCategory(item.category) });
+      selectedIds.add(item.namespace);
+    }
+  });
+
+  if (rejectedForBrandRisk.length > 0) {
+    console.log(`   Rejected ${rejectedForBrandRisk.length} for brand risk:`, rejectedForBrandRisk.map((r) => r.title));
+  }
+
+  const newestIds = new Set(freshTopN.map((item) => item.namespace));
 
   const now = new Date().toISOString();
   const games: GameMetadata[] = selected.map(({ item, siteCategory }) => {

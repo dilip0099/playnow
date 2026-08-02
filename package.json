@@ -10,6 +10,8 @@
     "import-gamepix": "tsx --env-file-if-exists=.env.local src/scripts/import-gamepix.ts"
   },
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
+    "@vercel/speed-insights": "^2.0.0",
     "clsx": "^2.1.1",
     "framer-motion": "^12.4.10",
     "lucide-react": "^0.475.0",

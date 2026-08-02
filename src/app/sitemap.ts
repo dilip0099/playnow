@@ -1,8 +1,9 @@
 import { MetadataRoute } from "next";
 import { getAllGames } from "@/lib/games";
+import { SITE_URL } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://gamehub.local";
+  const baseUrl = SITE_URL;
   const games = getAllGames();
 
   const categories = [
