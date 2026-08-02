@@ -1,0 +1,38 @@
+{
+  "id": "minesweeper-cyber",
+  "title": "Cyber Minesweeper 3000",
+  "slug": "minesweeper-cyber",
+  "description": "Clear the encrypted minefield using numerical logic clues without detonating cyber bombs.",
+  "instructions": "Use controls to play Cyber Minesweeper 3000.",
+  "category": "puzzle",
+  "genre": "puzzle",
+  "tags": [
+    "puzzle",
+    "arcade",
+    "browser-game"
+  ],
+  "controls": [
+    {
+      "key": "Left Click",
+      "action": "Reveal Cell"
+    },
+    {
+      "key": "Right Click",
+      "action": "Flag Cell"
+    }
+  ],
+  "author": "Zoe Chen",
+  "license": "MIT",
+  "repository": "https://github.com/zoechen/cyber-minesweeper-3000",
+  "homepage": "https://gamehub.local/game/minesweeper-cyber",
+  "releaseDate": "2025-06-01",
+  "lastUpdated": "2026-01-15",
+  "mobileSupport": true,
+  "version": "1.0.0",
+  "rating": 4.6,
+  "playsCount": 9244,
+  "featured": false,
+  "trending": true,
+  "isNew": false,
+  "aspectRatio": "16/9"
+}

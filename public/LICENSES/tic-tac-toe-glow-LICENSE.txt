@@ -1,0 +1,6 @@
+ISC License
+
+Copyright (c) 2025-2026 Liam Thorne
+
+Permission is hereby granted under the terms of the ISC license.
+Repository: https://github.com/liamthorne/tic-tac-toe-glow

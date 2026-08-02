@@ -1,0 +1,34 @@
+{
+  "id": "tic-tac-toe-glow",
+  "title": "Tic Tac Toe Cyber Glow",
+  "slug": "tic-tac-toe-glow",
+  "description": "Strategic neon 3x3 grid battle against smart AI or local multiplayer.",
+  "instructions": "Use controls to play Tic Tac Toe Cyber Glow.",
+  "category": "strategy",
+  "genre": "strategy",
+  "tags": [
+    "strategy",
+    "arcade",
+    "browser-game"
+  ],
+  "controls": [
+    {
+      "key": "Mouse Click",
+      "action": "Place Symbol"
+    }
+  ],
+  "author": "Liam Thorne",
+  "license": "ISC",
+  "repository": "https://github.com/liamthorne/tic-tac-toe-glow",
+  "homepage": "https://gamehub.local/game/tic-tac-toe-glow",
+  "releaseDate": "2025-06-01",
+  "lastUpdated": "2026-01-15",
+  "mobileSupport": true,
+  "version": "1.0.0",
+  "rating": 4.8,
+  "playsCount": 19278,
+  "featured": false,
+  "trending": false,
+  "isNew": false,
+  "aspectRatio": "16/9"
+}

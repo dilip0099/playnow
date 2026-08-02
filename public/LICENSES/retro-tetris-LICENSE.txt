@@ -1,0 +1,6 @@
+MIT License
+
+Copyright (c) 2025-2026 Alex Rivers
+
+Permission is hereby granted under the terms of the MIT license.
+Repository: https://github.com/alexrivers/retro-tetris-pulse

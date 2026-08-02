@@ -22,6 +22,7 @@ export interface GameMetadata {
   description: string;
   instructions?: string;
   category: GameCategory;
+  genre: GameCategory;
   tags: string[];
   controls: GameControl[];
   author: string;
@@ -32,11 +33,14 @@ export interface GameMetadata {
   trending?: boolean;
   isNew?: boolean;
   releaseDate: string;
+  lastUpdated: string;
+  mobileSupport: boolean;
   aspectRatio?: string;
   thumbnailUrl: string;
+  screenshots: string[];
   gameUrl: string;
   
-  // Legal License Metadata (Milestone 3)
+  // Legal License Metadata
   license: SupportedLicense;
   repository: string;
   homepage: string;

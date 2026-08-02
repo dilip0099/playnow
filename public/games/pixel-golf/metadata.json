@@ -1,0 +1,34 @@
+{
+  "id": "pixel-golf",
+  "title": "Pixel Golf Odyssey",
+  "slug": "pixel-golf",
+  "description": "Aim stroke direction and power to hole-in-one through neon miniature golf obstacles.",
+  "instructions": "Use controls to play Pixel Golf Odyssey.",
+  "category": "sports",
+  "genre": "sports",
+  "tags": [
+    "sports",
+    "arcade",
+    "browser-game"
+  ],
+  "controls": [
+    {
+      "key": "Drag & Release",
+      "action": "Aim & Shoot Golf Ball"
+    }
+  ],
+  "author": "Brian Nelson",
+  "license": "MIT",
+  "repository": "https://github.com/briannelson/pixel-golf-odyssey",
+  "homepage": "https://gamehub.local/game/pixel-golf",
+  "releaseDate": "2025-06-01",
+  "lastUpdated": "2026-01-15",
+  "mobileSupport": true,
+  "version": "1.0.0",
+  "rating": 4.9,
+  "playsCount": 9817,
+  "featured": false,
+  "trending": false,
+  "isNew": false,
+  "aspectRatio": "16/9"
+}

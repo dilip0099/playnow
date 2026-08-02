@@ -1,0 +1,34 @@
+{
+  "id": "doodle-jump-neon",
+  "title": "Doodle Hop Cyber Bounce",
+  "slug": "doodle-jump-neon",
+  "description": "Leap infinitely higher on glowing platforms while dodging gravity hazards.",
+  "instructions": "Use controls to play Doodle Hop Cyber Bounce.",
+  "category": "arcade",
+  "genre": "arcade",
+  "tags": [
+    "arcade",
+    "arcade",
+    "browser-game"
+  ],
+  "controls": [
+    {
+      "key": "Left / Right",
+      "action": "Steer Jumper"
+    }
+  ],
+  "author": "Hannah Vance",
+  "license": "Apache-2.0",
+  "repository": "https://github.com/hannahvance/doodle-hop-cyber-bounce",
+  "homepage": "https://gamehub.local/game/doodle-jump-neon",
+  "releaseDate": "2025-06-01",
+  "lastUpdated": "2026-01-15",
+  "mobileSupport": true,
+  "version": "1.0.0",
+  "rating": 4.6,
+  "playsCount": 22836,
+  "featured": true,
+  "trending": false,
+  "isNew": true,
+  "aspectRatio": "16/9"
+}

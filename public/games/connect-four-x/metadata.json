@@ -1,0 +1,34 @@
+{
+  "id": "connect-four-x",
+  "title": "Connect Four Cyber Matrix",
+  "slug": "connect-four-x",
+  "description": "Drop glowing discs into a vertical grid to form 4-in-a-row before your opponent.",
+  "instructions": "Use controls to play Connect Four Cyber Matrix.",
+  "category": "strategy",
+  "genre": "strategy",
+  "tags": [
+    "strategy",
+    "arcade",
+    "browser-game"
+  ],
+  "controls": [
+    {
+      "key": "Click Column",
+      "action": "Drop Disc"
+    }
+  ],
+  "author": "Sophia Laurent",
+  "license": "MIT",
+  "repository": "https://github.com/sophialaurent/connect-four-x",
+  "homepage": "https://gamehub.local/game/connect-four-x",
+  "releaseDate": "2025-06-01",
+  "lastUpdated": "2026-01-15",
+  "mobileSupport": true,
+  "version": "1.0.0",
+  "rating": 4.5,
+  "playsCount": 11570,
+  "featured": false,
+  "trending": false,
+  "isNew": false,
+  "aspectRatio": "16/9"
+}

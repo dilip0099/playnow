@@ -1,11 +1,225 @@
 [
   {
+    "id": "2048-fusion",
+    "title": "2048 Cyber Fusion",
+    "slug": "2048-fusion",
+    "description": "Slide matching numbers together to reach the legendary 2048 energy core.",
+    "instructions": "Use controls to play 2048 Cyber Fusion.",
+    "category": "puzzle",
+    "genre": "puzzle",
+    "tags": [
+      "puzzle",
+      "arcade",
+      "browser-game"
+    ],
+    "controls": [
+      {
+        "key": "Arrow Keys / Swipe",
+        "action": "Slide Grid"
+      }
+    ],
+    "author": "Gabby Vance",
+    "version": "1.0.0",
+    "rating": 4.5,
+    "playsCount": 13370,
+    "featured": false,
+    "trending": false,
+    "isNew": false,
+    "releaseDate": "2025-06-01",
+    "lastUpdated": "2026-01-15",
+    "mobileSupport": true,
+    "aspectRatio": "16/9",
+    "thumbnailUrl": "/games/2048-fusion/thumbnail.svg",
+    "screenshots": [
+      "/games/2048-fusion/thumbnail.svg"
+    ],
+    "gameUrl": "/games/2048-fusion/index.html",
+    "license": "MIT",
+    "repository": "https://github.com/gabbyvance/2048-cyber-fusion",
+    "homepage": "https://gamehub.local/game/2048-fusion",
+    "commercialUse": true,
+    "attributionRequired": true
+  },
+  {
+    "id": "asteroids-blast",
+    "title": "Asteroids Vector Blast",
+    "slug": "asteroids-blast",
+    "description": "Pilot your vector ship in deep space, rotate 360 degrees, and blast floating space rocks into dust.",
+    "instructions": "Use controls to play Asteroids Vector Blast.",
+    "category": "action",
+    "genre": "action",
+    "tags": [
+      "action",
+      "arcade",
+      "browser-game"
+    ],
+    "controls": [
+      {
+        "key": "Left / Right",
+        "action": "Rotate Ship"
+      },
+      {
+        "key": "Up",
+        "action": "Thrust"
+      },
+      {
+        "key": "Space",
+        "action": "Blast Asteroids"
+      }
+    ],
+    "author": "Maya Lin",
+    "version": "1.0.0",
+    "rating": 4.6,
+    "playsCount": 24285,
+    "featured": false,
+    "trending": false,
+    "isNew": false,
+    "releaseDate": "2025-06-01",
+    "lastUpdated": "2026-01-15",
+    "mobileSupport": true,
+    "aspectRatio": "16/9",
+    "thumbnailUrl": "/games/asteroids-blast/thumbnail.svg",
+    "screenshots": [
+      "/games/asteroids-blast/thumbnail.svg"
+    ],
+    "gameUrl": "/games/asteroids-blast/index.html",
+    "license": "MIT",
+    "repository": "https://github.com/mayalin/asteroids-vector-blast",
+    "homepage": "https://gamehub.local/game/asteroids-blast",
+    "commercialUse": true,
+    "attributionRequired": true
+  },
+  {
+    "id": "bounce-ball-3d",
+    "title": "Bounce Ball Highway",
+    "slug": "bounce-ball-3d",
+    "description": "Bounce along futuristic synthwave tracks, hopping over gaps and avoiding red spikes.",
+    "instructions": "Use controls to play Bounce Ball Highway.",
+    "category": "arcade",
+    "genre": "arcade",
+    "tags": [
+      "arcade",
+      "arcade",
+      "browser-game"
+    ],
+    "controls": [
+      {
+        "key": "A / D or Arrows",
+        "action": "Steer Ball"
+      }
+    ],
+    "author": "Lucas Vance",
+    "version": "1.0.0",
+    "rating": 4.8,
+    "playsCount": 12448,
+    "featured": true,
+    "trending": false,
+    "isNew": true,
+    "releaseDate": "2025-06-01",
+    "lastUpdated": "2026-01-15",
+    "mobileSupport": true,
+    "aspectRatio": "16/9",
+    "thumbnailUrl": "/games/bounce-ball-3d/thumbnail.svg",
+    "screenshots": [
+      "/games/bounce-ball-3d/thumbnail.svg"
+    ],
+    "gameUrl": "/games/bounce-ball-3d/index.html",
+    "license": "Apache-2.0",
+    "repository": "https://github.com/lucasvance/bounce-ball-highway",
+    "homepage": "https://gamehub.local/game/bounce-ball-3d",
+    "commercialUse": true,
+    "attributionRequired": true
+  },
+  {
+    "id": "breakout-pulse",
+    "title": "Breakout Pulse DX",
+    "slug": "breakout-pulse",
+    "description": "Shatter glowing neon bricks with a high-velocity plasma ball and moveable paddle.",
+    "instructions": "Use controls to play Breakout Pulse DX.",
+    "category": "arcade",
+    "genre": "arcade",
+    "tags": [
+      "arcade",
+      "arcade",
+      "browser-game"
+    ],
+    "controls": [
+      {
+        "key": "Left / Right",
+        "action": "Move Paddle"
+      }
+    ],
+    "author": "Elena Rostova",
+    "version": "1.0.0",
+    "rating": 4.5,
+    "playsCount": 9769,
+    "featured": true,
+    "trending": false,
+    "isNew": false,
+    "releaseDate": "2025-06-01",
+    "lastUpdated": "2026-01-15",
+    "mobileSupport": true,
+    "aspectRatio": "16/9",
+    "thumbnailUrl": "/games/breakout-pulse/thumbnail.svg",
+    "screenshots": [
+      "/games/breakout-pulse/thumbnail.svg"
+    ],
+    "gameUrl": "/games/breakout-pulse/index.html",
+    "license": "Apache-2.0",
+    "repository": "https://github.com/elenarostova/breakout-pulse-dx",
+    "homepage": "https://gamehub.local/game/breakout-pulse",
+    "commercialUse": true,
+    "attributionRequired": true
+  },
+  {
+    "id": "connect-four-x",
+    "title": "Connect Four Cyber Matrix",
+    "slug": "connect-four-x",
+    "description": "Drop glowing discs into a vertical grid to form 4-in-a-row before your opponent.",
+    "instructions": "Use controls to play Connect Four Cyber Matrix.",
+    "category": "strategy",
+    "genre": "strategy",
+    "tags": [
+      "strategy",
+      "arcade",
+      "browser-game"
+    ],
+    "controls": [
+      {
+        "key": "Click Column",
+        "action": "Drop Disc"
+      }
+    ],
+    "author": "Sophia Laurent",
+    "version": "1.0.0",
+    "rating": 4.5,
+    "playsCount": 11570,
+    "featured": false,
+    "trending": false,
+    "isNew": false,
+    "releaseDate": "2025-06-01",
+    "lastUpdated": "2026-01-15",
+    "mobileSupport": true,
+    "aspectRatio": "16/9",
+    "thumbnailUrl": "/games/connect-four-x/thumbnail.svg",
+    "screenshots": [
+      "/games/connect-four-x/thumbnail.svg"
+    ],
+    "gameUrl": "/games/connect-four-x/index.html",
+    "license": "MIT",
+    "repository": "https://github.com/sophialaurent/connect-four-x",
+    "homepage": "https://gamehub.local/game/connect-four-x",
+    "commercialUse": true,
+    "attributionRequired": true
+  },
+  {
     "id": "cosmic-defense",
     "title": "Cosmic Defense 2184",
     "slug": "cosmic-defense",
     "description": "Defend the galactic outpost from waves of incoming meteorites and hostile alien starships. Upgrade your plasma cannons and trigger hyper-beams to survive the cosmic swarm.",
     "instructions": "Use Left/Right arrow keys or A/D to move your fighter. Press Spacebar to shoot plasma laser bursts.",
     "category": "action",
+    "genre": "action",
     "tags": [
       "space",
       "shooter",
@@ -35,12 +249,308 @@
     "trending": true,
     "isNew": false,
     "releaseDate": "2025-11-20",
+    "lastUpdated": "2025-11-20",
+    "mobileSupport": true,
     "aspectRatio": "16/9",
     "thumbnailUrl": "/games/cosmic-defense/thumbnail.svg",
+    "screenshots": [
+      "/games/cosmic-defense/thumbnail.svg"
+    ],
     "gameUrl": "/games/cosmic-defense/index.html",
     "license": "Apache-2.0",
     "repository": "https://github.com/gamehub/cosmic-defense",
     "homepage": "https://gamehub.local/game/cosmic-defense",
+    "commercialUse": true,
+    "attributionRequired": true
+  },
+  {
+    "id": "cyber-chess",
+    "title": "Cyber Chess Warfare",
+    "slug": "cyber-chess",
+    "description": "Play tactical grandmaster chess with glowing holographic pieces and move hints.",
+    "instructions": "Use controls to play Cyber Chess Warfare.",
+    "category": "strategy",
+    "genre": "strategy",
+    "tags": [
+      "strategy",
+      "arcade",
+      "browser-game"
+    ],
+    "controls": [
+      {
+        "key": "Click Piece",
+        "action": "Select & Move Piece"
+      }
+    ],
+    "author": "Magnus Vance",
+    "version": "1.0.0",
+    "rating": 4.7,
+    "playsCount": 11390,
+    "featured": true,
+    "trending": false,
+    "isNew": false,
+    "releaseDate": "2025-06-01",
+    "lastUpdated": "2026-01-15",
+    "mobileSupport": true,
+    "aspectRatio": "16/9",
+    "thumbnailUrl": "/games/cyber-chess/thumbnail.svg",
+    "screenshots": [
+      "/games/cyber-chess/thumbnail.svg"
+    ],
+    "gameUrl": "/games/cyber-chess/index.html",
+    "license": "MIT",
+    "repository": "https://github.com/magnusvance/cyber-chess-warfare",
+    "homepage": "https://gamehub.local/game/cyber-chess",
+    "commercialUse": true,
+    "attributionRequired": true
+  },
+  {
+    "id": "cyber-runner",
+    "title": "Cyber Runner 2099",
+    "slug": "cyber-runner",
+    "description": "Endless side-scrolling runner game through a synthwave neon city. Jump over plasma barriers and collect energy orbs.",
+    "instructions": "Use controls to play Cyber Runner 2099.",
+    "category": "arcade",
+    "genre": "arcade",
+    "tags": [
+      "arcade",
+      "arcade",
+      "browser-game"
+    ],
+    "controls": [
+      {
+        "key": "Spacebar / Up",
+        "action": "Jump"
+      }
+    ],
+    "author": "Kira Vance",
+    "version": "1.0.0",
+    "rating": 4.7,
+    "playsCount": 7099,
+    "featured": false,
+    "trending": true,
+    "isNew": true,
+    "releaseDate": "2025-06-01",
+    "lastUpdated": "2026-01-15",
+    "mobileSupport": true,
+    "aspectRatio": "16/9",
+    "thumbnailUrl": "/games/cyber-runner/thumbnail.svg",
+    "screenshots": [
+      "/games/cyber-runner/thumbnail.svg"
+    ],
+    "gameUrl": "/games/cyber-runner/index.html",
+    "license": "MIT",
+    "repository": "https://github.com/kiravance/cyber-runner-2099",
+    "homepage": "https://gamehub.local/game/cyber-runner",
+    "commercialUse": true,
+    "attributionRequired": true
+  },
+  {
+    "id": "doodle-jump-neon",
+    "title": "Doodle Hop Cyber Bounce",
+    "slug": "doodle-jump-neon",
+    "description": "Leap infinitely higher on glowing platforms while dodging gravity hazards.",
+    "instructions": "Use controls to play Doodle Hop Cyber Bounce.",
+    "category": "arcade",
+    "genre": "arcade",
+    "tags": [
+      "arcade",
+      "arcade",
+      "browser-game"
+    ],
+    "controls": [
+      {
+        "key": "Left / Right",
+        "action": "Steer Jumper"
+      }
+    ],
+    "author": "Hannah Vance",
+    "version": "1.0.0",
+    "rating": 4.6,
+    "playsCount": 22836,
+    "featured": true,
+    "trending": false,
+    "isNew": true,
+    "releaseDate": "2025-06-01",
+    "lastUpdated": "2026-01-15",
+    "mobileSupport": true,
+    "aspectRatio": "16/9",
+    "thumbnailUrl": "/games/doodle-jump-neon/thumbnail.svg",
+    "screenshots": [
+      "/games/doodle-jump-neon/thumbnail.svg"
+    ],
+    "gameUrl": "/games/doodle-jump-neon/index.html",
+    "license": "Apache-2.0",
+    "repository": "https://github.com/hannahvance/doodle-hop-cyber-bounce",
+    "homepage": "https://gamehub.local/game/doodle-jump-neon",
+    "commercialUse": true,
+    "attributionRequired": true
+  },
+  {
+    "id": "flappy-birdo",
+    "title": "Flappy Cyber Wing",
+    "slug": "flappy-birdo",
+    "description": "Flap through high-voltage neon pylons in this intense arcade timing challenge.",
+    "instructions": "Use controls to play Flappy Cyber Wing.",
+    "category": "arcade",
+    "genre": "arcade",
+    "tags": [
+      "arcade",
+      "arcade",
+      "browser-game"
+    ],
+    "controls": [
+      {
+        "key": "Click / Spacebar",
+        "action": "Flap Wings"
+      }
+    ],
+    "author": "Devon Cross",
+    "version": "1.0.0",
+    "rating": 4.5,
+    "playsCount": 9975,
+    "featured": false,
+    "trending": false,
+    "isNew": false,
+    "releaseDate": "2025-06-01",
+    "lastUpdated": "2026-01-15",
+    "mobileSupport": true,
+    "aspectRatio": "16/9",
+    "thumbnailUrl": "/games/flappy-birdo/thumbnail.svg",
+    "screenshots": [
+      "/games/flappy-birdo/thumbnail.svg"
+    ],
+    "gameUrl": "/games/flappy-birdo/index.html",
+    "license": "ISC",
+    "repository": "https://github.com/devoncross/flappy-cyber-wing",
+    "homepage": "https://gamehub.local/game/flappy-birdo",
+    "commercialUse": true,
+    "attributionRequired": true
+  },
+  {
+    "id": "hextris-cyber",
+    "title": "Hextris Hexagon Pulse",
+    "slug": "hextris-cyber",
+    "description": "Rotate the central hexagon to match incoming colored block bars on all 6 sides.",
+    "instructions": "Use controls to play Hextris Hexagon Pulse.",
+    "category": "puzzle",
+    "genre": "puzzle",
+    "tags": [
+      "puzzle",
+      "arcade",
+      "browser-game"
+    ],
+    "controls": [
+      {
+        "key": "Left / Right",
+        "action": "Rotate Hexagon"
+      }
+    ],
+    "author": "Garrett Hayes",
+    "version": "1.0.0",
+    "rating": 4.6,
+    "playsCount": 7849,
+    "featured": true,
+    "trending": true,
+    "isNew": false,
+    "releaseDate": "2025-06-01",
+    "lastUpdated": "2026-01-15",
+    "mobileSupport": true,
+    "aspectRatio": "16/9",
+    "thumbnailUrl": "/games/hextris-cyber/thumbnail.svg",
+    "screenshots": [
+      "/games/hextris-cyber/thumbnail.svg"
+    ],
+    "gameUrl": "/games/hextris-cyber/index.html",
+    "license": "MIT",
+    "repository": "https://github.com/garretthayes/hextris-hexagon-pulse",
+    "homepage": "https://gamehub.local/game/hextris-cyber",
+    "commercialUse": true,
+    "attributionRequired": true
+  },
+  {
+    "id": "hyper-drift",
+    "title": "Hyper Drift Grand Prix",
+    "slug": "hyper-drift",
+    "description": "Master sharp drift turns and speed boosts around futuristic cyberpunk tracks.",
+    "instructions": "Use controls to play Hyper Drift Grand Prix.",
+    "category": "racing",
+    "genre": "racing",
+    "tags": [
+      "racing",
+      "arcade",
+      "browser-game"
+    ],
+    "controls": [
+      {
+        "key": "Arrow Keys / WASD",
+        "action": "Drive & Drift"
+      }
+    ],
+    "author": "Dominic Toretto",
+    "version": "1.0.0",
+    "rating": 4.5,
+    "playsCount": 9933,
+    "featured": true,
+    "trending": false,
+    "isNew": false,
+    "releaseDate": "2025-06-01",
+    "lastUpdated": "2026-01-15",
+    "mobileSupport": true,
+    "aspectRatio": "16/9",
+    "thumbnailUrl": "/games/hyper-drift/thumbnail.svg",
+    "screenshots": [
+      "/games/hyper-drift/thumbnail.svg"
+    ],
+    "gameUrl": "/games/hyper-drift/index.html",
+    "license": "BSD-2",
+    "repository": "https://github.com/dominictoretto/hyper-drift-gp",
+    "homepage": "https://gamehub.local/game/hyper-drift",
+    "commercialUse": true,
+    "attributionRequired": true
+  },
+  {
+    "id": "minesweeper-cyber",
+    "title": "Cyber Minesweeper 3000",
+    "slug": "minesweeper-cyber",
+    "description": "Clear the encrypted minefield using numerical logic clues without detonating cyber bombs.",
+    "instructions": "Use controls to play Cyber Minesweeper 3000.",
+    "category": "puzzle",
+    "genre": "puzzle",
+    "tags": [
+      "puzzle",
+      "arcade",
+      "browser-game"
+    ],
+    "controls": [
+      {
+        "key": "Left Click",
+        "action": "Reveal Cell"
+      },
+      {
+        "key": "Right Click",
+        "action": "Flag Cell"
+      }
+    ],
+    "author": "Zoe Chen",
+    "version": "1.0.0",
+    "rating": 4.6,
+    "playsCount": 9244,
+    "featured": false,
+    "trending": true,
+    "isNew": false,
+    "releaseDate": "2025-06-01",
+    "lastUpdated": "2026-01-15",
+    "mobileSupport": true,
+    "aspectRatio": "16/9",
+    "thumbnailUrl": "/games/minesweeper-cyber/thumbnail.svg",
+    "screenshots": [
+      "/games/minesweeper-cyber/thumbnail.svg"
+    ],
+    "gameUrl": "/games/minesweeper-cyber/index.html",
+    "license": "MIT",
+    "repository": "https://github.com/zoechen/cyber-minesweeper-3000",
+    "homepage": "https://gamehub.local/game/minesweeper-cyber",
     "commercialUse": true,
     "attributionRequired": true
   },
@@ -51,6 +561,7 @@
     "description": "Control a glowing cybernetic snake through an electrified grid. Collect energy cores, avoid tail collisions, and race against accelerating speed in this arcade visual masterpiece.",
     "instructions": "Use arrow keys or WASD to turn the snake. Collect glowing energy orbs to increase your length and score.",
     "category": "arcade",
+    "genre": "arcade",
     "tags": [
       "snake",
       "cyberpunk",
@@ -80,12 +591,99 @@
     "trending": true,
     "isNew": true,
     "releaseDate": "2026-01-15",
+    "lastUpdated": "2026-01-15",
+    "mobileSupport": true,
     "aspectRatio": "16/9",
     "thumbnailUrl": "/games/neon-snake/thumbnail.svg",
+    "screenshots": [
+      "/games/neon-snake/thumbnail.svg"
+    ],
     "gameUrl": "/games/neon-snake/index.html",
     "license": "MIT",
     "repository": "https://github.com/gamehub/neon-snake",
     "homepage": "https://gamehub.local/game/neon-snake",
+    "commercialUse": true,
+    "attributionRequired": true
+  },
+  {
+    "id": "pacman-lab",
+    "title": "Pac-Maze Cyber Runner",
+    "slug": "pacman-lab",
+    "description": "Navigate glowing maze corridors, consume power dots, and outsmart cyber phantom ghosts.",
+    "instructions": "Use controls to play Pac-Maze Cyber Runner.",
+    "category": "arcade",
+    "genre": "arcade",
+    "tags": [
+      "arcade",
+      "arcade",
+      "browser-game"
+    ],
+    "controls": [
+      {
+        "key": "Arrow Keys",
+        "action": "Navigate Maze"
+      }
+    ],
+    "author": "Tariq Miller",
+    "version": "1.0.0",
+    "rating": 4.9,
+    "playsCount": 15859,
+    "featured": true,
+    "trending": true,
+    "isNew": false,
+    "releaseDate": "2025-06-01",
+    "lastUpdated": "2026-01-15",
+    "mobileSupport": true,
+    "aspectRatio": "16/9",
+    "thumbnailUrl": "/games/pacman-lab/thumbnail.svg",
+    "screenshots": [
+      "/games/pacman-lab/thumbnail.svg"
+    ],
+    "gameUrl": "/games/pacman-lab/index.html",
+    "license": "BSD-3",
+    "repository": "https://github.com/tariqmiller/pac-maze-cyber-runner",
+    "homepage": "https://gamehub.local/game/pacman-lab",
+    "commercialUse": true,
+    "attributionRequired": true
+  },
+  {
+    "id": "pixel-golf",
+    "title": "Pixel Golf Odyssey",
+    "slug": "pixel-golf",
+    "description": "Aim stroke direction and power to hole-in-one through neon miniature golf obstacles.",
+    "instructions": "Use controls to play Pixel Golf Odyssey.",
+    "category": "sports",
+    "genre": "sports",
+    "tags": [
+      "sports",
+      "arcade",
+      "browser-game"
+    ],
+    "controls": [
+      {
+        "key": "Drag & Release",
+        "action": "Aim & Shoot Golf Ball"
+      }
+    ],
+    "author": "Brian Nelson",
+    "version": "1.0.0",
+    "rating": 4.9,
+    "playsCount": 9817,
+    "featured": false,
+    "trending": false,
+    "isNew": false,
+    "releaseDate": "2025-06-01",
+    "lastUpdated": "2026-01-15",
+    "mobileSupport": true,
+    "aspectRatio": "16/9",
+    "thumbnailUrl": "/games/pixel-golf/thumbnail.svg",
+    "screenshots": [
+      "/games/pixel-golf/thumbnail.svg"
+    ],
+    "gameUrl": "/games/pixel-golf/index.html",
+    "license": "MIT",
+    "repository": "https://github.com/briannelson/pixel-golf-odyssey",
+    "homepage": "https://gamehub.local/game/pixel-golf",
     "commercialUse": true,
     "attributionRequired": true
   },
@@ -96,6 +694,7 @@
     "description": "Test your cognitive memory in this sleek cyber-themed card matching puzzle. Flip cards, discover matching glyph pairs, and maintain your combo multiplier before the timer runs out.",
     "instructions": "Click or tap on any two cards to reveal their hidden symbols. Match all identical pairs to clear the board.",
     "category": "puzzle",
+    "genre": "puzzle",
     "tags": [
       "puzzle",
       "memory",
@@ -121,12 +720,357 @@
     "trending": true,
     "isNew": true,
     "releaseDate": "2026-02-01",
+    "lastUpdated": "2026-02-01",
+    "mobileSupport": true,
     "aspectRatio": "16/9",
     "thumbnailUrl": "/games/pixel-memory/thumbnail.svg",
+    "screenshots": [
+      "/games/pixel-memory/thumbnail.svg"
+    ],
     "gameUrl": "/games/pixel-memory/index.html",
     "license": "BSD-3",
     "repository": "https://github.com/gamehub/pixel-memory",
     "homepage": "https://gamehub.local/game/pixel-memory",
+    "commercialUse": true,
+    "attributionRequired": true
+  },
+  {
+    "id": "pong-championship",
+    "title": "Cyber Pong Championship",
+    "slug": "pong-championship",
+    "description": "Hyper-fast futuristic table tennis vs AI with particle trails and speed progression.",
+    "instructions": "Use controls to play Cyber Pong Championship.",
+    "category": "sports",
+    "genre": "sports",
+    "tags": [
+      "sports",
+      "arcade",
+      "browser-game"
+    ],
+    "controls": [
+      {
+        "key": "W / S or Up / Down",
+        "action": "Control Paddle"
+      }
+    ],
+    "author": "Soren Cole",
+    "version": "1.0.0",
+    "rating": 4.5,
+    "playsCount": 17279,
+    "featured": false,
+    "trending": true,
+    "isNew": false,
+    "releaseDate": "2025-06-01",
+    "lastUpdated": "2026-01-15",
+    "mobileSupport": true,
+    "aspectRatio": "16/9",
+    "thumbnailUrl": "/games/pong-championship/thumbnail.svg",
+    "screenshots": [
+      "/games/pong-championship/thumbnail.svg"
+    ],
+    "gameUrl": "/games/pong-championship/index.html",
+    "license": "MIT",
+    "repository": "https://github.com/sorencole/cyber-pong-championship",
+    "homepage": "https://gamehub.local/game/pong-championship",
+    "commercialUse": true,
+    "attributionRequired": true
+  },
+  {
+    "id": "retro-tetris",
+    "title": "Retro Tetris Pulse",
+    "slug": "retro-tetris",
+    "description": "Classic block stacking arcade game with glowing neon polyominoes, line clears, and score multipliers.",
+    "instructions": "Use controls to play Retro Tetris Pulse.",
+    "category": "puzzle",
+    "genre": "puzzle",
+    "tags": [
+      "puzzle",
+      "arcade",
+      "browser-game"
+    ],
+    "controls": [
+      {
+        "key": "Left/Right/Down",
+        "action": "Move Block"
+      },
+      {
+        "key": "Up Arrow",
+        "action": "Rotate Block"
+      }
+    ],
+    "author": "Alex Rivers",
+    "version": "1.0.0",
+    "rating": 4.6,
+    "playsCount": 17630,
+    "featured": false,
+    "trending": false,
+    "isNew": true,
+    "releaseDate": "2025-06-01",
+    "lastUpdated": "2026-01-15",
+    "mobileSupport": true,
+    "aspectRatio": "16/9",
+    "thumbnailUrl": "/games/retro-tetris/thumbnail.svg",
+    "screenshots": [
+      "/games/retro-tetris/thumbnail.svg"
+    ],
+    "gameUrl": "/games/retro-tetris/index.html",
+    "license": "MIT",
+    "repository": "https://github.com/alexrivers/retro-tetris-pulse",
+    "homepage": "https://gamehub.local/game/retro-tetris",
+    "commercialUse": true,
+    "attributionRequired": true
+  },
+  {
+    "id": "simon-says-neon",
+    "title": "Simon Says Neon Memory",
+    "slug": "simon-says-neon",
+    "description": "Memorize and repeat accelerating patterns of glowing colors and musical tones.",
+    "instructions": "Use controls to play Simon Says Neon Memory.",
+    "category": "puzzle",
+    "genre": "puzzle",
+    "tags": [
+      "puzzle",
+      "arcade",
+      "browser-game"
+    ],
+    "controls": [
+      {
+        "key": "Click / Tap",
+        "action": "Select Tone Button"
+      }
+    ],
+    "author": "Cody Rhodes",
+    "version": "1.0.0",
+    "rating": 4.9,
+    "playsCount": 23443,
+    "featured": false,
+    "trending": false,
+    "isNew": false,
+    "releaseDate": "2025-06-01",
+    "lastUpdated": "2026-01-15",
+    "mobileSupport": true,
+    "aspectRatio": "16/9",
+    "thumbnailUrl": "/games/simon-says-neon/thumbnail.svg",
+    "screenshots": [
+      "/games/simon-says-neon/thumbnail.svg"
+    ],
+    "gameUrl": "/games/simon-says-neon/index.html",
+    "license": "ISC",
+    "repository": "https://github.com/codyrhodes/simon-says-neon-memory",
+    "homepage": "https://gamehub.local/game/simon-says-neon",
+    "commercialUse": true,
+    "attributionRequired": true
+  },
+  {
+    "id": "space-invaders-x",
+    "title": "Space Invaders X",
+    "slug": "space-invaders-x",
+    "description": "Defend Earth against descending waves of alien invaders in this classic retro shooter.",
+    "instructions": "Use controls to play Space Invaders X.",
+    "category": "action",
+    "genre": "action",
+    "tags": [
+      "action",
+      "arcade",
+      "browser-game"
+    ],
+    "controls": [
+      {
+        "key": "Left / Right",
+        "action": "Move Ship"
+      },
+      {
+        "key": "Spacebar",
+        "action": "Shoot"
+      }
+    ],
+    "author": "Nora Sterling",
+    "version": "1.0.0",
+    "rating": 4.8,
+    "playsCount": 11570,
+    "featured": true,
+    "trending": true,
+    "isNew": false,
+    "releaseDate": "2025-06-01",
+    "lastUpdated": "2026-01-15",
+    "mobileSupport": true,
+    "aspectRatio": "16/9",
+    "thumbnailUrl": "/games/space-invaders-x/thumbnail.svg",
+    "screenshots": [
+      "/games/space-invaders-x/thumbnail.svg"
+    ],
+    "gameUrl": "/games/space-invaders-x/index.html",
+    "license": "MIT",
+    "repository": "https://github.com/norasterling/space-invaders-x",
+    "homepage": "https://gamehub.local/game/space-invaders-x",
+    "commercialUse": true,
+    "attributionRequired": true
+  },
+  {
+    "id": "speed-racer",
+    "title": "Neon Speed Racer",
+    "slug": "speed-racer",
+    "description": "High-octane pseudo-3D highway racer. Dodge oncoming traffic and push your turbo boosters to the limit.",
+    "instructions": "Use controls to play Neon Speed Racer.",
+    "category": "racing",
+    "genre": "racing",
+    "tags": [
+      "racing",
+      "arcade",
+      "browser-game"
+    ],
+    "controls": [
+      {
+        "key": "Left / Right",
+        "action": "Steer Vehicle"
+      },
+      {
+        "key": "Up Arrow",
+        "action": "Nitro Boost"
+      }
+    ],
+    "author": "Marcus Blade",
+    "version": "1.0.0",
+    "rating": 4.9,
+    "playsCount": 22102,
+    "featured": true,
+    "trending": true,
+    "isNew": false,
+    "releaseDate": "2025-06-01",
+    "lastUpdated": "2026-01-15",
+    "mobileSupport": true,
+    "aspectRatio": "16/9",
+    "thumbnailUrl": "/games/speed-racer/thumbnail.svg",
+    "screenshots": [
+      "/games/speed-racer/thumbnail.svg"
+    ],
+    "gameUrl": "/games/speed-racer/index.html",
+    "license": "BSD-2",
+    "repository": "https://github.com/marcusblade/neon-speed-racer",
+    "homepage": "https://gamehub.local/game/speed-racer",
+    "commercialUse": true,
+    "attributionRequired": true
+  },
+  {
+    "id": "tic-tac-toe-glow",
+    "title": "Tic Tac Toe Cyber Glow",
+    "slug": "tic-tac-toe-glow",
+    "description": "Strategic neon 3x3 grid battle against smart AI or local multiplayer.",
+    "instructions": "Use controls to play Tic Tac Toe Cyber Glow.",
+    "category": "strategy",
+    "genre": "strategy",
+    "tags": [
+      "strategy",
+      "arcade",
+      "browser-game"
+    ],
+    "controls": [
+      {
+        "key": "Mouse Click",
+        "action": "Place Symbol"
+      }
+    ],
+    "author": "Liam Thorne",
+    "version": "1.0.0",
+    "rating": 4.8,
+    "playsCount": 19278,
+    "featured": false,
+    "trending": false,
+    "isNew": false,
+    "releaseDate": "2025-06-01",
+    "lastUpdated": "2026-01-15",
+    "mobileSupport": true,
+    "aspectRatio": "16/9",
+    "thumbnailUrl": "/games/tic-tac-toe-glow/thumbnail.svg",
+    "screenshots": [
+      "/games/tic-tac-toe-glow/thumbnail.svg"
+    ],
+    "gameUrl": "/games/tic-tac-toe-glow/index.html",
+    "license": "ISC",
+    "repository": "https://github.com/liamthorne/tic-tac-toe-glow",
+    "homepage": "https://gamehub.local/game/tic-tac-toe-glow",
+    "commercialUse": true,
+    "attributionRequired": true
+  },
+  {
+    "id": "tower-builder",
+    "title": "Neon Tower Builder",
+    "slug": "tower-builder",
+    "description": "Stack moving skyscraper blocks with precision timing to construct the tallest cyber tower.",
+    "instructions": "Use controls to play Neon Tower Builder.",
+    "category": "arcade",
+    "genre": "arcade",
+    "tags": [
+      "arcade",
+      "arcade",
+      "browser-game"
+    ],
+    "controls": [
+      {
+        "key": "Spacebar / Click",
+        "action": "Drop Skyscraper Block"
+      }
+    ],
+    "author": "Owen Price",
+    "version": "1.0.0",
+    "rating": 4.9,
+    "playsCount": 17556,
+    "featured": true,
+    "trending": false,
+    "isNew": false,
+    "releaseDate": "2025-06-01",
+    "lastUpdated": "2026-01-15",
+    "mobileSupport": true,
+    "aspectRatio": "16/9",
+    "thumbnailUrl": "/games/tower-builder/thumbnail.svg",
+    "screenshots": [
+      "/games/tower-builder/thumbnail.svg"
+    ],
+    "gameUrl": "/games/tower-builder/index.html",
+    "license": "MIT",
+    "repository": "https://github.com/owenprice/neon-tower-builder",
+    "homepage": "https://gamehub.local/game/tower-builder",
+    "commercialUse": true,
+    "attributionRequired": true
+  },
+  {
+    "id": "wordle-cyber",
+    "title": "Cyber Word Matrix",
+    "slug": "wordle-cyber",
+    "description": "Guess the secret 5-letter cyber word within 6 tries using color-coded hints.",
+    "instructions": "Use controls to play Cyber Word Matrix.",
+    "category": "puzzle",
+    "genre": "puzzle",
+    "tags": [
+      "puzzle",
+      "arcade",
+      "browser-game"
+    ],
+    "controls": [
+      {
+        "key": "Keyboard Typing",
+        "action": "Enter Word Guess"
+      }
+    ],
+    "author": "Chloe Bennett",
+    "version": "1.0.0",
+    "rating": 4.8,
+    "playsCount": 10629,
+    "featured": true,
+    "trending": false,
+    "isNew": false,
+    "releaseDate": "2025-06-01",
+    "lastUpdated": "2026-01-15",
+    "mobileSupport": true,
+    "aspectRatio": "16/9",
+    "thumbnailUrl": "/games/wordle-cyber/thumbnail.svg",
+    "screenshots": [
+      "/games/wordle-cyber/thumbnail.svg"
+    ],
+    "gameUrl": "/games/wordle-cyber/index.html",
+    "license": "MIT",
+    "repository": "https://github.com/chloebennett/cyber-word-matrix",
+    "homepage": "https://gamehub.local/game/wordle-cyber",
     "commercialUse": true,
     "attributionRequired": true
   }

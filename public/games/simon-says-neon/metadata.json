@@ -1,0 +1,34 @@
+{
+  "id": "simon-says-neon",
+  "title": "Simon Says Neon Memory",
+  "slug": "simon-says-neon",
+  "description": "Memorize and repeat accelerating patterns of glowing colors and musical tones.",
+  "instructions": "Use controls to play Simon Says Neon Memory.",
+  "category": "puzzle",
+  "genre": "puzzle",
+  "tags": [
+    "puzzle",
+    "arcade",
+    "browser-game"
+  ],
+  "controls": [
+    {
+      "key": "Click / Tap",
+      "action": "Select Tone Button"
+    }
+  ],
+  "author": "Cody Rhodes",
+  "license": "ISC",
+  "repository": "https://github.com/codyrhodes/simon-says-neon-memory",
+  "homepage": "https://gamehub.local/game/simon-says-neon",
+  "releaseDate": "2025-06-01",
+  "lastUpdated": "2026-01-15",
+  "mobileSupport": true,
+  "version": "1.0.0",
+  "rating": 4.9,
+  "playsCount": 23443,
+  "featured": false,
+  "trending": false,
+  "isNew": false,
+  "aspectRatio": "16/9"
+}
