@@ -32,7 +32,10 @@ interface ComplianceDashboardClientProps {
 }
 
 export function ComplianceDashboardClient({ initialData }: ComplianceDashboardClientProps) {
-  const { games, licenseReport, assetRegistry, assetSources } = initialData;
+  const games = useMemo(() => Array.isArray(initialData?.games) ? initialData.games : [], [initialData]);
+  const licenseReport = initialData?.licenseReport || {};
+  const assetRegistry = useMemo(() => Array.isArray(initialData?.assetRegistry) ? initialData.assetRegistry : [], [initialData]);
+  const assetSources = useMemo(() => Array.isArray(initialData?.assetSources) ? initialData.assetSources : [], [initialData]);
 
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -41,31 +44,31 @@ export function ComplianceDashboardClient({ initialData }: ComplianceDashboardCl
   // Metrics Calculations
   const metrics = useMemo(() => {
     const totalGames = games.length;
-    const verifiedGames = games.filter((g) => g.trustVerified && g.assetVerificationStatus === "VERIFIED").length;
-    const rejectedGames = licenseReport.totalRejected || 0;
+    const verifiedGames = games.filter((g) => Boolean(g?.trustVerified && g?.assetVerificationStatus === "VERIFIED")).length;
+    const rejectedGames = Number(licenseReport?.totalRejected) || 0;
 
     const licenseCounts = {
-      MIT: games.filter((g) => g.license === "MIT").length,
-      Apache: games.filter((g) => g.license === "Apache-2.0").length,
-      BSD: games.filter((g) => g.license.startsWith("BSD")).length,
-      ISC: games.filter((g) => g.license === "ISC").length,
-      Owned: assetSources.filter((s) => s.ownershipStatus === "OWNED" || s.creator === "GameHub Studios").length,
+      MIT: games.filter((g) => g?.license === "MIT").length,
+      Apache: games.filter((g) => g?.license === "Apache-2.0").length,
+      BSD: games.filter((g) => String(g?.license || "").startsWith("BSD")).length,
+      ISC: games.filter((g) => g?.license === "ISC").length,
+      Owned: assetSources.filter((s) => s?.ownershipStatus === "OWNED" || s?.creator === "GameHub Studios").length,
     };
 
     const totalAssets = assetRegistry.length;
-    const ownedAssets = assetSources.filter((s) => s.ownershipStatus === "OWNED" || s.creator === "GameHub Studios").length;
+    const ownedAssets = assetSources.filter((s) => s?.ownershipStatus === "OWNED" || s?.creator === "GameHub Studios").length;
     const thirdPartyAssets = totalAssets - ownedAssets;
     const missingRecords = totalAssets - assetSources.length;
 
     const trademarkRisks = {
-      LOW: games.filter((g) => g.brandRisk === "LOW").length,
-      MEDIUM: games.filter((g) => g.brandRisk === "MEDIUM").length,
-      HIGH: games.filter((g) => g.brandRisk === "HIGH").length,
+      LOW: games.filter((g) => (g?.brandRisk || "LOW") === "LOW").length,
+      MEDIUM: games.filter((g) => g?.brandRisk === "MEDIUM").length,
+      HIGH: games.filter((g) => g?.brandRisk === "HIGH").length,
     };
 
     const commercialReadiness = {
-      ready: games.filter((g) => g.commercialReady).length,
-      blocked: totalGames - games.filter((g) => g.commercialReady).length + rejectedGames,
+      ready: games.filter((g) => Boolean(g?.commercialReady)).length,
+      blocked: totalGames - games.filter((g) => Boolean(g?.commercialReady)).length + rejectedGames,
     };
 
     return {
@@ -84,14 +87,15 @@ export function ComplianceDashboardClient({ initialData }: ComplianceDashboardCl
 
   // Filtered Games List
   const filteredGames = useMemo(() => {
+    const query = searchQuery.toLowerCase().trim();
     return games.filter((game) => {
-      const matchesSearch =
-        game.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        game.author.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        game.slug.toLowerCase().includes(searchQuery.toLowerCase());
+      const title = String(game?.title || "").toLowerCase();
+      const author = String(game?.author || "").toLowerCase();
+      const slug = String(game?.slug || "").toLowerCase();
 
-      const matchesCategory = selectedCategory === "all" || game.category === selectedCategory;
-      const matchesRisk = selectedRisk === "all" || game.brandRisk === selectedRisk;
+      const matchesSearch = !query || title.includes(query) || author.includes(query) || slug.includes(query);
+      const matchesCategory = selectedCategory === "all" || game?.category === selectedCategory;
+      const matchesRisk = selectedRisk === "all" || (game?.brandRisk || "LOW") === selectedRisk;
 
       return matchesSearch && matchesCategory && matchesRisk;
     });
