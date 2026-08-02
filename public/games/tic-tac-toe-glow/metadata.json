@@ -30,5 +30,14 @@
   "featured": false,
   "trending": false,
   "isNew": false,
-  "aspectRatio": "16/9"
+  "aspectRatio": "16/9",
+  "thumbnailUrl": "/games/tic-tac-toe-glow/thumbnail.svg",
+  "searchKeywords": [
+    "Tic Tac Toe Cyber Glow",
+    "strategy",
+    "Liam Thorne",
+    "strategy",
+    "arcade",
+    "browser-game"
+  ]
 }

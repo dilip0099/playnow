@@ -30,5 +30,14 @@
   "featured": false,
   "trending": false,
   "isNew": false,
-  "aspectRatio": "16/9"
+  "aspectRatio": "16/9",
+  "thumbnailUrl": "/games/2048-fusion/thumbnail.svg",
+  "searchKeywords": [
+    "2048 Cyber Fusion",
+    "puzzle",
+    "Gabby Vance",
+    "puzzle",
+    "arcade",
+    "browser-game"
+  ]
 }

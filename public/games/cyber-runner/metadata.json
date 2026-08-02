@@ -30,5 +30,14 @@
   "featured": false,
   "trending": true,
   "isNew": true,
-  "aspectRatio": "16/9"
+  "aspectRatio": "16/9",
+  "thumbnailUrl": "/games/cyber-runner/thumbnail.svg",
+  "searchKeywords": [
+    "Cyber Runner 2099",
+    "arcade",
+    "Kira Vance",
+    "arcade",
+    "arcade",
+    "browser-game"
+  ]
 }

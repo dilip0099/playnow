@@ -5,10 +5,22 @@
   "description": "Test your cognitive memory in this sleek cyber-themed card matching puzzle. Flip cards, discover matching glyph pairs, and maintain your combo multiplier before the timer runs out.",
   "instructions": "Click or tap on any two cards to reveal their hidden symbols. Match all identical pairs to clear the board.",
   "category": "puzzle",
-  "tags": ["puzzle", "memory", "brain", "matching", "casual"],
+  "tags": [
+    "puzzle",
+    "memory",
+    "brain",
+    "matching",
+    "casual"
+  ],
   "controls": [
-    { "key": "Left Mouse Click / Tap", "action": "Flip Card" },
-    { "key": "R", "action": "Restart Puzzle" }
+    {
+      "key": "Left Mouse Click / Tap",
+      "action": "Flip Card"
+    },
+    {
+      "key": "R",
+      "action": "Restart Puzzle"
+    }
   ],
   "author": "GameHub Studios",
   "license": "BSD-3",
@@ -21,5 +33,16 @@
   "trending": true,
   "isNew": true,
   "releaseDate": "2026-02-01",
-  "aspectRatio": "16/9"
+  "aspectRatio": "16/9",
+  "thumbnailUrl": "/games/pixel-memory/thumbnail.svg",
+  "searchKeywords": [
+    "Pixel Memory Quest",
+    "puzzle",
+    "GameHub Studios",
+    "puzzle",
+    "memory",
+    "brain",
+    "matching",
+    "casual"
+  ]
 }

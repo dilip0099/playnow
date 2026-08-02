@@ -34,5 +34,14 @@
   "featured": false,
   "trending": false,
   "isNew": true,
-  "aspectRatio": "16/9"
+  "aspectRatio": "16/9",
+  "thumbnailUrl": "/games/retro-tetris/thumbnail.svg",
+  "searchKeywords": [
+    "Retro Tetris Pulse",
+    "puzzle",
+    "Alex Rivers",
+    "puzzle",
+    "arcade",
+    "browser-game"
+  ]
 }
