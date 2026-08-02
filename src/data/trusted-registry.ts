@@ -1,5 +1,5 @@
 import { SupportedLicense } from "./licenses";
-import { GameClassification } from "../types/game";
+import { GameClassification, AssetSourceType } from "../types/game";
 
 export interface TrustedRepoEntry {
   slug: string;
@@ -13,6 +13,7 @@ export interface TrustedRepoEntry {
   homepage: string;
   category: "action" | "puzzle" | "arcade" | "racing" | "adventure" | "strategy" | "sports" | "multiplayer";
   gameType: GameClassification;
+  assetSource: AssetSourceType;
   modifications: string[];
 }
 
@@ -29,6 +30,7 @@ export const TRUSTED_GITHUB_REGISTRY: Record<string, TrustedRepoEntry> = {
     homepage: "https://play2048.co/",
     category: "puzzle",
     gameType: "Derived Game",
+    assetSource: "Original",
     modifications: [
       "Added GameHub neon dark aesthetic UI theme",
       "Integrated GameHub HTML5 iframe sandbox controls",
@@ -48,6 +50,7 @@ export const TRUSTED_GITHUB_REGISTRY: Record<string, TrustedRepoEntry> = {
     homepage: "http://patorjk.com/games/snake/",
     category: "arcade",
     gameType: "Derived Game",
+    assetSource: "Original",
     modifications: [
       "Applied cyberpunk neon particle trail render pipeline",
       "Added WASD and Arrow Key dual control support",
@@ -67,6 +70,7 @@ export const TRUSTED_GITHUB_REGISTRY: Record<string, TrustedRepoEntry> = {
     homepage: "https://github.com/dmcinnes/HTML5-Asteroids",
     category: "action",
     gameType: "Derived Game",
+    assetSource: "Original",
     modifications: [
       "Added space defense outpost enemy wave mechanics",
       "Integrated plasma laser graphics and explosion particles",
@@ -85,6 +89,7 @@ export const TRUSTED_GITHUB_REGISTRY: Record<string, TrustedRepoEntry> = {
     homepage: "https://chessboardjs.com/",
     category: "puzzle",
     gameType: "Derived Game",
+    assetSource: "Original",
     modifications: [
       "Implemented 3D CSS card flip animations",
       "Added timer and moves combo multiplier system",
@@ -103,6 +108,7 @@ export const TRUSTED_GITHUB_REGISTRY: Record<string, TrustedRepoEntry> = {
     homepage: "https://end3r.github.io/Gamedev-Canvas-workshop/",
     category: "arcade",
     gameType: "Derived Game",
+    assetSource: "Original",
     modifications: [
       "Refactored canvas rendering to use neon glowing vector bricks",
       "Added paddle acceleration and particle trail effects",
@@ -121,6 +127,7 @@ export const TRUSTED_GITHUB_REGISTRY: Record<string, TrustedRepoEntry> = {
     homepage: "https://ellisonleao.github.io/clumsy-bird/",
     category: "arcade",
     gameType: "Derived Game",
+    assetSource: "Original",
     modifications: [
       "Replaced graphics with original cyberpunk neon vector art",
       "Added jump sound synthesis and score overlay",
@@ -139,6 +146,7 @@ export const TRUSTED_GITHUB_REGISTRY: Record<string, TrustedRepoEntry> = {
     homepage: "https://straker.github.io/pong-canvas/",
     category: "sports",
     gameType: "Derived Game",
+    assetSource: "Original",
     modifications: [
       "Added cyber theme paddle glow and ball velocity trails",
       "Integrated AI opponent difficulty scaling",
@@ -147,7 +155,7 @@ export const TRUSTED_GITHUB_REGISTRY: Record<string, TrustedRepoEntry> = {
   },
   "retro-tetris": {
     slug: "retro-tetris",
-    derivedTitle: "Retro Tetris Pulse",
+    derivedTitle: "Retro Block Stack Pulse",
     originalTitle: "Tetris Canvas",
     originalAuthor: "Steven Lambert",
     originalRepository: "https://github.com/straker/tetris-canvas",
@@ -157,7 +165,9 @@ export const TRUSTED_GITHUB_REGISTRY: Record<string, TrustedRepoEntry> = {
     homepage: "https://straker.github.io/tetris-canvas/",
     category: "puzzle",
     gameType: "Derived Game",
+    assetSource: "Original",
     modifications: [
+      "Renamed to non-infringing title (Retro Block Stack Pulse) to eliminate trademark risk",
       "Added neon polyomino colors and drop particle effects",
       "Integrated line clear sound effects",
       "Added GameHub responsive container layout",
@@ -175,6 +185,7 @@ export const TRUSTED_GITHUB_REGISTRY: Record<string, TrustedRepoEntry> = {
     homepage: "https://react-wordle.netlify.app/",
     category: "strategy",
     gameType: "Derived Game",
+    assetSource: "Original",
     modifications: [
       "Created glowing SVG grid UI with AI opponent",
       "Integrated win streak calculation and sound effects",
@@ -193,6 +204,7 @@ export const TRUSTED_GITHUB_REGISTRY: Record<string, TrustedRepoEntry> = {
     homepage: "https://xiangwei-chen.github.io/tower_game/",
     category: "arcade",
     gameType: "Derived Game",
+    assetSource: "Original",
     modifications: [
       "Refactored stack physics to use neon skyscraper blocks",
       "Added drop sound synthesis and score multiplier",

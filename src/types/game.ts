@@ -12,6 +12,9 @@ export type GameCategory =
 
 export type GameClassification = "Original Game" | "Derived Game";
 
+export type BrandRiskLevel = "LOW" | "MEDIUM" | "HIGH";
+export type AssetSourceType = "Original" | "Open Licensed" | "Unknown";
+
 export interface GameControl {
   key: string;
   action: string;
@@ -63,6 +66,11 @@ export interface GameMetadata {
   derivedTitle: string;
   modifications: string[];
   originalCommitHash: string;
+
+  // Milestone 7 Asset and Trademark Compliance
+  brandRisk: BrandRiskLevel;
+  assetSource: AssetSourceType;
+  commercialReady: boolean;
 }
 
 export type SortOption = "popular" | "newest" | "rating" | "title";

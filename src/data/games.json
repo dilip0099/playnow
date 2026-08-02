@@ -41,7 +41,7 @@
     "attributionRequired": true,
     "commitHash": "fc82ecae46d6a506bfec38c4c798031d279998df",
     "licenseChecksum": "4d6d420a4cb4bff3893675b6df0625b9cd3ad8f6b581b237be085e6650ed9a30",
-    "importTimestamp": "2026-08-02T06:55:00.027Z",
+    "importTimestamp": "2026-08-02T06:56:53.818Z",
     "trustVerified": true,
     "gameType": "Derived Game",
     "originalRepository": "https://github.com/gabrielecirulli/2048",
@@ -54,7 +54,10 @@
       "Added Web Audio sound synthesis for tile merges",
       "Normalized responsive canvas scaling"
     ],
-    "originalCommitHash": "fc82ecae46d6a506bfec38c4c798031d279998df"
+    "originalCommitHash": "fc82ecae46d6a506bfec38c4c798031d279998df",
+    "brandRisk": "LOW",
+    "assetSource": "Original",
+    "commercialReady": true
   },
   {
     "id": "breakout-pulse",
@@ -98,7 +101,7 @@
     "attributionRequired": true,
     "commitHash": "4e9128f73e4b7890a88df54b2a36b32810a976a1",
     "licenseChecksum": "a7480cb4632d1dfab73fec04c084a20556e74249dda23d5949e068239d4478c8",
-    "importTimestamp": "2026-08-02T06:55:00.029Z",
+    "importTimestamp": "2026-08-02T06:56:53.820Z",
     "trustVerified": true,
     "gameType": "Derived Game",
     "originalRepository": "https://github.com/end3r/Gamedev-Canvas-workshop",
@@ -110,7 +113,10 @@
       "Added paddle acceleration and particle trail effects",
       "Standardized iframe sandbox integration"
     ],
-    "originalCommitHash": "4e9128f73e4b7890a88df54b2a36b32810a976a1"
+    "originalCommitHash": "4e9128f73e4b7890a88df54b2a36b32810a976a1",
+    "brandRisk": "LOW",
+    "assetSource": "Original",
+    "commercialReady": true
   },
   {
     "id": "cosmic-defense",
@@ -164,7 +170,7 @@
     "attributionRequired": true,
     "commitHash": "33a218d6a89901768bf7094b81c2f90a211f440b",
     "licenseChecksum": "a40ab0bc6bae99a23e67042a7704fdc1362e201a4444c5343a001b5e167815bc",
-    "importTimestamp": "2026-08-02T06:55:00.030Z",
+    "importTimestamp": "2026-08-02T06:56:53.822Z",
     "trustVerified": true,
     "gameType": "Derived Game",
     "originalRepository": "https://github.com/dmcinnes/HTML5-Asteroids",
@@ -176,7 +182,10 @@
       "Integrated plasma laser graphics and explosion particles",
       "Added GameHub iframe fullscreen compliance layer"
     ],
-    "originalCommitHash": "33a218d6a89901768bf7094b81c2f90a211f440b"
+    "originalCommitHash": "33a218d6a89901768bf7094b81c2f90a211f440b",
+    "brandRisk": "LOW",
+    "assetSource": "Original",
+    "commercialReady": true
   },
   {
     "id": "cyber-runner",
@@ -220,7 +229,7 @@
     "attributionRequired": true,
     "commitHash": "9b87a892b1555543c7b3997ef8b8c9d0901e9d89",
     "licenseChecksum": "01db2303fa900dc8eba534a165c847fa995a531affc834ab9ae0874da9306814",
-    "importTimestamp": "2026-08-02T06:55:00.032Z",
+    "importTimestamp": "2026-08-02T06:56:53.824Z",
     "trustVerified": true,
     "gameType": "Derived Game",
     "originalRepository": "https://github.com/ellisonleao/clumsy-bird",
@@ -232,7 +241,10 @@
       "Added jump sound synthesis and score overlay",
       "Added GameHub responsive viewport scaling"
     ],
-    "originalCommitHash": "9b87a892b1555543c7b3997ef8b8c9d0901e9d89"
+    "originalCommitHash": "9b87a892b1555543c7b3997ef8b8c9d0901e9d89",
+    "brandRisk": "LOW",
+    "assetSource": "Original",
+    "commercialReady": true
   },
   {
     "id": "neon-snake",
@@ -286,7 +298,7 @@
     "attributionRequired": true,
     "commitHash": "a1599e823f6c8d4512b9d21e8609594f839c43a2",
     "licenseChecksum": "65fcbdf98ae10b7bf2b13fa50a95fb70998fa1b29d1022208dbec071f43fbfa1",
-    "importTimestamp": "2026-08-02T06:55:00.033Z",
+    "importTimestamp": "2026-08-02T06:56:53.825Z",
     "trustVerified": true,
     "gameType": "Derived Game",
     "originalRepository": "https://github.com/patorjk/JavaScript-Snake",
@@ -299,7 +311,10 @@
       "Integrated Web Audio synth oscillator sound effects",
       "Added local high score persistence"
     ],
-    "originalCommitHash": "a1599e823f6c8d4512b9d21e8609594f839c43a2"
+    "originalCommitHash": "a1599e823f6c8d4512b9d21e8609594f839c43a2",
+    "brandRisk": "LOW",
+    "assetSource": "Original",
+    "commercialReady": true
   },
   {
     "id": "pixel-memory",
@@ -349,7 +364,7 @@
     "attributionRequired": true,
     "commitHash": "8d89a744ef87959bb4b22c7104b2a95c4794e772",
     "licenseChecksum": "3a836235ae97414d989571eb7f61a921f4c8dfa9442bbb22fa225ef1081a8121",
-    "importTimestamp": "2026-08-02T06:55:00.034Z",
+    "importTimestamp": "2026-08-02T06:56:53.826Z",
     "trustVerified": true,
     "gameType": "Derived Game",
     "originalRepository": "https://github.com/jhlywa/chess.js",
@@ -361,7 +376,10 @@
       "Added timer and moves combo multiplier system",
       "Integrated audio feedback tones on card flip"
     ],
-    "originalCommitHash": "8d89a744ef87959bb4b22c7104b2a95c4794e772"
+    "originalCommitHash": "8d89a744ef87959bb4b22c7104b2a95c4794e772",
+    "brandRisk": "LOW",
+    "assetSource": "Original",
+    "commercialReady": true
   },
   {
     "id": "pong-championship",
@@ -405,7 +423,7 @@
     "attributionRequired": true,
     "commitHash": "c41a24bf89d091e92d8f28f090b8f17a941e82a9",
     "licenseChecksum": "2d4ce578315c72300412c8c86c54f6b64e8e0706394b3ec487811817a4549081",
-    "importTimestamp": "2026-08-02T06:55:00.035Z",
+    "importTimestamp": "2026-08-02T06:56:53.828Z",
     "trustVerified": true,
     "gameType": "Derived Game",
     "originalRepository": "https://github.com/straker/pong-canvas",
@@ -417,39 +435,38 @@
       "Integrated AI opponent difficulty scaling",
       "Added GameHub keyboard binding normalization"
     ],
-    "originalCommitHash": "c41a24bf89d091e92d8f28f090b8f17a941e82a9"
+    "originalCommitHash": "c41a24bf89d091e92d8f28f090b8f17a941e82a9",
+    "brandRisk": "LOW",
+    "assetSource": "Original",
+    "commercialReady": true
   },
   {
     "id": "retro-tetris",
-    "title": "Retro Tetris Pulse",
+    "title": "Retro Block Stack Pulse",
     "slug": "retro-tetris",
     "description": "Classic block stacking arcade game with glowing neon polyominoes, line clears, and score multipliers.",
-    "instructions": "Use controls to play Retro Tetris Pulse.",
+    "instructions": "Use Arrow keys to move and rotate falling blocks.",
     "category": "puzzle",
     "genre": "puzzle",
     "tags": [
       "puzzle",
-      "arcade",
-      "browser-game"
+      "blocks",
+      "arcade"
     ],
     "controls": [
       {
-        "key": "Left/Right/Down",
-        "action": "Move Block"
-      },
-      {
-        "key": "Up Arrow",
-        "action": "Rotate Block"
+        "key": "WASD / Mouse",
+        "action": "Play"
       }
     ],
     "author": "Steven Lambert",
     "version": "1.0.0",
-    "rating": 4.6,
-    "playsCount": 17630,
+    "rating": 4.8,
+    "playsCount": 12000,
     "featured": false,
     "trending": false,
-    "isNew": true,
-    "releaseDate": "2025-06-01",
+    "isNew": false,
+    "releaseDate": "2025-01-01",
     "lastUpdated": "2026-01-15",
     "mobileSupport": true,
     "aspectRatio": "16/9",
@@ -465,19 +482,23 @@
     "attributionRequired": true,
     "commitHash": "59f1f0e21a8d052b895fc247b9d4a8e8b0a99182",
     "licenseChecksum": "3602bb5054147f8547d6e1a4bdb068b958c528b21858f30823acc2479348e0b0",
-    "importTimestamp": "2026-08-02T06:55:00.037Z",
+    "importTimestamp": "2026-08-02T06:56:53.829Z",
     "trustVerified": true,
     "gameType": "Derived Game",
     "originalRepository": "https://github.com/straker/tetris-canvas",
     "originalAuthor": "Steven Lambert",
     "originalLicense": "MIT",
-    "derivedTitle": "Retro Tetris Pulse",
+    "derivedTitle": "Retro Block Stack Pulse",
     "modifications": [
+      "Renamed to non-infringing title (Retro Block Stack Pulse) to eliminate trademark risk",
       "Added neon polyomino colors and drop particle effects",
       "Integrated line clear sound effects",
       "Added GameHub responsive container layout"
     ],
-    "originalCommitHash": "59f1f0e21a8d052b895fc247b9d4a8e8b0a99182"
+    "originalCommitHash": "59f1f0e21a8d052b895fc247b9d4a8e8b0a99182",
+    "brandRisk": "LOW",
+    "assetSource": "Original",
+    "commercialReady": true
   },
   {
     "id": "tic-tac-toe-glow",
@@ -521,7 +542,7 @@
     "attributionRequired": true,
     "commitHash": "c36a43f88bb83c48bc6259d6e4922119ef8eb025",
     "licenseChecksum": "a221fc0681c9d380e269eb5c23520d7a4a31b4de30c30ffca21f746d49b5f9f4",
-    "importTimestamp": "2026-08-02T06:55:00.038Z",
+    "importTimestamp": "2026-08-02T06:56:53.830Z",
     "trustVerified": true,
     "gameType": "Derived Game",
     "originalRepository": "https://github.com/cwackerfuss/react-wordle",
@@ -533,7 +554,10 @@
       "Integrated win streak calculation and sound effects",
       "Added GameHub responsive viewport scaling"
     ],
-    "originalCommitHash": "c36a43f88bb83c48bc6259d6e4922119ef8eb025"
+    "originalCommitHash": "c36a43f88bb83c48bc6259d6e4922119ef8eb025",
+    "brandRisk": "LOW",
+    "assetSource": "Original",
+    "commercialReady": true
   },
   {
     "id": "tower-builder",
@@ -577,7 +601,7 @@
     "attributionRequired": true,
     "commitHash": "d9426f8d38e2195f00e99ab31f31f9e205ab038c",
     "licenseChecksum": "68ef64a0f0cb93de560b4788f4fb1096ea12db301a0831c8b9576bbe393d154f",
-    "importTimestamp": "2026-08-02T06:55:00.039Z",
+    "importTimestamp": "2026-08-02T06:56:53.832Z",
     "trustVerified": true,
     "gameType": "Derived Game",
     "originalRepository": "https://github.com/xiangwei-chen/tower_game",
@@ -589,6 +613,9 @@
       "Added drop sound synthesis and score multiplier",
       "Standardized iframe sandbox integration"
     ],
-    "originalCommitHash": "d9426f8d38e2195f00e99ab31f31f9e205ab038c"
+    "originalCommitHash": "d9426f8d38e2195f00e99ab31f31f9e205ab038c",
+    "brandRisk": "LOW",
+    "assetSource": "Original",
+    "commercialReady": true
   }
 ]

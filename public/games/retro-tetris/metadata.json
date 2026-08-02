@@ -1,47 +1,14 @@
 {
   "id": "retro-tetris",
-  "title": "Retro Tetris Pulse",
+  "title": "Retro Block Stack Pulse",
   "slug": "retro-tetris",
   "description": "Classic block stacking arcade game with glowing neon polyominoes, line clears, and score multipliers.",
-  "instructions": "Use controls to play Retro Tetris Pulse.",
+  "instructions": "Use Arrow keys to move and rotate falling blocks.",
   "category": "puzzle",
   "genre": "puzzle",
-  "tags": [
-    "puzzle",
-    "arcade",
-    "browser-game"
-  ],
-  "controls": [
-    {
-      "key": "Left/Right/Down",
-      "action": "Move Block"
-    },
-    {
-      "key": "Up Arrow",
-      "action": "Rotate Block"
-    }
-  ],
-  "author": "Alex Rivers",
+  "tags": ["puzzle", "blocks", "arcade"],
+  "author": "Steven Lambert",
   "license": "MIT",
-  "repository": "https://github.com/alexrivers/retro-tetris-pulse",
-  "homepage": "https://gamehub.local/game/retro-tetris",
-  "releaseDate": "2025-06-01",
-  "lastUpdated": "2026-01-15",
-  "mobileSupport": true,
-  "version": "1.0.0",
-  "rating": 4.6,
-  "playsCount": 17630,
-  "featured": false,
-  "trending": false,
-  "isNew": true,
-  "aspectRatio": "16/9",
-  "thumbnailUrl": "/games/retro-tetris/thumbnail.svg",
-  "searchKeywords": [
-    "Retro Tetris Pulse",
-    "puzzle",
-    "Alex Rivers",
-    "puzzle",
-    "arcade",
-    "browser-game"
-  ]
+  "repository": "https://github.com/straker/tetris-canvas",
+  "homepage": "https://straker.github.io/tetris-canvas/"
 }
