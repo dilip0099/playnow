@@ -4,10 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npm run import-games && next build",
+    "build": "npm run import-games && npm run validate-games && next build",
     "start": "next start",
     "lint": "next lint",
-    "import-games": "tsx src/scripts/import-games.ts"
+    "import-games": "tsx src/scripts/import-games.ts",
+    "validate-games": "tsx src/scripts/validate-games.ts"
   },
   "dependencies": {
     "clsx": "^2.1.1",
@@ -23,7 +24,7 @@
     "@types/node": "^22.13.4",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
-    "autoprefixer": "^10.5.4",
+    "autoprefixer": "^10.4.21",
     "eslint": "^9.20.1",
     "eslint-config-next": "^15.1.7",
     "postcss": "^8.5.2",

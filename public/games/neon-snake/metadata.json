@@ -12,6 +12,9 @@
     { "key": "R", "action": "Restart Game" }
   ],
   "author": "GameHub Studios",
+  "license": "MIT",
+  "repository": "https://github.com/gamehub/neon-snake",
+  "homepage": "https://gamehub.local/game/neon-snake",
   "version": "1.0.0",
   "rating": 4.9,
   "playsCount": 18420,

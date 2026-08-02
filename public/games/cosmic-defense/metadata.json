@@ -12,6 +12,9 @@
     { "key": "P", "action": "Pause Game" }
   ],
   "author": "GameHub Studios",
+  "license": "Apache-2.0",
+  "repository": "https://github.com/gamehub/cosmic-defense",
+  "homepage": "https://gamehub.local/game/cosmic-defense",
   "version": "1.2.0",
   "rating": 4.8,
   "playsCount": 24900,

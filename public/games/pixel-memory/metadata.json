@@ -11,6 +11,9 @@
     { "key": "R", "action": "Restart Puzzle" }
   ],
   "author": "GameHub Studios",
+  "license": "BSD-3",
+  "repository": "https://github.com/gamehub/pixel-memory",
+  "homepage": "https://gamehub.local/game/pixel-memory",
   "version": "1.0.1",
   "rating": 4.7,
   "playsCount": 14200,

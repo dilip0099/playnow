@@ -1,0 +1,41 @@
+{
+  "timestamp": "2026-08-02T06:44:56.251Z",
+  "totalDiscovered": 3,
+  "totalImported": 3,
+  "totalRejected": 0,
+  "licenseDistribution": {
+    "Apache-2.0": 1,
+    "MIT": 1,
+    "BSD-3": 1
+  },
+  "importedGames": [
+    {
+      "id": "cosmic-defense",
+      "title": "Cosmic Defense 2184",
+      "author": "GameHub Studios",
+      "license": "Apache-2.0",
+      "repository": "https://github.com/gamehub/cosmic-defense",
+      "commercialUse": true,
+      "attributionRequired": true
+    },
+    {
+      "id": "neon-snake",
+      "title": "Neon Snake Cyberpulse",
+      "author": "GameHub Studios",
+      "license": "MIT",
+      "repository": "https://github.com/gamehub/neon-snake",
+      "commercialUse": true,
+      "attributionRequired": true
+    },
+    {
+      "id": "pixel-memory",
+      "title": "Pixel Memory Quest",
+      "author": "GameHub Studios",
+      "license": "BSD-3",
+      "repository": "https://github.com/gamehub/pixel-memory",
+      "commercialUse": true,
+      "attributionRequired": true
+    }
+  ],
+  "rejectedEntries": []
+}

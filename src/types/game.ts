@@ -1,3 +1,5 @@
+import { SupportedLicense } from "../data/licenses";
+
 export type GameCategory =
   | "action"
   | "puzzle"
@@ -30,9 +32,16 @@ export interface GameMetadata {
   trending?: boolean;
   isNew?: boolean;
   releaseDate: string;
-  aspectRatio?: string; // e.g. "16/9" or "4/3"
+  aspectRatio?: string;
   thumbnailUrl: string;
   gameUrl: string;
+  
+  // Legal License Metadata (Milestone 3)
+  license: SupportedLicense;
+  repository: string;
+  homepage: string;
+  commercialUse: boolean;
+  attributionRequired: boolean;
 }
 
 export type SortOption = "popular" | "newest" | "rating" | "title";
