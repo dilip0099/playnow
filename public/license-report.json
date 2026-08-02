@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-08-02T07:21:12.091Z",
-  "milestone": "Milestone 9.3 - Owned Asset Classification",
+  "timestamp": "2026-08-02T07:22:48.483Z",
+  "milestone": "Milestone 13 - Monetization & Revenue Infrastructure",
   "totalImported": 10,
   "licenseDistribution": {
     "MIT": 6,
@@ -12,52 +12,62 @@
     {
       "slug": "2048-fusion",
       "title": "2048 Cyber Fusion",
-      "commercialReady": true
+      "commercialReady": true,
+      "monetizationEnabled": true
     },
     {
       "slug": "breakout-pulse",
       "title": "Breakout Pulse DX",
-      "commercialReady": true
+      "commercialReady": true,
+      "monetizationEnabled": true
     },
     {
       "slug": "cosmic-defense",
       "title": "Cosmic Defense 2184",
-      "commercialReady": true
+      "commercialReady": true,
+      "monetizationEnabled": true
     },
     {
       "slug": "cyber-runner",
       "title": "Cyber Runner 2099",
-      "commercialReady": true
+      "commercialReady": true,
+      "monetizationEnabled": true
     },
     {
       "slug": "neon-snake",
       "title": "Neon Snake Cyberpulse",
-      "commercialReady": true
+      "commercialReady": true,
+      "monetizationEnabled": true
     },
     {
       "slug": "pixel-memory",
       "title": "Pixel Memory Quest",
-      "commercialReady": true
+      "commercialReady": true,
+      "monetizationEnabled": true
     },
     {
       "slug": "pong-championship",
       "title": "Cyber Pong Championship",
-      "commercialReady": true
+      "commercialReady": true,
+      "monetizationEnabled": true
     },
     {
       "slug": "retro-tetris",
       "title": "Retro Block Stack Pulse",
-      "commercialReady": true
+      "commercialReady": true,
+      "monetizationEnabled": true
     },
     {
       "slug": "tic-tac-toe-glow",
       "title": "Tic Tac Toe Cyber Glow",
-      "commercialReady": true
+      "commercialReady": true,
+      "monetizationEnabled": true
     },
     {
       "slug": "tower-builder",
       "title": "Neon Tower Builder",
-      "commercialReady": true
+      "commercialReady": true,
+      "monetizationEnabled": true
     }
   ]
 }

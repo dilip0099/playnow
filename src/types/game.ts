@@ -78,6 +78,11 @@ export interface GameMetadata {
 
   // Milestone 8 Asset Provenance Verification
   assetVerificationStatus: AssetVerificationStatus;
+
+  // Milestone 13 Monetization Settings
+  monetizationEnabled: boolean;
+  adSupported: boolean;
+  revenueShare?: number;
 }
 
 export type SortOption = "popular" | "newest" | "rating" | "title";

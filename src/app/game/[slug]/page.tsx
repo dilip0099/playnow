@@ -1,12 +1,14 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ChevronRight, Home, Star, Eye, User, Tag, GitBranch, ExternalLink, ShieldCheck, CheckCircle2, Lock, Sparkles, Key, Layers } from "lucide-react";
+import { ChevronRight, Home, Star, Eye, User, Tag, GitBranch, ExternalLink, ShieldCheck, CheckCircle2, Lock, Sparkles, Key, Layers, DollarSign, Crown, Zap } from "lucide-react";
 import { getGameBySlug, getRelatedGames, getAllGames } from "@/lib/games";
 import { GamePlayer } from "@/components/games/GamePlayer";
 import { GameControls } from "@/components/games/GameControls";
 import { GameCard } from "@/components/games/GameCard";
 import { Badge } from "@/components/ui/badge";
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 interface GamePageProps {
   params: Promise<{ slug: string }>;
@@ -98,6 +100,21 @@ export default async function GameDetailPage({ params }: GamePageProps) {
           <ChevronRight className="h-3 w-3" />
           <span className="text-foreground font-bold truncate max-w-[200px]">{game.derivedTitle || game.title}</span>
         </nav>
+
+        {/* Top Responsive Leaderboard Ad Slot (Monetization Engine) */}
+        {game.commercialReady && game.brandRisk === "LOW" && (
+          <div className="rounded-2xl border border-dashed border-border/80 bg-slate-900/40 p-4 text-center space-y-1">
+            <div className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest flex items-center justify-center space-x-1">
+              <DollarSign className="h-3 w-3 text-emerald-400" />
+              <span>Sponsor Advertisement • Verified Commercial Slot</span>
+            </div>
+            <div className="h-16 w-full rounded-xl bg-gradient-to-r from-purple-900/20 via-cyan-900/20 to-purple-900/20 flex items-center justify-center border border-border/40">
+              <span className="text-xs font-bold text-cyan-400 tracking-wider">
+                [GameHub Direct Ad Network - 728x90 Leaderboard Slot Active]
+              </span>
+            </div>
+          </div>
+        )}
 
         {/* Game Player Iframe */}
         <GamePlayer game={game} />
@@ -225,9 +242,25 @@ export default async function GameDetailPage({ params }: GamePageProps) {
             </div>
           </div>
 
-          {/* Right Sidebar: Original Author & Provenance Info */}
+          {/* Right Sidebar: Controls, Provenance & Monetization Widgets */}
           <div className="space-y-6">
             <GameControls controls={game.controls} />
+
+            {/* Premium Upgrade Placeholder */}
+            <Card className="p-5 border-amber-500/40 bg-gradient-to-br from-amber-950/20 to-slate-900 backdrop-blur-md space-y-3">
+              <div className="flex items-center space-x-2 text-amber-400 font-bold text-xs">
+                <Crown className="h-4 w-4" />
+                <span>GameHub Pass Premium</span>
+              </div>
+              <h4 className="text-sm font-black text-foreground">Play 100% Ad-Free with Unlimited High Scores</h4>
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                Support open-source game creators directly and unlock instant cloud save states.
+              </p>
+              <Button className="w-full rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs py-2 shadow-lg shadow-amber-500/20">
+                <Zap className="h-3.5 w-3.5 mr-1.5 fill-slate-950" />
+                <span>Upgrade for $4.99/mo</span>
+              </Button>
+            </Card>
 
             <div className="rounded-2xl border border-border/60 bg-card/60 p-5 shadow-lg backdrop-blur-md space-y-3 text-xs text-muted-foreground">
               <h3 className="font-bold text-foreground uppercase tracking-wider text-xs mb-2 flex items-center justify-between">

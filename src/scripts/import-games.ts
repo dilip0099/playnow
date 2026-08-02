@@ -149,7 +149,7 @@ function scanGameAssets(
 }
 
 export function importAndValidateGames() {
-  console.log("🔍 [Milestone 9.3 Engine] Verifying Owned Asset Classification...");
+  console.log("🔍 [Milestone 13 Engine] Verifying Monetization Infrastructure & Compliance...");
 
   if (!fs.existsSync(PUBLIC_GAMES_DIR)) {
     console.error(`❌ Directory not found: ${PUBLIC_GAMES_DIR}`);
@@ -314,13 +314,18 @@ export function importAndValidateGames() {
       assetSource: scanResult.assetSource,
       commercialReady: isCommercialReady,
       assetVerificationStatus,
+
+      // Milestone 13 Monetization Settings
+      monetizationEnabled: isCommercialReady && scanResult.brandRisk === "LOW",
+      adSupported: isCommercialReady && scanResult.brandRisk === "LOW",
+      revenueShare: 70,
     };
 
     games.push(game);
     licenseCounts[normalizedLicense] = (licenseCounts[normalizedLicense] || 0) + 1;
 
     console.log(
-      `✅ [Milestone 9.3] Approved "${game.derivedTitle}" | Owned Asset Classification Verified (OWNED)`
+      `✅ [Milestone 13] Approved "${game.derivedTitle}" | Monetization Enabled: ${game.monetizationEnabled}`
     );
   }
 
@@ -342,7 +347,7 @@ export function importAndValidateGames() {
   generateAssetLicenseAuditMd(sourceRegistry);
   generateLicenseReport(games, rejectedGames, licenseCounts);
 
-  console.log(`🚀 [Milestone 9.3 Engine] Complete: ASSET_LICENSE_AUDIT.md updated with Owned Asset Classification.`);
+  console.log(`🚀 [Milestone 13 Engine] Complete: Database updated with Monetization settings.`);
   return { games, rejectedGames };
 }
 
@@ -433,10 +438,10 @@ function generateAssetLicenseAuditMd(registry: Map<string, AssetSourceEntry>) {
 function generateLicenseReport(games: GameMetadata[], rejectedGames: any[], licenseCounts: Record<string, number>) {
   const report = {
     timestamp: new Date().toISOString(),
-    milestone: "Milestone 9.3 - Owned Asset Classification",
+    milestone: "Milestone 13 - Monetization & Revenue Infrastructure",
     totalImported: games.length,
     licenseDistribution: licenseCounts,
-    importedGames: games.map((g) => ({ slug: g.slug, title: g.derivedTitle, commercialReady: g.commercialReady })),
+    importedGames: games.map((g) => ({ slug: g.slug, title: g.derivedTitle, commercialReady: g.commercialReady, monetizationEnabled: g.monetizationEnabled })),
   };
   fs.writeFileSync(LICENSE_REPORT_FILE, JSON.stringify(report, null, 2), "utf-8");
   fs.writeFileSync(PUBLIC_LICENSE_REPORT_FILE, JSON.stringify(report, null, 2), "utf-8");
