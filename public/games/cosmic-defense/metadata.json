@@ -1,0 +1,23 @@
+{
+  "id": "cosmic-defense",
+  "title": "Cosmic Defense 2184",
+  "slug": "cosmic-defense",
+  "description": "Defend the galactic outpost from waves of incoming meteorites and hostile alien starships. Upgrade your plasma cannons and trigger hyper-beams to survive the cosmic swarm.",
+  "instructions": "Use Left/Right arrow keys or A/D to move your fighter. Press Spacebar to shoot plasma laser bursts.",
+  "category": "action",
+  "tags": ["space", "shooter", "arcade", "bullet-hell", "action"],
+  "controls": [
+    { "key": "Left / Right / A / D", "action": "Move Starship" },
+    { "key": "Spacebar", "action": "Fire Plasma Laser" },
+    { "key": "P", "action": "Pause Game" }
+  ],
+  "author": "GameHub Studios",
+  "version": "1.2.0",
+  "rating": 4.8,
+  "playsCount": 24900,
+  "featured": true,
+  "trending": true,
+  "isNew": false,
+  "releaseDate": "2025-11-20",
+  "aspectRatio": "16/9"
+}

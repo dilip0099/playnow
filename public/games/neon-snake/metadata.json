@@ -1,0 +1,23 @@
+{
+  "id": "neon-snake",
+  "title": "Neon Snake Cyberpulse",
+  "slug": "neon-snake",
+  "description": "Control a glowing cybernetic snake through an electrified grid. Collect energy cores, avoid tail collisions, and race against accelerating speed in this arcade visual masterpiece.",
+  "instructions": "Use arrow keys or WASD to turn the snake. Collect glowing energy orbs to increase your length and score.",
+  "category": "arcade",
+  "tags": ["snake", "cyberpunk", "retro", "neon", "high-score"],
+  "controls": [
+    { "key": "Arrow Keys / WASD", "action": "Steer Snake" },
+    { "key": "P", "action": "Pause Game" },
+    { "key": "R", "action": "Restart Game" }
+  ],
+  "author": "GameHub Studios",
+  "version": "1.0.0",
+  "rating": 4.9,
+  "playsCount": 18420,
+  "featured": true,
+  "trending": true,
+  "isNew": true,
+  "releaseDate": "2026-01-15",
+  "aspectRatio": "16/9"
+}

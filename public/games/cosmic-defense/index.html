@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cosmic Defense 2184</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; }
+    body {
+      background: #030308;
+      color: #fff;
+      font-family: system-ui, -apple-system, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+    #game-container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      max-width: 960px;
+      max-height: 540px;
+      background: #050614;
+      border-radius: 12px;
+      box-shadow: 0 0 30px rgba(124, 58, 237, 0.3);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    #hud {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 20px;
+      background: rgba(15, 23, 42, 0.85);
+      border-bottom: 1px solid rgba(168, 85, 247, 0.3);
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: 1px;
+    }
+    .hud-title { color: #a855f7; text-shadow: 0 0 10px rgba(168, 85, 247, 0.6); }
+    .hud-val { color: #38bdf8; text-shadow: 0 0 10px rgba(56, 189, 248, 0.6); }
+    canvas { flex: 1; display: block; width: 100%; height: 100%; }
+    .overlay {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(3, 3, 8, 0.85);
+      backdrop-filter: blur(8px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+    }
+    .overlay h1 { font-size: 38px; margin-bottom: 10px; background: linear-gradient(135deg, #a855f7, #38bdf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .overlay p { font-size: 16px; color: #94a3b8; margin-bottom: 24px; text-align: center; max-width: 80%; }
+    .btn {
+      padding: 12px 32px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #fff;
+      background: linear-gradient(135deg, #a855f7, #6366f1);
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 0 20px rgba(168, 85, 247, 0.6);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(168, 85, 247, 0.9); }
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+
+<div id="game-container">
+  <div id="hud">
+    <div class="hud-title">COSMIC DEFENSE</div>
+    <div>SCORE: <span id="score" class="hud-val">0</span></div>
+    <div>LIVES: <span id="lives" class="hud-val">❤❤❤</span></div>
+  </div>
+  <canvas id="gameCanvas"></canvas>
+
+  <div id="startOverlay" class="overlay">
+    <h1>COSMIC DEFENSE 2184</h1>
+    <p>Defend your outpost! Use A/D or Left/Right arrows to move. SPACE to shoot lasers.</p>
+    <button class="btn" id="startBtn">ENGAGE ENEMY</button>
+  </div>
+
+  <div id="gameOverOverlay" class="overlay hidden">
+    <h1 style="background: linear-gradient(135deg, #f43f5e, #fb923c); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">OUTPOST FALLEN</h1>
+    <p>Final Score: <span id="finalScore" style="color:#a855f7; font-weight:bold;">0</span></p>
+    <button class="btn" id="restartBtn">REDEPLOY SHIP</button>
+  </div>
+</div>
+
+<script>
+  const canvas = document.getElementById('gameCanvas');
+  const ctx = canvas.getContext('2d');
+  const scoreEl = document.getElementById('score');
+  const livesEl = document.getElementById('lives');
+  const finalScoreEl = document.getElementById('finalScore');
+  const startOverlay = document.getElementById('startOverlay');
+  const gameOverOverlay = document.getElementById('gameOverOverlay');
+
+  let width, height;
+  let player = { x: 0, y: 0, w: 40, h: 30, speed: 7 };
+  let lasers = [];
+  let enemies = [];
+  let particles = [];
+  let stars = [];
+  let keys = {};
+  let score = 0;
+  let lives = 3;
+  let animId = null;
+  let isRunning = false;
+  let enemySpawnTimer = 0;
+
+  const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  function playSound(freq, type = 'sine', duration = 0.1) {
+    try {
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = type;
+      osc.frequency.value = freq;
+      gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + duration);
+    } catch(e) {}
+  }
+
+  function resize() {
+    canvas.width = canvas.clientWidth;
+    canvas.height = canvas.clientHeight;
+    width = canvas.width;
+    height = canvas.height;
+    player.y = height - 50;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  function initStars() {
+    stars = [];
+    for (let i = 0; i < 80; i++) {
+      stars.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        size: Math.random() * 2 + 1,
+        speed: Math.random() * 2 + 0.5
+      });
+    }
+  }
+
+  function initGame() {
+    resize();
+    initStars();
+    player.x = width / 2 - player.w / 2;
+    lasers = [];
+    enemies = [];
+    particles = [];
+    score = 0;
+    lives = 3;
+    scoreEl.textContent = score;
+    livesEl.textContent = '❤'.repeat(lives);
+  }
+
+  function spawnExplosion(x, y, color) {
+    for (let i = 0; i < 15; i++) {
+      particles.push({
+        x, y,
+        vx: (Math.random() - 0.5) * 8,
+        vy: (Math.random() - 0.5) * 8,
+        color,
+        life: 1,
+        decay: Math.random() * 0.04 + 0.02
+      });
+    }
+  }
+
+  function update() {
+    // Stars
+    stars.forEach(s => {
+      s.y += s.speed;
+      if (s.y > height) s.y = 0;
+    });
+
+    // Player Move
+    if ((keys['ArrowLeft'] || keys['a'] || keys['A']) && player.x > 0) player.x -= player.speed;
+    if ((keys['ArrowRight'] || keys['d'] || keys['D']) && player.x < width - player.w) player.x += player.speed;
+
+    // Lasers
+    for (let i = lasers.length - 1; i >= 0; i--) {
+      lasers[i].y -= 12;
+      if (lasers[i].y < 0) lasers.splice(i, 1);
+    }
+
+    // Enemies
+    enemySpawnTimer++;
+    if (enemySpawnTimer % 45 === 0) {
+      enemies.push({
+        x: Math.random() * (width - 30),
+        y: -30,
+        w: 30,
+        h: 30,
+        speed: Math.random() * 2.5 + 2,
+        color: ['#f43f5e', '#fb923c', '#eab308'][Math.floor(Math.random() * 3)]
+      });
+    }
+
+    for (let i = enemies.length - 1; i >= 0; i--) {
+      let e = enemies[i];
+      e.y += e.speed;
+
+      // Enemy hit player
+      if (e.x < player.x + player.w && e.x + e.w > player.x && e.y < player.y + player.h && e.y + e.h > player.y) {
+        spawnExplosion(player.x + player.w/2, player.y + player.h/2, '#f43f5e');
+        playSound(120, 'sawtooth', 0.3);
+        lives--;
+        livesEl.textContent = '❤'.repeat(lives);
+        enemies.splice(i, 1);
+        if (lives <= 0) return gameOver();
+        continue;
+      }
+
+      // Enemy hit bottom
+      if (e.y > height) {
+        enemies.splice(i, 1);
+        lives--;
+        livesEl.textContent = '❤'.repeat(lives);
+        if (lives <= 0) return gameOver();
+        continue;
+      }
+
+      // Laser hit enemy
+      for (let j = lasers.length - 1; j >= 0; j--) {
+        let l = lasers[j];
+        if (l.x > e.x && l.x < e.x + e.w && l.y > e.y && l.y < e.y + e.h) {
+          spawnExplosion(e.x + e.w/2, e.y + e.h/2, e.color);
+          playSound(440, 'triangle', 0.1);
+          score += 50;
+          scoreEl.textContent = score;
+          enemies.splice(i, 1);
+          lasers.splice(j, 1);
+          break;
+        }
+      }
+    }
+
+    // Particles
+    for (let i = particles.length - 1; i >= 0; i--) {
+      let p = particles[i];
+      p.x += p.vx;
+      p.y += p.vy;
+      p.life -= p.decay;
+      if (p.life <= 0) particles.splice(i, 1);
+    }
+  }
+
+  function draw() {
+    ctx.fillStyle = '#050614';
+    ctx.fillRect(0, 0, width, height);
+
+    // Stars
+    ctx.fillStyle = '#ffffff';
+    stars.forEach(s => {
+      ctx.globalAlpha = Math.random() * 0.5 + 0.5;
+      ctx.fillRect(s.x, s.y, s.size, s.size);
+    });
+    ctx.globalAlpha = 1.0;
+
+    // Player Ship
+    ctx.shadowBlur = 15;
+    ctx.shadowColor = '#38bdf8';
+    ctx.fillStyle = '#38bdf8';
+    ctx.beginPath();
+    ctx.moveTo(player.x + player.w / 2, player.y);
+    ctx.lineTo(player.x, player.y + player.h);
+    ctx.lineTo(player.x + player.w, player.y + player.h);
+    ctx.closePath();
+    ctx.fill();
+
+    // Lasers
+    ctx.shadowColor = '#a855f7';
+    ctx.fillStyle = '#a855f7';
+    lasers.forEach(l => {
+      ctx.fillRect(l.x - 2, l.y, 4, 14);
+    });
+
+    // Enemies
+    enemies.forEach(e => {
+      ctx.shadowColor = e.color;
+      ctx.fillStyle = e.color;
+      ctx.beginPath();
+      ctx.arc(e.x + e.w/2, e.y + e.h/2, e.w/2, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    // Particles
+    particles.forEach(p => {
+      ctx.shadowColor = p.color;
+      ctx.fillStyle = p.color;
+      ctx.globalAlpha = p.life;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, 3, 0, Math.PI * 2);
+      ctx.fill();
+    });
+    ctx.globalAlpha = 1.0;
+    ctx.shadowBlur = 0;
+  }
+
+  function loop() {
+    if (!isRunning) return;
+    update();
+    draw();
+    animId = requestAnimationFrame(loop);
+  }
+
+  function startGame() {
+    initGame();
+    startOverlay.classList.add('hidden');
+    gameOverOverlay.classList.add('hidden');
+    isRunning = true;
+    if (animId) cancelAnimationFrame(animId);
+    loop();
+  }
+
+  function gameOver() {
+    isRunning = false;
+    finalScoreEl.textContent = score;
+    gameOverOverlay.classList.remove('hidden');
+  }
+
+  window.addEventListener('keydown', e => {
+    keys[e.key] = true;
+    if (e.code === 'Space' && isRunning) {
+      lasers.push({ x: player.x + player.w / 2, y: player.y });
+      playSound(880, 'sine', 0.08);
+      e.preventDefault();
+    }
+  });
+
+  window.addEventListener('keyup', e => {
+    keys[e.key] = false;
+  });
+
+  document.getElementById('startBtn').addEventListener('click', startGame);
+  document.getElementById('restartBtn').addEventListener('click', startGame);
+</script>
+</body>
+</html>

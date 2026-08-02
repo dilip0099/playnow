@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg-memory" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#080711"/>
+      <stop offset="100%" stop-color="#1f092b"/>
+    </linearGradient>
+    <filter id="glow-pink" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="10" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="600" height="400" fill="url(#bg-memory)"/>
+
+  <!-- Cards Grid Preview -->
+  <rect x="180" y="80" width="100" height="120" rx="12" fill="#1e1b4b" stroke="#ec4899" stroke-width="2" filter="url(#glow-pink)"/>
+  <rect x="320" y="80" width="100" height="120" rx="12" fill="#be185d" stroke="#f97316" stroke-width="2" filter="url(#glow-pink)"/>
+  <text x="370" y="155" text-anchor="middle" fill="#fff" font-family="system-ui, sans-serif" font-weight="900" font-size="44">💎</text>
+
+  <!-- Title Text -->
+  <text x="300" y="320" text-anchor="middle" fill="#ec4899" font-family="system-ui, sans-serif" font-weight="900" font-size="32" letter-spacing="4" filter="url(#glow-pink)">PIXEL MEMORY</text>
+  <text x="300" y="350" text-anchor="middle" fill="#f97316" font-family="system-ui, sans-serif" font-weight="600" font-size="14" letter-spacing="2">CARD MATCHING PUZZLE</text>
+</svg>
