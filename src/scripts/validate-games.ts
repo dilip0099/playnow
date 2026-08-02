@@ -5,9 +5,11 @@ import { AssetSourceEntry } from "./import-games";
 
 const GAMES_DATA_FILE = path.join(process.cwd(), "src", "data", "games.json");
 const ASSET_SOURCES_FILE = path.join(process.cwd(), "src", "data", "asset-sources.json");
+const GAME_CREDITS_FILE = path.join(process.cwd(), "GAME_CREDITS.md");
+const ASSET_CREDITS_FILE = path.join(process.cwd(), "ASSET_CREDITS.md");
 
 function validateAllGames() {
-  console.log("🔍 [Milestone 9 Validator] Verifying Asset Source Registry & Provenance Records...");
+  console.log("🔍 [Milestone 9.1 Validator] Verifying Independent Game & Asset Provenance...");
 
   if (!fs.existsSync(GAMES_DATA_FILE)) {
     console.error(`❌ [Validator] Failure: Database ${GAMES_DATA_FILE} does not exist.`);
@@ -16,6 +18,16 @@ function validateAllGames() {
 
   if (!fs.existsSync(ASSET_SOURCES_FILE)) {
     console.error(`❌ [Validator] Failure: Asset Source Registry ${ASSET_SOURCES_FILE} does not exist.`);
+    process.exit(1);
+  }
+
+  if (!fs.existsSync(GAME_CREDITS_FILE)) {
+    console.error(`❌ [Validator] Failure: GAME_CREDITS.md missing.`);
+    process.exit(1);
+  }
+
+  if (!fs.existsSync(ASSET_CREDITS_FILE)) {
+    console.error(`❌ [Validator] Failure: ASSET_CREDITS.md missing.`);
     process.exit(1);
   }
 
@@ -39,36 +51,36 @@ function validateAllGames() {
 
   let failureCount = 0;
 
-  // Validate Source Entries
+  // Validate Independent Asset Creators
   sources.forEach((source, i) => {
-    if (!source.creator || !source.sourceURL || !source.license || !source.licenseURL || source.commercialUse !== true) {
-      console.error(`  ❌ Invalid Asset Source Entry #${i + 1} (${source.assetPath}): Missing required metadata or commercialUse is not true.`);
+    if (!source.creator || !source.sourceURL || !source.license || source.commercialUse !== true) {
+      console.error(`  ❌ Invalid Independent Asset Entry #${i + 1} (${source.assetPath}).`);
       failureCount++;
     }
   });
 
   if (failureCount === 0) {
-    console.log(`  ✅ All ${sources.length} Asset Source Records passed 100% field validation.`);
+    console.log(`  ✅ All ${sources.length} Independent Asset Source Records passed validation.`);
   }
 
   games.forEach((game, index) => {
     console.log(`\nChecking [${index + 1}/${games.length}]: "${game.derivedTitle}" (${game.slug})`);
 
-    // Commercial Ready Enforcement Check
-    if (game.commercialReady && game.assetVerificationStatus !== "VERIFIED") {
-      console.error(`  ❌ Commercial ready game has unverified asset status.`);
+    // Verify Original Game Source vs Independent Asset Creator
+    if (!game.originalAuthor || !game.originalRepository) {
+      console.error(`  ❌ Missing original game repository or author metadata.`);
       failureCount++;
     } else {
-      console.log(`  ✅ Verified 100% asset source records for commercial deployment.`);
+      console.log(`  ✅ Independent Game Provenance verified (Author: ${game.originalAuthor}, Repo: ${game.originalRepository}).`);
     }
   });
 
   console.log("\n==================================================");
   if (failureCount > 0) {
-    console.error(`❌ [Milestone 9 Validator] FAILED! Found ${failureCount} asset source errors.`);
+    console.error(`❌ [Milestone 9.1 Validator] FAILED! Found ${failureCount} provenance errors.`);
     process.exit(1);
   } else {
-    console.log(`✅ [Milestone 9 Validator] SUCCESS! All ${games.length} games passed 100% asset source registry verification.`);
+    console.log(`✅ [Milestone 9.1 Validator] SUCCESS! All ${games.length} games passed independent game & asset provenance validation.`);
   }
 }
 

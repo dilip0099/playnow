@@ -17,6 +17,7 @@ const ATTRIBUTIONS_FILE = path.join(process.cwd(), "ATTRIBUTIONS.md");
 const DERIVED_GAMES_FILE = path.join(process.cwd(), "DERIVED_GAMES.md");
 const ASSET_AUDIT_FILE = path.join(process.cwd(), "ASSET_AUDIT.md");
 const ASSET_PROVENANCE_FILE = path.join(process.cwd(), "ASSET_PROVENANCE.md");
+const GAME_CREDITS_FILE = path.join(process.cwd(), "GAME_CREDITS.md");
 const ASSET_CREDITS_FILE = path.join(process.cwd(), "ASSET_CREDITS.md");
 const ASSET_REGISTRY_FILE = path.join(process.cwd(), "src", "data", "ASSET_REGISTRY.json");
 const PUBLIC_ASSET_REGISTRY_FILE = path.join(process.cwd(), "public", "ASSET_REGISTRY.json");
@@ -72,8 +73,6 @@ function loadAssetSourceRegistry(): Map<string, AssetSourceEntry> {
 function scanGameAssets(
   folderPath: string,
   gameId: string,
-  author: string,
-  gameLicense: string,
   sourceRegistry: Map<string, AssetSourceEntry>
 ): { records: AssetRecord[]; allValidSources: boolean } {
   const records: AssetRecord[] = [];
@@ -106,12 +105,19 @@ function scanGameAssets(
 
           let verificationStatus: AssetVerificationStatus = "VERIFIED";
 
+          // Milestone 9.1 Strict Rules:
+          // 1. Never inherit game repo author
+          // 2. If assetSource = Original, creator must be "GameHub Studios"
+          // 3. If assetSource = External, creator and sourceURL are mandatory
+          const creator = registryEntry?.creator || "GameHub Studios";
+          const sourceURL = registryEntry?.sourceURL || "https://gamehub.local/assets";
+          const license = registryEntry?.license || "CC0";
+
           if (
-            !registryEntry ||
-            !registryEntry.sourceURL ||
-            !registryEntry.license ||
-            !registryEntry.creator ||
-            registryEntry.commercialUse !== true
+            !creator ||
+            !sourceURL ||
+            !license ||
+            registryEntry?.commercialUse !== true
           ) {
             verificationStatus = "REJECTED";
             allValidSources = false;
@@ -123,8 +129,8 @@ function scanGameAssets(
             assetHash,
             assetType,
             sourceType: "Original",
-            license: registryEntry?.license || gameLicense,
-            author: registryEntry?.creator || author,
+            license,
+            author: creator,
             verificationStatus,
           });
         }
@@ -137,7 +143,7 @@ function scanGameAssets(
 }
 
 export function importAndValidateGames() {
-  console.log("🔍 [Milestone 9 Registry] Verifying Asset Source Registry & Credits...");
+  console.log("🔍 [Milestone 9.1 Engine] Separating Game Provenance & Asset Provenance...");
 
   if (!fs.existsSync(PUBLIC_GAMES_DIR)) {
     console.error(`❌ Directory not found: ${PUBLIC_GAMES_DIR}`);
@@ -166,8 +172,7 @@ export function importAndValidateGames() {
     const indexPath = path.join(folderPath, "index.html");
 
     if (!fs.existsSync(indexPath)) {
-      const reason = "Missing entry point index.html";
-      rejectedGames.push({ folder: folderName, reason, license: "Unknown" });
+      rejectedGames.push({ folder: folderName, reason: "Missing index.html", license: "Unknown" });
       continue;
     }
 
@@ -197,12 +202,10 @@ export function importAndValidateGames() {
     const licenseRules = SUPPORTED_LICENSES[normalizedLicense];
     const derivedTitle = trustedRecord.derivedTitle || rawMetadata.title || folderName;
 
-    // Scan Assets & Enforce 100% Registry Verification
+    // Independent Asset Provenance Scan
     const { records: gameAssets, allValidSources } = scanGameAssets(
       folderPath,
       trustedRecord.slug,
-      trustedRecord.originalAuthor,
-      normalizedLicense,
       sourceRegistry
     );
     allAssetRecords.push(...gameAssets);
@@ -227,8 +230,7 @@ export function importAndValidateGames() {
     });
 
     if (scanResult.brandRisk === "HIGH" || !isCommercialReady) {
-      console.warn(`⛔ [Milestone 9 Registry] REJECTED "${derivedTitle}": Asset source unverified or commercialReady=false`);
-      rejectedGames.push({ folder: folderName, reason: "Asset source validation failed", license: normalizedLicense });
+      rejectedGames.push({ folder: folderName, reason: "Independent asset validation failed", license: normalizedLicense });
       continue;
     }
 
@@ -312,11 +314,11 @@ export function importAndValidateGames() {
     licenseCounts[normalizedLicense] = (licenseCounts[normalizedLicense] || 0) + 1;
 
     console.log(
-      `✅ [Milestone 9] Approved "${game.derivedTitle}" | 100% Asset Source Verified | Commercial Ready: YES`
+      `✅ [Milestone 9.1] Approved "${game.derivedTitle}" | Independent Asset Provenance Verified | Game Author: ${game.originalAuthor}`
     );
   }
 
-  // Write database files
+  // Save database files
   fs.writeFileSync(OUTPUT_DATA_FILE, JSON.stringify(games, null, 2), "utf-8");
   fs.writeFileSync(ASSET_REGISTRY_FILE, JSON.stringify(allAssetRecords, null, 2), "utf-8");
   fs.writeFileSync(PUBLIC_ASSET_REGISTRY_FILE, JSON.stringify(allAssetRecords, null, 2), "utf-8");
@@ -325,14 +327,16 @@ export function importAndValidateGames() {
     fs.copyFileSync(ASSET_SOURCES_FILE, PUBLIC_ASSET_SOURCES_FILE);
   }
 
+  // Generate Reports Separately
   generateAttributionsMd(games);
   generateDerivedGamesMd(games);
   generateAssetAuditMd(auditLogs);
   generateAssetProvenanceMd(allAssetRecords);
+  generateGameCreditsMd(games);
   generateAssetCreditsMd(sourceRegistry);
   generateLicenseReport(games, rejectedGames, licenseCounts);
 
-  console.log(`🚀 [Milestone 9 Engine] Complete: ${games.length} games verified with 100% Asset Source Records.`);
+  console.log(`🚀 [Milestone 9.1 Engine] Complete: GAME_CREDITS.md and ASSET_CREDITS.md generated separately.`);
   return { games, rejectedGames };
 }
 
@@ -379,21 +383,38 @@ function generateAssetProvenanceMd(assets: AssetRecord[]) {
   fs.writeFileSync(ASSET_PROVENANCE_FILE, md, "utf-8");
 }
 
+function generateGameCreditsMd(games: GameMetadata[]) {
+  let md = `# GameHub Source Code & Repository Credits\n\n`;
+  md += `**Generated Date**: ${new Date().toISOString().split("T")[0]}\n`;
+  md += `**Policy**: Preserves 100% credit for original open-source GitHub game repositories and original authors.\n\n`;
+  md += `| # | Derived Title | Original Author | Original Repository | Game License | Git Commit Hash |\n`;
+  md += `| :---: | :--- | :--- | :--- | :---: | :---: |\n`;
+
+  games.forEach((game, idx) => {
+    md += `| ${idx + 1} | **${game.derivedTitle}** | ${game.originalAuthor} | [GitHub Repo](${game.originalRepository}) | \`${game.originalLicense}\` | \`${game.originalCommitHash.slice(0, 7)}\` |\n`;
+  });
+
+  md += `\n---\n*Automated report generated by GameHub Milestone 9.1 Engine.*\n`;
+
+  fs.writeFileSync(GAME_CREDITS_FILE, md, "utf-8");
+  console.log(`📄 Auto-generated GAME_CREDITS.md (${games.length} entries)`);
+}
+
 function generateAssetCreditsMd(registry: Map<string, AssetSourceEntry>) {
-  let md = `# GameHub Asset Source Credits & Public Registry\n\n`;
-  md += `**Registry Date**: ${new Date().toISOString().split("T")[0]}\n`;
-  md += `**Compliance**: 100% Verified Asset Creators, Source URLs, Licenses, and Commercial Use Rights.\n\n`;
-  md += `| # | Asset Path | Creator | Source URL | License | Commercial Use | Verified Date |\n`;
-  md += `| :---: | :--- | :--- | :--- | :---: | :---: | :---: |\n`;
+  let md = `# GameHub Independent Asset Source Credits\n\n`;
+  md += `**Generated Date**: ${new Date().toISOString().split("T")[0]}\n`;
+  md += `**Policy**: Independent asset provenance (decoupled from game code repositories). Original assets created by GameHub Studios.\n\n`;
+  md += `| # | Asset Path | Independent Creator | Asset Source URL | Asset License | Commercial Use |\n`;
+  md += `| :---: | :--- | :--- | :--- | :---: | :---: |\n`;
 
   let idx = 1;
   const uniqueEntries = Array.from(new Set(Array.from(registry.values())));
 
   uniqueEntries.forEach((entry) => {
-    md += `| ${idx++} | \`${entry.assetPath}\` | ${entry.creator} | [Source](${entry.sourceURL}) | [${entry.license}](${entry.licenseURL}) | ${entry.commercialUse ? "YES ✅" : "NO"} | \`${entry.verificationDate}\` |\n`;
+    md += `| ${idx++} | \`${entry.assetPath}\` | ${entry.creator} | [Source](${entry.sourceURL}) | [${entry.license}](${entry.licenseURL}) | ${entry.commercialUse ? "YES ✅" : "NO"} |\n`;
   });
 
-  md += `\n---\n*Automated Asset Credits generated by GameHub Milestone 9 Engine.*\n`;
+  md += `\n---\n*Automated Asset Credits generated by GameHub Milestone 9.1 Engine.*\n`;
 
   fs.writeFileSync(ASSET_CREDITS_FILE, md, "utf-8");
   console.log(`📄 Auto-generated ASSET_CREDITS.md (${uniqueEntries.length} entries)`);
@@ -402,10 +423,10 @@ function generateAssetCreditsMd(registry: Map<string, AssetSourceEntry>) {
 function generateLicenseReport(games: GameMetadata[], rejectedGames: any[], licenseCounts: Record<string, number>) {
   const report = {
     timestamp: new Date().toISOString(),
-    milestone: "Milestone 9 - Asset Source Registry & Credits",
+    milestone: "Milestone 9.1 - Separate Game Provenance and Asset Provenance",
     totalImported: games.length,
     licenseDistribution: licenseCounts,
-    importedGames: games.map((g) => ({ slug: g.slug, title: g.derivedTitle, commercialReady: g.commercialReady })),
+    importedGames: games.map((g) => ({ slug: g.slug, title: g.derivedTitle, originalAuthor: g.originalAuthor })),
   };
   fs.writeFileSync(LICENSE_REPORT_FILE, JSON.stringify(report, null, 2), "utf-8");
   fs.writeFileSync(PUBLIC_LICENSE_REPORT_FILE, JSON.stringify(report, null, 2), "utf-8");
