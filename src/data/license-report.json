@@ -1,8 +1,7 @@
 {
-  "timestamp": "2026-08-02T07:05:28.478Z",
-  "milestone": "Milestone 8 - Asset Provenance Verification",
+  "timestamp": "2026-08-02T07:06:57.250Z",
+  "milestone": "Milestone 9 - Asset Source Registry & Credits",
   "totalImported": 10,
-  "verifiedAssetsCount": 10,
   "licenseDistribution": {
     "MIT": 6,
     "Apache-2.0": 2,
@@ -13,61 +12,51 @@
     {
       "slug": "2048-fusion",
       "title": "2048 Cyber Fusion",
-      "assetVerificationStatus": "VERIFIED",
       "commercialReady": true
     },
     {
       "slug": "breakout-pulse",
       "title": "Breakout Pulse DX",
-      "assetVerificationStatus": "VERIFIED",
       "commercialReady": true
     },
     {
       "slug": "cosmic-defense",
       "title": "Cosmic Defense 2184",
-      "assetVerificationStatus": "VERIFIED",
       "commercialReady": true
     },
     {
       "slug": "cyber-runner",
       "title": "Cyber Runner 2099",
-      "assetVerificationStatus": "VERIFIED",
       "commercialReady": true
     },
     {
       "slug": "neon-snake",
       "title": "Neon Snake Cyberpulse",
-      "assetVerificationStatus": "VERIFIED",
       "commercialReady": true
     },
     {
       "slug": "pixel-memory",
       "title": "Pixel Memory Quest",
-      "assetVerificationStatus": "VERIFIED",
       "commercialReady": true
     },
     {
       "slug": "pong-championship",
       "title": "Cyber Pong Championship",
-      "assetVerificationStatus": "VERIFIED",
       "commercialReady": true
     },
     {
       "slug": "retro-tetris",
       "title": "Retro Block Stack Pulse",
-      "assetVerificationStatus": "VERIFIED",
       "commercialReady": true
     },
     {
       "slug": "tic-tac-toe-glow",
       "title": "Tic Tac Toe Cyber Glow",
-      "assetVerificationStatus": "VERIFIED",
       "commercialReady": true
     },
     {
       "slug": "tower-builder",
       "title": "Neon Tower Builder",
-      "assetVerificationStatus": "VERIFIED",
       "commercialReady": true
     }
   ]

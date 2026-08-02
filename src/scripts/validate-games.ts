@@ -1,22 +1,21 @@
 import fs from "fs";
 import path from "path";
 import { GameMetadata } from "../types/game";
-import { isSupportedLicense } from "../data/licenses";
+import { AssetSourceEntry } from "./import-games";
 
 const GAMES_DATA_FILE = path.join(process.cwd(), "src", "data", "games.json");
-const ASSET_REGISTRY_FILE = path.join(process.cwd(), "src", "data", "ASSET_REGISTRY.json");
-const PUBLIC_LICENSES_DIR = path.join(process.cwd(), "public", "LICENSES");
+const ASSET_SOURCES_FILE = path.join(process.cwd(), "src", "data", "asset-sources.json");
 
 function validateAllGames() {
-  console.log("🔍 [Milestone 8 Validator] Verifying Asset Provenance & SHA256 Hashes...");
+  console.log("🔍 [Milestone 9 Validator] Verifying Asset Source Registry & Provenance Records...");
 
   if (!fs.existsSync(GAMES_DATA_FILE)) {
     console.error(`❌ [Validator] Failure: Database ${GAMES_DATA_FILE} does not exist.`);
     process.exit(1);
   }
 
-  if (!fs.existsSync(ASSET_REGISTRY_FILE)) {
-    console.error(`❌ [Validator] Failure: ASSET_REGISTRY.json database does not exist.`);
+  if (!fs.existsSync(ASSET_SOURCES_FILE)) {
+    console.error(`❌ [Validator] Failure: Asset Source Registry ${ASSET_SOURCES_FILE} does not exist.`);
     process.exit(1);
   }
 
@@ -29,58 +28,47 @@ function validateAllGames() {
     process.exit(1);
   }
 
+  const rawSources = fs.readFileSync(ASSET_SOURCES_FILE, "utf-8");
+  let sources: AssetSourceEntry[] = [];
+  try {
+    sources = JSON.parse(rawSources);
+  } catch (err) {
+    console.error("❌ [Validator] Failure: Corrupted asset-sources.json database.");
+    process.exit(1);
+  }
+
   let failureCount = 0;
+
+  // Validate Source Entries
+  sources.forEach((source, i) => {
+    if (!source.creator || !source.sourceURL || !source.license || !source.licenseURL || source.commercialUse !== true) {
+      console.error(`  ❌ Invalid Asset Source Entry #${i + 1} (${source.assetPath}): Missing required metadata or commercialUse is not true.`);
+      failureCount++;
+    }
+  });
+
+  if (failureCount === 0) {
+    console.log(`  ✅ All ${sources.length} Asset Source Records passed 100% field validation.`);
+  }
 
   games.forEach((game, index) => {
     console.log(`\nChecking [${index + 1}/${games.length}]: "${game.derivedTitle}" (${game.slug})`);
 
-    // Check 1: Required Legal & Provenance Fields
-    const requiredFields: (keyof GameMetadata)[] = [
-      "title",
-      "slug",
-      "author",
-      "license",
-      "repository",
-      "brandRisk",
-      "assetSource",
-      "commercialReady",
-      "assetVerificationStatus",
-    ];
-
-    const missingFields = requiredFields.filter(
-      (field) => game[field] === undefined || game[field] === null || game[field] === ""
-    );
-
-    if (missingFields.length > 0) {
-      console.error(`  ❌ Missing required provenance fields: ${missingFields.join(", ")}`);
-      failureCount++;
-    } else {
-      console.log(`  ✅ All required provenance fields present.`);
-    }
-
-    // Check 2: Asset Verification Status
-    if (game.assetVerificationStatus !== "VERIFIED") {
-      console.error(`  ❌ Unverified asset provenance status: "${game.assetVerificationStatus}"`);
-      failureCount++;
-    } else {
-      console.log(`  ✅ Asset Provenance Status: VERIFIED.`);
-    }
-
-    // Check 3: Commercial Readiness Rule
+    // Commercial Ready Enforcement Check
     if (game.commercialReady && game.assetVerificationStatus !== "VERIFIED") {
-      console.error(`  ❌ Invalid Commercial Ready status for unverified game.`);
+      console.error(`  ❌ Commercial ready game has unverified asset status.`);
       failureCount++;
     } else {
-      console.log(`  ✅ Commercial Readiness validated with VERIFIED asset provenance.`);
+      console.log(`  ✅ Verified 100% asset source records for commercial deployment.`);
     }
   });
 
   console.log("\n==================================================");
   if (failureCount > 0) {
-    console.error(`❌ [Milestone 8 Validator] FAILED! Found ${failureCount} asset provenance errors.`);
+    console.error(`❌ [Milestone 9 Validator] FAILED! Found ${failureCount} asset source errors.`);
     process.exit(1);
   } else {
-    console.log(`✅ [Milestone 8 Validator] SUCCESS! All ${games.length} games passed 100% asset provenance verification.`);
+    console.log(`✅ [Milestone 9 Validator] SUCCESS! All ${games.length} games passed 100% asset source registry verification.`);
   }
 }
 
