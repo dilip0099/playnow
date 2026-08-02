@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpDown, Frown, SlidersHorizontal } from "lucide-react";
 import { GameCard } from "./GameCard";
 import { GameMetadata, SortOption } from "@/types/game";
@@ -80,42 +79,35 @@ export function GameGrid({
       {/* Game Cards Grid */}
       {displayedGames.length > 0 ? (
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          <AnimatePresence mode="popLayout">
-            {displayedGames.map((game, idx) => (
-              <motion.div
-                key={game.id || idx}
-                layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.2 }}
-              >
-                <GameCard game={game} priority={idx < 4} />
-              </motion.div>
-            ))}
-          </AnimatePresence>
+          {displayedGames.map((game, idx) => (
+            <div key={game.id || idx} className="transition-all duration-300">
+              <GameCard game={game} priority={idx < 4} />
+            </div>
+          ))}
         </div>
       ) : (
         /* Empty State */
         <div className="flex flex-col items-center justify-center rounded-3xl border border-dashed border-border p-12 text-center space-y-3">
-          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-purple-500/10 text-purple-400">
+          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-muted text-muted-foreground">
             <Frown className="h-6 w-6" />
           </div>
-          <h3 className="text-lg font-bold text-foreground">No games found</h3>
-          <p className="text-sm text-muted-foreground max-w-sm">
-            We couldn't find any games matching your current filters or search terms.
-          </p>
+          <div className="space-y-1">
+            <h3 className="text-base font-bold text-foreground">No games found</h3>
+            <p className="text-xs text-muted-foreground">
+              Try selecting a different category or adjusting your search filters.
+            </p>
+          </div>
         </div>
       )}
 
       {/* Load More Button */}
       {hasMore && (
-        <div className="flex justify-center pt-4">
+        <div className="flex justify-center pt-6">
           <button
-            onClick={() => setVisibleCount((prev) => prev + 8)}
-            className="rounded-xl border border-purple-500/30 bg-purple-500/10 px-6 py-2.5 text-xs font-bold text-purple-300 hover:bg-purple-500/20 transition-all shadow-lg shadow-purple-500/10"
+            onClick={() => setVisibleCount((prev) => prev + 12)}
+            className="rounded-2xl border border-purple-500/30 bg-purple-500/10 px-8 py-3 text-xs font-bold text-purple-300 hover:bg-purple-600 hover:text-white shadow-lg transition-all hover:scale-105"
           >
-            Load More Games ({sortedGames.length - visibleCount} Remaining)
+            Load More Games ({sortedGames.length - visibleCount} remaining)
           </button>
         </div>
       )}
