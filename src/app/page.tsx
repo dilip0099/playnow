@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Swords, Brain, Car, Joystick, Puzzle, Compass, Volleyball, UsersRound } from "lucide-react";
+import { Swords, Brain, Car, Joystick, Puzzle, Compass, Volleyball, UsersRound, Unlock } from "lucide-react";
 import { gamesData } from "@/lib/games";
 import { GameCard } from "@/components/games/GameCard";
 import { ContinuePlayingRail } from "@/components/games/ContinuePlayingRail";
@@ -43,14 +43,15 @@ export default function HomePage() {
           .slice(0, 6);
 
   const genreIcons = [
-    { name: "ACTION", icon: Swords, count: gamesData.filter((g) => g.category === "action").length },
-    { name: "STRATEGY", icon: Brain, count: gamesData.filter((g) => g.category === "strategy").length },
-    { name: "RACING", icon: Car, count: gamesData.filter((g) => g.category === "racing").length },
-    { name: "ARCADE", icon: Joystick, count: gamesData.filter((g) => g.category === "arcade").length },
-    { name: "PUZZLE", icon: Puzzle, count: gamesData.filter((g) => g.category === "puzzle").length },
-    { name: "ADVENTURE", icon: Compass, count: gamesData.filter((g) => g.category === "adventure").length },
-    { name: "SPORTS", icon: Volleyball, count: gamesData.filter((g) => g.category === "sports").length },
-    { name: "MULTIPLAYER", icon: UsersRound, count: gamesData.filter((g) => g.category === "multiplayer").length },
+    { name: "UNBLOCKED", href: "/unblocked-games", icon: Unlock, count: gamesData.length },
+    { name: "ACTION", href: "/category/action", icon: Swords, count: gamesData.filter((g) => g.category === "action").length },
+    { name: "STRATEGY", href: "/category/strategy", icon: Brain, count: gamesData.filter((g) => g.category === "strategy").length },
+    { name: "RACING", href: "/category/racing", icon: Car, count: gamesData.filter((g) => g.category === "racing").length },
+    { name: "ARCADE", href: "/category/arcade", icon: Joystick, count: gamesData.filter((g) => g.category === "arcade").length },
+    { name: "PUZZLE", href: "/category/puzzle", icon: Puzzle, count: gamesData.filter((g) => g.category === "puzzle").length },
+    { name: "ADVENTURE", href: "/category/adventure", icon: Compass, count: gamesData.filter((g) => g.category === "adventure").length },
+    { name: "SPORTS", href: "/category/sports", icon: Volleyball, count: gamesData.filter((g) => g.category === "sports").length },
+    { name: "MULTIPLAYER", href: "/category/multiplayer", icon: UsersRound, count: gamesData.filter((g) => g.category === "multiplayer").length },
   ];
 
   // WebSite schema (+ SearchAction) is what makes a site eligible for Google's sitelinks
@@ -133,7 +134,7 @@ export default function HomePage() {
               return (
                 <Link
                   key={genre.name}
-                  href={`/category/${genre.name.toLowerCase()}`}
+                  href={genre.href}
                   className="flex flex-col items-center justify-center rounded-2xl border border-border bg-card p-5 aspect-square hover:border-primary/50 hover:-translate-y-1 transition-all group"
                 >
                   <Icon className="h-7 w-7 mb-2 text-muted-foreground group-hover:text-primary transition-colors" aria-hidden="true" />
@@ -164,7 +165,7 @@ export default function HomePage() {
               READY<br />TO PLAY?
             </h2>
             <p className="text-xs text-primary-foreground/70 leading-relaxed font-mono">
-              No downloads, no lag, no limits. Jump straight into the action with PlayNow's ultra-low latency streaming technology.
+              No downloads, no plugins, no waiting. Every game runs instantly in your browser — click and play.
             </p>
           </div>
 

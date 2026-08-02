@@ -15,7 +15,8 @@ import {
   Puzzle,
   Compass,
   Volleyball,
-  UsersRound
+  UsersRound,
+  Unlock
 } from "lucide-react";
 
 export function Sidebar() {
@@ -23,6 +24,7 @@ export function Sidebar() {
 
   const navItems = [
     { name: "HOME", href: "/", icon: Home },
+    { name: "UNBLOCKED", href: "/unblocked-games", icon: Unlock },
     { name: "LIBRARY", href: "/library", icon: Bookmark },
     { name: "STORE", href: "/discover", icon: ShoppingBag },
     { name: "FAVORITES", href: "/favorites", icon: Heart },

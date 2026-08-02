@@ -69,6 +69,11 @@ export function Footer() {
             </h3>
             <ul className="space-y-2 text-xs text-muted-foreground">
               <li>
+                <Link href="/unblocked-games" className="hover:text-primary transition-colors">
+                  Unblocked Games
+                </Link>
+              </li>
+              <li>
                 <Link href="/" className="hover:text-primary transition-colors">
                   Featured Games
                 </Link>
