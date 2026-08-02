@@ -1,4 +1,4 @@
-export type AdProvider = "Google AdSense" | "GameHub Direct Ad Network" | "Unity Ads" | "Custom Direct Sponsor";
+export type AdProvider = "Google AdSense" | "PlayNow Direct Ad Network" | "Unity Ads" | "Custom Direct Sponsor";
 
 export type AdPlacementType = "homepage_banner" | "game_banner" | "loading_screen" | "rewarded_ad";
 

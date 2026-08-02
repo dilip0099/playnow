@@ -47,12 +47,12 @@ function SearchContent() {
           <h1 className="text-2xl sm:text-3xl font-black text-foreground flex items-center space-x-3">
             {isFavoritesOnly ? (
               <>
-                <Heart className="h-7 w-7 text-pink-500 fill-pink-500" />
+                <Heart className="h-7 w-7 text-rose-500 fill-rose-500" aria-hidden="true" />
                 <span>My Favorite Games</span>
               </>
             ) : query ? (
               <>
-                <SearchIcon className="h-7 w-7 text-purple-400" />
+                <SearchIcon className="h-7 w-7 text-primary" aria-hidden="true" />
                 <span>Search Results for "{query}"</span>
               </>
             ) : (

@@ -7,8 +7,8 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
 export const metadata: Metadata = {
-  title: "Open Source Licenses Policy - GameHub Legal",
-  description: "Supported open-source software license definitions, allowed licenses (MIT, Apache-2.0, BSD-2/3, ISC), and prohibited licenses policy.",
+  title: "Licensing Policy - PlayNow Legal",
+  description: "How PlayNow licenses its game catalog via GamePix, plus the open-source license rules for any code we host directly.",
 };
 
 export default function LegalLicensesPage() {
@@ -36,17 +36,31 @@ export default function LegalLicensesPage() {
               <span>Legal Policy Document</span>
             </span>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-black text-foreground">Open Source License Framework</h1>
+          <h1 className="text-3xl sm:text-4xl font-black text-foreground">Licensing Policy</h1>
           <p className="text-sm text-muted-foreground leading-relaxed">
-            GameHub strictly enforces open-source software compliance. Only permissive licenses allowing commercial distribution and modification are accepted into our catalog.
+            PlayNow's game catalog is currently sourced entirely through a <strong className="text-foreground">GamePix publisher agreement</strong> — a licensed, commercial arrangement, not open-source code we've copied. If PlayNow ever hosts original or open-source-derived code directly in the future, it will only accept the permissive licenses below.
           </p>
         </div>
 
-        {/* Allowed Licenses */}
+        {/* Primary licensing model */}
         <div className="space-y-4">
           <h2 className="text-xl font-bold text-foreground flex items-center space-x-2">
             <CheckCircle2 className="h-5 w-5 text-emerald-400" />
-            <span>Permitted Open Source Licenses</span>
+            <span>Current Sourcing Model</span>
+          </h2>
+          <Card className="p-5 border-emerald-500/30 bg-emerald-500/5 space-y-2">
+            <Badge className="bg-emerald-500/20 text-emerald-400 border-emerald-500/40">Network-Licensed (GamePix)</Badge>
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              Every game currently on PlayNow is embedded from GamePix's publisher network under their standard terms. GamePix — not PlayNow — owns and is responsible for this game code; PlayNow's role is limited to embedding and screening titles for brand/trademark conflicts before listing them.
+            </p>
+          </Card>
+        </div>
+
+        {/* Allowed Licenses (for any future directly-hosted code) */}
+        <div className="space-y-4 pt-4 border-t border-border/60">
+          <h2 className="text-xl font-bold text-foreground flex items-center space-x-2">
+            <CheckCircle2 className="h-5 w-5 text-emerald-400" />
+            <span>Permitted Licenses for Any Directly-Hosted Code</span>
           </h2>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

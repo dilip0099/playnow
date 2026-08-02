@@ -15,7 +15,10 @@ import {
 import { GameMetadata } from "@/types/game";
 import { useFavorites } from "@/hooks/useFavorites";
 import { useFullscreen } from "@/hooks/useFullscreen";
+import { useRecentlyPlayed } from "@/hooks/useRecentlyPlayed";
 import { ShareModal } from "./ShareModal";
+import { Skeleton } from "@/components/ui/skeleton";
+import { ASPECT_RATIO_CLASS, resolveAspectRatio } from "@/lib/aspect-ratio";
 
 interface GamePlayerProps {
   game: GameMetadata;
@@ -27,15 +30,26 @@ export function GamePlayer({ game, onPlay }: GamePlayerProps) {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [isCoverLoaded, setIsCoverLoaded] = useState(false);
   const [isTheaterMode, setIsTheaterMode] = useState(false);
   const [isShareOpen, setIsShareOpen] = useState(false);
 
   const { isFavorite, toggleFavorite } = useFavorites();
   const { isFullscreen, toggleFullscreen } = useFullscreen(containerRef);
+  const { addRecentlyPlayed } = useRecentlyPlayed();
   const favorited = isFavorite(game.id);
+  const coverImage = game.heroImage || game.coverImage || game.thumbnailUrl;
+
+  // Play the game in its real shape — a portrait game (e.g. most "puzzle"/"casual"
+  // titles from GamePix) forced into a landscape 16:9 box renders tiny and
+  // unplayable. Portrait titles also get a narrower centered column instead of
+  // stretching full-width-then-absurdly-tall on wide screens.
+  const aspectRatio = resolveAspectRatio(game.aspectRatio);
+  const isPortrait = aspectRatio === "3/4";
 
   const handleStartPlay = () => {
     setIsPlaying(true);
+    addRecentlyPlayed(game.id);
     if (onPlay) onPlay();
   };
 
@@ -46,43 +60,64 @@ export function GamePlayer({ game, onPlay }: GamePlayerProps) {
     }
   };
 
+  const widthClass = isTheaterMode
+    ? "max-w-none rounded-none border-none shadow-none"
+    : isPortrait
+    ? "max-w-xs sm:max-w-sm mx-auto"
+    : "";
+
   return (
     <>
       <div
         ref={containerRef}
-        className={`relative w-full overflow-hidden rounded-3xl border border-border/80 bg-slate-950 shadow-2xl transition-all duration-300 ${isTheaterMode ? "max-w-none rounded-none border-none shadow-none" : ""
-          }`}
+        className={`relative w-full overflow-hidden rounded-3xl border border-border bg-background shadow-2xl transition-all duration-base ${widthClass}`}
       >
-        {/* Aspect Ratio Container (16:9 default) */}
-        <div className="relative aspect-[16/9] w-full bg-slate-950">
+        {/* Aspect Ratio Container — matches the real game's shape so portrait
+            titles aren't squeezed into a landscape box; reserves space up
+            front to avoid layout shift. */}
+        <div className={`relative w-full bg-background ${ASPECT_RATIO_CLASS[aspectRatio]}`}>
 
           {/* Pre-play Cover Overlay */}
           {!isPlaying ? (
-            <div className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-slate-950/90 p-6 text-center backdrop-blur-md">
-              <div className="mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-tr from-purple-600 via-indigo-600 to-cyan-400 shadow-2xl shadow-purple-500/40">
-                <Play className="h-9 w-9 fill-white text-white ml-1.5" />
+            <>
+              {!isCoverLoaded && <Skeleton className="absolute inset-0 rounded-none" />}
+              <img
+                src={coverImage}
+                alt=""
+                aria-hidden="true"
+                onLoad={() => setIsCoverLoaded(true)}
+                className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-slow ${
+                  isCoverLoaded ? "opacity-100" : "opacity-0"
+                }`}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-background/40" />
+
+              <div className="absolute inset-0 z-20 flex flex-col items-center justify-center p-6 text-center">
+                <div className="mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-primary shadow-glow-primary">
+                  <Play className="ml-1.5 h-9 w-9 fill-current text-primary-foreground" />
+                </div>
+                <h2 className="mb-2 font-display text-2xl font-black text-foreground sm:text-3xl">
+                  Ready to play {game.title}?
+                </h2>
+                <p className="mb-6 max-w-md text-xs text-muted-foreground sm:text-sm">
+                  Click below to start playing immediately in high definition. No downloads needed.
+                </p>
+                <button
+                  onClick={handleStartPlay}
+                  className="flex items-center space-x-2 rounded-full bg-primary px-8 py-3.5 text-sm font-black text-primary-foreground shadow-glow-primary transition-all hover:scale-105 hover:bg-primary-hover"
+                >
+                  <Play className="h-4 w-4 fill-current" />
+                  <span>PLAY GAME NOW</span>
+                </button>
               </div>
-              <h2 className="text-2xl sm:text-3xl font-black text-white mb-2">
-                Ready to play {game.title}?
-              </h2>
-              <p className="text-xs sm:text-sm text-slate-400 max-w-md mb-6">
-                Click below to start playing immediately in high definition. No downloads needed.
-              </p>
-              <button
-                onClick={handleStartPlay}
-                className="flex items-center space-x-2 rounded-full bg-gradient-to-r from-purple-600 to-cyan-500 px-8 py-3.5 text-sm font-black text-white shadow-lg shadow-purple-500/30 hover:scale-105 transition-all"
-              >
-                <Play className="h-4 w-4 fill-white" />
-                <span>PLAY GAME NOW</span>
-              </button>
-            </div>
+            </>
           ) : (
             /* Active Iframe Container */
             <>
               {isLoading && (
-                <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-slate-950">
-                  <Loader2 className="h-10 w-10 animate-spin text-purple-500 mb-3" />
-                  <p className="text-xs font-semibold text-slate-400">Loading HTML5 Engine...</p>
+                <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-background">
+                  <Loader2 className="mb-3 h-10 w-10 animate-spin text-primary" />
+                  <p className="text-xs font-semibold text-muted-foreground">Loading HTML5 Engine...</p>
                 </div>
               )}
               <iframe
@@ -99,15 +134,13 @@ export function GamePlayer({ game, onPlay }: GamePlayerProps) {
         </div>
 
         {/* Toolbar Controls Bar */}
-        <div className="flex items-center justify-between border-t border-border/40 bg-slate-900/90 px-4 py-3 backdrop-blur-md">
+        <div className="flex items-center justify-between border-t border-border bg-card px-4 py-3 backdrop-blur-md">
           <div className="flex items-center space-x-2">
-            <span className="flex items-center space-x-1 text-xs font-semibold text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20">
+            <span className="flex items-center space-x-1 rounded-full border border-primary/20 bg-primary/10 px-2.5 py-1 text-xs font-semibold text-primary">
               <ShieldCheck className="h-3.5 w-3.5" />
               <span className="hidden sm:inline">HTML5 Safe</span>
             </span>
-            <span className="text-xs text-muted-foreground hidden md:inline">
-              {game.title}
-            </span>
+            <span className="hidden text-xs text-muted-foreground md:inline">{game.title}</span>
           </div>
 
           <div className="flex items-center space-x-2">
@@ -116,7 +149,8 @@ export function GamePlayer({ game, onPlay }: GamePlayerProps) {
               <button
                 onClick={handleReload}
                 title="Restart Game"
-                className="flex h-9 w-9 items-center justify-center rounded-xl bg-slate-800/80 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors"
+                aria-label="Restart game"
+                className="flex h-9 w-9 items-center justify-center rounded-xl bg-muted text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
               >
                 <RotateCcw className="h-4 w-4" />
               </button>
@@ -125,13 +159,15 @@ export function GamePlayer({ game, onPlay }: GamePlayerProps) {
             {/* Favorite toggle */}
             <button
               onClick={() => toggleFavorite(game.id)}
+              aria-pressed={favorited}
               title={favorited ? "Remove from Favorites" : "Add to Favorites"}
-              className={`flex items-center space-x-1.5 rounded-xl px-3 py-1.5 text-xs font-bold transition-colors ${favorited
-                  ? "bg-pink-500/20 text-pink-400 border border-pink-500/30"
-                  : "bg-slate-800/80 text-slate-300 hover:bg-slate-700"
-                }`}
+              className={`flex items-center space-x-1.5 rounded-xl px-3 py-1.5 text-xs font-bold transition-colors ${
+                favorited
+                  ? "border border-rose-500/30 bg-rose-500/20 text-rose-400"
+                  : "bg-muted text-muted-foreground hover:bg-accent hover:text-foreground"
+              }`}
             >
-              <Heart className={`h-4 w-4 ${favorited ? "fill-pink-400" : ""}`} />
+              <Heart className={`h-4 w-4 ${favorited ? "fill-rose-400" : ""}`} />
               <span className="hidden sm:inline">{favorited ? "Favorited" : "Favorite"}</span>
             </button>
 
@@ -139,7 +175,7 @@ export function GamePlayer({ game, onPlay }: GamePlayerProps) {
             <button
               onClick={() => setIsShareOpen(true)}
               title="Share Game"
-              className="flex items-center space-x-1.5 rounded-xl bg-slate-800/80 px-3 py-1.5 text-xs font-bold text-slate-300 hover:bg-slate-700 hover:text-white transition-colors"
+              className="flex items-center space-x-1.5 rounded-xl bg-muted px-3 py-1.5 text-xs font-bold text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
             >
               <Share2 className="h-4 w-4" />
               <span className="hidden sm:inline">Share</span>
@@ -149,8 +185,12 @@ export function GamePlayer({ game, onPlay }: GamePlayerProps) {
             <button
               onClick={() => setIsTheaterMode(!isTheaterMode)}
               title="Theater Mode"
-              className={`flex h-9 w-9 items-center justify-center rounded-xl text-slate-300 hover:bg-slate-700 transition-colors ${isTheaterMode ? "bg-purple-600 text-white" : "bg-slate-800/80"
-                }`}
+              aria-pressed={isTheaterMode}
+              className={`flex h-9 w-9 items-center justify-center rounded-xl transition-colors ${
+                isTheaterMode
+                  ? "bg-secondary text-secondary-foreground"
+                  : "bg-muted text-muted-foreground hover:bg-accent hover:text-foreground"
+              }`}
             >
               <Tv className="h-4 w-4" />
             </button>
@@ -159,13 +199,9 @@ export function GamePlayer({ game, onPlay }: GamePlayerProps) {
             <button
               onClick={toggleFullscreen}
               title="Fullscreen Mode"
-              className="flex items-center space-x-1.5 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 px-3.5 py-1.5 text-xs font-bold text-white shadow-md shadow-purple-500/20 hover:scale-105 transition-all"
+              className="flex items-center space-x-1.5 rounded-xl bg-primary px-3.5 py-1.5 text-xs font-bold text-primary-foreground shadow-glow-primary transition-all hover:scale-105 hover:bg-primary-hover"
             >
-              {isFullscreen ? (
-                <Minimize2 className="h-4 w-4" />
-              ) : (
-                <Maximize2 className="h-4 w-4" />
-              )}
+              {isFullscreen ? <Minimize2 className="h-4 w-4" /> : <Maximize2 className="h-4 w-4" />}
               <span className="hidden sm:inline">{isFullscreen ? "Exit" : "Fullscreen"}</span>
             </button>
           </div>
@@ -173,11 +209,7 @@ export function GamePlayer({ game, onPlay }: GamePlayerProps) {
       </div>
 
       {/* Share Modal Dialog */}
-      <ShareModal
-        game={game}
-        isOpen={isShareOpen}
-        onClose={() => setIsShareOpen(false)}
-      />
+      <ShareModal game={game} isOpen={isShareOpen} onClose={() => setIsShareOpen(false)} />
     </>
   );
 }

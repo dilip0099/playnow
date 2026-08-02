@@ -7,7 +7,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
 export const metadata: Metadata = {
-  title: "Developer Management - GameHub Admin",
+  title: "Developer Management - PlayNow Admin",
   description: "Developer game submissions queue, 70% ad revenue share payouts, and verification.",
 };
 
@@ -67,7 +67,7 @@ export default function AdminDevelopersPage() {
                   return (
                     <tr key={game.id} className="hover:bg-slate-800/40 transition-colors">
                       <td className="px-5 py-4 font-mono">{index + 1}</td>
-                      <td className="px-5 py-4 font-bold text-white">{game.originalAuthor || game.author}</td>
+                      <td className="px-5 py-4 font-bold text-white">{game.author}</td>
                       <td className="px-5 py-4 font-bold text-cyan-400">
                         <Link href={`/game/${game.slug}`} className="hover:underline flex items-center space-x-1">
                           <span>{game.derivedTitle || game.title}</span>

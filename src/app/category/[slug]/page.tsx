@@ -32,11 +32,11 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
   const categoryName = slug.charAt(0).toUpperCase() + slug.slice(1);
 
   return {
-    title: `Best Free ${categoryName} Games - Play Online on GameHub`,
+    title: `Best Free ${categoryName} Games - Play Online on PlayNow`,
     description: `Discover the top free online ${categoryName} browser games. Play instantly in your web browser with zero installs or downloads.`,
     openGraph: {
-      title: `${categoryName} Games - GameHub`,
-      description: `Free online ${categoryName} browser games on GameHub.`,
+      title: `${categoryName} Games - PlayNow`,
+      description: `Free online ${categoryName} browser games on PlayNow.`,
     },
   };
 }
@@ -66,15 +66,15 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
       </nav>
 
       {/* Category Banner Header */}
-      <div className="relative overflow-hidden rounded-3xl border border-purple-500/20 bg-gradient-to-r from-purple-950/60 via-slate-950 to-slate-950 p-8 sm:p-10 shadow-xl">
+      <div className="relative overflow-hidden rounded-3xl border border-secondary/20 bg-gradient-to-r from-secondary/20 via-card to-card p-8 sm:p-10 shadow-xl">
         <div className="relative z-10 space-y-2">
-          <span className="rounded-full bg-purple-500/10 px-3 py-1 text-xs font-bold text-purple-400 border border-purple-500/20 uppercase tracking-wider">
+          <span className="rounded-full bg-secondary/10 px-3 py-1 text-xs font-bold text-violet-300 border border-secondary/20 uppercase tracking-wider">
             Category Hub
           </span>
-          <h1 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
+          <h1 className="text-3xl sm:text-4xl font-black text-foreground tracking-tight">
             {categoryName} Games
           </h1>
-          <p className="text-sm text-slate-300 max-w-xl leading-relaxed">
+          <p className="text-sm text-foreground/80 max-w-xl leading-relaxed">
             Browse our hand-picked collection of high quality {categoryName.toLowerCase()} HTML5 games. Play instantly on desktop or mobile.
           </p>
         </div>

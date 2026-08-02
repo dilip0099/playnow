@@ -6,7 +6,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
 export const metadata: Metadata = {
-  title: "User Management - GameHub Admin",
+  title: "User Management - PlayNow Admin",
   description: "User profiles, roles, play activity history, and authentication accounts.",
 };
 

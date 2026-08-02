@@ -6,7 +6,7 @@ import { ShieldCheck, Users, Gamepad2, Code2, TrendingUp, DollarSign, ArrowRight
 import { Card } from "@/components/ui/card";
 
 export const metadata: Metadata = {
-  title: "Executive SaaS Dashboard - GameHub Admin",
+  title: "Executive SaaS Dashboard - PlayNow Admin",
   description: "Executive platform command center, SaaS metrics overview, and portal navigation.",
 };
 

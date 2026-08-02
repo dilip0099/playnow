@@ -1,73 +1,121 @@
 {
-  "timestamp": "2026-08-02T08:21:47.442Z",
-  "milestone": "Milestone 13 - Monetization & Revenue Infrastructure",
-  "totalImported": 10,
-  "licenseDistribution": {
-    "MIT": 6,
-    "Apache-2.0": 2,
-    "BSD-3": 1,
-    "ISC": 1
+  "timestamp": "2026-08-02T15:21:10.946Z",
+  "totalImported": 56,
+  "sourceNetwork": "GamePix",
+  "categoryDistribution": {
+    "action": 7,
+    "puzzle": 7,
+    "arcade": 7,
+    "racing": 7,
+    "adventure": 7,
+    "strategy": 7,
+    "sports": 7,
+    "multiplayer": 7
   },
-  "importedGames": [
+  "rejectedForBrandRisk": [
     {
-      "slug": "2048-fusion",
-      "title": "2048 Cyber Fusion",
-      "commercialReady": true,
-      "monetizationEnabled": true
+      "title": "TenTrix",
+      "conflicts": [
+        "TETRIS"
+      ]
     },
     {
-      "slug": "breakout-pulse",
-      "title": "Breakout Pulse DX",
-      "commercialReady": true,
-      "monetizationEnabled": true
+      "title": "Idle Craft 3D",
+      "conflicts": [
+        "MARVEL"
+      ]
     },
     {
-      "slug": "cosmic-defense",
-      "title": "Cosmic Defense 2184",
-      "commercialReady": true,
-      "monetizationEnabled": true
+      "title": "Catch Huggy Wuggy!",
+      "conflicts": [
+        "HUGGY WUGGY",
+        "HUGGY"
+      ]
     },
     {
-      "slug": "cyber-runner",
-      "title": "Cyber Runner 2099",
-      "commercialReady": true,
-      "monetizationEnabled": true
+      "title": "Speakerman Revenge",
+      "conflicts": [
+        "SONIC"
+      ]
     },
     {
-      "slug": "neon-snake",
-      "title": "Neon Snake Cyberpulse",
-      "commercialReady": true,
-      "monetizationEnabled": true
+      "title": "Monster School Challenges",
+      "conflicts": [
+        "MINECRAFT"
+      ]
     },
     {
-      "slug": "pixel-memory",
-      "title": "Pixel Memory Quest",
-      "commercialReady": true,
-      "monetizationEnabled": true
+      "title": "Red and Blue Stickman Huggy",
+      "conflicts": [
+        "HUGGY"
+      ]
     },
     {
-      "slug": "pong-championship",
-      "title": "Cyber Pong Championship",
-      "commercialReady": true,
-      "monetizationEnabled": true
+      "title": "Among Us",
+      "conflicts": [
+        "AMONG US"
+      ]
     },
     {
-      "slug": "retro-tetris",
-      "title": "Retro Block Stack Pulse",
-      "commercialReady": true,
-      "monetizationEnabled": true
+      "title": "Baby Chicco Adventures",
+      "conflicts": [
+        "MARIO"
+      ]
     },
     {
-      "slug": "tic-tac-toe-glow",
-      "title": "Tic Tac Toe Cyber Glow",
-      "commercialReady": true,
-      "monetizationEnabled": true
+      "title": "Minecraft Skibidi Hidden Toilet",
+      "conflicts": [
+        "MINECRAFT"
+      ]
     },
     {
-      "slug": "tower-builder",
-      "title": "Neon Tower Builder",
-      "commercialReady": true,
-      "monetizationEnabled": true
+      "title": "Poppy Strike 3",
+      "conflicts": [
+        "HUGGY WUGGY",
+        "HUGGY"
+      ]
+    },
+    {
+      "title": "Killer Escape Huggy",
+      "conflicts": [
+        "HUGGY"
+      ]
+    },
+    {
+      "title": "DD Blocky",
+      "conflicts": [
+        "TETRIS"
+      ]
+    },
+    {
+      "title": "Red Stickman vs Monster School",
+      "conflicts": [
+        "MINECRAFT"
+      ]
+    },
+    {
+      "title": "Tung Tung Sahur GTA Miami",
+      "conflicts": [
+        "GTA"
+      ]
+    },
+    {
+      "title": "Cubetopia Parkour",
+      "conflicts": [
+        "MINECRAFT"
+      ]
+    },
+    {
+      "title": "Noob Huggy Kissiy",
+      "conflicts": [
+        "HUGGY"
+      ]
+    },
+    {
+      "title": "Noob Huggy Winter",
+      "conflicts": [
+        "HUGGY"
+      ]
     }
   ]
 }

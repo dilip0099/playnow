@@ -3,17 +3,14 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { 
-  Gamepad2, 
-  Search, 
-  Dices, 
-  Heart, 
+import {
+  Search,
+  Bell,
+  Dices,
+  Heart,
   X,
-  Compass,
-  Code2,
-  Lock,
-  Menu,
-  Bookmark
+  User,
+  Gamepad2
 } from "lucide-react";
 import { gamesData } from "@/lib/games";
 import { useFavorites } from "@/hooks/useFavorites";
@@ -26,7 +23,7 @@ export function Navbar() {
   const [searchQuery, setSearchQuery] = useState("");
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchResults, setSearchResults] = useState<GameMetadata[]>([]);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(-1);
   const [isSpinning, setIsSpinning] = useState(false);
 
   const searchRef = useRef<HTMLDivElement>(null);
@@ -49,6 +46,7 @@ export function Navbar() {
   }, []);
 
   useEffect(() => {
+    setActiveIndex(-1);
     if (searchQuery.trim().length > 0) {
       const q = searchQuery.toLowerCase().trim();
       const filtered = gamesData.filter(
@@ -87,163 +85,165 @@ export function Navbar() {
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (activeIndex >= 0 && searchResults[activeIndex]) {
+      router.push(`/game/${searchResults[activeIndex].slug}`);
+      setIsSearchOpen(false);
+      return;
+    }
     if (searchQuery.trim()) {
       router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
       setIsSearchOpen(false);
     }
   };
 
-  return (
-    <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-[#131313]/90 backdrop-blur-xl">
-      <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        
-        {/* Brand Logo & Main Nav Items */}
-        <div className="flex items-center space-x-8">
-          <Link href="/" className="flex items-center space-x-2 group">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#c3f400] text-[#161e00] shadow-lg group-hover:scale-105 transition-transform">
-              <Gamepad2 className="h-5 w-5 fill-[#161e00]" />
-            </div>
-            <span className="font-display text-base font-black tracking-tight text-white group-hover:text-[#c3f400] transition-colors">
-              GAMEHUB
-            </span>
-          </Link>
+  const handleSearchKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (!isSearchOpen || searchResults.length === 0) return;
 
-          {/* Desktop Nav Links */}
-          <nav className="hidden md:flex items-center space-x-6 text-xs font-bold text-zinc-400">
-            <Link href="/" className="hover:text-white transition-colors">
-              Store
-            </Link>
-            <Link href="/discover" className="hover:text-white transition-colors flex items-center space-x-1">
-              <Compass className="h-3.5 w-3.5" />
-              <span>Discover</span>
-            </Link>
-            <Link href="/library" className="hover:text-white transition-colors flex items-center space-x-1">
-              <Bookmark className="h-3.5 w-3.5" />
-              <span>Library</span>
-            </Link>
-            <Link href="/developers" className="hover:text-white transition-colors flex items-center space-x-1">
-              <Code2 className="h-3.5 w-3.5" />
-              <span>Publishers</span>
-            </Link>
-            <Link href="/admin" className="hover:text-white transition-colors flex items-center space-x-1">
-              <Lock className="h-3.5 w-3.5" />
-              <span>Admin</span>
-            </Link>
-          </nav>
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      setActiveIndex((prev) => Math.min(prev + 1, searchResults.length - 1));
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      setActiveIndex((prev) => Math.max(prev - 1, 0));
+    } else if (e.key === "Escape") {
+      setIsSearchOpen(false);
+      setActiveIndex(-1);
+    }
+  };
+
+  const activeResult = activeIndex >= 0 ? searchResults[activeIndex] : undefined;
+
+  return (
+    <header className="sticky top-0 z-30 w-full border-b border-border bg-background/90 backdrop-blur-xl">
+      <div className="mx-auto flex h-14 items-center gap-3 px-4 sm:px-6 lg:px-8">
+
+        {/* Mobile-only Brand Logo — Sidebar (which holds the real logo) is hidden below lg */}
+        <Link href="/" className="group flex shrink-0 items-center space-x-2 lg:hidden">
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground shadow-md transition-transform group-hover:scale-105">
+            <Gamepad2 className="h-4 w-4 fill-current" aria-hidden="true" />
+          </div>
+          <span className="hidden font-display text-base font-black tracking-tight text-foreground sm:inline">
+            PlayNow
+          </span>
+        </Link>
+
+        {/* Search Input Bar */}
+        <div ref={searchRef} className="relative min-w-0 flex-1 lg:max-w-md lg:flex-initial">
+          <form onSubmit={handleSearchSubmit} role="search">
+            <div className="relative flex items-center">
+              <Search className="absolute left-3.5 h-3.5 w-3.5 text-muted-foreground" aria-hidden="true" />
+              <label htmlFor="global-search-input" className="sr-only">
+                Search games, friends, discussions
+              </label>
+              <input
+                ref={inputRef}
+                id="global-search-input"
+                type="text"
+                placeholder="SEARCH GAMES, FRIENDS, DISCUSSIONS..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onFocus={() => searchQuery.trim() && setIsSearchOpen(true)}
+                onKeyDown={handleSearchKeyDown}
+                role="combobox"
+                aria-expanded={isSearchOpen && searchResults.length > 0}
+                aria-controls="navbar-search-results"
+                aria-autocomplete="list"
+                aria-activedescendant={activeResult ? `search-result-${activeResult.id}` : undefined}
+                autoComplete="off"
+                className="w-full rounded-lg border border-border bg-card py-1.5 pl-9 pr-12 text-[11px] font-mono font-medium text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none transition-all uppercase tracking-wider"
+              />
+
+              {searchQuery && (
+                <button
+                  type="button"
+                  onClick={() => setSearchQuery("")}
+                  aria-label="Clear search"
+                  className="absolute right-2.5 text-muted-foreground hover:text-foreground"
+                >
+                  <X className="h-3.5 w-3.5" />
+                </button>
+              )}
+            </div>
+          </form>
+
+          {/* Autocomplete Search Dropdown */}
+          {isSearchOpen && searchResults.length > 0 && (
+            <div
+              id="navbar-search-results"
+              role="listbox"
+              aria-label="Search results"
+              className="absolute left-0 right-0 top-full mt-2 rounded-xl border border-border bg-card p-2 shadow-2xl backdrop-blur-xl z-50 space-y-1"
+            >
+              {searchResults.map((game, idx) => (
+                <Link
+                  key={game.id}
+                  id={`search-result-${game.id}`}
+                  role="option"
+                  aria-selected={idx === activeIndex}
+                  href={`/game/${game.slug}`}
+                  onClick={() => setIsSearchOpen(false)}
+                  className={`flex items-center space-x-3 rounded-lg p-2 transition-colors ${
+                    idx === activeIndex ? "bg-accent" : "hover:bg-accent"
+                  }`}
+                >
+                  <img src={game.thumbnailUrl} alt="" className="h-8 w-12 rounded-md object-cover" />
+                  <div className="flex flex-col truncate">
+                    <span className="font-display text-xs font-bold text-foreground truncate">{game.derivedTitle || game.title}</span>
+                    <span className="font-mono text-[10px] text-muted-foreground capitalize">{game.category}</span>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          )}
         </div>
 
-        {/* Right Search & Quick Controls */}
-        <div className="flex items-center space-x-3">
-          
-          {/* Search Bar */}
-          <div ref={searchRef} className="relative hidden sm:block w-48 md:w-64">
-            <form onSubmit={handleSearchSubmit}>
-              <div className="relative flex items-center">
-                <Search className="absolute left-3 h-3.5 w-3.5 text-zinc-500" />
-                <input
-                  ref={inputRef}
-                  type="text"
-                  placeholder="Search games..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  onFocus={() => searchQuery.trim() && setIsSearchOpen(true)}
-                  className="w-full rounded-lg border border-white/10 bg-[#1c1b1b] py-1.5 pl-8 pr-16 text-xs font-medium text-white placeholder-zinc-500 focus:border-[#c3f400] focus:outline-none transition-all font-mono"
-                />
-                
-                {/* Hotkey Badge */}
-                {!searchQuery && (
-                  <kbd className="absolute right-2.5 hidden md:inline-flex items-center rounded border border-white/10 bg-[#131313] px-1.5 py-0.5 text-[9px] font-mono text-zinc-400">
-                    ⌘K
-                  </kbd>
-                )}
+        {/* Right Controls & User Profile Badge */}
+        <div className="flex shrink-0 items-center space-x-2 sm:space-x-4">
 
-                {searchQuery && (
-                  <button
-                    type="button"
-                    onClick={() => setSearchQuery("")}
-                    className="absolute right-2.5 text-zinc-500 hover:text-white"
-                  >
-                    <X className="h-3.5 w-3.5" />
-                  </button>
-                )}
-              </div>
-            </form>
+          {/* Notification Bell — hidden on mobile to reduce crowding */}
+          <button aria-label="Notifications" className="relative hidden h-8 w-8 items-center justify-center rounded-lg bg-card border border-border text-muted-foreground hover:text-foreground transition-colors sm:flex">
+            <Bell className="h-4 w-4" />
+            <span className="absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-primary" />
+          </button>
 
-            {/* Dropdown Search Results */}
-            {isSearchOpen && searchResults.length > 0 && (
-              <div className="absolute left-0 right-0 top-full mt-2 rounded-xl border border-white/10 bg-[#1c1b1b] p-2 shadow-2xl backdrop-blur-xl z-50 space-y-1">
-                {searchResults.map((game) => (
-                  <Link
-                    key={game.id}
-                    href={`/game/${game.slug}`}
-                    onClick={() => setIsSearchOpen(false)}
-                    className="flex items-center space-x-3 rounded-lg p-2 hover:bg-zinc-800 transition-colors"
-                  >
-                    <img src={game.thumbnailUrl} alt={game.title} className="h-8 w-12 rounded-md object-cover" />
-                    <div className="flex flex-col truncate">
-                      <span className="font-display text-xs font-bold text-white truncate">{game.derivedTitle || game.title}</span>
-                      <span className="font-mono text-[10px] text-zinc-400 capitalize">{game.category}</span>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* Random Game Roll Button */}
+          {/* Random Roll Dice — hidden on mobile to reduce crowding */}
           <button
             onClick={handleRandomGame}
             title="Random Game (Roll Dice)"
-            className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#1c1b1b] border border-white/10 text-zinc-400 hover:bg-[#c3f400] hover:text-[#161e00] transition-all shadow-md"
+            aria-label="Play a random game"
+            className="hidden h-8 w-8 items-center justify-center rounded-lg bg-card border border-border text-muted-foreground hover:bg-primary hover:text-primary-foreground transition-all sm:flex"
           >
-            <Dices className={`h-4 w-4 ${isSpinning ? "animate-spin text-[#161e00]" : ""}`} />
+            <Dices className={`h-4 w-4 ${isSpinning ? "animate-spin" : ""}`} />
           </button>
 
-          {/* Favorites Counter */}
+          {/* Favorites Badge */}
           <Link
             href="/search?favorites=true"
-            className="relative flex h-8 items-center space-x-1.5 rounded-lg bg-[#1c1b1b] border border-white/10 px-3 text-xs font-bold text-zinc-300 hover:bg-zinc-800 transition-all font-mono"
+            aria-label="Saved games"
+            className="relative flex h-8 items-center space-x-1.5 rounded-lg bg-card border border-border px-2 text-xs font-mono font-bold text-foreground/80 hover:bg-accent transition-all sm:px-3"
           >
-            <Heart className="h-3.5 w-3.5 text-rose-500 fill-rose-500" />
+            <Heart className="h-3.5 w-3.5 text-rose-500 fill-rose-500" aria-hidden="true" />
             <span className="hidden sm:inline">Saved</span>
             {mounted && favorites.length > 0 && (
-              <span className="ml-1 rounded-full bg-[#c3f400] text-[#161e00] font-mono font-black text-[9px] px-1.5 py-0.2">
+              <span className="ml-1 rounded-full bg-primary text-primary-foreground font-mono font-black text-[9px] px-1.5 py-0.2">
                 {favorites.length}
               </span>
             )}
           </Link>
 
-          {/* Mobile Menu Trigger */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden flex h-8 w-8 items-center justify-center rounded-lg bg-[#1c1b1b] border border-white/10 text-zinc-300"
-          >
-            <Menu className="h-4 w-4" />
-          </button>
+          {/* Commander_7 Profile Badge */}
+          <Link href="/profile" aria-label="Your profile" className="flex items-center space-x-2.5 rounded-xl border border-border bg-card px-2 py-1 hover:border-primary/40 transition-colors sm:px-3">
+            <div className="hidden flex-col text-right font-mono leading-none sm:flex">
+              <span className="text-xs font-bold text-foreground">Commander_7</span>
+              <span className="text-[9px] font-bold text-primary tracking-wider mt-0.5">LEVEL 42 ELITE</span>
+            </div>
+            <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-secondary text-secondary-foreground font-bold text-xs">
+              <User className="h-4 w-4" />
+            </div>
+          </Link>
 
         </div>
       </div>
-
-      {/* Mobile Drawer Menu */}
-      {isMobileMenuOpen && (
-        <div className="md:hidden border-t border-white/10 bg-[#131313] p-4 space-y-3 font-bold text-xs">
-          <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className="block py-2 text-white font-display">
-            Store
-          </Link>
-          <Link href="/discover" onClick={() => setIsMobileMenuOpen(false)} className="block py-2 text-zinc-400 hover:text-white">
-            Discover Catalog
-          </Link>
-          <Link href="/library" onClick={() => setIsMobileMenuOpen(false)} className="block py-2 text-zinc-400 hover:text-white">
-            My Game Library
-          </Link>
-          <Link href="/developers" onClick={() => setIsMobileMenuOpen(false)} className="block py-2 text-zinc-400 hover:text-white">
-            Publishers
-          </Link>
-          <Link href="/admin" onClick={() => setIsMobileMenuOpen(false)} className="block py-2 text-zinc-400 hover:text-white">
-            Admin Suite
-          </Link>
-        </div>
-      )}
     </header>
   );
 }

@@ -6,7 +6,7 @@ import { TrendingUp, ArrowLeft, Users, Play, Search, Eye } from "lucide-react";
 import { Card } from "@/components/ui/card";
 
 export const metadata: Metadata = {
-  title: "Platform Analytics - GameHub Admin",
+  title: "Platform Analytics - PlayNow Admin",
   description: "Play trends, retention metrics, user activity, and popular game rankings.",
 };
 

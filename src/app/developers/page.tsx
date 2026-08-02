@@ -49,11 +49,11 @@ export default function DevelopersPage() {
           </div>
           
           <h1 className="text-3xl sm:text-4xl font-black text-foreground tracking-tight">
-            Publish Open-Source Games on GameHub
+            Publish Open-Source Games on PlayNow
           </h1>
           
           <p className="text-muted-foreground text-sm leading-relaxed max-w-2xl">
-            Submit your open-source HTML5 browser game for automated legal compliance audit, repository authentication, and global hosting on GameHub.
+            Submit your open-source HTML5 browser game for automated legal compliance audit, repository authentication, and global hosting on PlayNow.
           </p>
         </div>
 
@@ -175,7 +175,7 @@ export default function DevelopersPage() {
                     onChange={(e) => setAssetSource(e.target.value)}
                     className="w-full rounded-xl bg-background/60 border border-border/60 p-2.5 text-xs font-bold text-foreground focus:outline-none"
                   >
-                    <option value="Original">Original GameHub / Custom Vector Assets</option>
+                    <option value="Original">Original PlayNow / Custom Vector Assets</option>
                     <option value="CC0">CC0 Public Domain Assets</option>
                     <option value="Open Licensed">Open Licensed Media</option>
                   </select>

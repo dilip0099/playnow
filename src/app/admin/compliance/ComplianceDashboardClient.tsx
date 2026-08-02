@@ -48,15 +48,16 @@ export function ComplianceDashboardClient({ initialData }: ComplianceDashboardCl
     const rejectedGames = Number(licenseReport?.totalRejected) || 0;
 
     const licenseCounts = {
+      networkLicensed: games.filter((g) => g?.license === "Network-Licensed").length,
       MIT: games.filter((g) => g?.license === "MIT").length,
       Apache: games.filter((g) => g?.license === "Apache-2.0").length,
       BSD: games.filter((g) => String(g?.license || "").startsWith("BSD")).length,
       ISC: games.filter((g) => g?.license === "ISC").length,
-      Owned: assetSources.filter((s) => s?.ownershipStatus === "OWNED" || s?.creator === "GameHub Studios").length,
     };
 
+    const sourceNetworks = new Set(games.map((g) => g?.sourceNetwork).filter(Boolean));
     const totalAssets = assetRegistry.length;
-    const ownedAssets = assetSources.filter((s) => s?.ownershipStatus === "OWNED" || s?.creator === "GameHub Studios").length;
+    const ownedAssets = assetSources.filter((s) => s?.ownershipStatus === "OWNED" || s?.creator === "PlayNow Studios").length;
     const thirdPartyAssets = totalAssets - ownedAssets;
     const missingRecords = totalAssets - assetSources.length;
 
@@ -76,6 +77,7 @@ export function ComplianceDashboardClient({ initialData }: ComplianceDashboardCl
       verifiedGames,
       rejectedGames,
       licenseCounts,
+      sourceNetworkCount: sourceNetworks.size,
       totalAssets,
       ownedAssets,
       thirdPartyAssets,
@@ -116,7 +118,7 @@ export function ComplianceDashboardClient({ initialData }: ComplianceDashboardCl
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `gamehub-compliance-report-${new Date().toISOString().split("T")[0]}.json`;
+    a.download = `playnow-compliance-report-${new Date().toISOString().split("T")[0]}.json`;
     a.click();
     URL.revokeObjectURL(url);
   };
@@ -133,9 +135,9 @@ export function ComplianceDashboardClient({ initialData }: ComplianceDashboardCl
               <span>Internal Admin System</span>
             </span>
           </div>
-          <h1 className="text-3xl font-black tracking-tight text-foreground">GameHub Compliance Dashboard</h1>
+          <h1 className="text-3xl font-black tracking-tight text-foreground">PlayNow Compliance Dashboard</h1>
           <p className="text-sm text-muted-foreground mt-1">
-            Legal compliance telemetry, repository trust verification, asset provenance, and trademark audit engine.
+            Legal compliance telemetry for PlayNow's GamePix-licensed game catalog — license records, sourcing, and trademark screening.
           </p>
         </div>
 
@@ -171,25 +173,24 @@ export function ComplianceDashboardClient({ initialData }: ComplianceDashboardCl
             <Key className="h-4 w-4 text-purple-400" />
           </div>
           <div className="text-2xl font-black text-purple-300">
-            MIT ({metrics.licenseCounts.MIT})
+            Network-Licensed ({metrics.licenseCounts.networkLicensed})
           </div>
           <div className="text-[11px] font-semibold text-muted-foreground flex flex-wrap gap-x-2">
+            <span>MIT: {metrics.licenseCounts.MIT}</span>
             <span>Apache: {metrics.licenseCounts.Apache}</span>
             <span>BSD: {metrics.licenseCounts.BSD}</span>
-            <span>ISC: {metrics.licenseCounts.ISC}</span>
           </div>
         </Card>
 
-        {/* Assets Metric */}
+        {/* Sourcing Metric */}
         <Card className="p-5 border-border/60 bg-card/60 backdrop-blur-md space-y-2">
           <div className="flex items-center justify-between text-xs font-bold text-muted-foreground uppercase">
-            <span>Asset Provenance</span>
+            <span>Sourcing Networks</span>
             <Layers className="h-4 w-4 text-emerald-400" />
           </div>
-          <div className="text-3xl font-black text-foreground">{metrics.totalAssets}</div>
-          <div className="flex items-center justify-between text-xs font-semibold pt-1 border-t border-border/30">
-            <span className="text-cyan-400">Owned: {metrics.ownedAssets}</span>
-            <span className="text-amber-400">Missing: {metrics.missingRecords}</span>
+          <div className="text-3xl font-black text-foreground">{metrics.sourceNetworkCount}</div>
+          <div className="text-xs font-semibold text-cyan-400 pt-1 border-t border-border/30">
+            All games embedded via GamePix
           </div>
         </Card>
 
@@ -230,7 +231,7 @@ export function ComplianceDashboardClient({ initialData }: ComplianceDashboardCl
           <Input
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search games, authors, repositories..."
+            placeholder="Search games, creators, slugs..."
             className="pl-10 rounded-xl bg-background/60 border-border/60 text-sm"
           />
         </div>
@@ -271,10 +272,10 @@ export function ComplianceDashboardClient({ initialData }: ComplianceDashboardCl
               <tr>
                 <th className="px-5 py-4">#</th>
                 <th className="px-5 py-4">Game Title & Slug</th>
-                <th className="px-5 py-4">Original Author</th>
+                <th className="px-5 py-4">Source</th>
                 <th className="px-5 py-4">License</th>
-                <th className="px-5 py-4">Git Commit</th>
-                <th className="px-5 py-4">Asset Provenance</th>
+                <th className="px-5 py-4">GamePix ID</th>
+                <th className="px-5 py-4">Verification</th>
                 <th className="px-5 py-4">Brand Risk</th>
                 <th className="px-5 py-4 text-right">Commercial Ready</th>
               </tr>
@@ -295,18 +296,18 @@ export function ComplianceDashboardClient({ initialData }: ComplianceDashboardCl
                   </td>
 
                   <td className="px-5 py-4 font-medium text-foreground">
-                    {game.originalAuthor || game.author}
+                    {game.sourceNetwork || game.author}
                   </td>
 
                   <td className="px-5 py-4">
                     <Badge variant="outline" className="font-mono text-[10px] bg-purple-500/10 text-purple-300 border-purple-500/30">
-                      {game.originalLicense || game.license}
+                      {game.license}
                     </Badge>
                   </td>
 
                   <td className="px-5 py-4">
                     <code className="font-mono text-[10px] text-cyan-400 bg-slate-900 px-1.5 py-0.5 rounded">
-                      {(game.originalCommitHash || game.commitHash || "").slice(0, 7)}
+                      {game.externalGameId || (game.commitHash || "").slice(0, 7)}
                     </code>
                   </td>
 

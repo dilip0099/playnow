@@ -1,14 +1,13 @@
 {
-  "name": "gamehub",
+  "name": "playnow",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npm run import-games && npm run validate-games && next build",
+    "build": "npm run import-gamepix && next build",
     "start": "next start",
     "lint": "next lint",
-    "import-games": "tsx src/scripts/import-games.ts",
-    "validate-games": "tsx src/scripts/validate-games.ts"
+    "import-gamepix": "tsx --env-file-if-exists=.env.local src/scripts/import-gamepix.ts"
   },
   "dependencies": {
     "clsx": "^2.1.1",

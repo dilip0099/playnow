@@ -2,12 +2,12 @@ import { Metadata } from "next";
 import Link from "next/link";
 import fs from "fs";
 import path from "path";
-import { GitBranch, ArrowLeft, ExternalLink, ShieldCheck } from "lucide-react";
+import { GitBranch, ArrowLeft, ExternalLink } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
 export const metadata: Metadata = {
-  title: "Author Attributions & Code Provenance - GameHub Legal",
-  description: "Official open-source author attributions, repository URLs, Git commit hashes, and LICENSE file links.",
+  title: "Game Sourcing Credits - PlayNow Legal",
+  description: "Every game on PlayNow is licensed via GamePix. This page lists the source, license, and catalog ID for each title.",
 };
 
 export default function LegalAttributionsPage() {
@@ -35,9 +35,9 @@ export default function LegalAttributionsPage() {
               <span>Public Attributions Registry</span>
             </span>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-black text-foreground">Author Attributions & Code Provenance</h1>
+          <h1 className="text-3xl sm:text-4xl font-black text-foreground">Game Sourcing Credits</h1>
           <p className="text-sm text-muted-foreground leading-relaxed">
-            Full legal attribution is preserved for all open-source creator repositories. Every game entry maintains direct links to original GitHub repositories, original authors, and exact Git commit hashes.
+            Every game on PlayNow is licensed through <strong className="text-foreground">GamePix</strong>, a third-party HTML5 game publisher network — PlayNow does not author this game code, only embeds it under a publisher agreement. Each title below links to its real GamePix catalog entry and ID so its origin is fully traceable.
           </p>
         </div>
 
@@ -48,11 +48,10 @@ export default function LegalAttributionsPage() {
               <thead className="bg-slate-900/80 text-foreground font-bold border-b border-border/60 uppercase tracking-wider text-[11px]">
                 <tr>
                   <th className="px-5 py-4">#</th>
-                  <th className="px-5 py-4">Derived Title</th>
-                  <th className="px-5 py-4">Original Author</th>
-                  <th className="px-5 py-4">Original Repository</th>
+                  <th className="px-5 py-4">Title</th>
+                  <th className="px-5 py-4">Source</th>
                   <th className="px-5 py-4">License</th>
-                  <th className="px-5 py-4 text-right">Git Commit</th>
+                  <th className="px-5 py-4 text-right">Catalog ID</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-border/40">
@@ -64,26 +63,20 @@ export default function LegalAttributionsPage() {
                         {game.derivedTitle || game.title}
                       </Link>
                     </td>
-                    <td className="px-5 py-4 font-medium text-foreground">{game.originalAuthor || game.author}</td>
-                    <td className="px-5 py-4">
-                      <a
-                        href={game.originalRepository || game.repository}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-cyan-400 hover:underline flex items-center space-x-1"
-                      >
-                        <span>GitHub Repo</span>
-                        <ExternalLink className="h-3 w-3" />
+                    <td className="px-5 py-4 font-medium text-foreground">
+                      <a href={game.gameUrl} target="_blank" rel="noopener noreferrer" className="flex items-center space-x-1 hover:text-cyan-400 transition-colors">
+                        <span>{game.sourceNetwork || game.author}</span>
+                        <ExternalLink className="h-3 w-3 opacity-60" />
                       </a>
                     </td>
                     <td className="px-5 py-4">
                       <Badge variant="outline" className="font-mono text-[10px] bg-purple-500/10 text-purple-300 border-purple-500/30">
-                        {game.originalLicense || game.license}
+                        {game.license}
                       </Badge>
                     </td>
                     <td className="px-5 py-4 text-right">
                       <code className="font-mono text-[10px] text-cyan-400 bg-slate-900 px-1.5 py-0.5 rounded">
-                        {(game.originalCommitHash || game.commitHash || "").slice(0, 7)}
+                        {game.externalGameId || (game.commitHash || "").slice(0, 12)}
                       </code>
                     </td>
                   </tr>

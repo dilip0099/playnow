@@ -6,50 +6,49 @@ const config: Config = {
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/lib/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
       colors: {
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
+        background: "rgb(var(--color-background) / <alpha-value>)",
+        foreground: "rgb(var(--color-foreground) / <alpha-value>)",
         card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
+          DEFAULT: "rgb(var(--color-card) / <alpha-value>)",
+          foreground: "rgb(var(--color-card-foreground) / <alpha-value>)",
         },
         popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
+          DEFAULT: "rgb(var(--color-popover) / <alpha-value>)",
+          foreground: "rgb(var(--color-popover-foreground) / <alpha-value>)",
         },
         primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
+          DEFAULT: "rgb(var(--color-primary) / <alpha-value>)",
+          hover: "rgb(var(--color-primary-hover) / <alpha-value>)",
+          foreground: "rgb(var(--color-primary-foreground) / <alpha-value>)",
         },
         secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
+          DEFAULT: "rgb(var(--color-secondary) / <alpha-value>)",
+          foreground: "rgb(var(--color-secondary-foreground) / <alpha-value>)",
         },
         muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
+          DEFAULT: "rgb(var(--color-muted) / <alpha-value>)",
+          foreground: "rgb(var(--color-muted-foreground) / <alpha-value>)",
         },
         accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
+          DEFAULT: "rgb(var(--color-accent) / <alpha-value>)",
+          foreground: "rgb(var(--color-accent-foreground) / <alpha-value>)",
         },
         destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))",
+          DEFAULT: "rgb(var(--color-destructive) / <alpha-value>)",
+          foreground: "rgb(var(--color-destructive-foreground) / <alpha-value>)",
         },
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
-        neon: {
-          cyan: "#00f0ff",
-          purple: "#9d4edd",
-          pink: "#ff007f",
-          lime: "#39ff14",
-          amber: "#ffb703"
-        }
+        border: "rgb(var(--color-border) / <alpha-value>)",
+        input: "rgb(var(--color-input) / <alpha-value>)",
+        ring: "rgb(var(--color-ring) / <alpha-value>)",
+        /* Recessed chrome (sidebar/navbar/footer/mobile-nav) — same tone as
+           `input`, named separately so shell-vs-form-control usage doesn't
+           get conflated in class names. */
+        shell: "rgb(var(--color-input) / <alpha-value>)",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -59,21 +58,24 @@ const config: Config = {
         "3xl": "1.5rem",
       },
       boxShadow: {
-        "neon-cyan": "0 0 20px -3px rgba(0, 240, 255, 0.4)",
-        "neon-purple": "0 0 20px -3px rgba(157, 78, 221, 0.4)",
-        "neon-pink": "0 0 20px -3px rgba(255, 0, 127, 0.4)",
-        "glow": "0 0 25px -5px rgba(124, 58, 237, 0.3)"
+        "glow-primary": "0 0 20px -3px rgba(195, 244, 0, 0.35)",
+        "glow-secondary": "0 0 20px -3px rgba(119, 1, 208, 0.4)",
+      },
+      transitionDuration: {
+        fast: "150ms",
+        base: "250ms",
+        slow: "400ms",
       },
       animation: {
         "pulse-slow": "pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite",
-        "glow-fade": "glowFade 2s ease-in-out infinite alternate"
+        "glow-fade": "glowFade 2s ease-in-out infinite alternate",
       },
       keyframes: {
         glowFade: {
           "0%": { opacity: "0.4", filter: "brightness(1)" },
-          "100%": { opacity: "0.9", filter: "brightness(1.3)" }
-        }
-      }
+          "100%": { opacity: "0.9", filter: "brightness(1.3)" },
+        },
+      },
     },
   },
   plugins: [],

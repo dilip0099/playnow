@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: DevPageProps): Promise<Metada
   const decodedName = decodeURIComponent(slug).replace(/-/g, " ");
   return {
     title: `${decodedName} - Open Source Game Creator Profile`,
-    description: `Browse open-source browser games created by ${decodedName} on GameHub Marketplace.`,
+    description: `Browse open-source browser games created by ${decodedName} on PlayNow Marketplace.`,
   };
 }
 

@@ -10,7 +10,7 @@ export type GameCategory =
   | "sports"
   | "multiplayer";
 
-export type GameClassification = "Original Game" | "Derived Game";
+export type GameClassification = "Original Game" | "Derived Game" | "Licensed Game";
 
 export type BrandRiskLevel = "LOW" | "MEDIUM" | "HIGH";
 export type AssetSourceType = "Original" | "CC0" | "MIT licensed" | "Open Licensed" | "Unknown";
@@ -95,6 +95,12 @@ export interface GameMetadata {
   monetizationEnabled?: boolean;
   adSupported?: boolean;
   revenueShare?: number;
+
+  // Third-party game network sourcing (e.g. GamePix) — set when gameType is
+  // "Licensed Game". Monetization for these is handled by the network itself
+  // per its publisher agreement, not by PlayNow's own ad stack.
+  sourceNetwork?: string;
+  externalGameId?: string;
 }
 
 export type SortOption = "popular" | "rating" | "newest" | "title";

@@ -1,162 +1,242 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { Search, Compass, SlidersHorizontal, ArrowUpDown } from "lucide-react";
+import { LayoutGrid, List, Plus, Star, SlidersHorizontal } from "lucide-react";
 import { GameMetadata, SortOption } from "@/types/game";
 import { GameCard } from "@/components/games/GameCard";
-import { Input } from "@/components/ui/input";
+import { Dialog } from "@/components/ui/dialog";
 
 interface DiscoverClientProps {
   initialGames: GameMetadata[];
 }
 
-const CATEGORIES = [
-  "all",
-  "arcade",
-  "puzzle",
-  "action",
-  "strategy",
-  "racing",
-  "sports",
-  "platformer",
-  "adventure",
-  "classic",
+const GENRE_FILTERS = [
+  { name: "Action / Combat", key: "action" },
+  { name: "Deep Strategy", key: "strategy" },
+  { name: "Brain Puzzles", key: "puzzle" },
+  { name: "Speed Racing", key: "racing" },
+  { name: "Epic Adventure", key: "adventure" },
+  { name: "Arcade Classic", key: "arcade" },
+  { name: "Arena Sports", key: "sports" },
+  { name: "Multiplayer Hub", key: "multiplayer" },
 ];
 
+interface FilterControlsProps {
+  selectedGenre: string | null;
+  setSelectedGenre: (value: string | null) => void;
+  topRatedOnly: boolean;
+  setTopRatedOnly: (value: boolean) => void;
+}
+
+function FilterControls({ selectedGenre, setSelectedGenre, topRatedOnly, setTopRatedOnly }: FilterControlsProps) {
+  return (
+    <>
+      {/* Genre Registry */}
+      <div className="space-y-3">
+        <span className="text-primary text-[10px] font-bold uppercase tracking-widest font-mono">GENRE REGISTRY</span>
+        <div className="space-y-1.5">
+          {GENRE_FILTERS.map((genre) => (
+            <button
+              key={genre.key}
+              onClick={() => setSelectedGenre(selectedGenre === genre.key ? null : genre.key)}
+              aria-pressed={selectedGenre === genre.key}
+              className={`flex items-center space-x-2.5 w-full text-left py-1.5 text-xs font-bold font-mono transition-colors ${
+                selectedGenre === genre.key ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              <span className={`h-3 w-3 rounded-sm ${selectedGenre === genre.key ? "bg-primary" : "bg-muted"}`} />
+              <span>{genre.name}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Rating Filter */}
+      <div className="mt-8 space-y-3">
+        <span className="text-primary text-[10px] font-bold uppercase tracking-widest font-mono">RATING</span>
+        <button
+          onClick={() => setTopRatedOnly(!topRatedOnly)}
+          aria-pressed={topRatedOnly}
+          className={`flex items-center space-x-1.5 rounded-full border px-2.5 py-1 font-mono font-bold text-[10px] transition-colors ${
+            topRatedOnly
+              ? "border-primary bg-primary/10 text-primary"
+              : "border-border text-muted-foreground hover:text-foreground"
+          }`}
+        >
+          <Star className={`h-3 w-3 ${topRatedOnly ? "fill-current" : ""}`} aria-hidden="true" />
+          <span>4.5+ Top Rated</span>
+        </button>
+      </div>
+    </>
+  );
+}
+
 export function DiscoverClient({ initialGames }: DiscoverClientProps) {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("all");
-  const [sortBy, setSortBy] = useState<SortOption | "trending" | "updated">("popular");
+  const [selectedGenre, setSelectedGenre] = useState<string | null>(null);
+  const [topRatedOnly, setTopRatedOnly] = useState(false);
+  const [sortBy, setSortBy] = useState<SortOption>("popular");
+  const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
+  const [visibleCount, setVisibleCount] = useState(8);
+  const [isFilterDialogOpen, setIsFilterDialogOpen] = useState(false);
 
-  const filteredAndSortedGames = useMemo(() => {
+  const activeFilterCount = (selectedGenre ? 1 : 0) + (topRatedOnly ? 1 : 0);
+
+  const topTrending = useMemo(
+    () => [...initialGames].sort((a, b) => b.playsCount - a.playsCount)[0],
+    [initialGames]
+  );
+
+  const filteredGames = useMemo(() => {
     let result = [...initialGames];
-
-    // Category Filter
-    if (selectedCategory !== "all") {
-      result = result.filter((g) => g.category.toLowerCase() === selectedCategory.toLowerCase());
+    if (selectedGenre) {
+      result = result.filter((g) => g.category.toLowerCase() === selectedGenre.toLowerCase());
     }
-
-    // Search Query Filter
-    if (searchQuery.trim()) {
-      const q = searchQuery.toLowerCase().trim();
-      result = result.filter(
-        (g) =>
-          g.title.toLowerCase().includes(q) ||
-          g.author.toLowerCase().includes(q) ||
-          g.tags.some((t) => t.toLowerCase().includes(q))
-      );
+    if (topRatedOnly) {
+      result = result.filter((g) => g.rating >= 4.5);
     }
-
-    // Sorting
     switch (sortBy) {
-      case "popular":
-        return result.sort((a, b) => (b.playsCount || 0) - (a.playsCount || 0));
-      case "rating":
-        return result.sort((a, b) => (b.rating || 0) - (a.rating || 0));
-      case "newest":
-        return result.sort(
-          (a, b) => new Date(b.releaseDate || 0).getTime() - new Date(a.releaseDate || 0).getTime()
-        );
-      case "trending":
-        return result.sort((a, b) => Number(b.trending) - Number(a.trending));
-      case "updated":
-        return result.sort(
-          (a, b) => new Date(b.lastUpdated || 0).getTime() - new Date(a.lastUpdated || 0).getTime()
-        );
-      default:
-        return result;
+      case "popular": return result.sort((a, b) => b.playsCount - a.playsCount);
+      case "rating": return result.sort((a, b) => b.rating - a.rating);
+      case "newest": return result.sort((a, b) => new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime());
+      default: return result;
     }
-  }, [initialGames, selectedCategory, searchQuery, sortBy]);
+  }, [initialGames, selectedGenre, topRatedOnly, sortBy]);
+
+  const visibleGames = filteredGames.slice(0, visibleCount);
+  const remainingCount = Math.max(0, filteredGames.length - visibleCount);
 
   return (
-    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-8">
-      
-      {/* Header Banner */}
-      <div className="space-y-2 border-b border-border/60 pb-6">
-        <div className="flex items-center space-x-2">
-          <span className="rounded-full bg-cyan-500/10 px-3 py-1 text-xs font-bold text-cyan-400 border border-cyan-500/20 flex items-center space-x-1">
-            <Compass className="h-3.5 w-3.5 mr-1" />
-            <span>Discover Portal</span>
-          </span>
-        </div>
-        <h1 className="text-3xl sm:text-4xl font-black text-white">Explore Full Game Catalog</h1>
-        <p className="text-sm text-slate-300">
-          Search and filter through our verified open-source HTML5 browser games repository.
-        </p>
-      </div>
+    <div className="min-h-screen bg-background text-foreground">
 
-      {/* Filter & Search Bar Controls */}
-      <div className="flex flex-col sm:flex-row items-center gap-4 bg-card/60 p-4 rounded-2xl border border-border/60 backdrop-blur-md">
-        
-        {/* Search Input */}
-        <div className="relative flex-1 w-full">
-          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
-          <Input
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search by title, author, or tag..."
-            className="pl-10 rounded-xl bg-slate-900/80 border-border/60 text-sm text-white"
-          />
-        </div>
-
-        {/* Sort By Selector */}
-        <div className="flex items-center space-x-3 w-full sm:w-auto">
-          <div className="relative flex items-center w-full sm:w-auto">
-            <SlidersHorizontal className="absolute left-3 h-3.5 w-3.5 text-slate-400" />
-            <select
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value as any)}
-              className="w-full sm:w-auto rounded-xl border border-border/60 bg-slate-900/80 py-2 pl-9 pr-8 text-xs font-bold text-white focus:outline-none appearance-none cursor-pointer"
-            >
-              <option value="popular">Most Played</option>
-              <option value="trending">Trending</option>
-              <option value="rating">Highest Rated</option>
-              <option value="newest">Newest First</option>
-              <option value="updated">Recently Updated</option>
-            </select>
-            <ArrowUpDown className="absolute right-2.5 h-3.5 w-3.5 text-slate-400 pointer-events-none" />
+      {/* ═══ CATALOG STATUS BAR ═══ */}
+      <div className="border-b border-border bg-shell px-4 sm:px-6 lg:px-8 py-3">
+        <div className="mx-auto max-w-7xl flex flex-wrap items-center justify-between gap-4 font-mono text-xs">
+          <div className="flex items-center space-x-8">
+            <div>
+              <span className="text-primary text-[10px] font-bold uppercase tracking-widest block">CATALOG</span>
+              <span className="text-foreground font-black text-lg flex items-center">
+                {initialGames.length} <span className="text-muted-foreground font-normal ml-1.5 text-xs">Games Available</span>
+              </span>
+            </div>
+            <div className="hidden sm:block">
+              <span className="text-muted-foreground text-[10px] block uppercase">MOST PLAYED</span>
+              <span className="text-foreground/80 font-bold">{topTrending?.derivedTitle || topTrending?.title}</span>
+            </div>
           </div>
-        </div>
 
-      </div>
-
-      {/* Category Tabs */}
-      <div className="flex items-center space-x-2 overflow-x-auto pb-2 no-scrollbar">
-        {CATEGORIES.map((cat) => (
+          {/* Mobile/Tablet Filter Trigger — the genre/rating sidebar is desktop-only (lg+) */}
           <button
-            key={cat}
-            onClick={() => setSelectedCategory(cat)}
-            className={`rounded-full px-4 py-1.5 text-xs font-bold capitalize transition-all whitespace-nowrap ${
-              selectedCategory === cat
-                ? "bg-purple-600 text-white shadow-lg shadow-purple-600/30"
-                : "bg-slate-900 text-slate-400 border border-border/60 hover:text-white"
-            }`}
+            onClick={() => setIsFilterDialogOpen(true)}
+            aria-haspopup="dialog"
+            className="relative flex items-center space-x-1.5 rounded-lg border border-border bg-card px-3 py-1.5 font-bold text-xs text-foreground/80 transition-colors hover:bg-accent lg:hidden"
           >
-            {cat}
+            <SlidersHorizontal className="h-3.5 w-3.5" aria-hidden="true" />
+            <span>Filters</span>
+            {activeFilterCount > 0 && (
+              <span className="ml-1 rounded-full bg-primary px-1.5 py-0.2 font-mono text-[9px] font-black text-primary-foreground">
+                {activeFilterCount}
+              </span>
+            )}
           </button>
-        ))}
-      </div>
 
-      {/* Results Count & Grid */}
-      <div className="space-y-4">
-        <div className="text-xs font-semibold text-slate-400">
-          Showing <strong className="text-white">{filteredAndSortedGames.length}</strong> games
+          {/* Grid/List toggle */}
+          <div className="flex items-center space-x-1 bg-card rounded-lg p-1 border border-border">
+            <button
+              onClick={() => setViewMode("grid")}
+              aria-pressed={viewMode === "grid"}
+              aria-label="Grid view"
+              className={`p-1.5 rounded-md transition-colors ${viewMode === "grid" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}
+            >
+              <LayoutGrid className="h-4 w-4" />
+            </button>
+            <button
+              onClick={() => setViewMode("list")}
+              aria-pressed={viewMode === "list"}
+              aria-label="List view"
+              className={`p-1.5 rounded-md transition-colors ${viewMode === "list" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}
+            >
+              <List className="h-4 w-4" />
+            </button>
+          </div>
         </div>
-
-        {filteredAndSortedGames.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {filteredAndSortedGames.map((game) => (
-              <GameCard key={game.id} game={game} />
-            ))}
-          </div>
-        ) : (
-          <div className="rounded-3xl border border-dashed border-border p-12 text-center text-slate-400 space-y-2">
-            <h3 className="text-lg font-bold text-white">No matching games found</h3>
-            <p className="text-xs">Try adjusting your category filter or search query.</p>
-          </div>
-        )}
       </div>
 
+      {/* Mobile/Tablet Filter Dialog — same controls as the desktop sidebar below */}
+      <Dialog open={isFilterDialogOpen} onClose={() => setIsFilterDialogOpen(false)} title="Filter Games">
+        <FilterControls
+          selectedGenre={selectedGenre}
+          setSelectedGenre={setSelectedGenre}
+          topRatedOnly={topRatedOnly}
+          setTopRatedOnly={setTopRatedOnly}
+        />
+        <button
+          onClick={() => setIsFilterDialogOpen(false)}
+          className="mt-6 w-full rounded-xl bg-primary py-3 font-mono text-xs font-bold uppercase tracking-wider text-primary-foreground transition-colors hover:bg-primary-hover"
+        >
+          Show {filteredGames.length} Games
+        </button>
+      </Dialog>
+
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+        <div className="flex gap-8">
+
+          {/* ═══ LEFT SIDEBAR: Genre Registry + Filters (desktop only) ═══ */}
+          <aside className="hidden lg:block w-52 flex-shrink-0 space-y-8 font-mono">
+            <FilterControls
+              selectedGenre={selectedGenre}
+              setSelectedGenre={setSelectedGenre}
+              topRatedOnly={topRatedOnly}
+              setTopRatedOnly={setTopRatedOnly}
+            />
+          </aside>
+
+          {/* ═══ MAIN CONTENT: Game Grid ═══ */}
+          <div className="flex-1 min-w-0 space-y-6">
+
+            {/* Game Cards Grid */}
+            <div className={`grid gap-5 ${viewMode === "grid" ? "grid-cols-1 sm:grid-cols-2 xl:grid-cols-3" : "grid-cols-1"}`}>
+              {visibleGames.map((game, idx) => (
+                <GameCard key={game.id} game={game} aspectRatio="16/9" priority={idx < 6} />
+              ))}
+
+              {/* Submit Game Card */}
+              <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-border bg-card p-8 text-center space-y-3">
+                <div className="flex h-14 w-14 items-center justify-center rounded-full border border-border text-muted-foreground">
+                  <Plus className="h-6 w-6" aria-hidden="true" />
+                </div>
+                <h3 className="font-display text-sm font-bold text-foreground">Submit Game</h3>
+                <p className="font-mono text-[10px] text-muted-foreground uppercase tracking-wider">JOIN THE FLEET</p>
+              </div>
+            </div>
+
+            {/* Discord CTA */}
+            <div className="rounded-2xl border border-border bg-card p-6 flex items-center justify-between">
+              <div className="space-y-1">
+                <h3 className="font-display text-sm font-bold text-foreground">Join Discord</h3>
+                <p className="font-mono text-[10px] text-muted-foreground uppercase tracking-wider">COMMUNITY EVENTS</p>
+              </div>
+              <button className="rounded-lg bg-primary px-5 py-2.5 font-mono text-[10px] font-bold text-primary-foreground uppercase tracking-wider hover:bg-primary-hover transition-colors">
+                CONNECT NOW
+              </button>
+            </div>
+
+            {/* Load More */}
+            {remainingCount > 0 && (
+              <div className="space-y-3 text-center">
+                <button
+                  onClick={() => setVisibleCount((prev) => prev + 8)}
+                  className="w-full rounded-2xl border border-border bg-card py-4 font-mono text-xs font-bold text-foreground/80 hover:text-primary hover:border-primary/30 transition-all uppercase tracking-wider"
+                >
+                  LOAD {Math.min(remainingCount, 8)} MORE TITLES
+                </button>
+                <p className="font-mono text-[10px] text-muted-foreground">
+                  Showing {visibleCount} of {filteredGames.length} Games
+                </p>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
-  title: "Game Management CMS - GameHub Admin",
+  title: "Game Management CMS - PlayNow Admin",
   description: "CMS game catalog management, metadata editor, compliance status, and monetization toggle.",
 };
 

@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { Copy, Check, X, Share2, Twitter, Facebook } from "lucide-react";
+import { Copy, Check, Share2, Twitter, Facebook } from "lucide-react";
 import { GameMetadata } from "@/types/game";
+import { Dialog } from "@/components/ui/dialog";
 
 interface ShareModalProps {
   game: GameMetadata;
@@ -13,8 +14,6 @@ interface ShareModalProps {
 export function ShareModal({ game, isOpen, onClose }: ShareModalProps) {
   const [copied, setCopied] = useState(false);
 
-  if (!isOpen) return null;
-
   const currentUrl = typeof window !== "undefined" ? window.location.href : "";
 
   const handleCopy = () => {
@@ -24,7 +23,7 @@ export function ShareModal({ game, isOpen, onClose }: ShareModalProps) {
   };
 
   const shareOnTwitter = () => {
-    const text = encodeURIComponent(`Play ${game.title} on GameHub! 🎮🔥`);
+    const text = encodeURIComponent(`Play ${game.title} on PlayNow! 🎮🔥`);
     window.open(`https://twitter.com/intent/tweet?text=${text}&url=${encodeURIComponent(currentUrl)}`, "_blank");
   };
 
@@ -33,80 +32,67 @@ export function ShareModal({ game, isOpen, onClose }: ShareModalProps) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 p-4 backdrop-blur-md animate-in fade-in duration-200">
-      <div className="relative w-full max-w-md overflow-hidden rounded-3xl border border-border bg-background p-6 shadow-2xl space-y-5">
-        
-        {/* Header */}
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-purple-500/10 text-purple-400">
-              <Share2 className="h-4 w-4" />
-            </div>
-            <h3 className="font-bold text-lg text-foreground">Share {game.title}</h3>
-          </div>
+    <Dialog open={isOpen} onClose={onClose} className="space-y-5">
+      {/* Header */}
+      <div className="flex items-center space-x-2">
+        <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-secondary/10 text-violet-300">
+          <Share2 className="h-4 w-4" />
+        </div>
+        <h3 className="font-display text-lg font-bold text-foreground">Share {game.title}</h3>
+      </div>
+
+      {/* Copy Link Input */}
+      <div className="space-y-2">
+        <label htmlFor="share-link-input" className="text-xs font-semibold text-muted-foreground">
+          Direct Game Link
+        </label>
+        <div className="flex items-center space-x-2">
+          <input
+            id="share-link-input"
+            type="text"
+            readOnly
+            value={currentUrl}
+            className="w-full rounded-xl border border-border/60 bg-muted/50 px-3.5 py-2.5 text-xs text-foreground focus:outline-none"
+          />
           <button
-            onClick={onClose}
-            className="flex h-8 w-8 items-center justify-center rounded-full text-muted-foreground hover:bg-muted hover:text-foreground"
+            onClick={handleCopy}
+            className="flex flex-shrink-0 items-center space-x-1.5 rounded-xl bg-primary px-4 py-2.5 text-xs font-bold text-primary-foreground shadow-md transition-colors hover:bg-primary-hover"
           >
-            <X className="h-4 w-4" />
+            {copied ? (
+              <>
+                <Check className="h-4 w-4" />
+                <span>Copied!</span>
+              </>
+            ) : (
+              <>
+                <Copy className="h-4 w-4" />
+                <span>Copy</span>
+              </>
+            )}
           </button>
         </div>
-
-        {/* Copy Link Input */}
-        <div className="space-y-2">
-          <label className="text-xs font-semibold text-muted-foreground">
-            Direct Game Link
-          </label>
-          <div className="flex items-center space-x-2">
-            <input
-              type="text"
-              readOnly
-              value={currentUrl}
-              className="w-full rounded-xl border border-border/60 bg-muted/50 px-3.5 py-2.5 text-xs text-foreground focus:outline-none"
-            />
-            <button
-              onClick={handleCopy}
-              className="flex items-center space-x-1.5 rounded-xl bg-purple-600 px-4 py-2.5 text-xs font-bold text-white shadow-md hover:bg-purple-700 transition-colors flex-shrink-0"
-            >
-              {copied ? (
-                <>
-                  <Check className="h-4 w-4 text-emerald-300" />
-                  <span>Copied!</span>
-                </>
-              ) : (
-                <>
-                  <Copy className="h-4 w-4" />
-                  <span>Copy</span>
-                </>
-              )}
-            </button>
-          </div>
-        </div>
-
-        {/* Social Buttons */}
-        <div className="space-y-2 pt-2 border-t border-border/40">
-          <label className="text-xs font-semibold text-muted-foreground">
-            Share to Socials
-          </label>
-          <div className="grid grid-cols-2 gap-3">
-            <button
-              onClick={shareOnTwitter}
-              className="flex items-center justify-center space-x-2 rounded-xl bg-slate-900 border border-border/60 p-2.5 text-xs font-bold text-sky-400 hover:bg-slate-800 transition-colors"
-            >
-              <Twitter className="h-4 w-4 fill-sky-400" />
-              <span>X / Twitter</span>
-            </button>
-            <button
-              onClick={shareOnFacebook}
-              className="flex items-center justify-center space-x-2 rounded-xl bg-slate-900 border border-border/60 p-2.5 text-xs font-bold text-blue-500 hover:bg-slate-800 transition-colors"
-            >
-              <Facebook className="h-4 w-4 fill-blue-500" />
-              <span>Facebook</span>
-            </button>
-          </div>
-        </div>
-
       </div>
-    </div>
+
+      {/* Social Buttons */}
+      <div className="space-y-2 border-t border-border/40 pt-2">
+        <label className="text-xs font-semibold text-muted-foreground">Share to Socials</label>
+        <div className="grid grid-cols-2 gap-3">
+          <button
+            onClick={shareOnTwitter}
+            className="flex items-center justify-center space-x-2 rounded-xl border border-border/60 bg-muted p-2.5 text-xs font-bold text-foreground transition-colors hover:bg-accent"
+          >
+            <Twitter className="h-4 w-4" />
+            <span>X / Twitter</span>
+          </button>
+          <button
+            onClick={shareOnFacebook}
+            className="flex items-center justify-center space-x-2 rounded-xl border border-border/60 bg-muted p-2.5 text-xs font-bold text-foreground transition-colors hover:bg-accent"
+          >
+            <Facebook className="h-4 w-4" />
+            <span>Facebook</span>
+          </button>
+        </div>
+      </div>
+    </Dialog>
   );
 }

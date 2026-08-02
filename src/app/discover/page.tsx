@@ -3,16 +3,12 @@ import { DiscoverClient } from "./DiscoverClient";
 import { getAllGames } from "@/lib/games";
 
 export const metadata: Metadata = {
-  title: "Discover Games - GameHub Marketplace",
-  description: "Explore the full catalog of free open-source HTML5 games. Search, filter by category, and sort by most played or highest rated.",
+  title: "Store - PlayNow Game Registry",
+  description: "Explore the full catalog of HTML5 browser games. Filter by genre, sort by rating, and launch instantly.",
 };
 
 export default function DiscoverPage() {
   const games = getAllGames();
 
-  return (
-    <div className="min-h-screen bg-background text-foreground py-8">
-      <DiscoverClient initialGames={games} />
-    </div>
-  );
+  return <DiscoverClient initialGames={games} />;
 }

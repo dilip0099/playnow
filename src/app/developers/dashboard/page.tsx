@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
-  title: "Developer Revenue Dashboard - GameHub",
+  title: "Developer Revenue Dashboard - PlayNow",
   description: "Developer portal for earnings telemetry, ad revenue share tracking, submitted games status, and payouts.",
 };
 

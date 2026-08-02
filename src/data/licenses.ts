@@ -1,4 +1,4 @@
-export type SupportedLicense = "MIT" | "BSD-2" | "BSD-3" | "Apache-2.0" | "ISC";
+export type SupportedLicense = "MIT" | "BSD-2" | "BSD-3" | "Apache-2.0" | "ISC" | "Network-Licensed";
 
 export type RejectedLicense = "GPL" | "AGPL" | "LGPL" | "Unknown" | "No License";
 
@@ -44,6 +44,13 @@ export const SUPPORTED_LICENSES: Record<SupportedLicense, LicenseRules> = {
     name: "ISC License",
     commercialUse: true,
     attributionRequired: true,
+    isPermissive: true,
+  },
+  "Network-Licensed": {
+    id: "Network-Licensed",
+    name: "Third-Party Publisher Network License (e.g. GamePix)",
+    commercialUse: true,
+    attributionRequired: false,
     isPermissive: true,
   },
 };

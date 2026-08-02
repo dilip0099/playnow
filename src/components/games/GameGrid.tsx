@@ -3,6 +3,7 @@
 import { useState, useMemo } from "react";
 import { ArrowUpDown, Frown, SlidersHorizontal } from "lucide-react";
 import { GameCard } from "./GameCard";
+import { EmptyGamesState } from "./EmptyGamesState";
 import { GameMetadata, SortOption } from "@/types/game";
 
 interface GameGridProps {
@@ -50,7 +51,7 @@ export function GameGrid({
         <div>
           <h2 className="text-xl sm:text-2xl font-black text-foreground tracking-tight flex items-center space-x-2">
             <span>{title}</span>
-            <span className="rounded-full bg-purple-500/10 px-2.5 py-0.5 text-xs font-bold text-purple-400 border border-purple-500/20">
+            <span className="rounded-full bg-secondary/10 px-2.5 py-0.5 text-xs font-bold text-violet-300 border border-secondary/20">
               {sortedGames.length}
             </span>
           </h2>
@@ -63,7 +64,7 @@ export function GameGrid({
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value as SortOption)}
-                className="rounded-xl border border-border/60 bg-card/80 py-1.5 pl-9 pr-8 text-xs font-bold text-foreground shadow-sm focus:border-purple-500 focus:outline-none appearance-none cursor-pointer"
+                className="rounded-xl border border-border/60 bg-card/80 py-1.5 pl-9 pr-8 text-xs font-bold text-foreground shadow-sm focus:border-primary focus:outline-none appearance-none cursor-pointer"
               >
                 <option value="popular">Most Popular</option>
                 <option value="rating">Highest Rated</option>
@@ -86,18 +87,11 @@ export function GameGrid({
           ))}
         </div>
       ) : (
-        /* Empty State */
-        <div className="flex flex-col items-center justify-center rounded-3xl border border-dashed border-border p-12 text-center space-y-3">
-          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-muted text-muted-foreground">
-            <Frown className="h-6 w-6" />
-          </div>
-          <div className="space-y-1">
-            <h3 className="text-base font-bold text-foreground">No games found</h3>
-            <p className="text-xs text-muted-foreground">
-              Try selecting a different category or adjusting your search filters.
-            </p>
-          </div>
-        </div>
+        <EmptyGamesState
+          icon={Frown}
+          title="No games found"
+          description="Try selecting a different category or adjusting your search filters."
+        />
       )}
 
       {/* Load More Button */}
@@ -105,7 +99,7 @@ export function GameGrid({
         <div className="flex justify-center pt-6">
           <button
             onClick={() => setVisibleCount((prev) => prev + 12)}
-            className="rounded-2xl border border-purple-500/30 bg-purple-500/10 px-8 py-3 text-xs font-bold text-purple-300 hover:bg-purple-600 hover:text-white shadow-lg transition-all hover:scale-105"
+            className="rounded-2xl border border-primary/30 bg-primary/10 px-8 py-3 text-xs font-bold text-primary hover:bg-primary hover:text-primary-foreground shadow-lg transition-all hover:scale-105"
           >
             Load More Games ({sortedGames.length - visibleCount} remaining)
           </button>

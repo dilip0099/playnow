@@ -1,6 +1,0 @@
-MIT License
-
-Copyright (c) 2025-2026 Kira Vance
-
-Permission is hereby granted under the terms of the MIT license.
-Repository: https://github.com/kiravance/cyber-runner-2099
