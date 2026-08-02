@@ -1,23 +1,23 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@layer base {
-  :root {
-    --font-sora: 'Sora', sans-serif;
-    --font-inter: 'Inter', sans-serif;
-    --font-mono: 'JetBrains Mono', monospace;
+:root {
+  --font-sora: 'Sora', sans-serif;
+  --font-inter: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
 
-    --bg-base: #131313;
-    --bg-surface: #1c1b1b;
-    --bg-surface-high: #201f1f;
-    --border-subtle: rgba(255, 255, 255, 0.08);
+  --bg-base: #131313;
+  --bg-surface: #1c1b1b;
+  --bg-surface-high: #201f1f;
+  --border-subtle: rgba(255, 255, 255, 0.08);
 
-    --primary-lime: #c3f400;
-    --primary-lime-hover: #abd600;
-    --on-primary: #161e00;
+  --primary-lime: #c3f400;
+  --primary-lime-hover: #abd600;
+  --on-primary: #161e00;
 
-    --secondary-violet: #7701d0;
-    --secondary-violet-light: #dcb8ff;
-  }
+  --secondary-violet: #7701d0;
+  --secondary-violet-light: #dcb8ff;
 }
 
 body {

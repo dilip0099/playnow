@@ -29,9 +29,11 @@
     "lastUpdated": "2026-01-15",
     "mobileSupport": true,
     "aspectRatio": "16/9",
-    "thumbnailUrl": "/games/2048-fusion/thumbnail.svg",
+    "thumbnailUrl": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80",
+    "coverImage": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1920&q=80",
+    "heroImage": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1920&q=80",
     "screenshots": [
-      "/games/2048-fusion/thumbnail.svg"
+      "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80"
     ],
     "gameUrl": "/games/2048-fusion/index.html",
     "license": "MIT",
@@ -41,7 +43,7 @@
     "attributionRequired": true,
     "commitHash": "fc82ecae46d6a506bfec38c4c798031d279998df",
     "licenseChecksum": "4d6d420a4cb4bff3893675b6df0625b9cd3ad8f6b581b237be085e6650ed9a30",
-    "importTimestamp": "2026-08-02T08:03:16.534Z",
+    "importTimestamp": "2026-08-02T08:21:47.405Z",
     "trustVerified": true,
     "gameType": "Derived Game",
     "originalRepository": "https://github.com/gabrielecirulli/2048",
@@ -93,9 +95,11 @@
     "lastUpdated": "2026-01-15",
     "mobileSupport": true,
     "aspectRatio": "16/9",
-    "thumbnailUrl": "/games/breakout-pulse/thumbnail.svg",
+    "thumbnailUrl": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80",
+    "coverImage": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1920&q=80",
+    "heroImage": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1920&q=80",
     "screenshots": [
-      "/games/breakout-pulse/thumbnail.svg"
+      "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1200&q=80"
     ],
     "gameUrl": "/games/breakout-pulse/index.html",
     "license": "Apache-2.0",
@@ -105,7 +109,7 @@
     "attributionRequired": true,
     "commitHash": "c0d48f1082ef74e9b940989d2c2d1b74549b01e3",
     "licenseChecksum": "a7480cb4632d1dfab73fec04c084a20556e74249dda23d5949e068239d4478c8",
-    "importTimestamp": "2026-08-02T08:03:16.536Z",
+    "importTimestamp": "2026-08-02T08:21:47.408Z",
     "trustVerified": true,
     "gameType": "Derived Game",
     "originalRepository": "https://github.com/end3r/Gamedev-Canvas-workshop",
@@ -166,9 +170,11 @@
     "lastUpdated": "2026-01-15",
     "mobileSupport": true,
     "aspectRatio": "16/9",
-    "thumbnailUrl": "/games/cosmic-defense/thumbnail.svg",
+    "thumbnailUrl": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80",
+    "coverImage": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1920&q=80",
+    "heroImage": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1920&q=80",
     "screenshots": [
-      "/games/cosmic-defense/thumbnail.svg"
+      "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=80"
     ],
     "gameUrl": "/games/cosmic-defense/index.html",
     "license": "Apache-2.0",
@@ -178,7 +184,7 @@
     "attributionRequired": true,
     "commitHash": "33a218d6a89901768bf7094b81c2f90a211f440b",
     "licenseChecksum": "a40ab0bc6bae99a23e67042a7704fdc1362e201a4444c5343a001b5e167815bc",
-    "importTimestamp": "2026-08-02T08:03:16.539Z",
+    "importTimestamp": "2026-08-02T08:21:47.411Z",
     "trustVerified": true,
     "gameType": "Derived Game",
     "originalRepository": "https://github.com/dmcinnes/HTML5-Asteroids",
@@ -229,9 +235,11 @@
     "lastUpdated": "2026-01-15",
     "mobileSupport": true,
     "aspectRatio": "16/9",
-    "thumbnailUrl": "/games/cyber-runner/thumbnail.svg",
+    "thumbnailUrl": "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=800&q=80",
+    "coverImage": "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1920&q=80",
+    "heroImage": "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1920&q=80",
     "screenshots": [
-      "/games/cyber-runner/thumbnail.svg"
+      "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1200&q=80"
     ],
     "gameUrl": "/games/cyber-runner/index.html",
     "license": "MIT",
@@ -241,7 +249,7 @@
     "attributionRequired": true,
     "commitHash": "4e9128f619b0d24177d612e2b9213efc12f4581a",
     "licenseChecksum": "01db2303fa900dc8eba534a165c847fa995a531affc834ab9ae0874da9306814",
-    "importTimestamp": "2026-08-02T08:03:16.541Z",
+    "importTimestamp": "2026-08-02T08:21:47.413Z",
     "trustVerified": true,
     "gameType": "Derived Game",
     "originalRepository": "https://github.com/wayou/t-rex-runner",
@@ -302,9 +310,11 @@
     "lastUpdated": "2026-01-15",
     "mobileSupport": true,
     "aspectRatio": "16/9",
-    "thumbnailUrl": "/games/neon-snake/thumbnail.svg",
+    "thumbnailUrl": "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=80",
+    "coverImage": "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1920&q=80",
+    "heroImage": "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1920&q=80",
     "screenshots": [
-      "/games/neon-snake/thumbnail.svg"
+      "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1200&q=80"
     ],
     "gameUrl": "/games/neon-snake/index.html",
     "license": "MIT",
@@ -314,7 +324,7 @@
     "attributionRequired": true,
     "commitHash": "a1599e823f6c8d4512b9d21e8609594f839c43a2",
     "licenseChecksum": "65fcbdf98ae10b7bf2b13fa50a95fb70998fa1b29d1022208dbec071f43fbfa1",
-    "importTimestamp": "2026-08-02T08:03:16.542Z",
+    "importTimestamp": "2026-08-02T08:21:47.417Z",
     "trustVerified": true,
     "gameType": "Derived Game",
     "originalRepository": "https://github.com/patorjk/JavaScript-Snake",
@@ -372,9 +382,11 @@
     "lastUpdated": "2026-01-15",
     "mobileSupport": true,
     "aspectRatio": "16/9",
-    "thumbnailUrl": "/games/pixel-memory/thumbnail.svg",
+    "thumbnailUrl": "https://images.unsplash.com/photo-1563089145-599997674d42?auto=format&fit=crop&w=800&q=80",
+    "coverImage": "https://images.unsplash.com/photo-1563089145-599997674d42?auto=format&fit=crop&w=1920&q=80",
+    "heroImage": "https://images.unsplash.com/photo-1563089145-599997674d42?auto=format&fit=crop&w=1920&q=80",
     "screenshots": [
-      "/games/pixel-memory/thumbnail.svg"
+      "https://images.unsplash.com/photo-1563089145-599997674d42?auto=format&fit=crop&w=1200&q=80"
     ],
     "gameUrl": "/games/pixel-memory/index.html",
     "license": "BSD-3",
@@ -384,7 +396,7 @@
     "attributionRequired": true,
     "commitHash": "8d89a744ef87959bb4b22c7104b2a95c4794e772",
     "licenseChecksum": "3a836235ae97414d989571eb7f61a921f4c8dfa9442bbb22fa225ef1081a8121",
-    "importTimestamp": "2026-08-02T08:03:16.544Z",
+    "importTimestamp": "2026-08-02T08:21:47.421Z",
     "trustVerified": true,
     "gameType": "Derived Game",
     "originalRepository": "https://github.com/jhlywa/chess.js",
@@ -435,9 +447,11 @@
     "lastUpdated": "2026-01-15",
     "mobileSupport": true,
     "aspectRatio": "16/9",
-    "thumbnailUrl": "/games/pong-championship/thumbnail.svg",
+    "thumbnailUrl": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=800&q=80",
+    "coverImage": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1920&q=80",
+    "heroImage": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1920&q=80",
     "screenshots": [
-      "/games/pong-championship/thumbnail.svg"
+      "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1200&q=80"
     ],
     "gameUrl": "/games/pong-championship/index.html",
     "license": "MIT",
@@ -447,7 +461,7 @@
     "attributionRequired": true,
     "commitHash": "e501928301928301928301928301928301928301",
     "licenseChecksum": "2d4ce578315c72300412c8c86c54f6b64e8e0706394b3ec487811817a4549081",
-    "importTimestamp": "2026-08-02T08:03:16.547Z",
+    "importTimestamp": "2026-08-02T08:21:47.424Z",
     "trustVerified": true,
     "gameType": "Derived Game",
     "originalRepository": "https://github.com/straker/html5-canvas-pong",
@@ -498,9 +512,11 @@
     "lastUpdated": "2026-01-15",
     "mobileSupport": true,
     "aspectRatio": "16/9",
-    "thumbnailUrl": "/games/retro-tetris/thumbnail.svg",
+    "thumbnailUrl": "https://images.unsplash.com/photo-1551103782-8ab07afd45c1?auto=format&fit=crop&w=800&q=80",
+    "coverImage": "https://images.unsplash.com/photo-1551103782-8ab07afd45c1?auto=format&fit=crop&w=1920&q=80",
+    "heroImage": "https://images.unsplash.com/photo-1551103782-8ab07afd45c1?auto=format&fit=crop&w=1920&q=80",
     "screenshots": [
-      "/games/retro-tetris/thumbnail.svg"
+      "https://images.unsplash.com/photo-1551103782-8ab07afd45c1?auto=format&fit=crop&w=1200&q=80"
     ],
     "gameUrl": "/games/retro-tetris/index.html",
     "license": "MIT",
@@ -510,7 +526,7 @@
     "attributionRequired": true,
     "commitHash": "9283102938102938102938102938102938102938",
     "licenseChecksum": "3602bb5054147f8547d6e1a4bdb068b958c528b21858f30823acc2479348e0b0",
-    "importTimestamp": "2026-08-02T08:03:16.548Z",
+    "importTimestamp": "2026-08-02T08:21:47.426Z",
     "trustVerified": true,
     "gameType": "Derived Game",
     "originalRepository": "https://github.com/straker/html5-canvas-tetris",
@@ -561,9 +577,11 @@
     "lastUpdated": "2026-01-15",
     "mobileSupport": true,
     "aspectRatio": "16/9",
-    "thumbnailUrl": "/games/tic-tac-toe-glow/thumbnail.svg",
+    "thumbnailUrl": "https://images.unsplash.com/photo-1611996575749-79a3a250f948?auto=format&fit=crop&w=800&q=80",
+    "coverImage": "https://images.unsplash.com/photo-1611996575749-79a3a250f948?auto=format&fit=crop&w=1920&q=80",
+    "heroImage": "https://images.unsplash.com/photo-1611996575749-79a3a250f948?auto=format&fit=crop&w=1920&q=80",
     "screenshots": [
-      "/games/tic-tac-toe-glow/thumbnail.svg"
+      "https://images.unsplash.com/photo-1611996575749-79a3a250f948?auto=format&fit=crop&w=1200&q=80"
     ],
     "gameUrl": "/games/tic-tac-toe-glow/index.html",
     "license": "ISC",
@@ -573,7 +591,7 @@
     "attributionRequired": true,
     "commitHash": "1029381029381029381029381029381029381029",
     "licenseChecksum": "a221fc0681c9d380e269eb5c23520d7a4a31b4de30c30ffca21f746d49b5f9f4",
-    "importTimestamp": "2026-08-02T08:03:16.551Z",
+    "importTimestamp": "2026-08-02T08:21:47.429Z",
     "trustVerified": true,
     "gameType": "Derived Game",
     "originalRepository": "https://github.com/straker/html5-canvas-tic-tac-toe",
@@ -624,9 +642,11 @@
     "lastUpdated": "2026-01-15",
     "mobileSupport": true,
     "aspectRatio": "16/9",
-    "thumbnailUrl": "/games/tower-builder/thumbnail.svg",
+    "thumbnailUrl": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80",
+    "coverImage": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1920&q=80",
+    "heroImage": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1920&q=80",
     "screenshots": [
-      "/games/tower-builder/thumbnail.svg"
+      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80"
     ],
     "gameUrl": "/games/tower-builder/index.html",
     "license": "MIT",
@@ -636,7 +656,7 @@
     "attributionRequired": true,
     "commitHash": "3810293810293810293810293810293810293810",
     "licenseChecksum": "68ef64a0f0cb93de560b4788f4fb1096ea12db301a0831c8b9576bbe393d154f",
-    "importTimestamp": "2026-08-02T08:03:16.553Z",
+    "importTimestamp": "2026-08-02T08:21:47.433Z",
     "trustVerified": true,
     "gameType": "Derived Game",
     "originalRepository": "https://github.com/straker/tower-building-game",

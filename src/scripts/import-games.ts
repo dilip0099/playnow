@@ -261,9 +261,68 @@ export function importAndValidateGames() {
 
     const calculatedChecksum = crypto.createHash("sha256").update(licenseContent).digest("hex");
 
-    let thumbnailUrl = `/games/${folderName}/thumbnail.svg`;
-    if (fs.existsSync(path.join(folderPath, "thumbnail.webp"))) thumbnailUrl = `/games/${folderName}/thumbnail.webp`;
-    else if (fs.existsSync(path.join(folderPath, "thumbnail.svg"))) thumbnailUrl = `/games/${folderName}/thumbnail.svg`;
+    const ARTWORK_MAP: Record<string, { thumbnail: string; hero: string; screenshots: string[] }> = {
+      "2048-fusion": {
+        thumbnail: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80",
+        hero: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1920&q=80",
+        screenshots: ["https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80"]
+      },
+      "neon-snake": {
+        thumbnail: "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=80",
+        hero: "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1920&q=80",
+        screenshots: ["https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1200&q=80"]
+      },
+      "cosmic-defense": {
+        thumbnail: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80",
+        hero: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1920&q=80",
+        screenshots: ["https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=80"]
+      },
+      "breakout-pulse": {
+        thumbnail: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80",
+        hero: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1920&q=80",
+        screenshots: ["https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1200&q=80"]
+      },
+      "cyber-runner": {
+        thumbnail: "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=800&q=80",
+        hero: "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1920&q=80",
+        screenshots: ["https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1200&q=80"]
+      },
+      "pixel-memory": {
+        thumbnail: "https://images.unsplash.com/photo-1563089145-599997674d42?auto=format&fit=crop&w=800&q=80",
+        hero: "https://images.unsplash.com/photo-1563089145-599997674d42?auto=format&fit=crop&w=1920&q=80",
+        screenshots: ["https://images.unsplash.com/photo-1563089145-599997674d42?auto=format&fit=crop&w=1200&q=80"]
+      },
+      "pong-championship": {
+        thumbnail: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=800&q=80",
+        hero: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1920&q=80",
+        screenshots: ["https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1200&q=80"]
+      },
+      "retro-tetris": {
+        thumbnail: "https://images.unsplash.com/photo-1551103782-8ab07afd45c1?auto=format&fit=crop&w=800&q=80",
+        hero: "https://images.unsplash.com/photo-1551103782-8ab07afd45c1?auto=format&fit=crop&w=1920&q=80",
+        screenshots: ["https://images.unsplash.com/photo-1551103782-8ab07afd45c1?auto=format&fit=crop&w=1200&q=80"]
+      },
+      "tic-tac-toe-glow": {
+        thumbnail: "https://images.unsplash.com/photo-1611996575749-79a3a250f948?auto=format&fit=crop&w=800&q=80",
+        hero: "https://images.unsplash.com/photo-1611996575749-79a3a250f948?auto=format&fit=crop&w=1920&q=80",
+        screenshots: ["https://images.unsplash.com/photo-1611996575749-79a3a250f948?auto=format&fit=crop&w=1200&q=80"]
+      },
+      "tower-builder": {
+        thumbnail: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80",
+        hero: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1920&q=80",
+        screenshots: ["https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80"]
+      }
+    };
+
+    const art = ARTWORK_MAP[trustedRecord.slug] || {
+      thumbnail: `/games/${folderName}/thumbnail.svg`,
+      hero: `/games/${folderName}/thumbnail.svg`,
+      screenshots: [`/games/${folderName}/thumbnail.svg`]
+    };
+
+    let thumbnailUrl = art.thumbnail;
+    let coverImage = art.hero;
+    let heroImage = art.hero;
 
     let category: GameCategory = trustedRecord.category || "arcade";
 
@@ -289,7 +348,9 @@ export function importAndValidateGames() {
       mobileSupport: true,
       aspectRatio: rawMetadata.aspectRatio || "16/9",
       thumbnailUrl,
-      screenshots: [thumbnailUrl],
+      coverImage,
+      heroImage,
+      screenshots: Array.isArray(rawMetadata.screenshots) && rawMetadata.screenshots.length > 0 ? rawMetadata.screenshots : art.screenshots,
       gameUrl: `/games/${folderName}/index.html`,
 
       license: normalizedLicense,
