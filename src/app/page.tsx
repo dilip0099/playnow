@@ -7,6 +7,7 @@ import { HeroCarousel } from "@/components/games/HeroCarousel";
 import { CategoryRail } from "@/components/games/CategoryRail";
 import { GAME_GRID_COLS } from "@/lib/game-grid";
 import { GameCategory } from "@/types/game";
+import { SITE_URL, SITE_NAME } from "@/lib/site";
 
 const HERO_SLIDE_COUNT = 5;
 
@@ -52,8 +53,36 @@ export default function HomePage() {
     { name: "MULTIPLAYER", icon: UsersRound, count: gamesData.filter((g) => g.category === "multiplayer").length },
   ];
 
+  // WebSite schema (+ SearchAction) is what makes a site eligible for Google's sitelinks
+  // search box; Organization ties the brand identity together for knowledge-panel purposes.
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        name: SITE_NAME,
+        url: SITE_URL,
+        potentialAction: {
+          "@type": "SearchAction",
+          target: `${SITE_URL}/search?q={search_term_string}`,
+          "query-input": "required name=search_term_string",
+        },
+      },
+      {
+        "@type": "Organization",
+        name: SITE_NAME,
+        url: SITE_URL,
+        logo: `${SITE_URL}/icon`,
+      },
+    ],
+  };
+
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
 
       {/* ═══ FEATURED GAMES CAROUSEL ═══ */}
       <HeroCarousel games={heroGames} />

@@ -29,28 +29,33 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap"
 });
 
+// Title/description lead with "free online games" (368K/mo) and "online games" (450K/mo) —
+// real, verified 2026 search volume — not "Kinetic Obsidian", which is our internal design-
+// system codename and something literally zero users search for. The single most valuable
+// piece of on-page SEO real estate should never be spent on internal jargon.
+const DEFAULT_TITLE = "Free Online Games - Play 180+ Games Instantly, No Download";
 const DEFAULT_DESCRIPTION =
-  "Play 180+ free HTML5 browser games instantly on PlayNow — no downloads, no installs. Action, puzzle, arcade, racing, strategy, sports and multiplayer games.";
+  "Play free online games instantly in your browser — no downloads, no installs, no signup. Action, puzzle, arcade, racing, strategy, sports, and .io multiplayer games.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "PlayNow - Kinetic Obsidian Gaming Marketplace",
-    template: "%s | PlayNow Browser Games",
+    default: `${DEFAULT_TITLE} | ${SITE_NAME}`,
+    template: `%s | ${SITE_NAME}`,
   },
   description: DEFAULT_DESCRIPTION,
-  keywords: ["HTML5 games", "PlayNow", "browser games", "instant games", "free online games"],
+  keywords: ["free online games", "online games", "browser games", "io games", "play games online", "no download games"],
   authors: [{ name: "PlayNow Studios" }],
   creator: "PlayNow Studios",
   openGraph: {
     type: "website",
     siteName: SITE_NAME,
-    title: "PlayNow - Kinetic Obsidian Gaming Marketplace",
+    title: `${DEFAULT_TITLE} | ${SITE_NAME}`,
     description: DEFAULT_DESCRIPTION,
   },
   twitter: {
     card: "summary_large_image",
-    title: "PlayNow - Kinetic Obsidian Gaming Marketplace",
+    title: `${DEFAULT_TITLE} | ${SITE_NAME}`,
     description: DEFAULT_DESCRIPTION,
   },
   robots: {

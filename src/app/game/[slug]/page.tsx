@@ -64,26 +64,38 @@ export default async function GamePage({ params }: GamePageProps) {
   // snippets would violate Google's structured-data policy on reviews.
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "VideoGame",
-    name: displayTitle,
-    description: game.description,
-    image: game.coverImage || game.thumbnailUrl,
-    genre: game.category,
-    applicationCategory: "GameApplication",
-    gamePlatform: "HTML5",
-    operatingSystem: "Any",
-    playMode: game.category === "multiplayer" ? "MultiPlayer" : "SinglePlayer",
-    url: `${SITE_URL}/game/${game.slug}`,
-    datePublished: game.releaseDate,
-    publisher: {
-      "@type": "Organization",
-      name: "GamePix",
-    },
-    offers: {
-      "@type": "Offer",
-      price: "0",
-      priceCurrency: "USD",
-    },
+    "@graph": [
+      {
+        "@type": "VideoGame",
+        name: displayTitle,
+        description: game.description,
+        image: game.coverImage || game.thumbnailUrl,
+        genre: game.category,
+        applicationCategory: "GameApplication",
+        gamePlatform: "HTML5",
+        operatingSystem: "Any",
+        playMode: game.category === "multiplayer" ? "MultiPlayer" : "SinglePlayer",
+        url: `${SITE_URL}/game/${game.slug}`,
+        datePublished: game.releaseDate,
+        publisher: {
+          "@type": "Organization",
+          name: "GamePix",
+        },
+        offers: {
+          "@type": "Offer",
+          price: "0",
+          priceCurrency: "USD",
+        },
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+          { "@type": "ListItem", position: 2, name: `${game.category} Games`, item: `${SITE_URL}/category/${game.category}` },
+          { "@type": "ListItem", position: 3, name: displayTitle, item: `${SITE_URL}/game/${game.slug}` },
+        ],
+      },
+    ],
   };
 
   return (
