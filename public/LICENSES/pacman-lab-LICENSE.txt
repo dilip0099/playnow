@@ -1,6 +1,0 @@
-BSD-3 License
-
-Copyright (c) 2025-2026 Tariq Miller
-
-Permission is hereby granted under the terms of the BSD-3 license.
-Repository: https://github.com/tariqmiller/pac-maze-cyber-runner

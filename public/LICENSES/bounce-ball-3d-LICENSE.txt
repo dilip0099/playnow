@@ -1,6 +1,0 @@
-Apache-2.0 License
-
-Copyright (c) 2025-2026 Lucas Vance
-
-Permission is hereby granted under the terms of the Apache-2.0 license.
-Repository: https://github.com/lucasvance/bounce-ball-highway
