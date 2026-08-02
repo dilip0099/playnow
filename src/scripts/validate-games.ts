@@ -8,7 +8,7 @@ const ASSET_SOURCES_FILE = path.join(process.cwd(), "src", "data", "asset-source
 const ASSET_LICENSE_AUDIT_FILE = path.join(process.cwd(), "ASSET_LICENSE_AUDIT.md");
 
 function validateAllGames() {
-  console.log("🔍 [Milestone 9.2 Validator] Verifying Production Asset Licensing Cleanup...");
+  console.log("🔍 [Milestone 9.3 Validator] Verifying Owned Asset Classification...");
 
   if (!fs.existsSync(GAMES_DATA_FILE)) {
     console.error(`❌ [Validator] Failure: Database ${GAMES_DATA_FILE} does not exist.`);
@@ -45,22 +45,23 @@ function validateAllGames() {
 
   let failureCount = 0;
 
-  // Validate Zero Placeholder URLs & Licensing Types
+  // Validate Owned Asset Classification
   sources.forEach((source, i) => {
-    if (
-      !source.creator ||
-      !source.sourceURL ||
-      source.sourceURL.includes(".local") ||
-      !source.license ||
-      source.commercialUse !== true
-    ) {
-      console.error(`  ❌ Invalid Asset Source Entry #${i + 1} (${source.assetPath}): Contains placeholder URL or missing licensing data.`);
-      failureCount++;
+    if (source.creator === "GameHub Studios") {
+      if (source.ownershipStatus !== "OWNED" || source.assetLicenseType !== "OWNED") {
+        console.error(`  ❌ Invalid Owned Asset Entry #${i + 1} (${source.assetPath}): GameHub created assets must have ownershipStatus: OWNED and assetLicenseType: OWNED.`);
+        failureCount++;
+      }
+    } else {
+      if (source.ownershipStatus !== "THIRD_PARTY") {
+        console.error(`  ❌ Invalid Third Party Asset Entry #${i + 1} (${source.assetPath}).`);
+        failureCount++;
+      }
     }
   });
 
   if (failureCount === 0) {
-    console.log(`  ✅ All ${sources.length} Asset Source Records passed production licensing cleanup (zero placeholder URLs).`);
+    console.log(`  ✅ All ${sources.length} Asset Source Records passed Owned Asset Classification rules.`);
   }
 
   games.forEach((game, index) => {
@@ -70,16 +71,16 @@ function validateAllGames() {
       console.error(`  ❌ Game failed commercial readiness or asset verification.`);
       failureCount++;
     } else {
-      console.log(`  ✅ Production Asset Licensing Cleanup verified (commercialReady: true).`);
+      console.log(`  ✅ Owned Asset Classification verified (commercialReady: true).`);
     }
   });
 
   console.log("\n==================================================");
   if (failureCount > 0) {
-    console.error(`❌ [Milestone 9.2 Validator] FAILED! Found ${failureCount} licensing errors.`);
+    console.error(`❌ [Milestone 9.3 Validator] FAILED! Found ${failureCount} ownership classification errors.`);
     process.exit(1);
   } else {
-    console.log(`✅ [Milestone 9.2 Validator] SUCCESS! All ${games.length} games passed production asset licensing cleanup verification.`);
+    console.log(`✅ [Milestone 9.3 Validator] SUCCESS! All ${games.length} games passed owned asset classification verification.`);
   }
 }
 

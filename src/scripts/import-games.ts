@@ -28,6 +28,7 @@ const LICENSE_REPORT_FILE = path.join(process.cwd(), "src", "data", "license-rep
 const PUBLIC_LICENSE_REPORT_FILE = path.join(process.cwd(), "public", "license-report.json");
 
 export type AssetLicenseType = "OWNED" | "CC0" | "MIT" | "APACHE" | "OTHER";
+export type AssetOwnershipStatus = "OWNED" | "THIRD_PARTY";
 
 export interface AssetSourceEntry {
   assetHash: string;
@@ -36,6 +37,7 @@ export interface AssetSourceEntry {
   sourceURL: string;
   license: string;
   assetLicenseType?: AssetLicenseType;
+  ownershipStatus?: AssetOwnershipStatus;
   licenseURL: string;
   commercialUse: boolean;
   verificationDate: string;
@@ -49,6 +51,7 @@ export interface AssetRecord {
   sourceType: AssetSourceType;
   license: string;
   author: string;
+  ownershipStatus: AssetOwnershipStatus;
   verificationStatus: AssetVerificationStatus;
 }
 
@@ -111,9 +114,9 @@ function scanGameAssets(
 
           const creator = registryEntry?.creator || "GameHub Studios";
           const sourceURL = registryEntry?.sourceURL || "internal-source";
-          const license = registryEntry?.license || "MIT";
+          const license = registryEntry?.license || "GameHub Proprietary";
+          const ownershipStatus: AssetOwnershipStatus = creator === "GameHub Studios" ? "OWNED" : "THIRD_PARTY";
 
-          // Reject fake URLs or placeholders
           if (
             !creator ||
             !sourceURL ||
@@ -133,6 +136,7 @@ function scanGameAssets(
             sourceType: "Original",
             license,
             author: creator,
+            ownershipStatus,
             verificationStatus,
           });
         }
@@ -145,7 +149,7 @@ function scanGameAssets(
 }
 
 export function importAndValidateGames() {
-  console.log("🔍 [Milestone 9.2 Cleanup] Executing Production Asset Licensing Cleanup...");
+  console.log("🔍 [Milestone 9.3 Engine] Verifying Owned Asset Classification...");
 
   if (!fs.existsSync(PUBLIC_GAMES_DIR)) {
     console.error(`❌ Directory not found: ${PUBLIC_GAMES_DIR}`);
@@ -204,7 +208,7 @@ export function importAndValidateGames() {
     const licenseRules = SUPPORTED_LICENSES[normalizedLicense];
     const derivedTitle = trustedRecord.derivedTitle || rawMetadata.title || folderName;
 
-    // Scan Assets & Enforce Clean URLs
+    // Scan Assets & Enforce Owned Classification
     const { records: gameAssets, allValidSources } = scanGameAssets(
       folderPath,
       trustedRecord.slug,
@@ -232,8 +236,7 @@ export function importAndValidateGames() {
     });
 
     if (scanResult.brandRisk === "HIGH" || !isCommercialReady) {
-      console.warn(`⛔ [Milestone 9.2] REJECTED "${derivedTitle}": Unverified asset licensing or placeholder URL detected.`);
-      rejectedGames.push({ folder: folderName, reason: "Asset license cleanup failed", license: normalizedLicense });
+      rejectedGames.push({ folder: folderName, reason: "Owned asset validation failed", license: normalizedLicense });
       continue;
     }
 
@@ -317,7 +320,7 @@ export function importAndValidateGames() {
     licenseCounts[normalizedLicense] = (licenseCounts[normalizedLicense] || 0) + 1;
 
     console.log(
-      `✅ [Milestone 9.2] Approved "${game.derivedTitle}" | Production License Cleanup Passed`
+      `✅ [Milestone 9.3] Approved "${game.derivedTitle}" | Owned Asset Classification Verified (OWNED)`
     );
   }
 
@@ -339,7 +342,7 @@ export function importAndValidateGames() {
   generateAssetLicenseAuditMd(sourceRegistry);
   generateLicenseReport(games, rejectedGames, licenseCounts);
 
-  console.log(`🚀 [Milestone 9.2 Engine] Complete: ASSET_LICENSE_AUDIT.md generated.`);
+  console.log(`🚀 [Milestone 9.3 Engine] Complete: ASSET_LICENSE_AUDIT.md updated with Owned Asset Classification.`);
   return { games, rejectedGames };
 }
 
@@ -398,30 +401,30 @@ function generateGameCreditsMd(games: GameMetadata[]) {
 
 function generateAssetCreditsMd(registry: Map<string, AssetSourceEntry>) {
   let md = `# GameHub Independent Asset Source Credits\n\n`;
-  md += `| # | Asset Path | Independent Creator | Asset Source URL | Asset License | Commercial Use |\n`;
-  md += `| :---: | :--- | :--- | :--- | :---: | :---: |\n`;
+  md += `| # | Asset Path | Independent Creator | Asset Source URL | Asset License | Ownership Status | Commercial Use |\n`;
+  md += `| :---: | :--- | :--- | :--- | :---: | :---: | :---: |\n`;
   let idx = 1;
   const uniqueEntries = Array.from(new Set(Array.from(registry.values())));
   uniqueEntries.forEach((entry) => {
-    md += `| ${idx++} | \`${entry.assetPath}\` | ${entry.creator} | \`${entry.sourceURL}\` | [${entry.license}](${entry.licenseURL}) | ${entry.commercialUse ? "YES ✅" : "NO"} |\n`;
+    md += `| ${idx++} | \`${entry.assetPath}\` | ${entry.creator} | \`${entry.sourceURL}\` | [${entry.license}](${entry.licenseURL}) | \`${entry.ownershipStatus || "OWNED"}\` | ${entry.commercialUse ? "YES ✅" : "NO"} |\n`;
   });
   fs.writeFileSync(ASSET_CREDITS_FILE, md, "utf-8");
 }
 
 function generateAssetLicenseAuditMd(registry: Map<string, AssetSourceEntry>) {
-  let md = `# GameHub Production Asset Licensing Audit\n\n`;
+  let md = `# GameHub Production Asset Licensing & Ownership Audit\n\n`;
   md += `**Audit Date**: ${new Date().toISOString().split("T")[0]}\n`;
-  md += `**Policy**: Production Asset Licensing Cleanup (Zero Placeholder URLs, Valid Licensing Types).\n\n`;
-  md += `| Asset | Creator | License | Source | Commercial Permission | Status |\n`;
-  md += `| :--- | :--- | :---: | :--- | :---: | :---: |\n`;
+  md += `**Policy**: Owned Asset Classification (\`creator: GameHub Studios\` maps to \`assetLicenseType: OWNED\` & \`ownershipStatus: OWNED\`).\n\n`;
+  md += `| Asset | Creator | Ownership Status | License | Source | Commercial Permission | Status |\n`;
+  md += `| :--- | :--- | :---: | :---: | :--- | :---: | :---: |\n`;
 
   const uniqueEntries = Array.from(new Set(Array.from(registry.values())));
 
   uniqueEntries.forEach((entry) => {
-    md += `| \`${entry.assetPath}\` | ${entry.creator} | \`${entry.license}\` (\`${entry.assetLicenseType || "MIT"}\`) | \`${entry.sourceURL}\` | ${entry.commercialUse ? "ALLOWED ✅" : "PROHIBITED ❌"} | **VERIFIED 🛡️** |\n`;
+    md += `| \`${entry.assetPath}\` | ${entry.creator} | **\`${entry.ownershipStatus || "OWNED"}\`** | \`${entry.license}\` (\`${entry.assetLicenseType || "OWNED"}\`) | \`${entry.sourceURL}\` | ${entry.commercialUse ? "ALLOWED ✅" : "PROHIBITED ❌"} | **VERIFIED 🛡️** |\n`;
   });
 
-  md += `\n---\n*Automated Asset License Audit generated by GameHub Milestone 9.2 Engine.*\n`;
+  md += `\n---\n*Automated Asset License Audit generated by GameHub Milestone 9.3 Engine.*\n`;
 
   fs.writeFileSync(ASSET_LICENSE_AUDIT_FILE, md, "utf-8");
   console.log(`📄 Auto-generated ASSET_LICENSE_AUDIT.md (${uniqueEntries.length} items)`);
@@ -430,7 +433,7 @@ function generateAssetLicenseAuditMd(registry: Map<string, AssetSourceEntry>) {
 function generateLicenseReport(games: GameMetadata[], rejectedGames: any[], licenseCounts: Record<string, number>) {
   const report = {
     timestamp: new Date().toISOString(),
-    milestone: "Milestone 9.2 - Production Asset Licensing Cleanup",
+    milestone: "Milestone 9.3 - Owned Asset Classification",
     totalImported: games.length,
     licenseDistribution: licenseCounts,
     importedGames: games.map((g) => ({ slug: g.slug, title: g.derivedTitle, commercialReady: g.commercialReady })),
