@@ -1,3 +1,8 @@
+# PlayNow's own site-wide AdSense account (playthorn.com) — monetizes the surrounding site
+# (homepage, category pages, etc.), separate from GamePix's own entries below which cover
+# revenue-share on the embedded game player only.
+google.com, pub-3550445608668316, DIRECT, f08c47fec0942fa0
+
 #gpx-property-775N7
 #gpx-last-updated-2024-11-21
 #gpx-reviq

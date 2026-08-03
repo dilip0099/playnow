@@ -66,6 +66,7 @@ export const metadata: Metadata = {
 };
 
 const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+const ADSENSE_CLIENT_ID = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID;
 
 export default function RootLayout({
   children,
@@ -90,6 +91,14 @@ export default function RootLayout({
               `}
             </Script>
           </>
+        )}
+        {ADSENSE_CLIENT_ID && (
+          <Script
+            async
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT_ID}`}
+            crossOrigin="anonymous"
+            strategy="afterInteractive"
+          />
         )}
         <ThemeProvider
           attribute="class"
