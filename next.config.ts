@@ -13,6 +13,20 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      // The Vercel-issued subdomain still resolves and serves the same deployment as
+      // playthorn.com now that a real domain is connected — without this, Google would see
+      // identical content under two hosts (duplicate content), and it's the exact URL this
+      // site was indexed under before the domain migration.
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "playnow-eta.vercel.app" }],
+        destination: "https://playthorn.com/:path*",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
