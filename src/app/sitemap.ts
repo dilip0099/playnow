@@ -15,6 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "strategy",
     "sports",
     "multiplayer",
+    "classic",
   ];
 
   // Static / Core routes

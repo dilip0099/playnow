@@ -20,6 +20,7 @@ const VALID_CATEGORIES: GameCategory[] = [
   "strategy",
   "sports",
   "multiplayer",
+  "classic",
 ];
 
 // Real keyword research (2026), not guessed copy — monthly search volume noted per pick.
@@ -91,6 +92,18 @@ const CATEGORY_SEO: Record<GameCategory, { h1: string; title: string; descriptio
       "Play free .io games and multiplayer games online instantly — compete with real players worldwide, no download needed.",
     intro:
       ".io games and other multiplayer titles where the other players on the map are real people, not bots — no download, no signup wall.",
+  },
+  // Chess (~4.09M/mo) and Mahjong (~3.35M/mo) are individually bigger search terms than any other
+  // category on this site — and unlike Tetris (deliberately excluded, see PROHIBITED_BRAND_TERMS in
+  // import-gamepix.ts), none of these are trademarked: chess/checkers/mahjong/solitaire/tic-tac-toe/
+  // ludo/domino/backgammon are public-domain game types.
+  classic: {
+    h1: "Classic Games: Chess, Mahjong, Solitaire & More",
+    title: "Classic Games Online - Chess, Mahjong, Solitaire, Tic Tac Toe Free",
+    description:
+      "Play classic games online for free — chess, mahjong, solitaire, checkers, tic tac toe, ludo, and domino. No download, just click and play in your browser.",
+    intro:
+      "The games everyone already knows how to play — chess, mahjong, solitaire, checkers, tic tac toe, ludo, and domino — playable instantly, no download or account required.",
   },
 };
 

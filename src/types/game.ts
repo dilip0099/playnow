@@ -8,7 +8,8 @@ export type GameCategory =
   | "adventure"
   | "strategy"
   | "sports"
-  | "multiplayer";
+  | "multiplayer"
+  | "classic";
 
 export type GameClassification = "Original Game" | "Derived Game" | "Licensed Game";
 

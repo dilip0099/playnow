@@ -20,6 +20,7 @@ const GENRE_FILTERS = [
   { name: "Arcade Classic", key: "arcade" },
   { name: "Arena Sports", key: "sports" },
   { name: "Multiplayer Hub", key: "multiplayer" },
+  { name: "Board & Card Classics", key: "classic" },
 ];
 
 interface FilterControlsProps {

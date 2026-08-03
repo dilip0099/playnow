@@ -11,6 +11,7 @@ export function Footer() {
     "Strategy",
     "Sports",
     "Multiplayer",
+    "Classic",
   ];
 
   return (

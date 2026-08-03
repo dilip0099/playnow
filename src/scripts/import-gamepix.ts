@@ -18,14 +18,26 @@ const MAIN_POOL_PAGES = 30;
 // accumulated engagement yet, so this is the only way to surface genuinely new titles at all.
 const NEW_RELEASES_POOL_PAGES = 3;
 const TARGET_PER_CATEGORY = 22;
+// Chess/checkers/mahjong/solitaire/tic-tac-toe/ludo/domino/backgammon are real, non-trademarked
+// public-domain games with individually massive search volume (chess ~4.09M/mo, mahjong ~3.35M/mo
+// — both far bigger than any of our per-category genre terms) and GamePix's "board"/"card" feed
+// categories have deep real inventory (verified live: 8 chess, 17 mahjong, 40+ solitaire, 18 tic-tac-
+// toe games etc.) that the old generic "strategy" bucket discarded almost all of. Give it a bigger
+// quota than the other categories to reflect that real depth.
+const TARGET_CLASSIC_GAMES = 40;
 const NEW_RELEASES_COUNT = 12;
 const QUALITY_THRESHOLD = 0.7;
 
 const VALID_CATEGORIES: GameCategory[] = [
-  "action", "puzzle", "arcade", "racing", "adventure", "strategy", "sports", "multiplayer",
+  "action", "puzzle", "arcade", "racing", "adventure", "strategy", "sports", "multiplayer", "classic",
 ];
 
-// Maps GamePix's ~90 granular categories onto our 8 site categories.
+// Per-category quota — everything defaults to TARGET_PER_CATEGORY except overrides here.
+const CATEGORY_QUOTA: Partial<Record<GameCategory, number>> = {
+  classic: TARGET_CLASSIC_GAMES,
+};
+
+// Maps GamePix's ~90 granular categories onto our 9 site categories.
 const CATEGORY_MAP: Record<string, GameCategory> = {
   shooter: "action", "first-person-shooter": "action", fighting: "action", battle: "action",
   zombie: "action", gangster: "action", robots: "action", hunting: "action",
@@ -41,18 +53,41 @@ const CATEGORY_MAP: Record<string, GameCategory> = {
   racing: "racing", driving: "racing", car: "racing", airplane: "racing",
   adventure: "adventure", platformer: "adventure", parkour: "adventure", monster: "adventure",
   scary: "adventure",
-  simulation: "strategy", idle: "strategy", board: "strategy", checkers: "strategy",
-  card: "strategy", clicker: "strategy", war: "strategy",
+  simulation: "strategy", idle: "strategy", clicker: "strategy", war: "strategy",
+  board: "classic", card: "classic", checkers: "classic",
   sports: "sports", basketball: "sports", soccer: "sports", boxing: "sports", archery: "sports",
   io: "multiplayer", "two-player": "multiplayer", tanks: "multiplayer",
 };
 
+// Cross-referenced 2026-08-03 against real popularity research per category — GamePix's actual
+// feed turned out to contain far more live trademark/copyright exposure than this list previously
+// caught (verified: "Candy Match Saga 2", "Flying Grimace", "Basketball Stars", "Grimace Penalty",
+// and "Dominations Idle" were ALL already sitting in the deployed games.json, none of them flagged
+// by the smaller original list). Expanded from that research pass across every site category.
 const PROHIBITED_BRAND_TERMS = [
-  "TETRIS", "PACMAN", "PAC-MAN", "MARIO", "POKEMON", "POKÉMON", "MINECRAFT", "SONIC", "ZELDA",
-  "FLAPPY BIRD", "SPACE INVADERS", "SUBWAY SURFERS", "TEMPLE RUN", "AMONG US", "DONKEY KONG",
-  "METROID", "GTA", "GRAND THEFT AUTO", "CALL OF DUTY", "NINTENDO", "SEGA", "DISNEY", "MARVEL",
-  "CAPCOM", "KONAMI", "UBISOFT", "MOJANG", "HUGGY WUGGY", "HUGGY", "POPPY PLAYTIME", "ROBLOX",
-  "FORTNITE", "SPONGEBOB", "BARBIE", "HELLO KITTY", "PAW PATROL", "STAR WARS", "HARRY POTTER",
+  "TETRIS", "PACMAN", "PAC-MAN", "PAC MAN", "MARIO", "POKEMON", "POKÉMON", "MINECRAFT", "SONIC",
+  "ZELDA", "FLAPPY BIRD", "SPACE INVADER", "SUBWAY SURFERS", "TEMPLE RUN", "AMONG US",
+  "DONKEY KONG", "METROID", "GTA", "GRAND THEFT AUTO", "CALL OF DUTY", "NINTENDO", "SEGA",
+  "DISNEY", "MARVEL", "CAPCOM", "KONAMI", "UBISOFT", "MOJANG", "HUGGY WUGGY", "HUGGY",
+  "POPPY PLAYTIME", "ROBLOX", "FORTNITE", "SPONGEBOB", "BARBIE", "HELLO KITTY", "PAW PATROL",
+  "STAR WARS", "HARRY POTTER",
+  // Action / battle-royale / shooter network research
+  "SHELL SHOCKERS", "KRUNKER", "1V1.LOL", "VENGE.IO", "PUBG", "KING OF FIGHTERS",
+  // Puzzle research
+  "CANDY CRUSH", "CANDY MATCH SAGA", "CUT THE ROPE", "OM NOM", "ZUMA", "BEJEWELED", "WORDLE",
+  // Arcade / runner research
+  "FROGGER", "NOKIA", "COMMANDER KEEN", "SQUID GAME", "SPRUNKI",
+  // Adventure research
+  "GARTEN OF BANBAN", "BANBAN", "RAINBOW FRIENDS", "LABUBU", "GRIMACE", "TERRARIA", "WITCHER",
+  "FIVE NIGHTS AT FREDDY", "FNAF",
+  // Strategy research
+  "DOMINATIONS", "COOKIE CLICKER", "CLICKER HEROES", "ADVENTURE CAPITALIST", "EGG INC",
+  "MELVOR IDLE", "BLOONS",
+  // Sports research
+  "BASKETBALL STARS", "BOXING STARS", "ARCHERY KING", "8 BALL POOL", "HEAD SOCCER",
+  "FOOTBALL STRIKE", "GOLF BATTLE",
+  // Multiplayer/.io research
+  "SLITHER.IO", "AGAR.IO", "DIEP.IO", "MOPE.IO", "SMASH KARTS", "SURVIV.IO", "ZOMBS ROYALE",
 ];
 
 interface GamePixItem {
@@ -98,14 +133,15 @@ function higherResImage(url: string, width: number): string {
   return url.replace(/([?&])w=\d+/, `$1w=${width}`);
 }
 
-async function fetchPages(pages: number, order: "quality" | "pubdate"): Promise<GamePixItem[]> {
+async function fetchPages(pages: number, order: "quality" | "pubdate", category?: string): Promise<GamePixItem[]> {
   const all: GamePixItem[] = [];
   for (let p = 1; p <= pages; p++) {
+    const categoryParam = category ? `&category=${category}` : "";
     const res = await fetch(
-      `https://feeds.gamepix.com/v2/json?sid=${SID}&pagination=${PAGE_SIZE}&page=${p}&order=${order}`
+      `https://feeds.gamepix.com/v2/json?sid=${SID}&pagination=${PAGE_SIZE}&page=${p}&order=${order}${categoryParam}`
     );
     if (!res.ok) {
-      console.warn(`⚠️  GamePix feed page ${p} (order=${order}) returned ${res.status}, stopping pagination.`);
+      console.warn(`⚠️  GamePix feed page ${p} (order=${order}${categoryParam}) returned ${res.status}, stopping pagination.`);
       break;
     }
     const data = (await res.json()) as GamePixFeed;
@@ -152,7 +188,8 @@ export async function importGamePixCatalog() {
 
   // Group by our site category, keep the top N per category by quality_score
   const byCategory: Record<GameCategory, GamePixItem[]> = {
-    action: [], puzzle: [], arcade: [], racing: [], adventure: [], strategy: [], sports: [], multiplayer: [],
+    action: [], puzzle: [], arcade: [], racing: [], adventure: [], strategy: [], sports: [],
+    multiplayer: [], classic: [],
   };
   qualityPool.forEach((item) => {
     byCategory[mapCategory(item.category)].push(item);
@@ -161,7 +198,8 @@ export async function importGamePixCatalog() {
   const selected: { item: GamePixItem; siteCategory: GameCategory }[] = [];
   const selectedIds = new Set<string>();
   VALID_CATEGORIES.forEach((cat) => {
-    const top = byCategory[cat].sort((a, b) => b.quality_score - a.quality_score).slice(0, TARGET_PER_CATEGORY);
+    const quota = CATEGORY_QUOTA[cat] ?? TARGET_PER_CATEGORY;
+    const top = byCategory[cat].sort((a, b) => b.quality_score - a.quality_score).slice(0, quota);
     top.forEach((item) => {
       selected.push({ item, siteCategory: cat });
       selectedIds.add(item.namespace);
@@ -169,6 +207,30 @@ export async function importGamePixCatalog() {
   });
 
   console.log(`✅ Selected ${selected.length} real games across ${VALID_CATEGORIES.length} categories.`);
+
+  // The global quality-sorted pool above only samples the top ~2880 games across GamePix's ~90
+  // categories combined — not deep enough to guarantee classic-games depth (chess/checkers/mahjong/
+  // solitaire/tic-tac-toe/ludo/domino/backgammon all live under just 2 of those ~90 GamePix
+  // categories: "board" and "card"). Fetch those two directly so real classic-game depth isn't left
+  // to chance (verified live: this alone surfaces 8 chess, 17+ mahjong, 40+ solitaire titles).
+  const classicSlotsUsed = selected.filter((s) => s.siteCategory === "classic").length;
+  const classicSlotsRemaining = TARGET_CLASSIC_GAMES - classicSlotsUsed;
+  if (classicSlotsRemaining > 0) {
+    console.log("🔍 Fetching board/card games directly from GamePix for classic-games depth...");
+    const classicPool = dedupeByNamespace([
+      ...(await fetchPages(6, "quality", "board")),
+      ...(await fetchPages(6, "quality", "card")),
+    ])
+      .filter(qualifies)
+      .filter((item) => !selectedIds.has(item.namespace))
+      .sort((a, b) => b.quality_score - a.quality_score)
+      .slice(0, classicSlotsRemaining);
+    console.log(`   ${classicPool.length} additional classic games clear the quality bar.`);
+    classicPool.forEach((item) => {
+      selected.push({ item, siteCategory: "classic" });
+      selectedIds.add(item.namespace);
+    });
+  }
 
   // "New Releases" needs titles that are ACTUALLY new, not just the most-recent survivors of a
   // quality-sorted pool (which skews toward older, more-established games — verified live: none

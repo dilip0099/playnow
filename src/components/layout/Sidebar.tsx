@@ -16,7 +16,8 @@ import {
   Compass,
   Volleyball,
   UsersRound,
-  Unlock
+  Unlock,
+  Dices
 } from "lucide-react";
 
 export function Sidebar() {
@@ -43,6 +44,7 @@ export function Sidebar() {
     { name: "Adventure", href: "/category/adventure", icon: Compass },
     { name: "Sports", href: "/category/sports", icon: Volleyball },
     { name: "Multiplayer", href: "/category/multiplayer", icon: UsersRound },
+    { name: "Classic", href: "/category/classic", icon: Dices },
   ];
 
   return (

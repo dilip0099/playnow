@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Swords, Brain, Car, Joystick, Puzzle, Compass, Volleyball, UsersRound, Unlock } from "lucide-react";
+import { Swords, Brain, Car, Joystick, Puzzle, Compass, Volleyball, UsersRound, Unlock, Dices } from "lucide-react";
 import { gamesData } from "@/lib/games";
 import { GameCard } from "@/components/games/GameCard";
 import { ContinuePlayingRail } from "@/components/games/ContinuePlayingRail";
@@ -20,6 +20,7 @@ const CATEGORY_RAILS: { category: GameCategory; label: string }[] = [
   { category: "adventure", label: "ADVENTURE GAMES" },
   { category: "sports", label: "SPORTS GAMES" },
   { category: "multiplayer", label: "MULTIPLAYER GAMES" },
+  { category: "classic", label: "CLASSIC GAMES" },
 ];
 
 export default function HomePage() {
@@ -52,6 +53,7 @@ export default function HomePage() {
     { name: "ADVENTURE", href: "/category/adventure", icon: Compass, count: gamesData.filter((g) => g.category === "adventure").length },
     { name: "SPORTS", href: "/category/sports", icon: Volleyball, count: gamesData.filter((g) => g.category === "sports").length },
     { name: "MULTIPLAYER", href: "/category/multiplayer", icon: UsersRound, count: gamesData.filter((g) => g.category === "multiplayer").length },
+    { name: "CLASSIC", href: "/category/classic", icon: Dices, count: gamesData.filter((g) => g.category === "classic").length },
   ];
 
   // WebSite schema (+ SearchAction) is what makes a site eligible for Google's sitelinks

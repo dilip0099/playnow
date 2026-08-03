@@ -1,16 +1,17 @@
 {
-  "timestamp": "2026-08-02T16:13:13.254Z",
-  "totalImported": 181,
+  "timestamp": "2026-08-03T15:34:00.313Z",
+  "totalImported": 211,
   "sourceNetwork": "GamePix",
   "categoryDistribution": {
     "action": 23,
-    "puzzle": 24,
+    "puzzle": 25,
     "arcade": 23,
     "racing": 22,
     "adventure": 22,
-    "strategy": 23,
+    "strategy": 22,
     "sports": 22,
-    "multiplayer": 22
+    "multiplayer": 22,
+    "classic": 30
   },
   "rejectedForBrandRisk": [
     {
@@ -33,15 +34,47 @@
       ]
     },
     {
+      "title": "Basketball Stars",
+      "conflicts": [
+        "BASKETBALL STARS"
+      ]
+    },
+    {
       "title": "Speakerman Revenge",
       "conflicts": [
         "SONIC"
       ]
     },
     {
+      "title": "Cut the Rope 2",
+      "conflicts": [
+        "CUT THE ROPE",
+        "OM NOM"
+      ]
+    },
+    {
       "title": "Monster School Challenges",
       "conflicts": [
         "MINECRAFT"
+      ]
+    },
+    {
+      "title": "Flying Grimace",
+      "conflicts": [
+        "GRIMACE"
+      ]
+    },
+    {
+      "title": "Candy Match Saga 2",
+      "conflicts": [
+        "CANDY MATCH SAGA"
+      ]
+    },
+    {
+      "title": "Cut The Rope",
+      "conflicts": [
+        "CUT THE ROPE",
+        "OM NOM"
       ]
     },
     {
@@ -63,9 +96,29 @@
       ]
     },
     {
+      "title": "Cut the Rope Experiments",
+      "conflicts": [
+        "CUT THE ROPE",
+        "OM NOM"
+      ]
+    },
+    {
+      "title": "Grimace Penalty",
+      "conflicts": [
+        "GRIMACE"
+      ]
+    },
+    {
       "title": "Minecraft Skibidi Hidden Toilet",
       "conflicts": [
         "MINECRAFT"
+      ]
+    },
+    {
+      "title": "Cut the Rope: Magic",
+      "conflicts": [
+        "CUT THE ROPE",
+        "OM NOM"
       ]
     },
     {
@@ -76,9 +129,27 @@
       ]
     },
     {
+      "title": "Rainbow Friends VS Skibidi Toilet",
+      "conflicts": [
+        "RAINBOW FRIENDS"
+      ]
+    },
+    {
+      "title": "Boxing Stars",
+      "conflicts": [
+        "BOXING STARS"
+      ]
+    },
+    {
       "title": "Killer Escape Huggy",
       "conflicts": [
         "HUGGY"
+      ]
+    },
+    {
+      "title": "Labubu Shooter",
+      "conflicts": [
+        "LABUBU"
       ]
     },
     {
@@ -100,9 +171,21 @@
       ]
     },
     {
+      "title": "Sprunki Games Player 456",
+      "conflicts": [
+        "SPRUNKI"
+      ]
+    },
+    {
       "title": "Cubetopia Parkour",
       "conflicts": [
         "MINECRAFT"
+      ]
+    },
+    {
+      "title": "Sprunki Stunt Driving Simulator",
+      "conflicts": [
+        "SPRUNKI"
       ]
     },
     {
@@ -112,15 +195,46 @@
       ]
     },
     {
+      "title": "Cut The Rope: Time Travel",
+      "conflicts": [
+        "CUT THE ROPE",
+        "OM NOM"
+      ]
+    },
+    {
+      "title": "Sprunki Coloring Book",
+      "conflicts": [
+        "SPRUNKI"
+      ]
+    },
+    {
+      "title": "Head Soccer 2023",
+      "conflicts": [
+        "HEAD SOCCER"
+      ]
+    },
+    {
       "title": "Noob Huggy Winter",
       "conflicts": [
         "HUGGY"
       ]
     },
     {
+      "title": "Dominations Idle",
+      "conflicts": [
+        "DOMINATIONS"
+      ]
+    },
+    {
       "title": "Mini Huggy - 2 Players",
       "conflicts": [
         "HUGGY"
+      ]
+    },
+    {
+      "title": "Sprunki Memory Card Match",
+      "conflicts": [
+        "SPRUNKI"
       ]
     },
     {
@@ -136,9 +250,27 @@
       ]
     },
     {
+      "title": "Tralalero Tralala Red Light Squid Game",
+      "conflicts": [
+        "SQUID GAME"
+      ]
+    },
+    {
+      "title": "Rainbow Friends Coloring Book",
+      "conflicts": [
+        "RAINBOW FRIENDS"
+      ]
+    },
+    {
       "title": "The dead among us",
       "conflicts": [
         "AMONG US"
+      ]
+    },
+    {
+      "title": "Sprunki Horror",
+      "conflicts": [
+        "SPRUNKI"
       ]
     },
     {
@@ -148,9 +280,28 @@
       ]
     },
     {
+      "title": "Garten of Banban 3 Drag and Drop game",
+      "conflicts": [
+        "GARTEN OF BANBAN",
+        "BANBAN"
+      ]
+    },
+    {
+      "title": "Sprunki Ice Mod - Aqua",
+      "conflicts": [
+        "SPRUNKI"
+      ]
+    },
+    {
       "title": "Counter Craft Zombies",
       "conflicts": [
         "MINECRAFT"
+      ]
+    },
+    {
+      "title": "NoobLOX Rainbow Friends",
+      "conflicts": [
+        "RAINBOW FRIENDS"
       ]
     },
     {
@@ -160,9 +311,39 @@
       ]
     },
     {
+      "title": "Rainbow Friends Chapter 2",
+      "conflicts": [
+        "RAINBOW FRIENDS"
+      ]
+    },
+    {
+      "title": "Skibidi Toilet Squid Game Red Light",
+      "conflicts": [
+        "SQUID GAME"
+      ]
+    },
+    {
       "title": "Noob Huggy",
       "conflicts": [
         "HUGGY"
+      ]
+    },
+    {
+      "title": "Head Soccer 2022",
+      "conflicts": [
+        "HEAD SOCCER"
+      ]
+    },
+    {
+      "title": "Two Impostor Squid Challenge",
+      "conflicts": [
+        "SQUID GAME"
+      ]
+    },
+    {
+      "title": "Grimace Shake Hidden Skibidi Toilet",
+      "conflicts": [
+        "GRIMACE"
       ]
     },
     {
@@ -178,6 +359,12 @@
       ]
     },
     {
+      "title": "Archery King",
+      "conflicts": [
+        "ARCHERY KING"
+      ]
+    },
+    {
       "title": "Super Huggie Bros",
       "conflicts": [
         "HUGGY WUGGY",
@@ -188,6 +375,12 @@
       "title": "Falling Blocks 2048 - 2D",
       "conflicts": [
         "TETRIS"
+      ]
+    },
+    {
+      "title": "Squid Game 3D Survival Squad",
+      "conflicts": [
+        "SQUID GAME"
       ]
     },
     {
@@ -219,7 +412,14 @@
     {
       "title": "Rainbow Friends Among Survival Adventures",
       "conflicts": [
-        "PAC-MAN"
+        "PAC-MAN",
+        "RAINBOW FRIENDS"
+      ]
+    },
+    {
+      "title": "Grimace Shake - Escape Skibidi and Cameraman",
+      "conflicts": [
+        "GRIMACE"
       ]
     },
     {
@@ -235,6 +435,37 @@
       ]
     },
     {
+      "title": "Sprunki Coloring Books",
+      "conflicts": [
+        "SPRUNKI"
+      ]
+    },
+    {
+      "title": "Draw and Create Sprunki Road",
+      "conflicts": [
+        "SPRUNKI"
+      ]
+    },
+    {
+      "title": "2048 - FNAF",
+      "conflicts": [
+        "FIVE NIGHTS AT FREDDY",
+        "FNAF"
+      ]
+    },
+    {
+      "title": "When Granny Met Grimace Shake",
+      "conflicts": [
+        "GRIMACE"
+      ]
+    },
+    {
+      "title": "FNAF Freddy Sliding Puzzle",
+      "conflicts": [
+        "FNAF"
+      ]
+    },
+    {
       "title": "Flappy FootChinko",
       "conflicts": [
         "FLAPPY BIRD"
@@ -247,15 +478,40 @@
       ]
     },
     {
+      "title": "Squid Game Craft Runner",
+      "conflicts": [
+        "SQUID GAME"
+      ]
+    },
+    {
       "title": "Flappy Bird 3D",
       "conflicts": [
         "FLAPPY BIRD"
       ]
     },
     {
+      "title": "Garten of Banban Obby",
+      "conflicts": [
+        "GARTEN OF BANBAN",
+        "BANBAN"
+      ]
+    },
+    {
       "title": "Minecraft Drift Simulator",
       "conflicts": [
         "MINECRAFT"
+      ]
+    },
+    {
+      "title": "8 Ball Pool Multiplayer",
+      "conflicts": [
+        "8 BALL POOL"
+      ]
+    },
+    {
+      "title": "Scream Sprunki",
+      "conflicts": [
+        "SPRUNKI"
       ]
     },
     {
@@ -271,9 +527,39 @@
       ]
     },
     {
+      "title": "Sprunki Super Hero",
+      "conflicts": [
+        "SPRUNKI"
+      ]
+    },
+    {
+      "title": "Grimace Vs Skibidi",
+      "conflicts": [
+        "GRIMACE"
+      ]
+    },
+    {
       "title": "Roblox Halloween Costume Party",
       "conflicts": [
         "ROBLOX"
+      ]
+    },
+    {
+      "title": "Sprunki Tung Sahur",
+      "conflicts": [
+        "SPRUNKI"
+      ]
+    },
+    {
+      "title": "8 Ball Pool Multiplayer",
+      "conflicts": [
+        "8 BALL POOL"
+      ]
+    },
+    {
+      "title": "Dominations Idle",
+      "conflicts": [
+        "DOMINATIONS"
       ]
     }
   ]
