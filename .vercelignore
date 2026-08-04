@@ -1,0 +1,6 @@
+# Files to ignore during Vercel Deployment & Build
+docs/
+*.md
+!README.md
+*.txt
+playthorn-*.json
