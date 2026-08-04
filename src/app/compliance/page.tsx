@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import fs from "fs";
 import path from "path";
-import { ShieldCheck, FileCheck, Layers, Sparkles, CheckCircle2, ArrowRight, ExternalLink, Key, Lock, GitBranch } from "lucide-react";
+import { ShieldCheck, FileCheck, Layers, Sparkles, CheckCircle2, ArrowRight, ExternalLink, Key, Lock, GitBranch, Copyright } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
@@ -135,7 +135,7 @@ export default function PublicCompliancePage() {
         <div className="space-y-4">
           <h2 className="text-2xl font-black text-foreground tracking-tight">Legal Transparency Documentation</h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
 
             <Link href="/legal/licenses" className="group">
               <Card className="p-6 border-border/60 bg-card/60 hover:bg-slate-800/60 transition-all duration-300 space-y-3 h-full">
@@ -193,6 +193,21 @@ export default function PublicCompliancePage() {
                 </h3>
                 <p className="text-xs text-muted-foreground leading-relaxed">
                   Full list of every licensed game with its category, quality signal, and publish/update dates.
+                </p>
+              </Card>
+            </Link>
+
+            <Link href="/legal/dmca" className="group">
+              <Card className="p-6 border-border/60 bg-card/60 hover:bg-slate-800/60 transition-all duration-300 space-y-3 h-full">
+                <div className="h-10 w-10 rounded-2xl bg-rose-500/10 flex items-center justify-center text-rose-400 border border-rose-500/20 group-hover:scale-110 transition-transform">
+                  <Copyright className="h-5 w-5" />
+                </div>
+                <h3 className="text-lg font-bold text-foreground group-hover:text-rose-300 transition-colors flex items-center justify-between">
+                  <span>DMCA Policy</span>
+                  <ArrowRight className="h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity" />
+                </h3>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  How to submit a valid copyright takedown notice, and how counter-notifications work.
                 </p>
               </Card>
             </Link>

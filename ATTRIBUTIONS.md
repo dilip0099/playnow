@@ -78,10 +78,10 @@ PlayNow's game catalog is licensed through **GamePix** (https://www.gamepix.com/
 | **Wear the Helmet** | racing | `262AT` | [GamePix](https://play.gamepix.com/wear-the-helmet/embed?sid=775N7) |
 | **Park the Cars** | racing | `T35CH` | [GamePix](https://play.gamepix.com/park-the-cars/embed?sid=775N7) |
 | **MR RACER - Car Racing** | racing | `C67715` | [GamePix](https://play.gamepix.com/mr-racer-car-racing-game/embed?sid=775N7) |
-| **BMG! CrashDay 2025** | racing | `37A02G` | [GamePix](https://play.gamepix.com/bmg-crashday-2025/embed?sid=775N7) |
 | **Italian Brainrot Extreme Driver** | racing | `EOEARI` | [GamePix](https://play.gamepix.com/italian-brainrot-extreme-driver/embed?sid=775N7) |
 | **Parking Solution** | racing | `8O7717` | [GamePix](https://play.gamepix.com/parking-solution/embed?sid=775N7) |
 | **Mini Car Racing** | racing | `CE13Q6` | [GamePix](https://play.gamepix.com/mini-car/embed?sid=775N7) |
+| **BMG! CrashDay 2025** | racing | `37A02G` | [GamePix](https://play.gamepix.com/bmg-crashday-2025/embed?sid=775N7) |
 | **Ramp Racing** | racing | `MAR8PC` | [GamePix](https://play.gamepix.com/ramp-racing/embed?sid=775N7) |
 | **Super SUV Driving** | racing | `644S6` | [GamePix](https://play.gamepix.com/super-suv-driving/embed?sid=775N7) |
 | **Hotgear** | racing | `E1844O` | [GamePix](https://play.gamepix.com/hotgear/embed?sid=775N7) |

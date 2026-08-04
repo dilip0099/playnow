@@ -6,16 +6,80 @@ import {
   Layers,
   Smartphone,
   Calendar,
-  ExternalLink
+  ExternalLink,
+  Lightbulb,
+  ChevronDown
 } from "lucide-react";
 import { getGameBySlug, getRelatedGames, getAllGames } from "@/lib/games";
 import { GamePlayer } from "@/components/games/GamePlayer";
 import { GameCard } from "@/components/games/GameCard";
+import { EmbedGameButton } from "@/components/games/EmbedGameButton";
+import { GameCategory } from "@/types/game";
 import { SITE_URL } from "@/lib/site";
 
 interface GamePageProps {
   params: Promise<{ slug: string }>;
 }
+
+// Generic, category-appropriate gameplay advice — not invented specifics about any single
+// game's levels/scores (which we can't verify), just the kind of honest strategy guidance
+// that applies to any real title in that genre. Keys must cover every GameCategory value.
+const CATEGORY_TIPS: Record<GameCategory, string[]> = {
+  action: [
+    "Learn enemy attack patterns before rushing in — most action games telegraph a wind-up before every hit, so reacting to that cue beats memorizing combos.",
+    "Keep moving. Standing still to line up the perfect shot is usually riskier than firing while repositioning.",
+    "Save your strongest resource (health, ammo, special move) for when you actually need it, not the first tough moment you see.",
+    "Practice a level's opening section until the controls feel automatic — most of the skill jump comes from muscle memory, not raw reflexes.",
+  ],
+  puzzle: [
+    "Scan the whole board or level before making your first move — many puzzles punish acting before you've seen the full picture.",
+    "Look for forced moves first — spots where only one piece or tile can go — solving those narrows down everything else.",
+    "If you get stuck, undo a few moves and try a different approach rather than grinding the same path.",
+    "Take a short break when stuck. Puzzle games usually reward a fresh perspective more than raw speed.",
+  ],
+  arcade: [
+    "Survive first, score second — most arcade games hand out points for staying alive, so protect your run before chasing risky combos.",
+    "Learn the pattern and timing of obstacles or enemies — arcade games are often built on repeating cycles once you notice them.",
+    "Chain small, safe wins instead of gambling on an ambitious play that resets your progress.",
+    "Practice one tricky section at a time instead of replaying the whole game from the start every attempt.",
+  ],
+  racing: [
+    "Brake before the turn, not during it, so you're already at the right speed when you turn in.",
+    "Look ahead to the next corner rather than at the car in front of you — reacting late causes most crashes.",
+    "Aim for a smooth racing line — wide on entry, tight at the apex, wide again on exit — instead of cutting hard corners.",
+    "Learn the track's layout over a lap or two before pushing for your fastest time.",
+  ],
+  adventure: [
+    "Explore fully before moving on — adventure games often hide useful items or shortcuts just off the main path.",
+    "Pay attention to environmental clues like color, sound, or camera framing — they usually hint at what to do next.",
+    "If you hit a locked door or gap you can't cross, backtrack later once you've likely gained the tool or ability to get past it.",
+    "Save or checkpoint often if the game allows it, especially before a risky jump or fight.",
+  ],
+  strategy: [
+    "Scout before you commit — knowing what you're up against is worth more than an early aggressive move.",
+    "Balance economy and offense; over-investing in one usually leaves you exposed on the other.",
+    "Think a move or two ahead and consider your opponent's likely response before committing.",
+    "Defend key positions rather than spreading your forces thin across the whole board or map.",
+  ],
+  sports: [
+    "Learn the timing window for your sport's key action — shot, swing, or tackle — since most sports games reward precise timing over button-mashing.",
+    "Position yourself where you're strongest instead of forcing a risky play out of position.",
+    "Watch your opponent's positioning before committing to a move; predictable patterns get punished.",
+    "Drill the fundamentals in a low-pressure moment before relying on them in a close match.",
+  ],
+  multiplayer: [
+    "Spectate for a minute first if the game allows it — you'll pick up the map and common strategies fast.",
+    "Stick near safer areas early on rather than exploring alone; isolated positions are usually the most exposed.",
+    "Grow or level up steadily and avoid unnecessary risks — many multiplayer and .io-style games make you more vulnerable right after a gain, not less.",
+    "Watch how experienced players open a round — you'll see the same effective patterns repeat.",
+  ],
+  classic: [
+    "Learn the fundamental rules cold before trying advanced tactics — classic games like chess, mahjong, and solitaire reward solid basics over clever tricks.",
+    "Think about your opponent's (or the board's) best response before committing to a move.",
+    "Replay the same match or deal if the game allows it — recognizing recurring patterns is most of the skill here.",
+    "Don't rush; classic games are generally won on patience and calculation, not speed.",
+  ],
+};
 
 export async function generateStaticParams() {
   const games = getAllGames();
@@ -58,6 +122,48 @@ export default async function GamePage({ params }: GamePageProps) {
 
   const relatedGames = getRelatedGames(game, 4);
   const displayTitle = game.derivedTitle || game.title;
+  const tips = CATEGORY_TIPS[game.category] || CATEGORY_TIPS.arcade;
+
+  // Every answer below is derived directly from real GameMetadata fields (mobileSupport,
+  // controls, category, tags) — nothing here is a claim we can't verify from the data.
+  const controlsSummary =
+    game.controls.length > 0
+      ? game.controls.map((c) => `${c.key} (${c.action})`).join(", ")
+      : "on-screen controls shown inside the game itself";
+
+  const faqs = [
+    {
+      question: `Is ${displayTitle} free to play?`,
+      answer: `Yes — ${displayTitle} is completely free to play on PlayNow, with no signup or subscription required.`,
+    },
+    {
+      question: "Do I need to download anything to play?",
+      answer: `No. ${displayTitle} runs directly in your browser as an HTML5 game — there's nothing to download or install.`,
+    },
+    {
+      question: `Does ${displayTitle} work on mobile devices?`,
+      answer: game.mobileSupport
+        ? `Yes — ${displayTitle} supports mobile play and works on phones and tablets directly in your mobile browser.`
+        : `${displayTitle} is currently optimized for desktop play and may not run well on mobile devices.`,
+    },
+    {
+      question: `What are the controls for ${displayTitle}?`,
+      answer:
+        game.controls.length > 0
+          ? `The controls are: ${controlsSummary}.`
+          : "Control instructions are shown inside the game itself once it loads.",
+    },
+    {
+      question: `What category is ${displayTitle}?`,
+      answer: `${displayTitle} is a ${game.category} game${
+        game.tags.length > 0 ? `, tagged as ${game.tags.join(", ")}` : ""
+      }.`,
+    },
+    {
+      question: `Can I embed ${displayTitle} on my own website?`,
+      answer: `Yes — use the "Embed This Game" button on this page to get a free copy-paste iframe snippet for ${displayTitle}.`,
+    },
+  ];
 
   // Deliberately omits aggregateRating/review — that requires a genuine per-site review
   // count, which we don't have (the star rating shown in our UI is derived from GamePix's
@@ -95,6 +201,17 @@ export default async function GamePage({ params }: GamePageProps) {
           { "@type": "ListItem", position: 2, name: `${game.category} Games`, item: `${SITE_URL}/category/${game.category}` },
           { "@type": "ListItem", position: 3, name: displayTitle, item: `${SITE_URL}/game/${game.slug}` },
         ],
+      },
+      {
+        "@type": "FAQPage",
+        mainEntity: faqs.map((faq) => ({
+          "@type": "Question",
+          name: faq.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: faq.answer,
+          },
+        })),
       },
     ],
   };
@@ -231,8 +348,33 @@ export default async function GamePage({ params }: GamePageProps) {
                 </div>
               )}
             </div>
+
+            {/* Embed This Game — copy-paste iframe snippet for other sites */}
+            <div className="rounded-2xl border border-border bg-card p-5 space-y-3">
+              <h3 className="font-display text-sm font-bold text-foreground">Embed This Game</h3>
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                Add {displayTitle} to your own website for free with a copy-paste iframe.
+              </p>
+              <EmbedGameButton slug={game.slug} title={displayTitle} />
+            </div>
           </div>
         </div>
+
+        {/* ═══ STRATEGY & TIPS — generic, category-appropriate advice, no invented specifics ═══ */}
+        <section className="space-y-5">
+          <h2 className="font-display text-xl font-black text-foreground uppercase flex items-center">
+            <span className="w-1 h-5 bg-primary rounded-full mr-3" />
+            STRATEGY & TIPS
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {tips.map((tip, idx) => (
+              <div key={idx} className="flex items-start space-x-3 rounded-2xl border border-border bg-card p-4">
+                <Lightbulb className="h-4 w-4 mt-0.5 shrink-0 text-primary" aria-hidden="true" />
+                <p className="text-sm text-foreground/80 leading-relaxed">{tip}</p>
+              </div>
+            ))}
+          </div>
+        </section>
 
         {/* ═══ GALLERY ═══ */}
         <section className="space-y-5">
@@ -252,6 +394,31 @@ export default async function GamePage({ params }: GamePageProps) {
                   className="object-cover hover:scale-105 transition-transform duration-slow"
                 />
               </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ═══ FAQ ═══ */}
+        <section className="space-y-5">
+          <h2 className="font-display text-xl font-black text-foreground uppercase flex items-center">
+            <span className="w-1 h-5 bg-primary rounded-full mr-3" />
+            FREQUENTLY ASKED QUESTIONS
+          </h2>
+          <div className="space-y-3">
+            {faqs.map((faq, idx) => (
+              <details
+                key={idx}
+                className="group rounded-2xl border border-border bg-card p-5"
+              >
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-3 font-display text-sm font-bold text-foreground marker:content-none [&::-webkit-details-marker]:hidden">
+                  <span>{faq.question}</span>
+                  <ChevronDown
+                    className="h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-base group-open:rotate-180"
+                    aria-hidden="true"
+                  />
+                </summary>
+                <p className="mt-3 text-sm text-foreground/80 leading-relaxed">{faq.answer}</p>
+              </details>
             ))}
           </div>
         </section>

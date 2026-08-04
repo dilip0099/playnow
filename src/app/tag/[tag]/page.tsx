@@ -1,0 +1,219 @@
+import { Metadata } from "next";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { ChevronRight, Home } from "lucide-react";
+import { getAllGames } from "@/lib/games";
+import { GameGrid } from "@/components/games/GameGrid";
+import { SITE_URL } from "@/lib/site";
+
+interface TagPageProps {
+  params: Promise<{ tag: string }>;
+}
+
+// Built directly from the real "tags" values in src/data/games.json (211 games total).
+// Two kinds of tags were deliberately excluded from this map, both to avoid thin/duplicate pages:
+//   1. "landscape" / "portrait" / "all" — these are device-orientation metadata on each game,
+//      not thematic tags, so a "Landscape Games" page would be meaningless to a visitor.
+//   2. Tags that are just the game's own category re-listed as a tag (e.g. "action", "puzzle",
+//      "arcade", "racing", "adventure", "strategy", "sports", "multiplayer", "classic") — for every
+//      one of these, the tag's game set is 100% identical to /category/[slug]'s game set, so a
+//      /tag/ page would be exact duplicate content of an existing category page.
+// What's left are genuine sub-collections (a themed slice within one or more categories) that each
+// have 4+ real games — the threshold below which a listing page reads as thin/empty.
+const TAG_SEO: Record<string, { h1: string; title: string; description: string; intro: string }> = {
+  board: {
+    h1: "Board Games",
+    title: "Free Board Games Online - Chess, Checkers, Ludo & More",
+    description:
+      "Play free board games online instantly — chess, checkers, ludo, dominoes, tic-tac-toe and more classic tabletop games in your browser. No download required.",
+    intro:
+      "Classic tabletop games brought to the screen — chess, checkers, ludo, dominoes, and more. No board to set up, no download, just click and play.",
+  },
+  tanks: {
+    h1: "Tank Games",
+    title: "Free Tank Games Online - Multiplayer Tank Battles",
+    description:
+      "Play free tank games online instantly — armored combat and multiplayer tank battles in your browser. No download needed.",
+    intro:
+      "Armored combat games where you roll out, aim, and fire straight from the browser — no download, no install, no patch to wait on.",
+  },
+  clicker: {
+    h1: "Clicker & Idle Games",
+    title: "Free Clicker & Idle Games Online - Play Instantly",
+    description:
+      "Play free clicker and idle games online instantly — tap, upgrade, and watch the numbers climb. No download required.",
+    intro:
+      "Tap-to-progress clicker and idle games for whenever you want something low-effort to grind on in the background. Loads instantly, no install.",
+  },
+  fighting: {
+    h1: "Fighting Games",
+    title: "Free Fighting Games Online - 1v1 Combat Games",
+    description:
+      "Play free fighting games online instantly — 1v1 combat and brawler games in your browser. No download required.",
+    intro:
+      "Head-to-head fighting and brawler games built for quick rounds — no download, no unlock grind, just fight.",
+  },
+  simulation: {
+    h1: "Simulation Games",
+    title: "Free Simulation Games Online - Play Instantly",
+    description:
+      "Play free simulation games online instantly — management, driving, and life-sim style games in your browser. No download needed.",
+    intro:
+      "Simulation games for players who like managing, driving, or running something — all playable directly in the browser, no install required.",
+  },
+  card: {
+    h1: "Card Games",
+    title: "Free Card Games Online - Classic Card & Deck Games",
+    description:
+      "Play free card games online instantly — classic card and deck games, solo and multiplayer, in your browser. No download required.",
+    intro:
+      "Card and deck games — solo and multiplayer — playable instantly with no download and no physical deck required.",
+  },
+  shooter: {
+    h1: "Shooter Games",
+    title: "Free Shooter Games Online - Play Instantly",
+    description:
+      "Play free shooter games online instantly — fast-paced shooting action in your browser. No download needed.",
+    intro:
+      "Fast-paced shooting games for quick sessions — no download, no launcher, just aim and play.",
+  },
+  "first-person-shooter": {
+    h1: "First-Person Shooter (FPS) Games",
+    title: "Free FPS Games Online - First-Person Shooters",
+    description:
+      "Play free first-person shooter games online instantly — browser-based FPS action. No download required.",
+    intro:
+      "First-person shooters that run entirely in the browser tab — no launcher, no patch downloads, just load in and play.",
+  },
+  trivia: {
+    h1: "Trivia Games",
+    title: "Free Trivia Games Online - Quiz & Knowledge Games",
+    description:
+      "Play free trivia games online instantly — quiz and knowledge games playable in your browser. No download needed.",
+    intro:
+      "Quiz-style trivia games for testing what you know, playable instantly with no download or sign-up.",
+  },
+  io: {
+    h1: "IO Games",
+    title: "Free IO Games Online - Multiplayer Browser Battles",
+    description:
+      "Play free .io-style multiplayer games online instantly — real opponents, browser-based battles. No download required.",
+    intro:
+      "Our .io-style multiplayer picks — real opponents, fast matches, no download, no signup wall.",
+  },
+  "two-player": {
+    h1: "Two-Player Games",
+    title: "Free Two-Player Games Online - Play With a Friend",
+    description:
+      "Play free two-player games online instantly — same-screen games you can play head-to-head with a friend. No download required.",
+    intro:
+      "Same-device two-player games for going head-to-head with a friend on one screen — no download, no extra equipment.",
+  },
+};
+
+const VALID_TAGS = Object.keys(TAG_SEO);
+
+export async function generateStaticParams() {
+  return VALID_TAGS.map((tag) => ({ tag }));
+}
+
+export async function generateMetadata({ params }: TagPageProps): Promise<Metadata> {
+  const { tag } = await params;
+  const normalized = tag.toLowerCase();
+  const seo = TAG_SEO[normalized];
+  if (!seo) return { title: "Games - PlayNow" };
+
+  return {
+    title: seo.title,
+    description: seo.description,
+    alternates: { canonical: `/tag/${tag}` },
+    openGraph: {
+      title: `${seo.h1} - PlayNow`,
+      description: seo.description,
+      type: "website",
+      url: `${SITE_URL}/tag/${tag}`,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${seo.h1} - PlayNow`,
+      description: seo.description,
+    },
+  };
+}
+
+export default async function TagPage({ params }: TagPageProps) {
+  const { tag } = await params;
+  const normalizedTag = tag.toLowerCase();
+
+  if (!VALID_TAGS.includes(normalizedTag)) {
+    notFound();
+  }
+
+  const seo = TAG_SEO[normalizedTag];
+  const games = getAllGames().filter((g) => g.tags.includes(normalizedTag));
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "CollectionPage",
+        name: seo.title,
+        description: seo.description,
+        url: `${SITE_URL}/tag/${tag}`,
+      },
+      {
+        "@type": "ItemList",
+        itemListElement: games.slice(0, 24).map((game, idx) => ({
+          "@type": "ListItem",
+          position: idx + 1,
+          url: `${SITE_URL}/game/${game.slug}`,
+          name: game.derivedTitle || game.title,
+        })),
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+          { "@type": "ListItem", position: 2, name: seo.h1, item: `${SITE_URL}/tag/${tag}` },
+        ],
+      },
+    ],
+  };
+
+  return (
+    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
+      {/* Breadcrumb */}
+      <nav className="flex items-center space-x-2 text-xs font-semibold text-muted-foreground">
+        <Link href="/" className="flex items-center hover:text-foreground transition-colors">
+          <Home className="h-3.5 w-3.5 mr-1" />
+          <span>Home</span>
+        </Link>
+        <ChevronRight className="h-3 w-3" />
+        <span className="text-foreground font-bold">{seo.h1}</span>
+      </nav>
+
+      {/* Tag Banner Header */}
+      <div className="relative overflow-hidden rounded-3xl border border-secondary/20 bg-gradient-to-r from-secondary/20 via-card to-card p-8 sm:p-10 shadow-xl">
+        <div className="relative z-10 space-y-2">
+          <span className="rounded-full bg-secondary/10 px-3 py-1 text-xs font-bold text-violet-300 border border-secondary/20 uppercase tracking-wider">
+            Tag Collection
+          </span>
+          <h1 className="text-3xl sm:text-4xl font-black text-foreground tracking-tight">
+            {seo.h1}
+          </h1>
+          <p className="text-sm text-foreground/80 max-w-xl leading-relaxed">
+            {seo.intro}
+          </p>
+        </div>
+      </div>
+
+      {/* Games Listing */}
+      <GameGrid games={games} title={seo.h1} showFilters={true} />
+    </div>
+  );
+}

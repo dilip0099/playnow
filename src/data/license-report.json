@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-08-03T16:46:52.725Z",
+  "timestamp": "2026-08-04T18:09:46.393Z",
   "totalImported": 211,
   "sourceNetwork": "GamePix",
   "categoryDistribution": {
@@ -447,6 +447,12 @@
       ]
     },
     {
+      "title": "Squid Game Craft Runner",
+      "conflicts": [
+        "SQUID GAME"
+      ]
+    },
+    {
       "title": "2048 - FNAF",
       "conflicts": [
         "FIVE NIGHTS AT FREDDY",
@@ -475,12 +481,6 @@
       "title": "Brain IQ test Mincraft Quiz",
       "conflicts": [
         "MINECRAFT"
-      ]
-    },
-    {
-      "title": "Squid Game Craft Runner",
-      "conflicts": [
-        "SQUID GAME"
       ]
     },
     {

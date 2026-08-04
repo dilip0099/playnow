@@ -17,7 +17,7 @@ export function Footer() {
   return (
     <footer className="w-full border-t border-border bg-shell pt-12 pb-8">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-4 lg:grid-cols-5">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-4 lg:grid-cols-6">
 
           {/* Brand Col */}
           <div className="md:col-span-2 space-y-4">
@@ -97,8 +97,42 @@ export function Footer() {
             </ul>
           </div>
 
+          {/* Legal Col */}
+          <div className="space-y-3">
+            <h3 className="text-[10px] font-mono font-bold uppercase tracking-widest text-primary">
+              Legal
+            </h3>
+            <ul className="space-y-2 text-xs text-muted-foreground">
+              <li>
+                <Link href="/about" className="hover:text-primary transition-colors">
+                  About
+                </Link>
+              </li>
+              <li>
+                <Link href="/privacy" className="hover:text-primary transition-colors">
+                  Privacy Policy
+                </Link>
+              </li>
+              <li>
+                <Link href="/terms" className="hover:text-primary transition-colors">
+                  Terms of Service
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="hover:text-primary transition-colors">
+                  Contact
+                </Link>
+              </li>
+              <li>
+                <Link href="/legal/dmca" className="hover:text-primary transition-colors">
+                  DMCA
+                </Link>
+              </li>
+            </ul>
+          </div>
+
           {/* Built for Gamers */}
-          <div className="space-y-3 md:col-span-4 lg:col-span-1">
+          <div className="space-y-3">
             <h3 className="text-[10px] font-mono font-bold uppercase tracking-widest text-primary">
               Built for Gamers
             </h3>
