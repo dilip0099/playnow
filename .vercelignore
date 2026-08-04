@@ -2,5 +2,4 @@
 docs/
 *.md
 !README.md
-*.txt
 playthorn-*.json
