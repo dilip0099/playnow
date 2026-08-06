@@ -14,6 +14,7 @@ import {
 import { gamesData } from "@/lib/games";
 import { useFavorites } from "@/hooks/useFavorites";
 import { GameMetadata } from "@/types/game";
+import { PwaInstallButton } from "@/components/pwa/PwaInstallButton";
 
 export function Navbar() {
   const router = useRouter();
@@ -198,6 +199,7 @@ export function Navbar() {
 
         {/* Right Controls */}
         <div className="flex shrink-0 items-center space-x-2 sm:space-x-4">
+          <PwaInstallButton />
 
           {/* Random Roll Dice — hidden on mobile to reduce crowding */}
           <button

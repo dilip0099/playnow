@@ -11,6 +11,8 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { MobileBottomNav } from "@/components/layout/MobileBottomNav";
 import { SITE_URL, SITE_NAME } from "@/lib/site";
+import { ServiceWorkerRegister } from "@/components/pwa/ServiceWorkerRegister";
+import { PwaInstallBanner } from "@/components/pwa/PwaInstallBanner";
 
 const sora = Sora({ 
   subsets: ["latin"],
@@ -123,6 +125,8 @@ export default function RootLayout({
                 <MobileBottomNav />
               </div>
             </div>
+            <PwaInstallBanner />
+            <ServiceWorkerRegister />
           </ToastProvider>
         </ThemeProvider>
         <Analytics />
