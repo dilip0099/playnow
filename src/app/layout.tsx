@@ -48,6 +48,9 @@ export const metadata: Metadata = {
   keywords: ["free online games", "online games", "browser games", "io games", "play games online", "no download games"],
   authors: [{ name: "PlayNow Studios" }],
   creator: "PlayNow Studios",
+  alternates: {
+    canonical: "./",
+  },
   openGraph: {
     type: "website",
     siteName: SITE_NAME,
