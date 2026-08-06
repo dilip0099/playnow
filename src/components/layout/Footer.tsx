@@ -28,11 +28,11 @@ export function Footer() {
                 <Gamepad2 className="h-4 w-4" aria-hidden="true" />
               </div>
               <span className="font-display text-lg sm:text-xl font-black text-foreground">
-                PlayNow
+                PlayThorn
               </span>
             </Link>
             <p className="text-[11px] sm:text-xs text-muted-foreground max-w-sm leading-relaxed font-sans">
-              PlayNow is an original HTML5 browser game portal. Enjoy instant, high-speed, fullscreen gaming without downloads or installs across all desktop and mobile browsers.
+              PlayThorn is an original HTML5 browser game portal. Enjoy instant, high-speed, fullscreen gaming without downloads or installs across all desktop and mobile browsers.
             </p>
             <div className="flex flex-wrap items-center gap-3 text-[9px] sm:text-[10px] text-muted-foreground font-mono font-bold uppercase tracking-wider">
               <span className="flex items-center space-x-1">
@@ -142,7 +142,7 @@ export function Footer() {
 
         {/* Bottom Copyright Row */}
         <div className="pt-4 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-2 text-[9px] sm:text-[10px] text-muted-foreground font-mono text-center sm:text-left">
-          <p>© {new Date().getFullYear()} PlayNow Studios. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} PlayThorn Studios. All rights reserved.</p>
           <p className="flex items-center space-x-1">
             <span>Crafted with</span>
             <Heart className="h-3 w-3 text-rose-500 fill-rose-500" aria-hidden="true" />

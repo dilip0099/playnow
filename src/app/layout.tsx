@@ -48,8 +48,8 @@ export const metadata: Metadata = {
   },
   description: DEFAULT_DESCRIPTION,
   keywords: ["free online games", "online games", "browser games", "io games", "play games online", "no download games"],
-  authors: [{ name: "PlayNow Studios" }],
-  creator: "PlayNow Studios",
+  authors: [{ name: "PlayThorn Studios" }],
+  creator: "PlayThorn Studios",
   alternates: {
     canonical: "./",
   },

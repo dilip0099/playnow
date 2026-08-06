@@ -82,7 +82,35 @@ interface GameMonetizeItem {
   height: string;
 }
 
-function mapCategory(cat: string, tags: string): GameCategory {
+function mapCategory(cat: string, tags: string, title = ""): GameCategory {
+  const blob = `${cat} ${tags} ${title}`.toLowerCase();
+  if (
+    blob.includes("card") ||
+    blob.includes("board") ||
+    blob.includes("chess") ||
+    blob.includes("solitaire") ||
+    blob.includes("mahjong") ||
+    blob.includes("classic") ||
+    blob.includes("domino") ||
+    blob.includes("sudoku") ||
+    blob.includes("checkers") ||
+    blob.includes("ludo") ||
+    blob.includes("tic tac")
+  ) {
+    return "classic";
+  }
+  if (
+    blob.includes("strategy") ||
+    blob.includes("defense") ||
+    blob.includes("simulation") ||
+    blob.includes("idle") ||
+    blob.includes("tycoon") ||
+    blob.includes("build") ||
+    blob.includes("tactics") ||
+    blob.includes("tower")
+  ) {
+    return "strategy";
+  }
   // Try direct category first
   for (const [key, val] of Object.entries(CATEGORY_MAP)) {
     if (cat.toLowerCase().includes(key.toLowerCase())) return val;
@@ -231,7 +259,7 @@ export async function importGameMonetizeCatalog() {
   };
 
   qualityPool.forEach((item) => {
-    const cat = mapCategory(item.category, item.tags);
+    const cat = mapCategory(item.category, item.tags, item.title);
     byCategory[cat].push(item);
   });
 

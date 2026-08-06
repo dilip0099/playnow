@@ -124,7 +124,7 @@ export function Navbar() {
             <Gamepad2 className="h-4 w-4 fill-current" aria-hidden="true" />
           </div>
           <span className="hidden font-display text-base font-black tracking-tight text-foreground sm:inline">
-            PlayNow
+            PlayThorn
           </span>
         </Link>
 

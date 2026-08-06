@@ -13,7 +13,6 @@ import {
 import { getGameBySlug, getRelatedGames, getAllGames } from "@/lib/games";
 import { GamePlayer } from "@/components/games/GamePlayer";
 import { GameGallery } from "@/components/games/GameGallery";
-import { GameWalkthrough } from "@/components/games/GameWalkthrough";
 import { GameCard } from "@/components/games/GameCard";
 import { EmbedGameButton } from "@/components/games/EmbedGameButton";
 import { GameCategory } from "@/types/game";
@@ -261,9 +260,6 @@ export default async function GamePage({ params }: GamePageProps) {
           <div className="lg:col-span-2 space-y-8">
             {/* Game Screenshots & Preview Showcase */}
             <GameGallery game={game} />
-
-            {/* GameMonetize Official Video Walkthrough */}
-            <GameWalkthrough externalGameId={game.externalGameId} gameTitle={displayTitle} />
 
             {/* How To Play */}
             {game.instructions && (

@@ -172,6 +172,29 @@ export function GamePlayer({ game, onPlay }: GamePlayerProps) {
     addRecentlyPlayed(game.id);
     recordGameSession();
 
+    // Auto-trigger Fullscreen on Play click
+    try {
+      if (containerRef.current) {
+        if (containerRef.current.requestFullscreen) {
+          containerRef.current.requestFullscreen().catch(() => {});
+        }
+      }
+    } catch {
+      // Fallback
+    }
+
+    // Auto-lock Screen Orientation on Mobile based on Game Aspect Ratio
+    if (typeof window !== "undefined" && screen.orientation && "lock" in screen.orientation) {
+      try {
+        const targetOrientation = isPortrait ? "portrait-primary" : "landscape";
+        (screen.orientation as unknown as { lock: (orientation: string) => Promise<void> })
+          .lock(targetOrientation)
+          .catch(() => {});
+      } catch {
+        // Fallback
+      }
+    }
+
     // Record play session
     if (onPlay) onPlay();
   };

@@ -13,10 +13,10 @@ import {
 import { getAllGames } from "@/lib/games";
 import { SITE_URL, SITE_NAME } from "@/lib/site";
 
-const TITLE = "About PlayNow - Free Browser Games, No Download Required";
+const TITLE = "About PlayThorn - Free Browser Games, No Download Required";
 const DESCRIPTION =
-  "PlayNow is an independent HTML5 browser games site. Learn how our catalog is licensed via GameMonetize, how the site is funded, and what we store about you.";
-const H1 = "About PlayNow";
+  "PlayThorn is an independent HTML5 browser games site. Learn how our catalog is licensed via GameMonetize, how the site is funded, and what we store about you.";
+const H1 = "About PlayThorn";
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -84,20 +84,20 @@ export default function AboutPage() {
             {H1}
           </h1>
           <p className="text-sm text-foreground/80 max-w-2xl leading-relaxed">
-            PlayNow is a free, independent browser games site — {totalGames} HTML5 games
+            PlayThorn is a free, independent browser games site — {totalGames} HTML5 games
             you can play instantly, with nothing to install and nothing to sign up for.
           </p>
         </div>
       </div>
 
-      {/* What PlayNow Is */}
+      {/* What PlayThorn Is */}
       <section className="space-y-4">
         <h2 className="text-2xl font-black text-foreground tracking-tight flex items-center gap-2">
           <Gamepad2 className="h-5 w-5 text-primary" />
-          What PlayNow Is
+          What PlayThorn Is
         </h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
-          PlayNow ({SITE_URL.replace("https://", "")}) is a catalog of {totalGames} free,
+          PlayThorn ({SITE_URL.replace("https://", "")}) is a catalog of {totalGames} free,
           browser-playable games across nine categories — action, puzzle, arcade, racing,
           adventure, strategy, sports, .io/multiplayer, and classic games like chess, mahjong,
           and solitaire. Every game runs directly in the page as pure HTML5: no downloads, no
@@ -118,7 +118,7 @@ export default function AboutPage() {
           How Our Games Are Sourced
         </h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
-          Every game on PlayNow is licensed through{" "}
+          Every game on PlayThorn is licensed through{" "}
           <a
             href="https://gamemonetize.com"
             target="_blank"
@@ -128,7 +128,7 @@ export default function AboutPage() {
             GameMonetize (Azerion)
           </a>
           , a leading HTML5 game publisher network, under a standard publisher agreement.
-          GameMonetize — not PlayNow — owns and is responsible for the underlying game code; each
+          GameMonetize — not PlayThorn — owns and is responsible for the underlying game code; each
           title is embedded directly from GameMonetize&apos;s network. Before a game is added to our
           catalog it&apos;s screened for trademark and brand-conflict risk, and we keep a fully
           public record of that process.
@@ -147,7 +147,7 @@ export default function AboutPage() {
       <section className="space-y-4">
         <h2 className="text-2xl font-black text-foreground tracking-tight flex items-center gap-2">
           <Layers className="h-5 w-5 text-cyan-400" />
-          How PlayNow Works
+          How PlayThorn Works
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="rounded-2xl border border-border/60 bg-card/60 p-5 space-y-2">
@@ -156,7 +156,7 @@ export default function AboutPage() {
               No account needed
             </div>
             <p className="text-xs text-muted-foreground leading-relaxed">
-              You can play every game on PlayNow without creating an account or signing in.
+              You can play every game on PlayThorn without creating an account or signing in.
               Favorites and recently-played history are saved locally in your own browser, not
               on our servers — see our{" "}
               <Link href="/privacy" className="text-primary hover:underline">
@@ -181,7 +181,7 @@ export default function AboutPage() {
               Free, supported by ads
             </div>
             <p className="text-xs text-muted-foreground leading-relaxed">
-              PlayNow is free to use. The site is supported by display advertising (Google
+              PlayThorn is free to use. The site is supported by display advertising (Google
               AdSense) rather than a paywall or required signup.
             </p>
           </div>

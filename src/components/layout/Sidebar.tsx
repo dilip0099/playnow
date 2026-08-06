@@ -56,7 +56,7 @@ export function Sidebar() {
             <Gamepad2 className="h-5 w-5 fill-current" aria-hidden="true" />
           </div>
           <span className="font-display text-lg font-black tracking-tight text-foreground group-hover:text-primary transition-colors">
-            PlayNow
+            PlayThorn
           </span>
         </Link>
       </div>
