@@ -1,17 +1,17 @@
 {
-  "timestamp": "2026-08-06T12:51:50.693Z",
-  "totalImported": 392,
+  "timestamp": "2026-08-06T13:41:22.217Z",
+  "totalImported": 491,
   "sourceNetwork": "GameMonetize",
   "categoryDistribution": {
-    "action": 24,
-    "puzzle": 167,
-    "arcade": 124,
-    "racing": 16,
-    "adventure": 34,
-    "strategy": 0,
-    "sports": 21,
-    "multiplayer": 6,
-    "classic": 0
+    "action": 20,
+    "puzzle": 175,
+    "arcade": 135,
+    "racing": 20,
+    "adventure": 33,
+    "strategy": 46,
+    "sports": 28,
+    "multiplayer": 7,
+    "classic": 27
   },
   "rejectedForBrandRisk": [
     {
@@ -60,6 +60,12 @@
       "title": "Voxel Frontier",
       "conflicts": [
         "MINECRAFT"
+      ]
+    },
+    {
+      "title": "Bird Obstacle Flappy",
+      "conflicts": [
+        "FLAPPY BIRD"
       ]
     }
   ]
