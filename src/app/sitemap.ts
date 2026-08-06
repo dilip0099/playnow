@@ -33,6 +33,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "trivia",
     "io",
     "two-player",
+    "car",
+    "driving",
+    "zombie",
+    "stickman",
+    "logic",
+    "physics",
+    "educational",
+    "match-3",
+    "escape",
+    "defense",
+    "word",
   ];
 
   // Franchise slugs with real, genuinely-matching games backing them (see

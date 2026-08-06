@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
   Star,
@@ -374,14 +375,18 @@ export default async function GamePage({ params }: GamePageProps) {
 
               {game.tags.length > 0 && (
                 <div className="flex flex-wrap gap-1.5 border-t border-border pt-4">
-                  {Array.from(new Set(game.tags)).map((tag) => (
-                    <span
-                      key={tag}
-                      className="rounded-full bg-muted px-2.5 py-1 font-mono text-[10px] font-bold capitalize text-muted-foreground"
-                    >
-                      {tag}
-                    </span>
-                  ))}
+                  {Array.from(new Set(game.tags)).map((tag) => {
+                    const slug = tag.toLowerCase().trim().replace(/\s+/g, "-");
+                    return (
+                      <Link
+                        key={tag}
+                        href={`/tag/${slug}`}
+                        className="rounded-full bg-muted px-2.5 py-1 font-mono text-[10px] font-bold capitalize text-muted-foreground hover:bg-primary/20 hover:text-primary transition-colors"
+                      >
+                        #{tag}
+                      </Link>
+                    );
+                  })}
                 </div>
               )}
             </div>

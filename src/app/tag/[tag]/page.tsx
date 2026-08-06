@@ -109,6 +109,94 @@ const TAG_SEO: Record<string, { h1: string; title: string; description: string; 
     intro:
       "Same-device two-player games for going head-to-head with a friend on one screen — no download, no extra equipment.",
   },
+  car: {
+    h1: "Car Games",
+    title: "Free Car Games Online - Driving & Racing Games",
+    description:
+      "Play free car games online instantly — high-speed driving, parking, and drifting games in your browser. No download needed.",
+    intro:
+      "Get behind the wheel with free car games — racing, drifting, parking, and stunt driving playable instantly in your browser tab.",
+  },
+  driving: {
+    h1: "Driving Games",
+    title: "Free Driving Games Online - Vehicle & Simulator Games",
+    description:
+      "Play free driving games online instantly — test your skills behind the wheel of cars, trucks, and buses. No download required.",
+    intro:
+      "Master vehicle physics and open roads with browser-based driving games. No downloads or installations required.",
+  },
+  zombie: {
+    h1: "Zombie Games",
+    title: "Free Zombie Games Online - Apocalypse & Survival Games",
+    description:
+      "Play free zombie games online instantly — fight off waves of undead in browser survival games. No download required.",
+    intro:
+      "Survive the undead outbreak with action-packed zombie shooters and defense games running directly in your browser.",
+  },
+  stickman: {
+    h1: "Stickman Games",
+    title: "Free Stickman Games Online - Action & Physics Games",
+    description:
+      "Play free stickman games online instantly — high-energy stick figure fighting, shooting, and physics games. No download needed.",
+    intro:
+      "Fast-paced stick figure action featuring physics ragdolls, intense combat, and obstacle courses playable instantly.",
+  },
+  logic: {
+    h1: "Logic Games",
+    title: "Free Logic Games Online - Mind & Brain Puzzles",
+    description:
+      "Play free logic games online instantly — challenge your brain with reasoning and problem-solving puzzles. No download needed.",
+    intro:
+      "Exercise your brain with clever logic puzzles, spatial challenges, and sequence-based mind games.",
+  },
+  physics: {
+    h1: "Physics Games",
+    title: "Free Physics Games Online - Gravity & Ragdoll Puzzles",
+    description:
+      "Play free physics games online instantly — experiment with gravity, momentum, and destruction in your browser. No download required.",
+    intro:
+      "Interact with realistic gravity, chain reactions, and momentum-based puzzles in instant browser games.",
+  },
+  educational: {
+    h1: "Educational Games",
+    title: "Free Educational Games Online - Math, Science & Learning",
+    description:
+      "Play free educational games online instantly — fun learning games for math, words, and problem solving. No download needed.",
+    intro:
+      "Fun, skill-building learning games that make math, spelling, and critical thinking engaging for all ages.",
+  },
+  "match-3": {
+    h1: "Match-3 Games",
+    title: "Free Match-3 Games Online - Swap & Tile Matching Puzzles",
+    description:
+      "Play free match-3 puzzle games online instantly — swap tiles, trigger combos, and clear boards. No download required.",
+    intro:
+      "Satisfying tile-matching and swap puzzles for quick, relaxing gameplay directly in your browser tab.",
+  },
+  escape: {
+    h1: "Escape Games",
+    title: "Free Escape Games Online - Room & Mystery Puzzles",
+    description:
+      "Play free escape games online instantly — find clues, solve riddles, and break out of locked rooms. No download needed.",
+    intro:
+      "Test your observation and problem-solving skills by discovering hidden clues and breaking out of mystery rooms.",
+  },
+  defense: {
+    h1: "Defense Games",
+    title: "Free Defense Games Online - Tower & Base Protection",
+    description:
+      "Play free defense games online instantly — place towers and hold the line against invading waves. No download required.",
+    intro:
+      "Strategic tower defense and base-protection games where smart positioning holds off endless enemy waves.",
+  },
+  word: {
+    h1: "Word Games",
+    title: "Free Word Games Online - Vocabulary & Crossword Puzzles",
+    description:
+      "Play free word games online instantly — test your vocabulary with anagrams, crosswords, and word searches. No download needed.",
+    intro:
+      "Challenge your vocabulary and spelling skills with daily word search, anagram, and crossword-style puzzles.",
+  },
 };
 
 const VALID_TAGS = Object.keys(TAG_SEO);
