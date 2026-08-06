@@ -17,6 +17,15 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "html5.gamedistribution.com",
       },
+      // GameMonetize CDN — replacement provider (no domain whitelist/traffic minimum)
+      {
+        protocol: "https",
+        hostname: "img.gamemonetize.com",
+      },
+      {
+        protocol: "https",
+        hostname: "html5.gamemonetize.co",
+      },
     ],
   },
   async headers() {
