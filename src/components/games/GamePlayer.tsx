@@ -351,7 +351,7 @@ export function GamePlayer({ game, onPlay }: GamePlayerProps) {
               <span className="hidden sm:inline">HTML5 Verified</span>
             </span>
             <span className="hidden sm:flex items-center space-x-1 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2 py-1 text-[10px] font-bold text-emerald-400">
-              <span>☁️ Progress Auto-Saved</span>
+              <span>⚡ Instant Play</span>
             </span>
             <span className="hidden font-display text-xs font-bold text-foreground/80 lg:inline truncate max-w-[180px]">
               {game.title}
