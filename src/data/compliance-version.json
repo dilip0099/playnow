@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
   "auditDate": "2026-08-02T12:00:00.000Z",
-  "auditor": "PlayNow Automated Legal Compliance Engine",
+  "auditor": "PlayThorn Automated Legal Compliance Engine",
   "gamesAudited": 50,
   "status": "PASSED_100_PERCENT_LEGAL_COMPLIANCE"
 }

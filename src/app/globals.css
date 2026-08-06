@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 /*
- * Kinetic Obsidian — the single design-token source of truth for PlayNow.
+ * Kinetic Obsidian — the single design-token source of truth for PlayThorn.
  * See DESIGN.md for the full spec. Every Tailwind color/radius/motion token
  * in tailwind.config.ts reads from the CSS variables defined here — there is
  * no second competing theme anywhere else in the codebase.

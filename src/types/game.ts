@@ -102,7 +102,7 @@ export interface GameMetadata {
 
   // Third-party game network sourcing (e.g. GameMonetize) — set when gameType is
   // "Licensed Game". Monetization for these is handled by the network itself
-  // per its publisher agreement, not by PlayNow's own ad stack.
+  // per its publisher agreement, not by PlayThorn's own ad stack.
   sourceNetwork?: string;
   externalGameId?: string;
 }

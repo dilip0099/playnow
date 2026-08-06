@@ -25,7 +25,7 @@ export function middleware(request: NextRequest) {
 
   return new NextResponse("Authentication required", {
     status: 401,
-    headers: { "WWW-Authenticate": 'Basic realm="PlayNow Admin"' },
+    headers: { "WWW-Authenticate": 'Basic realm="PlayThorn Admin"' },
   });
 }
 

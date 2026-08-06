@@ -332,8 +332,8 @@ export async function importGamePixCatalog() {
   fs.writeFileSync(LICENSE_REPORT_FILE, JSON.stringify(report, null, 2), "utf-8");
   fs.writeFileSync(PUBLIC_LICENSE_REPORT_FILE, JSON.stringify(report, null, 2), "utf-8");
 
-  let md = `# PlayNow Game Sourcing & Attributions\n\n`;
-  md += `PlayNow's game catalog is licensed through **GamePix** (https://www.gamepix.com/), a third-party HTML5 game publisher network, under a standard publisher agreement. PlayNow does not author, host, or claim ownership of this game code — each title is embedded directly from GamePix's platform, and GamePix (not PlayNow) is responsible for the underlying game's content and its own developer-attribution relationships.\n\n`;
+  let md = `# PlayThorn Game Sourcing & Attributions\n\n`;
+  md += `PlayThorn's game catalog is licensed through **GamePix** (https://www.gamepix.com/), a third-party HTML5 game publisher network, under a standard publisher agreement. PlayThorn does not author, host, or claim ownership of this game code — each title is embedded directly from GamePix's platform, and GamePix (not PlayThorn) is responsible for the underlying game's content and its own developer-attribution relationships.\n\n`;
   md += `| Title | Category | GamePix ID | Embed Source |\n`;
   md += `| :--- | :---: | :---: | :--- |\n`;
   games.forEach((g) => {
