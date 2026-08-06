@@ -11,7 +11,7 @@ import { SITE_URL } from "@/lib/site";
 // these games work in restrictive network environments (HTML5, no Flash/plugins, no
 // installs — a real, verifiable technical fact) rather than promising to "bypass school
 // firewalls," which we can't guarantee and would be a false claim.
-const TITLE = "Unblocked Games - Play 180+ Free Games Online, No Download";
+const TITLE = "Unblocked Games - Play 490+ Free Games Online, No Download";
 const DESCRIPTION =
   "Play unblocked games online for free — no downloads, no installs, no Flash or plugins required. Every game runs instantly in your browser on school Chromebooks, work laptops, or your phone.";
 const H1 = "Unblocked Games";
