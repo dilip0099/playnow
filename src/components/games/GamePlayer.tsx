@@ -347,8 +347,9 @@ export function GamePlayer({ game, onPlay }: GamePlayerProps) {
                 ref={iframeRef}
                 src={effectiveGameUrl}
                 title={game.title}
-                allow="autoplay; fullscreen; microphone; camera; midi; geolocation; accelerometer; gyroscope; payment"
+                allow="autoplay; fullscreen; microphone; camera; midi; geolocation; accelerometer; gyroscope; payment; clipboard-read; clipboard-write"
                 referrerPolicy="no-referrer-when-downgrade"
+                sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-modals allow-pointer-lock allow-downloads"
                 onLoad={() => setIsLoading(false)}
                 className="h-full w-full border-0 bg-black"
               />

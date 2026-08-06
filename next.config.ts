@@ -19,6 +19,23 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async headers() {
+    return [
+      {
+        // Apply to all routes — allow GameDistribution iframes to load without being
+        // blocked by Vercel's default X-Frame-Options / CSP headers in production.
+        source: "/:path*",
+        headers: [
+          // Allow our own pages to be served normally (not framed by others)
+          { key: "X-Frame-Options", value: "SAMEORIGIN" },
+          // Referrer policy so GD SDK gets the correct origin for publisher validation
+          { key: "Referrer-Policy", value: "no-referrer-when-downgrade" },
+          // Permissions for fullscreen API used by GamePlayer auto-fullscreen feature
+          { key: "Permissions-Policy", value: "fullscreen=*, autoplay=*, gyroscope=*, accelerometer=*" },
+        ],
+      },
+    ];
+  },
   async redirects() {
     return [
       // The Vercel-issued subdomain still resolves and serves the same deployment as
@@ -36,3 +53,4 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
+
