@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import { Video } from "lucide-react";
 
 interface GameWalkthroughProps {
@@ -7,7 +8,57 @@ interface GameWalkthroughProps {
   gameTitle: string;
 }
 
+declare global {
+  interface Window {
+    VIDEO_OPTIONS?: {
+      gameid: string;
+      width: string;
+      height: string;
+      color: string;
+      getads: string;
+    };
+  }
+}
+
 export function GameWalkthrough({ externalGameId, gameTitle }: GameWalkthroughProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!externalGameId || !containerRef.current) return;
+
+    // Clear previous elements if re-rendered
+    containerRef.current.innerHTML = "";
+
+    // Create target div required by GameMonetize script
+    const targetDiv = document.createElement("div");
+    targetDiv.id = "gamemonetize-video";
+    containerRef.current.appendChild(targetDiv);
+
+    // Configure GameMonetize global video options
+    window.VIDEO_OPTIONS = {
+      gameid: externalGameId,
+      width: "100%",
+      height: "480px",
+      color: "#c3f400", // PlayNow theme lime color
+      getads: "true",   // Enable video ads for 80% pub revenue share
+    };
+
+    // Inject official GameMonetize video API script
+    const script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://api.gamemonetize.com/video.js";
+    script.id = "gamemonetize-video-api";
+    script.async = true;
+
+    containerRef.current.appendChild(script);
+
+    return () => {
+      if (containerRef.current) {
+        containerRef.current.innerHTML = "";
+      }
+    };
+  }, [externalGameId]);
+
   if (!externalGameId) return null;
 
   return (
@@ -22,13 +73,9 @@ export function GameWalkthrough({ externalGameId, gameTitle }: GameWalkthroughPr
         </span>
       </div>
 
-      <div className="relative aspect-video w-full overflow-hidden rounded-xl bg-black border border-border">
-        <iframe
-          src={`https://html5.gamemonetize.co/walkthrough/${externalGameId}/`}
-          title={`${gameTitle} Video Walkthrough`}
-          allow="autoplay; fullscreen"
-          className="h-full w-full border-0"
-        />
+      {/* Container where GameMonetize script initializes #gamemonetize-video */}
+      <div className="relative w-full overflow-hidden rounded-xl bg-black border border-border min-h-[320px] sm:min-h-[480px]">
+        <div ref={containerRef} className="w-full h-full" />
       </div>
 
       <p className="text-xs text-muted-foreground leading-relaxed">
