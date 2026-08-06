@@ -195,10 +195,16 @@ export function DiscoverClient({ initialGames }: DiscoverClientProps) {
           {/* ═══ MAIN CONTENT: Game Grid ═══ */}
           <div className="flex-1 min-w-0 space-y-6">
 
-            {/* Game Cards Grid */}
+            {/* Game Cards Grid / List */}
             <div className={`grid gap-4 ${viewMode === "grid" ? GAME_GRID_COLS : "grid-cols-1"}`}>
               {visibleGames.map((game, idx) => (
-                <GameCard key={game.id} game={game} aspectRatio="16/9" priority={idx < 6} />
+                <GameCard
+                  key={game.id}
+                  game={game}
+                  aspectRatio="16/9"
+                  priority={idx < 6}
+                  layout={viewMode}
+                />
               ))}
             </div>
 
