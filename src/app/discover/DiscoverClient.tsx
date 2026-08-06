@@ -28,9 +28,24 @@ interface FilterControlsProps {
   setSelectedGenre: (value: string | null) => void;
   topRatedOnly: boolean;
   setTopRatedOnly: (value: boolean) => void;
+  selectedTag: string | null;
+  setSelectedTag: (value: string | null) => void;
+  webGlOnly: boolean;
+  setWebGlOnly: (value: boolean) => void;
 }
 
-function FilterControls({ selectedGenre, setSelectedGenre, topRatedOnly, setTopRatedOnly }: FilterControlsProps) {
+function FilterControls({
+  selectedGenre,
+  setSelectedGenre,
+  topRatedOnly,
+  setTopRatedOnly,
+  selectedTag,
+  setSelectedTag,
+  webGlOnly,
+  setWebGlOnly,
+}: FilterControlsProps) {
+  const POPULAR_TAGS = ["3d", "physics", "multiplayer", "guns", "car", "puzzle"];
+
   return (
     <>
       {/* Genre Registry */}
@@ -53,21 +68,54 @@ function FilterControls({ selectedGenre, setSelectedGenre, topRatedOnly, setTopR
         </div>
       </div>
 
-      {/* Rating Filter */}
-      <div className="mt-8 space-y-3">
-        <span className="text-primary text-[10px] font-bold uppercase tracking-widest font-mono">RATING</span>
-        <button
-          onClick={() => setTopRatedOnly(!topRatedOnly)}
-          aria-pressed={topRatedOnly}
-          className={`flex items-center space-x-1.5 rounded-full border px-2.5 py-1 font-mono font-bold text-[10px] transition-colors ${
-            topRatedOnly
-              ? "border-primary bg-primary/10 text-primary"
-              : "border-border text-muted-foreground hover:text-foreground"
-          }`}
-        >
-          <Star className={`h-3 w-3 ${topRatedOnly ? "fill-current" : ""}`} aria-hidden="true" />
-          <span>4.5+ Top Rated</span>
-        </button>
+      {/* Engine & Quality Filters */}
+      <div className="mt-6 space-y-3">
+        <span className="text-primary text-[10px] font-bold uppercase tracking-widest font-mono">ENGINE & QUALITY</span>
+        <div className="flex flex-wrap gap-2">
+          <button
+            onClick={() => setWebGlOnly(!webGlOnly)}
+            aria-pressed={webGlOnly}
+            className={`flex items-center space-x-1.5 rounded-full border px-2.5 py-1 font-mono font-bold text-[10px] transition-colors ${
+              webGlOnly
+                ? "border-amber-400 bg-amber-400/10 text-amber-400"
+                : "border-border text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            <span>🎮 3D WebGL HD</span>
+          </button>
+          <button
+            onClick={() => setTopRatedOnly(!topRatedOnly)}
+            aria-pressed={topRatedOnly}
+            className={`flex items-center space-x-1.5 rounded-full border px-2.5 py-1 font-mono font-bold text-[10px] transition-colors ${
+              topRatedOnly
+                ? "border-primary bg-primary/10 text-primary"
+                : "border-border text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            <Star className={`h-3 w-3 ${topRatedOnly ? "fill-current" : ""}`} aria-hidden="true" />
+            <span>4.5+ Top Rated</span>
+          </button>
+        </div>
+      </div>
+
+      {/* Dynamic Tags */}
+      <div className="mt-6 space-y-3">
+        <span className="text-primary text-[10px] font-bold uppercase tracking-widest font-mono">POPULAR TAGS</span>
+        <div className="flex flex-wrap gap-1.5">
+          {POPULAR_TAGS.map((tag) => (
+            <button
+              key={tag}
+              onClick={() => setSelectedTag(selectedTag === tag ? null : tag)}
+              className={`rounded-md border px-2 py-0.5 font-mono text-[10px] font-bold transition-all ${
+                selectedTag === tag
+                  ? "border-primary bg-primary text-primary-foreground"
+                  : "border-border bg-card text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              #{tag}
+            </button>
+          ))}
+        </div>
       </div>
     </>
   );
@@ -76,12 +124,14 @@ function FilterControls({ selectedGenre, setSelectedGenre, topRatedOnly, setTopR
 export function DiscoverClient({ initialGames }: DiscoverClientProps) {
   const [selectedGenre, setSelectedGenre] = useState<string | null>(null);
   const [topRatedOnly, setTopRatedOnly] = useState(false);
+  const [webGlOnly, setWebGlOnly] = useState(false);
+  const [selectedTag, setSelectedTag] = useState<string | null>(null);
   const [sortBy, setSortBy] = useState<SortOption>("popular");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [visibleCount, setVisibleCount] = useState(21);
   const [isFilterDialogOpen, setIsFilterDialogOpen] = useState(false);
 
-  const activeFilterCount = (selectedGenre ? 1 : 0) + (topRatedOnly ? 1 : 0);
+  const activeFilterCount = (selectedGenre ? 1 : 0) + (topRatedOnly ? 1 : 0) + (webGlOnly ? 1 : 0) + (selectedTag ? 1 : 0);
 
   const topTrending = useMemo(
     () => [...initialGames].sort((a, b) => b.playsCount - a.playsCount)[0],
@@ -95,6 +145,14 @@ export function DiscoverClient({ initialGames }: DiscoverClientProps) {
     }
     if (topRatedOnly) {
       result = result.filter((g) => g.rating >= 4.5);
+    }
+    if (webGlOnly) {
+      result = result.filter((g) => (g.subType || "").toLowerCase().includes("webgl"));
+    }
+    if (selectedTag) {
+      result = result.filter((g) =>
+        (g.tags || []).some((t) => t.toLowerCase() === selectedTag.toLowerCase())
+      );
     }
     switch (sortBy) {
       case "popular": return result.sort((a, b) => b.playsCount - a.playsCount);
@@ -170,6 +228,10 @@ export function DiscoverClient({ initialGames }: DiscoverClientProps) {
           setSelectedGenre={setSelectedGenre}
           topRatedOnly={topRatedOnly}
           setTopRatedOnly={setTopRatedOnly}
+          selectedTag={selectedTag}
+          setSelectedTag={setSelectedTag}
+          webGlOnly={webGlOnly}
+          setWebGlOnly={setWebGlOnly}
         />
         <button
           onClick={() => setIsFilterDialogOpen(false)}
@@ -189,6 +251,10 @@ export function DiscoverClient({ initialGames }: DiscoverClientProps) {
               setSelectedGenre={setSelectedGenre}
               topRatedOnly={topRatedOnly}
               setTopRatedOnly={setTopRatedOnly}
+              selectedTag={selectedTag}
+              setSelectedTag={setSelectedTag}
+              webGlOnly={webGlOnly}
+              setWebGlOnly={setWebGlOnly}
             />
           </aside>
 

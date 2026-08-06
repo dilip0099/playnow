@@ -52,6 +52,9 @@ export interface GameMetadata {
   featured?: boolean;
   trending?: boolean;
   isNew?: boolean;
+  isExclusive?: boolean;
+  isRewarded?: boolean;
+  subType?: string; // Engine: WebGL, Javascript, Construct 3
   releaseDate: string;
   lastUpdated: string;
   mobileSupport: boolean;

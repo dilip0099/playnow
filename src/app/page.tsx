@@ -114,6 +114,25 @@ export default function HomePage() {
           </div>
         </section>
 
+        {/* ═══ EXCLUSIVE & REWARDED TITLES ═══ */}
+        {gamesData.some((g) => g.isExclusive || g.isRewarded) && (
+          <section className="space-y-3 sm:space-y-5">
+            <div className="space-y-0.5 sm:space-y-1">
+              <span className="font-mono text-[9px] sm:text-[10px] font-bold text-amber-400 tracking-widest uppercase">FEATURED COLLECTION</span>
+              <h2 className="font-display text-sm sm:text-xl lg:text-2xl font-black text-foreground uppercase tracking-tight flex items-center">
+                <span className="w-1 h-4 sm:h-6 bg-amber-400 rounded-full mr-2 sm:mr-3" />
+                ✨ EXCLUSIVE & BONUS TITLES
+              </h2>
+            </div>
+
+            <div className={`grid gap-4 ${GAME_GRID_COLS}`}>
+              {gamesData.filter((g) => g.isExclusive || g.isRewarded).slice(0, 5).map((game) => (
+                <GameCard key={game.id} game={game} />
+              ))}
+            </div>
+          </section>
+        )}
+
         {/* ═══ NEW RELEASES ═══ */}
         <section className="space-y-3 sm:space-y-5">
           <h2 className="font-display text-sm sm:text-xl lg:text-2xl font-black text-foreground uppercase tracking-tight flex items-center">

@@ -10,10 +10,10 @@ const PUBLIC_LICENSE_REPORT_FILE = path.join(process.cwd(), "public", "license-r
 const ATTRIBUTIONS_FILE = path.join(process.cwd(), "ATTRIBUTIONS.md");
 
 const PAGE_SIZE = 100;
-const MAIN_POOL_PAGES = 30;
-const TARGET_PER_CATEGORY = 24;
-const TARGET_CLASSIC_GAMES = 40;
-const NEW_RELEASES_COUNT = 16;
+const MAIN_POOL_PAGES = 250;       // 250 × 100 = 25,000 games scanned, sorted by rating
+const TARGET_PER_CATEGORY = 120;  // Top 120 per category
+const TARGET_CLASSIC_GAMES = 80;
+const NEW_RELEASES_COUNT = 40;
 
 const VALID_CATEGORIES: GameCategory[] = [
   "action", "puzzle", "arcade", "racing", "adventure", "strategy", "sports", "multiplayer", "classic",
@@ -82,7 +82,19 @@ function mapCategory(categories: string[]): GameCategory {
   return "arcade";
 }
 
-function bucketAspectRatio(width: number, height: number): "16/9" | "3/4" | "square" {
+function bucketAspectRatio(item: GameDistributionItem): "16/9" | "3/4" | "square" {
+  const text = `${item.Title || ""} ${item.Description || ""} ${item.Instructions || ""} ${(item.Tag || []).join(" ")}`.toLowerCase();
+  if (
+    text.includes("portrait") ||
+    text.includes("vertical") ||
+    text.includes("hold upright") ||
+    text.includes("upright mode")
+  ) {
+    return "3/4";
+  }
+
+  const width = item.Width;
+  const height = item.Height;
   if (!width || !height) return "16/9";
   const ratio = width / height;
   if (ratio > 1.2) return "16/9";
@@ -151,16 +163,21 @@ async function fetchPages(pages: number): Promise<GameDistributionItem[]> {
   const all: GameDistributionItem[] = [];
   for (let p = 1; p <= pages; p++) {
     try {
+      // sortBy=rating ensures highest-quality/most-popular games come first
       const res = await fetch(
-        `https://catalog.api.gamedistribution.com/api/v2.0/rss/All/?collection=All&categories=All&tags=All&type=All&subType=All&amount=${PAGE_SIZE}&page=${p}&format=json`
+        `https://catalog.api.gamedistribution.com/api/v2.0/rss/All/?collection=All&categories=All&tags=All&type=All&subType=All&amount=${PAGE_SIZE}&page=${p}&format=json&sortBy=rating`
       );
       if (!res.ok) {
         console.warn(`⚠️  GameDistribution feed page ${p} returned status ${res.status}, stopping.`);
         break;
       }
       const data = (await res.json()) as GameDistributionItem[];
-      if (!data || data.length === 0) break;
+      if (!data || data.length === 0) {
+        console.log(`   ↳ Reached end of catalog at page ${p - 1} (${all.length} total games).`);
+        break;
+      }
       all.push(...data);
+      if (p % 25 === 0) console.log(`   ↳ Fetched ${all.length} games so far (page ${p}/${pages})...`);
     } catch (err) {
       console.warn(`⚠️  Error fetching page ${p}:`, err);
       break;
@@ -247,10 +264,13 @@ export async function importGameDistributionCatalog() {
       featured: idx < 6,
       trending: idx % 4 === 0,
       isNew: idx % 5 === 0,
+      isExclusive: idx % 6 === 0,
+      isRewarded: idx % 3 === 0,
+      subType: item.SubType || "WebGL",
       releaseDate: now,
       lastUpdated: now,
       mobileSupport: item.Mobile !== "false",
-      aspectRatio: bucketAspectRatio(item.Width, item.Height),
+      aspectRatio: bucketAspectRatio(item),
       thumbnailUrl,
       coverImage,
       heroImage,

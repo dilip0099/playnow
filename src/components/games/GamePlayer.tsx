@@ -9,11 +9,13 @@ import {
   Share2,
   Tv,
   RotateCcw,
+  RotateCw,
   Loader2,
   Play,
   ShieldCheck,
   Smartphone,
-  Zap
+  Zap,
+  X
 } from "lucide-react";
 import { GameMetadata } from "@/types/game";
 import { useFavorites } from "@/hooks/useFavorites";
@@ -38,15 +40,26 @@ export function GamePlayer({ game, onPlay }: GamePlayerProps) {
   const [isTheaterMode, setIsTheaterMode] = useState(false);
   const [isShareOpen, setIsShareOpen] = useState(false);
 
-  const aspectRatio = resolveAspectRatio(game.aspectRatio);
-  const isPortrait = aspectRatio === "3/4";
-  const isLandscapeGame = aspectRatio === "16/9";
+  const [overrideAspectRatio, setOverrideAspectRatio] = useState<"16/9" | "3/4" | "9/16" | "square" | null>(null);
+  const [isOrientationNoticeDismissed, setIsOrientationNoticeDismissed] = useState(false);
+
+  const aspectRatio = overrideAspectRatio || resolveAspectRatio(game.aspectRatio, `${game.title} ${game.description} ${game.instructions} ${(game.tags || []).join(" ")}`);
+  const isPortrait = aspectRatio === "3/4" || aspectRatio === "9/16" || aspectRatio === "square";
+  const isLandscapeGame = !isPortrait;
+
+  const toggleOrientation = () => {
+    setIsOrientationNoticeDismissed(true);
+    setOverrideAspectRatio((prev) => {
+      if (prev === "9/16" || prev === "3/4" || (!prev && isPortrait)) return "16/9";
+      return "9/16";
+    });
+  };
 
   const [isAdPlaying, setIsAdPlaying] = useState(false);
   const [rewardToast, setRewardToast] = useState<string | null>(null);
 
   const { isFavorite, toggleFavorite } = useFavorites();
-  const { isFullscreen, toggleFullscreen } = useFullscreen(containerRef, isLandscapeGame ? "landscape" : undefined);
+  const { isFullscreen, toggleFullscreen } = useFullscreen(containerRef, isPortrait ? "portrait" : "landscape");
   const { addRecentlyPlayed } = useRecentlyPlayed();
   const { recordGameSession, addXp } = useGamification();
   const favorited = isFavorite(game.id);
@@ -159,7 +172,19 @@ export function GamePlayer({ game, onPlay }: GamePlayerProps) {
     addRecentlyPlayed(game.id);
     recordGameSession();
 
-    if (typeof window !== "undefined" && isLandscapeGame && window.innerWidth < 768) {
+    // Feature 2: Send background SDK preload signals to iframe for instant zero-lag ad loading
+    setTimeout(() => {
+      if (iframeRef.current?.contentWindow) {
+        try {
+          iframeRef.current.contentWindow.postMessage(JSON.stringify({ action: "gdsdk.preloadAd", type: "rewarded" }), "*");
+        } catch {
+          // Silent fallback
+        }
+      }
+    }, 1500);
+
+    // Auto fullscreen on mobile for ALL games — portrait locks portrait, landscape locks landscape
+    if (typeof window !== "undefined" && window.innerWidth < 1024) {
       toggleFullscreen();
     }
 
@@ -177,9 +202,7 @@ export function GamePlayer({ game, onPlay }: GamePlayerProps) {
     ? "max-w-none rounded-none border-none shadow-none"
     : isTheaterMode
     ? "fixed inset-4 sm:inset-10 z-50 max-w-6xl mx-auto my-auto h-[calc(100vh-5rem)] shadow-2xl border-2 border-primary/50"
-    : isPortrait
-    ? "w-full max-w-sm mx-auto"
-    : "";
+    : "w-full";
 
   // Keyboard shortcuts listener for gaming power-users (F = Fullscreen, T = Theater, R = Reload)
   useEffect(() => {
@@ -203,6 +226,31 @@ export function GamePlayer({ game, onPlay }: GamePlayerProps) {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isPlaying, toggleFullscreen]);
 
+  // Auto-handle screen orientation locking for Portrait & Landscape games on mobile
+  useEffect(() => {
+    if (!isPlaying || typeof window === "undefined") return;
+
+    const handleOrientationChange = () => {
+      if (window.innerWidth < 1024 && screen.orientation && "lock" in screen.orientation) {
+        try {
+          const targetOrientation = isPortrait ? "portrait-primary" : "landscape";
+          (screen.orientation as unknown as { lock: (orientation: string) => Promise<void> })
+            .lock(targetOrientation)
+            .catch(() => {});
+        } catch {
+          // Fallback
+        }
+      }
+    };
+
+    window.addEventListener("resize", handleOrientationChange);
+    window.addEventListener("orientationchange", handleOrientationChange);
+    return () => {
+      window.removeEventListener("resize", handleOrientationChange);
+      window.removeEventListener("orientationchange", handleOrientationChange);
+    };
+  }, [isPlaying, isPortrait]);
+
   return (
     <>
       {/* Theater Mode Dimmed Backdrop */}
@@ -215,31 +263,19 @@ export function GamePlayer({ game, onPlay }: GamePlayerProps) {
 
       <div
         ref={containerRef}
-        className={`relative flex w-full flex-col overflow-hidden rounded-2xl sm:rounded-3xl border border-border bg-background shadow-2xl transition-all duration-base ${
+        className={`relative flex w-full flex-col overflow-hidden rounded-2xl sm:rounded-3xl border border-border bg-black shadow-2xl transition-all duration-base ${
           isFullscreen ? "h-full" : ""
         } ${widthClass}`}
       >
-        {/* Aspect Ratio Container */}
-        <div className={`relative w-full bg-background min-h-[280px] sm:min-h-0 ${isFullscreen ? "min-h-0 flex-1" : ASPECT_RATIO_CLASS[aspectRatio]}`}>
-
-          {/* CrazyGames-style Mobile Landscape Rotate Prompt Overlay */}
-          {isPlaying && isLandscapeGame && (
-            <div className="absolute inset-0 z-30 hidden flex-col items-center justify-center bg-background/95 p-6 text-center backdrop-blur-md portrait:flex md:!hidden">
-              <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/20 text-primary border border-primary/30 shadow-glow-primary">
-                <Smartphone className="h-7 w-7 animate-bounce rotate-90" />
-              </div>
-              <h3 className="mb-2 font-display text-base font-black text-foreground uppercase tracking-wide">Please Rotate Your Device</h3>
-              <p className="mb-5 max-w-xs text-xs text-muted-foreground">
-                This title is designed for landscape widescreen mode. Rotate sideways for optimal gameplay.
-              </p>
-              <button
-                onClick={toggleFullscreen}
-                className="rounded-full bg-primary px-6 py-2.5 text-xs font-bold text-primary-foreground uppercase shadow-glow-primary transition-all hover:bg-primary-hover active:scale-95"
-              >
-                Enter Widescreen Mode
-              </button>
-            </div>
-          )}
+        {/* Aspect Ratio Container — Fullscreen & Responsive Height */}
+        <div
+          className={`relative w-full bg-black transition-all duration-300 ${
+            isFullscreen
+              ? "h-full min-h-0 flex-1"
+              : ASPECT_RATIO_CLASS[aspectRatio]
+          }`}
+        >
+          {/* Direct Game Iframe Container — Flexible responsive height for all mobile screen sizes */}
 
           {/* Pre-play Cover Overlay — Launchpad */}
           {!isPlaying ? (
@@ -314,7 +350,7 @@ export function GamePlayer({ game, onPlay }: GamePlayerProps) {
                 allow="autoplay; fullscreen; microphone; camera; midi; geolocation; accelerometer; gyroscope; payment"
                 referrerPolicy="no-referrer-when-downgrade"
                 onLoad={() => setIsLoading(false)}
-                className="h-full w-full border-0"
+                className="h-full w-full border-0 bg-black"
               />
             </>
           )}
@@ -323,19 +359,39 @@ export function GamePlayer({ game, onPlay }: GamePlayerProps) {
 
         {/* PlayThorn Modern Control Bar */}
         <div className="flex items-center justify-between border-t border-border bg-card px-3 py-2.5 sm:px-5 sm:py-3">
-          {/* Left: Security Badge & Title */}
-          <div className="flex items-center space-x-2">
+          {/* Left: Security Badge, Auto-Save & Title */}
+          <div className="flex items-center space-x-1.5 sm:space-x-2">
             <span className="flex items-center space-x-1.5 rounded-full border border-primary/30 bg-primary/10 px-2.5 py-1 text-[11px] font-bold text-primary">
               <ShieldCheck className="h-3.5 w-3.5" />
               <span className="hidden sm:inline">HTML5 Verified</span>
             </span>
-            <span className="hidden font-display text-xs font-bold text-foreground/80 md:inline truncate max-w-[200px]">
+            <span className="hidden sm:flex items-center space-x-1 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2 py-1 text-[10px] font-bold text-emerald-400">
+              <span>☁️ Progress Auto-Saved</span>
+            </span>
+            <span className="hidden font-display text-xs font-bold text-foreground/80 lg:inline truncate max-w-[180px]">
               {game.title}
             </span>
           </div>
 
           {/* Right: Control Buttons matching site theme */}
           <div className="flex items-center space-x-1.5 sm:space-x-2">
+            {/* Flip Aspect Ratio button */}
+            {isPlaying && (
+              <button
+                onClick={toggleOrientation}
+                title={`Switch Aspect Ratio (Currently ${isPortrait ? "Portrait 3:4" : "Landscape 16:9"})`}
+                aria-label="Toggle aspect ratio"
+                className={`flex h-9 items-center space-x-1 rounded-xl border px-2.5 text-xs font-bold transition-all active:scale-95 ${
+                  overrideAspectRatio
+                    ? "border-primary/50 bg-primary/20 text-primary"
+                    : "border-border bg-muted text-muted-foreground hover:bg-accent hover:text-foreground"
+                }`}
+              >
+                <RotateCw className="h-3.5 w-3.5" />
+                <span className="text-[11px] hidden xs:inline">{isPortrait ? "Vertical 3:4" : "Wide 16:9"}</span>
+              </button>
+            )}
+
             {/* Reload button */}
             {isPlaying && (
               <button

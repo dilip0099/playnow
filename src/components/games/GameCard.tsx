@@ -20,7 +20,15 @@ export function GameCard({
   layout = "grid",
 }: GameCardProps) {
   const displayTitle = game.derivedTitle || game.title;
-  const statusLabel = game.trending ? "TRENDING" : game.isNew ? "LIVE NOW" : null;
+  const statusLabel = game.isExclusive
+    ? "EXCLUSIVE"
+    : game.isRewarded
+    ? "⚡ REWARD"
+    : game.trending
+    ? "TRENDING"
+    : game.isNew
+    ? "NEW"
+    : null;
 
   if (layout === "list") {
     return (
