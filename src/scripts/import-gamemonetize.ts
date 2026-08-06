@@ -249,10 +249,10 @@ export async function importGameMonetizeCatalog() {
   const now = new Date().toISOString();
   const games: GameMetadata[] = selected.map(({ item, siteCategory }, idx) => {
     const scanResult = scanGameForTrademarks(item.title, item.description, "", "Open Licensed");
-    const thumbBase = `https://img.gamemonetize.com/${item.url.split("/").filter(Boolean).pop()}`;
-    const thumbnailUrl = item.thumb || `${thumbBase}/512x384.jpg`;
-    const coverImage = `${thumbBase}/1280x720.jpg`;
-    const heroImage = `${thumbBase}/1280x550.jpg`;
+    const thumbnailUrl = item.thumb || `https://img.gamemonetize.com/${item.url.split("/").filter(Boolean).pop()}/512x384.jpg`;
+    // GameMonetize only hosts 512x384.jpg thumbnail; use it for cover, hero, and screenshots as well
+    const coverImage = thumbnailUrl;
+    const heroImage = thumbnailUrl;
     const aspectRatio = bucketAspectRatio(item);
     const id = crypto.createHash("md5").update(item.url).digest("hex");
 
