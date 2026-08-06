@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { createPortal } from "react-dom";
 import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -17,6 +18,11 @@ const FOCUSABLE_SELECTOR =
 
 export function Dialog({ open, onClose, title, children, className }: DialogProps) {
   const contentRef = React.useRef<HTMLDivElement>(null);
+  const [mounted, setMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
 
   React.useEffect(() => {
     if (!open) return;
@@ -54,15 +60,18 @@ export function Dialog({ open, onClose, title, children, className }: DialogProp
     };
   }, [open, onClose]);
 
-  if (!open) return null;
+  if (!open || !mounted) return null;
 
-  return (
-    <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
+  return createPortal(
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 sm:p-6 animate-in fade-in duration-200">
+      {/* Dimmed Overlay Backdrop - clicking closes modal */}
       <div
-        className="absolute inset-0 bg-background/80 backdrop-blur-sm"
+        className="fixed inset-0 bg-black/80 backdrop-blur-md transition-opacity"
         onClick={onClose}
         aria-hidden="true"
       />
+
+      {/* Modal Dialog Content */}
       <div
         ref={contentRef}
         role="dialog"
@@ -70,26 +79,27 @@ export function Dialog({ open, onClose, title, children, className }: DialogProp
         aria-labelledby={title ? "dialog-title" : undefined}
         tabIndex={-1}
         className={cn(
-          "relative z-10 w-full max-w-lg rounded-2xl border border-border bg-card p-6 shadow-2xl focus:outline-none",
+          "relative z-10 w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-3xl border border-border bg-card p-6 shadow-2xl focus:outline-none scrollbar-thin",
           className
         )}
       >
         {title && (
-          <div className="mb-4 flex items-center justify-between">
+          <div className="mb-4 flex items-center justify-between sticky top-0 bg-card z-20 pb-2 border-b border-border/50">
             <h2 id="dialog-title" className="font-display text-lg font-bold text-foreground">
               {title}
             </h2>
             <button
               onClick={onClose}
               aria-label="Close dialog"
-              className="rounded-lg p-1.5 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+              className="rounded-full p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
             >
-              <X className="h-4 w-4" />
+              <X className="h-5 w-5" />
             </button>
           </div>
         )}
         {children}
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
