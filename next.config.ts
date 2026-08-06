@@ -5,6 +5,7 @@ const nextConfig: NextConfig = {
   outputFileTracingRoot: path.join(__dirname),
   reactStrictMode: true,
   images: {
+    unoptimized: true,
     formats: ["image/avif", "image/webp"],
     // All game artwork (thumbnails, covers, hero images, screenshots) comes from GameMonetize's
     // CDN — see src/scripts/import-gamemonetize.ts.
