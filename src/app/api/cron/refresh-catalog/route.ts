@@ -8,9 +8,9 @@ export const dynamic = "force-dynamic";
 //
 // This endpoint doesn't run the fetch/parse logic directly because Vercel Serverless
 // functions are limited in execution time and can't easily execute tsx scripts like
-// import-gamedistribution.ts itself; instead it calls the project's Deploy Hook,
+// import-gamemonetize.ts itself; instead it calls the project's Deploy Hook,
 // which triggers a full Vercel build. A fresh Vercel build automatically
-// re-runs import-gamedistribution against the live GameDistribution feed, exactly like a normal
+// re-runs import-gamemonetize against the live GameMonetize feed, exactly like a normal
 // git-push deploy.
 export async function GET(request: NextRequest) {
   const authHeader = request.headers.get("authorization");

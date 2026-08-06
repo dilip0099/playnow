@@ -2,5 +2,5 @@
 # (homepage, category pages, etc.)
 google.com, pub-3550445608668316, DIRECT, f08c47fec0942fa0
 
-# GameDistribution Ads
-# (Add your GameDistribution ads.txt lines here when provided by GameDistribution Publisher Dashboard)
+# GameMonetize Ads
+# (Add your GameMonetize ads.txt lines here when provided by GameMonetize Publisher Dashboard)

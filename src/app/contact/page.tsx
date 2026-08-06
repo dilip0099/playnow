@@ -160,7 +160,7 @@ export default function ContactPage() {
 
       <p className="text-xs text-muted-foreground leading-relaxed">
         Note: for questions about a specific game&apos;s underlying code, developer, or
-        original license, GameDistribution (our game licensing partner) manages those relationships
+        original license, GameMonetize (our game licensing partner) manages those relationships
         directly — see our{" "}
         <Link href="/compliance" className="text-primary hover:underline">
           Legal Compliance &amp; Sourcing portal

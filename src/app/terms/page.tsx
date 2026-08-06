@@ -91,7 +91,7 @@ export default function TermsPage() {
         <p className="text-sm text-muted-foreground leading-relaxed">
           PlayNow provides free access to a catalog of browser-playable HTML5 games. No
           download, install, or account is required to play. Games are licensed and embedded
-          from GameDistribution (Azerion), a third-party game publisher network — see our{" "}
+          from GameMonetize, a third-party game publisher network — see our{" "}
           <Link href="/compliance" className="text-primary hover:underline">
             Legal Compliance &amp; Sourcing portal
           </Link>{" "}
@@ -127,7 +127,7 @@ export default function TermsPage() {
         <p className="text-sm text-muted-foreground leading-relaxed">
           The PlayNow site design, branding, and original written content are owned by
           PlayNow. The games available through PlayNow are owned by their respective
-          developers and are licensed to PlayNow through GameDistribution&apos;s publisher network —
+          developers and are licensed to PlayNow through GameMonetize&apos;s publisher network —
           PlayNow does not claim authorship or ownership of any embedded game&apos;s code,
           art, or audio. Full per-game sourcing information is available on our{" "}
           <Link href="/legal/attributions" className="text-primary hover:underline">
@@ -154,8 +154,8 @@ export default function TermsPage() {
           <Link href="/privacy" className="text-primary hover:underline">
             Privacy Policy
           </Link>{" "}
-          for details. Embedded games are served from GameDistribution&apos;s platform and are subject
-          to GameDistribution&apos;s own terms; PlayNow is not responsible for the availability,
+          for details. Embedded games are served from GameMonetize&apos;s platform and are subject
+          to GameMonetize&apos;s own terms; PlayNow is not responsible for the availability,
           content, or behavior of individual embedded games beyond the screening described in
           our compliance portal.
         </p>
@@ -171,7 +171,7 @@ export default function TermsPage() {
           PlayNow is provided &quot;as is&quot; and &quot;as available,&quot; without
           warranties of any kind, express or implied. We don&apos;t guarantee that the site or
           any particular game will be uninterrupted, error-free, or available at all times —
-          individual games are hosted by GameDistribution and their availability can change outside of
+          individual games are hosted by GameMonetize and their availability can change outside of
           our control.
         </p>
       </section>

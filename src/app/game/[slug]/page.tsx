@@ -167,7 +167,7 @@ export default async function GamePage({ params }: GamePageProps) {
   ];
 
   // Deliberately omits aggregateRating/review — that requires a genuine per-site review
-  // count, which we don't have (the star rating shown in our UI is derived from GameDistribution's
+  // count, which we don't have (the star rating shown in our UI is derived from GameMonetize's
   // quality_score, not real user reviews on PlayNow). Fabricating one for richer search
   // snippets would violate Google's structured-data policy on reviews.
   const jsonLd = {
@@ -187,7 +187,7 @@ export default async function GamePage({ params }: GamePageProps) {
         datePublished: game.releaseDate,
         publisher: {
           "@type": "Organization",
-          name: "GameDistribution",
+          name: "GameMonetize",
         },
         offers: {
           "@type": "Offer",
@@ -219,11 +219,11 @@ export default async function GamePage({ params }: GamePageProps) {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      {/* Network warming resource hints for low latency instant iframe loading */}
-      <link rel="preconnect" href="https://html5.gamedistribution.com" crossOrigin="anonymous" />
-      <link rel="dns-prefetch" href="https://html5.gamedistribution.com" />
-      <link rel="preconnect" href="https://img.gamedistribution.com" crossOrigin="anonymous" />
-      <link rel="dns-prefetch" href="https://img.gamedistribution.com" />
+      {/* Preconnect to GameMonetize CDNs for faster iframe initialization */}
+      <link rel="preconnect" href="https://html5.gamemonetize.co" crossOrigin="anonymous" />
+      <link rel="dns-prefetch" href="https://html5.gamemonetize.co" />
+      <link rel="preconnect" href="https://img.gamemonetize.com" crossOrigin="anonymous" />
+      <link rel="dns-prefetch" href="https://img.gamemonetize.com" />
 
       <script
         type="application/ld+json"

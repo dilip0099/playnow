@@ -81,12 +81,12 @@ export default function DmcaPage() {
           <p className="text-xs text-muted-foreground leading-relaxed">
             Every game on PlayNow is embedded from{" "}
             <a
-              href="https://gamedistribution.com"
+              href="https://gamemonetize.com"
               target="_blank"
               rel="noopener noreferrer"
               className="text-primary hover:underline"
             >
-              GameDistribution (Azerion)
+              GameMonetize
             </a>
             , a third-party HTML5 game publisher network — PlayNow does not host the
             underlying game code, art, or audio on its own servers (see our{" "}
@@ -94,7 +94,7 @@ export default function DmcaPage() {
               Asset Responsibility
             </Link>{" "}
             page). If your claim concerns a game&apos;s underlying code or assets rather than
-            how it&apos;s presented on PlayNow, you may need to also contact GameDistribution directly,
+            how it&apos;s presented on PlayNow, you may need to also contact GameMonetize directly,
             since they control that content. That said, we still act on valid notices
             concerning our own catalog listing — including removing or delisting a specific
             game from PlayNow&apos;s catalog.

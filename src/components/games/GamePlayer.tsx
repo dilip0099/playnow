@@ -67,7 +67,7 @@ export function GamePlayer({ game, onPlay }: GamePlayerProps) {
 
   const [effectiveGameUrl, setEffectiveGameUrl] = useState(game.gameUrl);
 
-  // Smart Game Lifecycle Hooks: Listen to GameDistribution & HTML5 SDK postMessage events
+  // Smart Game Lifecycle Hooks: Listen to GameMonetize & HTML5 SDK postMessage events
   useEffect(() => {
     if (!isPlaying || typeof window === "undefined") return;
 

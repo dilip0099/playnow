@@ -27,7 +27,7 @@ interface FranchiseSeo {
   gameSlugs: string[];
 }
 
-// Only franchises where our own GameDistribution-licensed catalog (src/data/games.json) has 3+
+// Only franchises where our own GameMonetize-licensed catalog (src/data/games.json) has 3+
 // genuinely similar real games were built out below. Several other obvious search terms
 // (Roblox, Fortnite, Among Us) were researched and deliberately skipped: our catalog
 // doesn't have enough games that are honestly comparable in actual gameplay, only in

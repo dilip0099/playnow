@@ -6,18 +6,9 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   images: {
     formats: ["image/avif", "image/webp"],
-    // All game artwork (thumbnails, covers, hero images, screenshots) comes from GameDistribution's
-    // CDN — see src/scripts/import-gamedistribution.ts.
+    // All game artwork (thumbnails, covers, hero images, screenshots) comes from GameMonetize's
+    // CDN — see src/scripts/import-gamemonetize.ts.
     remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "img.gamedistribution.com",
-      },
-      {
-        protocol: "https",
-        hostname: "html5.gamedistribution.com",
-      },
-      // GameMonetize CDN — replacement provider (no domain whitelist/traffic minimum)
       {
         protocol: "https",
         hostname: "img.gamemonetize.com",
@@ -31,13 +22,13 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
-        // Apply to all routes — allow GameDistribution iframes to load without being
+        // Apply to all routes — allow GameMonetize iframes to load without being
         // blocked by Vercel's default X-Frame-Options / CSP headers in production.
         source: "/:path*",
         headers: [
           // Allow our own pages to be served normally (not framed by others)
           { key: "X-Frame-Options", value: "SAMEORIGIN" },
-          // Referrer policy so GD SDK gets the correct origin for publisher validation
+          // Referrer policy so GameMonetize SDK gets the correct origin for publisher validation
           { key: "Referrer-Policy", value: "no-referrer-when-downgrade" },
           // Permissions for fullscreen API used by GamePlayer auto-fullscreen feature
           { key: "Permissions-Policy", value: "fullscreen=*, autoplay=*, gyroscope=*, accelerometer=*" },

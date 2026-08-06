@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge";
 
 export const metadata: Metadata = {
   title: "Legal & Sourcing Audit - PlayNow Admin",
-  description: "License distribution, GameDistribution sourcing registry, trademark risk scans, and commercial readiness audit.",
+  description: "License distribution, GameMonetize sourcing registry, trademark risk scans, and commercial readiness audit.",
 };
 
 function loadLegalAuditData() {
@@ -48,7 +48,7 @@ export default function AdminLegalPage() {
           </div>
           <h1 className="text-3xl font-black text-white">Game Sourcing & Legal Audit</h1>
           <p className="text-sm text-slate-400">
-            License distribution, GameDistribution sourcing registry, and trademark safety scans.
+            License distribution, GameMonetize sourcing registry, and trademark safety scans.
           </p>
         </div>
 

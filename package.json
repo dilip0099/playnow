@@ -4,10 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npm run import-gamemonetize && next build",
+    "build": "npm run import-games && next build",
     "start": "next start",
     "lint": "next lint",
-    "import-gamedistribution": "tsx --env-file-if-exists=.env.local src/scripts/import-gamedistribution.ts",
+    "import-games": "tsx --env-file-if-exists=.env.local src/scripts/import-gamemonetize.ts",
     "import-gamemonetize": "tsx --env-file-if-exists=.env.local src/scripts/import-gamemonetize.ts"
   },
   "dependencies": {

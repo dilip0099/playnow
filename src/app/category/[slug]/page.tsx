@@ -26,7 +26,7 @@ const VALID_CATEGORIES: GameCategory[] = [
 // Real keyword research (2026), not guessed copy — monthly search volume noted per pick.
 // Multiplayer targets "io games" (201K/mo) over the generic "multiplayer games" (49.5K/mo)
 // because our multiplayer bucket genuinely IS io/two-player/tanks titles (see
-// import-gamedistribution.ts's CATEGORY_MAP) — the higher-volume term is also the accurate one here,
+// import-gamemonetize.ts's CATEGORY_MAP) — the higher-volume term is also the accurate one here,
 // not just a keyword-stuffing swap.
 const CATEGORY_SEO: Record<GameCategory, { h1: string; title: string; description: string; intro: string }> = {
   action: {
@@ -95,7 +95,7 @@ const CATEGORY_SEO: Record<GameCategory, { h1: string; title: string; descriptio
   },
   // Chess (~4.09M/mo) and Mahjong (~3.35M/mo) are individually bigger search terms than any other
   // category on this site — and unlike Tetris (deliberately excluded, see PROHIBITED_BRAND_TERMS in
-  // import-gamedistribution.ts), none of these are trademarked: chess/checkers/mahjong/solitaire/tic-tac-toe/
+  // import-gamemonetize.ts), none of these are trademarked: chess/checkers/mahjong/solitaire/tic-tac-toe/
   // ludo/domino/backgammon are public-domain game types.
   classic: {
     h1: "Classic Games: Chess, Mahjong, Solitaire & More",

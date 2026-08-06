@@ -100,7 +100,7 @@ export interface GameMetadata {
   adSupported?: boolean;
   revenueShare?: number;
 
-  // Third-party game network sourcing (e.g. GameDistribution) — set when gameType is
+  // Third-party game network sourcing (e.g. GameMonetize) — set when gameType is
   // "Licensed Game". Monetization for these is handled by the network itself
   // per its publisher agreement, not by PlayNow's own ad stack.
   sourceNetwork?: string;
