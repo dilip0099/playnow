@@ -11,9 +11,9 @@ import { SITE_URL } from "@/lib/site";
 // these games work in restrictive network environments (HTML5, no Flash/plugins, no
 // installs — a real, verifiable technical fact) rather than promising to "bypass school
 // firewalls," which we can't guarantee and would be a false claim.
-const TITLE = "Unblocked Games - Play 490+ Free Games Online, No Download";
+const TITLE = "Unblocked Games - Play Free HTML5 Games Online - PlayThorn";
 const DESCRIPTION =
-  "Play unblocked games online for free — no downloads, no installs, no Flash or plugins required. Every game runs instantly in your browser on school Chromebooks, work laptops, or your phone.";
+  "Play unblocked HTML5 games online for free in your browser. No Flash or downloads required — works on school Chromebooks, work PCs, and mobile devices.";
 const H1 = "Unblocked Games";
 const INTRO =
   "Every game on PlayThorn is pure HTML5 — no Flash, no plugins, no installer, nothing for a network filter to flag as an executable download. That's what \"unblocked\" really means here: these games run entirely inside the browser tab you already have open, the same as any other webpage. Pick one below and it loads instantly.";

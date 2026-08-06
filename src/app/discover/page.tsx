@@ -3,8 +3,8 @@ import { DiscoverClient } from "./DiscoverClient";
 import { getAllGames } from "@/lib/games";
 
 export const metadata: Metadata = {
-  title: "Store - PlayThorn Game Registry",
-  description: "Explore the full catalog of HTML5 browser games. Filter by genre, sort by rating, and launch instantly.",
+  title: "Free Online Games - Browse Full HTML5 Catalog - PlayThorn",
+  description: "Browse free HTML5 browser games online instantly. Filter by category, sort by popularity, and play directly in your browser with no downloads or signup required.",
 };
 
 export default function DiscoverPage() {
