@@ -7,8 +7,8 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
 export const metadata: Metadata = {
-  title: "Licensing Policy - PlayNow Legal",
-  description: "How PlayNow licenses its game catalog via GameMonetize, plus the open-source license rules for any code we host directly.",
+  title: "Licensing Policy - PlayThorn Legal",
+  description: "How PlayThorn licenses its game catalog via GameMonetize, plus the open-source license rules for any code we host directly.",
 };
 
 export default function LegalLicensesPage() {
@@ -38,7 +38,7 @@ export default function LegalLicensesPage() {
           </div>
           <h1 className="text-3xl sm:text-4xl font-black text-foreground">Licensing Policy</h1>
           <p className="text-sm text-muted-foreground leading-relaxed">
-            PlayNow's game catalog is currently sourced entirely through a <strong className="text-foreground">GameMonetize publisher agreement</strong> — a licensed, commercial arrangement, not open-source code we've copied. If PlayNow ever hosts original or open-source-derived code directly in the future, it will only accept the permissive licenses below.
+            PlayThorn's game catalog is currently sourced entirely through a <strong className="text-foreground">GameMonetize publisher agreement</strong> — a licensed, commercial arrangement, not open-source code we've copied. If PlayThorn ever hosts original or open-source-derived code directly in the future, it will only accept the permissive licenses below.
           </p>
         </div>
 
@@ -51,7 +51,7 @@ export default function LegalLicensesPage() {
           <Card className="p-5 border-emerald-500/30 bg-emerald-500/5 space-y-2">
             <Badge className="bg-emerald-500/20 text-emerald-400 border-emerald-500/40">Network-Licensed (GameMonetize)</Badge>
             <p className="text-xs text-muted-foreground leading-relaxed">
-              Every game currently on PlayNow is embedded from GameMonetize's publisher network under their standard terms. GameMonetize — not PlayNow — owns and is responsible for this game code; PlayNow's role is limited to embedding and screening titles for brand/trademark conflicts before listing them.
+              Every game currently on PlayThorn is embedded from GameMonetize's publisher network under their standard terms. GameMonetize — not PlayThorn — owns and is responsible for this game code; PlayThorn's role is limited to embedding and screening titles for brand/trademark conflicts before listing them.
             </p>
           </Card>
         </div>

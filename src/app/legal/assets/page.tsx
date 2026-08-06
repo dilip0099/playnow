@@ -4,8 +4,8 @@ import { Layers, ArrowLeft, ShieldCheck } from "lucide-react";
 import { Card } from "@/components/ui/card";
 
 export const metadata: Metadata = {
-  title: "Asset Responsibility - PlayNow Legal",
-  description: "Game art, audio, and code assets on PlayNow are hosted and managed by GameMonetize, not stored on PlayNow's own servers.",
+  title: "Asset Responsibility - PlayThorn Legal",
+  description: "Game art, audio, and code assets on PlayThorn are hosted and managed by GameMonetize, not stored on PlayThorn's own servers.",
 };
 
 export default function LegalAssetsPage() {
@@ -27,22 +27,22 @@ export default function LegalAssetsPage() {
           </div>
           <h1 className="text-3xl sm:text-4xl font-black text-foreground">Asset Responsibility</h1>
           <p className="text-sm text-muted-foreground leading-relaxed">
-            PlayNow does not store or host game art, audio, or executable game code on its own servers. Every game is embedded live from <strong className="text-foreground">GameMonetize</strong>'s platform via iframe — GameMonetize hosts, serves, and is responsible for the underlying assets, and manages its own relationships with the original game developers.
+            PlayThorn does not store or host game art, audio, or executable game code on its own servers. Every game is embedded live from <strong className="text-foreground">GameMonetize</strong>'s platform via iframe — GameMonetize hosts, serves, and is responsible for the underlying assets, and manages its own relationships with the original game developers.
           </p>
         </div>
 
         <Card className="p-6 border-border/60 bg-card/60 space-y-4">
           <div className="flex items-center space-x-2">
             <ShieldCheck className="h-5 w-5 text-emerald-400" />
-            <h2 className="text-lg font-bold text-foreground">What PlayNow Verifies</h2>
+            <h2 className="text-lg font-bold text-foreground">What PlayThorn Verifies</h2>
           </div>
           <ul className="text-xs text-muted-foreground leading-relaxed space-y-2 list-disc list-inside">
-            <li>Each title's public GameMonetize catalog listing and embed URL are checked before being added to PlayNow's catalog.</li>
+            <li>Each title's public GameMonetize catalog listing and embed URL are checked before being added to PlayThorn's catalog.</li>
             <li>Titles and descriptions are screened against a trademark/brand-conflict denylist before listing (see the automated screening in <code className="text-cyan-400">src/scripts/import-gamemonetize.ts</code>).</li>
-            <li>Thumbnails, cover art, and screenshots shown on PlayNow are the same public images GameMonetize provides for each listing — PlayNow does not modify, re-host, or re-license them independently.</li>
+            <li>Thumbnails, cover art, and screenshots shown on PlayThorn are the same public images GameMonetize provides for each listing — PlayThorn does not modify, re-host, or re-license them independently.</li>
           </ul>
           <p className="text-xs text-muted-foreground leading-relaxed pt-2 border-t border-border/40">
-            For a specific game's original developer, license terms, or asset ownership, refer to that game's page on <a href="https://gamemonetize.com" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:underline">GameMonetize.com</a> directly, or see its embed link on PlayNow's <Link href="/legal/attributions" className="text-cyan-400 hover:underline">Game Sourcing Credits</Link> page.
+            For a specific game's original developer, license terms, or asset ownership, refer to that game's page on <a href="https://gamemonetize.com" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:underline">GameMonetize.com</a> directly, or see its embed link on PlayThorn's <Link href="/legal/attributions" className="text-cyan-400 hover:underline">Game Sourcing Credits</Link> page.
           </p>
         </Card>
 

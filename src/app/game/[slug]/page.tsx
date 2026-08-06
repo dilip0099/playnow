@@ -90,9 +90,9 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: GamePageProps): Promise<Metadata> {
   const { slug } = await params;
   const game = getGameBySlug(slug);
-  if (!game) return { title: "Game Not Found - PlayNow" };
+  if (!game) return { title: "Game Not Found - PlayThorn" };
 
-  const title = `${game.derivedTitle || game.title} - Play Free on PlayNow`;
+  const title = `${game.derivedTitle || game.title} - Play Free on PlayThorn`;
   const image = game.coverImage || game.thumbnailUrl;
 
   return {
@@ -135,7 +135,7 @@ export default async function GamePage({ params }: GamePageProps) {
   const faqs = [
     {
       question: `Is ${displayTitle} free to play?`,
-      answer: `Yes — ${displayTitle} is completely free to play on PlayNow, with no signup or subscription required.`,
+      answer: `Yes — ${displayTitle} is completely free to play on PlayThorn, with no signup or subscription required.`,
     },
     {
       question: "Do I need to download anything to play?",
@@ -168,7 +168,7 @@ export default async function GamePage({ params }: GamePageProps) {
 
   // Deliberately omits aggregateRating/review — that requires a genuine per-site review
   // count, which we don't have (the star rating shown in our UI is derived from GameMonetize's
-  // quality_score, not real user reviews on PlayNow). Fabricating one for richer search
+  // quality_score, not real user reviews on PlayThorn). Fabricating one for richer search
   // snippets would violate Google's structured-data policy on reviews.
   const jsonLd = {
     "@context": "https://schema.org",

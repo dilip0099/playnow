@@ -4,7 +4,7 @@ import { getAllGames } from "@/lib/games";
 import { FavoritesClient } from "./FavoritesClient";
 
 export const metadata: Metadata = {
-  title: "Favorite Games - PlayNow",
+  title: "Favorite Games - PlayThorn",
   description: "View and play your saved favorite HTML5 browser games.",
 };
 

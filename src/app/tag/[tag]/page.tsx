@@ -121,21 +121,21 @@ export async function generateMetadata({ params }: TagPageProps): Promise<Metada
   const { tag } = await params;
   const normalized = tag.toLowerCase();
   const seo = TAG_SEO[normalized];
-  if (!seo) return { title: "Games - PlayNow" };
+  if (!seo) return { title: "Games - PlayThorn" };
 
   return {
     title: seo.title,
     description: seo.description,
     alternates: { canonical: `/tag/${tag}` },
     openGraph: {
-      title: `${seo.h1} - PlayNow`,
+      title: `${seo.h1} - PlayThorn`,
       description: seo.description,
       type: "website",
       url: `${SITE_URL}/tag/${tag}`,
     },
     twitter: {
       card: "summary_large_image",
-      title: `${seo.h1} - PlayNow`,
+      title: `${seo.h1} - PlayThorn`,
       description: seo.description,
     },
   };

@@ -14,9 +14,9 @@ import {
 } from "lucide-react";
 import { SITE_URL, SITE_NAME } from "@/lib/site";
 
-const TITLE = "Terms of Service - PlayNow";
+const TITLE = "Terms of Service - PlayThorn";
 const DESCRIPTION =
-  "The Terms of Service for using PlayNow's free browser games site: acceptable use, third-party game licensing, disclaimers, and how to reach us.";
+  "The Terms of Service for using PlayThorn's free browser games site: acceptable use, third-party game licensing, disclaimers, and how to reach us.";
 const H1 = "Terms of Service";
 const LAST_UPDATED = "August 4, 2026";
 
@@ -77,7 +77,7 @@ export default function TermsPage() {
         <h1 className="text-3xl sm:text-4xl font-black text-foreground tracking-tight">{H1}</h1>
         <p className="text-sm text-muted-foreground leading-relaxed max-w-2xl">
           These Terms of Service (&quot;Terms&quot;) govern your use of{" "}
-          {SITE_URL.replace("https://", "")} (&quot;PlayNow&quot;, &quot;we&quot;,
+          {SITE_URL.replace("https://", "")} (&quot;PlayThorn&quot;, &quot;we&quot;,
           &quot;us&quot;). By using the site, you agree to these Terms.
         </p>
       </div>
@@ -89,7 +89,7 @@ export default function TermsPage() {
           1. The Service
         </h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
-          PlayNow provides free access to a catalog of browser-playable HTML5 games. No
+          PlayThorn provides free access to a catalog of browser-playable HTML5 games. No
           download, install, or account is required to play. Games are licensed and embedded
           from GameMonetize, a third-party game publisher network — see our{" "}
           <Link href="/compliance" className="text-primary hover:underline">
@@ -107,14 +107,14 @@ export default function TermsPage() {
           2. Acceptable Use
         </h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
-          You agree to use PlayNow only for lawful purposes. You agree not to:
+          You agree to use PlayThorn only for lawful purposes. You agree not to:
         </p>
         <ul className="text-sm text-muted-foreground leading-relaxed space-y-2 list-disc list-inside pl-2">
           <li>Scrape, crawl, or bulk-download the site&apos;s content outside of normal browsing;</li>
           <li>Attempt to interfere with, disable, or circumvent the site&apos;s ad delivery or security measures;</li>
           <li>Reverse engineer, decompile, or attempt to extract source code from embedded games;</li>
           <li>Use the site to distribute malware, spam, or unlawful content; or</li>
-          <li>Misrepresent your affiliation with PlayNow or any game publisher.</li>
+          <li>Misrepresent your affiliation with PlayThorn or any game publisher.</li>
         </ul>
       </section>
 
@@ -125,15 +125,15 @@ export default function TermsPage() {
           3. Intellectual Property
         </h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
-          The PlayNow site design, branding, and original written content are owned by
-          PlayNow. The games available through PlayNow are owned by their respective
-          developers and are licensed to PlayNow through GameMonetize&apos;s publisher network —
-          PlayNow does not claim authorship or ownership of any embedded game&apos;s code,
+          The PlayThorn site design, branding, and original written content are owned by
+          PlayThorn. The games available through PlayThorn are owned by their respective
+          developers and are licensed to PlayThorn through GameMonetize&apos;s publisher network —
+          PlayThorn does not claim authorship or ownership of any embedded game&apos;s code,
           art, or audio. Full per-game sourcing information is available on our{" "}
           <Link href="/legal/attributions" className="text-primary hover:underline">
             Game Sourcing Credits
           </Link>{" "}
-          page. If you believe content on PlayNow infringes your copyright, see our{" "}
+          page. If you believe content on PlayThorn infringes your copyright, see our{" "}
           <Link href="/legal/dmca" className="text-primary hover:underline">
             DMCA Policy
           </Link>
@@ -148,14 +148,14 @@ export default function TermsPage() {
           4. Third-Party Services &amp; Advertising
         </h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
-          PlayNow is supported by display advertising served through Google AdSense and uses
+          PlayThorn is supported by display advertising served through Google AdSense and uses
           Google Analytics and Vercel Analytics/Speed Insights to understand site usage — see
           our{" "}
           <Link href="/privacy" className="text-primary hover:underline">
             Privacy Policy
           </Link>{" "}
           for details. Embedded games are served from GameMonetize&apos;s platform and are subject
-          to GameMonetize&apos;s own terms; PlayNow is not responsible for the availability,
+          to GameMonetize&apos;s own terms; PlayThorn is not responsible for the availability,
           content, or behavior of individual embedded games beyond the screening described in
           our compliance portal.
         </p>
@@ -168,7 +168,7 @@ export default function TermsPage() {
           5. Disclaimer of Warranties
         </h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
-          PlayNow is provided &quot;as is&quot; and &quot;as available,&quot; without
+          PlayThorn is provided &quot;as is&quot; and &quot;as available,&quot; without
           warranties of any kind, express or implied. We don&apos;t guarantee that the site or
           any particular game will be uninterrupted, error-free, or available at all times —
           individual games are hosted by GameMonetize and their availability can change outside of
@@ -183,7 +183,7 @@ export default function TermsPage() {
           6. Limitation of Liability
         </h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
-          To the fullest extent permitted by applicable law, PlayNow and its operators will not
+          To the fullest extent permitted by applicable law, PlayThorn and its operators will not
           be liable for any indirect, incidental, or consequential damages arising from your
           use of the site or any embedded game.
         </p>
@@ -198,7 +198,7 @@ export default function TermsPage() {
         <p className="text-sm text-muted-foreground leading-relaxed">
           We may restrict or terminate access to the site for anyone who violates these Terms.
           We may update these Terms from time to time; the &quot;Last Updated&quot; date above
-          reflects the most recent revision. Continued use of PlayNow after a change means you
+          reflects the most recent revision. Continued use of PlayThorn after a change means you
           accept the updated Terms.
         </p>
       </section>

@@ -7,8 +7,8 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
 export const metadata: Metadata = {
-  title: "Catalog Changelog - PlayNow Legal",
-  description: "Full list of every PlayNow game licensed via GameMonetize, with category, quality signal, and publish/update dates.",
+  title: "Catalog Changelog - PlayThorn Legal",
+  description: "Full list of every PlayThorn game licensed via GameMonetize, with category, quality signal, and publish/update dates.",
 };
 
 export default function LegalOpenSourcePage() {
@@ -38,7 +38,7 @@ export default function LegalOpenSourcePage() {
           </div>
           <h1 className="text-3xl sm:text-4xl font-black text-foreground">Catalog Changelog</h1>
           <p className="text-sm text-muted-foreground leading-relaxed">
-            Every game below is licensed via GameMonetize — PlayNow does not author this code. Publish and update dates are GameMonetize's own catalog timestamps.
+            Every game below is licensed via GameMonetize — PlayThorn does not author this code. Publish and update dates are GameMonetize's own catalog timestamps.
           </p>
         </div>
 

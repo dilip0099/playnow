@@ -13,9 +13,9 @@ import {
 } from "lucide-react";
 import { SITE_URL, SITE_NAME } from "@/lib/site";
 
-const TITLE = "Privacy Policy - PlayNow";
+const TITLE = "Privacy Policy - PlayThorn";
 const DESCRIPTION =
-  "PlayNow's Privacy Policy: what data we collect (analytics, ads) and don't collect (no accounts), and what's stored locally in your browser for favorites and history.";
+  "PlayThorn's Privacy Policy: what data we collect (analytics, ads) and don't collect (no accounts), and what's stored locally in your browser for favorites and history.";
 const H1 = "Privacy Policy";
 const LAST_UPDATED = "August 4, 2026";
 
@@ -88,7 +88,7 @@ export default function PrivacyPage() {
           Information We Don&apos;t Collect
         </h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
-          PlayNow does not require you to create an account, and we do not have a login or
+          PlayThorn does not require you to create an account, and we do not have a login or
           registration system. We don&apos;t ask for your name, email address, or payment
           details to play any game on the site, and we don&apos;t operate any messaging or
           comment system that would collect personal content from you.
@@ -121,7 +121,7 @@ export default function PrivacyPage() {
         <p className="text-sm text-muted-foreground leading-relaxed">
           This data lives only in your browser on your device. We never receive it, never see
           it, and can&apos;t associate it with you personally — it&apos;s never transmitted to
-          PlayNow or anyone else. You can clear it at any time by clearing your browser&apos;s
+          PlayThorn or anyone else. You can clear it at any time by clearing your browser&apos;s
           site data/cookies for this site, or using private/incognito browsing.
         </p>
       </section>
@@ -163,7 +163,7 @@ export default function PrivacyPage() {
           Advertising
         </h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
-          PlayNow displays ads served by <strong className="text-foreground">Google
+          PlayThorn displays ads served by <strong className="text-foreground">Google
           AdSense</strong> to help cover hosting costs and keep the site free. Google and its
           advertising partners may use cookies (such as the DoubleClick cookie) to serve ads
           based on your visits to this and other sites. You can review or opt out of
@@ -203,7 +203,7 @@ export default function PrivacyPage() {
           </Link>{" "}
           for details). The embedded game player may load its own ads, analytics, or cookies
           from GameMonetize&apos;s advertising partners — this is governed by GameMonetize&apos;s own
-          privacy policy, not this one, since PlayNow does not control what runs inside that
+          privacy policy, not this one, since PlayThorn does not control what runs inside that
           embedded player.
         </p>
       </section>
@@ -215,7 +215,7 @@ export default function PrivacyPage() {
           Cookies
         </h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
-          PlayNow itself doesn&apos;t set authentication or tracking cookies, since there are
+          PlayThorn itself doesn&apos;t set authentication or tracking cookies, since there are
           no user accounts. Cookies you may encounter while using the site come from the
           third-party services described above (Google Analytics, Google AdSense, and
           GameMonetize&apos;s embedded game player). You can control or delete cookies through your
@@ -230,7 +230,7 @@ export default function PrivacyPage() {
           Children&apos;s Privacy
         </h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
-          PlayNow is a general-audience site and is not directed specifically at children under
+          PlayThorn is a general-audience site and is not directed specifically at children under
           13. We do not knowingly collect personal information from children. Because the site
           requires no account or personal information to use, we don&apos;t knowingly collect
           any such data from anyone, regardless of age. If you believe a child has provided us
@@ -251,7 +251,7 @@ export default function PrivacyPage() {
         <p className="text-sm text-muted-foreground leading-relaxed">
           We may update this Privacy Policy from time to time as the site or the services it
           uses change. The &quot;Last Updated&quot; date at the top of this page reflects the
-          most recent revision. Continued use of PlayNow after a change means you accept the
+          most recent revision. Continued use of PlayThorn after a change means you accept the
           updated policy.
         </p>
       </section>

@@ -7,7 +7,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
 export const metadata: Metadata = {
-  title: "Legal & Sourcing Audit - PlayNow Admin",
+  title: "Legal & Sourcing Audit - PlayThorn Admin",
   description: "License distribution, GameMonetize sourcing registry, trademark risk scans, and commercial readiness audit.",
 };
 

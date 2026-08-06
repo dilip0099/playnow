@@ -4,7 +4,7 @@ import { getAllGames } from "@/lib/games";
 import { RecentClient } from "./RecentClient";
 
 export const metadata: Metadata = {
-  title: "Recently Played - PlayNow",
+  title: "Recently Played - PlayThorn",
   description: "View your recently played HTML5 browser games history.",
 };
 

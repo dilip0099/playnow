@@ -14,12 +14,12 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: EmbedGamePageProps): Promise<Metadata> {
   const { slug } = await params;
   const game = getGameBySlug(slug);
-  if (!game) return { title: "Game Not Found - PlayNow" };
+  if (!game) return { title: "Game Not Found - PlayThorn" };
 
   const displayTitle = game.derivedTitle || game.title;
 
   return {
-    title: `Embed ${displayTitle} - PlayNow`,
+    title: `Embed ${displayTitle} - PlayThorn`,
     // This route exists purely as an iframe target for third-party sites — it's a
     // near-duplicate of /game/[slug] with no chrome, so it shouldn't compete with the
     // real game page in search results.

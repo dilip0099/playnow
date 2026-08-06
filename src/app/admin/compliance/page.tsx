@@ -4,7 +4,7 @@ import path from "path";
 import { ComplianceDashboardClient } from "./ComplianceDashboardClient";
 
 export const metadata: Metadata = {
-  title: "Compliance Dashboard - PlayNow Admin",
+  title: "Compliance Dashboard - PlayThorn Admin",
   description: "Internal legal compliance, asset provenance, trademark risk, and commercial readiness dashboard.",
 };
 

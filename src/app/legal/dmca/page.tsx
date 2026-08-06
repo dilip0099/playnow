@@ -4,9 +4,9 @@ import { ArrowLeft, Copyright, FileCheck, Mail, ShieldAlert, Scale } from "lucid
 import { Card } from "@/components/ui/card";
 import { SITE_URL, SITE_NAME } from "@/lib/site";
 
-const TITLE = "DMCA Policy - PlayNow Legal";
+const TITLE = "DMCA Policy - PlayThorn Legal";
 const DESCRIPTION =
-  "PlayNow's DMCA / copyright takedown policy: how to submit a valid infringement notice and how counter-notifications work.";
+  "PlayThorn's DMCA / copyright takedown policy: how to submit a valid infringement notice and how counter-notifications work.";
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -66,7 +66,7 @@ export default function DmcaPage() {
           </div>
           <h1 className="text-3xl sm:text-4xl font-black text-foreground">DMCA Policy</h1>
           <p className="text-sm text-muted-foreground leading-relaxed">
-            PlayNow respects the intellectual property rights of others and responds to clear
+            PlayThorn respects the intellectual property rights of others and responds to clear
             notices of alleged copyright infringement submitted in accordance with the U.S.
             Digital Millennium Copyright Act (DMCA), 17 U.S.C. § 512.
           </p>
@@ -79,7 +79,7 @@ export default function DmcaPage() {
             <h2 className="text-lg font-bold text-foreground">Before You Submit a Notice</h2>
           </div>
           <p className="text-xs text-muted-foreground leading-relaxed">
-            Every game on PlayNow is embedded from{" "}
+            Every game on PlayThorn is embedded from{" "}
             <a
               href="https://gamemonetize.com"
               target="_blank"
@@ -88,16 +88,16 @@ export default function DmcaPage() {
             >
               GameMonetize
             </a>
-            , a third-party HTML5 game publisher network — PlayNow does not host the
+            , a third-party HTML5 game publisher network — PlayThorn does not host the
             underlying game code, art, or audio on its own servers (see our{" "}
             <Link href="/legal/assets" className="text-primary hover:underline">
               Asset Responsibility
             </Link>{" "}
             page). If your claim concerns a game&apos;s underlying code or assets rather than
-            how it&apos;s presented on PlayNow, you may need to also contact GameMonetize directly,
+            how it&apos;s presented on PlayThorn, you may need to also contact GameMonetize directly,
             since they control that content. That said, we still act on valid notices
             concerning our own catalog listing — including removing or delisting a specific
-            game from PlayNow&apos;s catalog.
+            game from PlayThorn&apos;s catalog.
           </p>
         </Card>
 
@@ -123,7 +123,7 @@ export default function DmcaPage() {
               </li>
               <li>
                 Identification of the material claimed to be infringing, with enough detail
-                (e.g. the exact PlayNow game/page URL) for us to locate it;
+                (e.g. the exact PlayThorn game/page URL) for us to locate it;
               </li>
               <li>Your contact information — name, address, telephone number, and email address;</li>
               <li>

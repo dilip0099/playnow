@@ -7,8 +7,8 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
 export const metadata: Metadata = {
-  title: "Public Legal Compliance & Sourcing - PlayNow",
-  description: "PlayNow's public legal transparency portal: how our game catalog is licensed, trademark safety, and commercial readiness.",
+  title: "Public Legal Compliance & Sourcing - PlayThorn",
+  description: "PlayThorn's public legal transparency portal: how our game catalog is licensed, trademark safety, and commercial readiness.",
 };
 
 function loadComplianceData() {
@@ -70,7 +70,7 @@ export default function PublicCompliancePage() {
           </h1>
 
           <p className="text-muted-foreground text-sm sm:text-base max-w-3xl leading-relaxed">
-            PlayNow's game catalog is provided through <strong className="text-foreground">GameMonetize</strong>, a third-party HTML5 game publisher network, under a standard publisher agreement. PlayNow does not author, host, or claim ownership of this game code — every title is embedded directly from GameMonetize's platform, which is responsible for the underlying game's content and its own developer relationships.
+            PlayThorn's game catalog is provided through <strong className="text-foreground">GameMonetize</strong>, a third-party HTML5 game publisher network, under a standard publisher agreement. PlayThorn does not author, host, or claim ownership of this game code — every title is embedded directly from GameMonetize's platform, which is responsible for the underlying game's content and its own developer relationships.
           </p>
 
           <div className="flex flex-wrap items-center gap-4 pt-2 text-xs font-semibold text-muted-foreground">
@@ -147,7 +147,7 @@ export default function PublicCompliancePage() {
                   <ArrowRight className="h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </h3>
                 <p className="text-xs text-muted-foreground leading-relaxed">
-                  How PlayNow licenses games via GameMonetize, and the rules for any open-source code we host directly.
+                  How PlayThorn licenses games via GameMonetize, and the rules for any open-source code we host directly.
                 </p>
               </Card>
             </Link>
@@ -177,7 +177,7 @@ export default function PublicCompliancePage() {
                   <ArrowRight className="h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </h3>
                 <p className="text-xs text-muted-foreground leading-relaxed">
-                  Game assets (art, audio, code) are hosted and managed by GameMonetize, not stored on PlayNow's own servers.
+                  Game assets (art, audio, code) are hosted and managed by GameMonetize, not stored on PlayThorn's own servers.
                 </p>
               </Card>
             </Link>

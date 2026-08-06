@@ -12,9 +12,9 @@ import {
 import { Card } from "@/components/ui/card";
 import { SITE_URL, SITE_NAME } from "@/lib/site";
 
-const TITLE = "Contact PlayNow";
+const TITLE = "Contact PlayThorn";
 const DESCRIPTION =
-  "Get in touch with PlayNow for general questions, bug reports, DMCA/copyright notices, or advertising inquiries.";
+  "Get in touch with PlayThorn for general questions, bug reports, DMCA/copyright notices, or advertising inquiries.";
 const H1 = "Contact Us";
 
 export const metadata: Metadata = {
@@ -74,7 +74,7 @@ export default function ContactPage() {
           </span>
           <h1 className="text-3xl sm:text-4xl font-black text-foreground tracking-tight">{H1}</h1>
           <p className="text-sm text-foreground/80 max-w-xl leading-relaxed">
-            PlayNow is a small, independently run site — email is the best way to reach us.
+            PlayThorn is a small, independently run site — email is the best way to reach us.
             We read every message; response times can vary, but we do our best to reply
             promptly.
           </p>

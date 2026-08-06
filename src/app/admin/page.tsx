@@ -6,7 +6,7 @@ import { ShieldCheck, Gamepad2, ArrowRight, Lock, ExternalLink } from "lucide-re
 import { Card } from "@/components/ui/card";
 
 export const metadata: Metadata = {
-  title: "Admin Overview - PlayNow Admin",
+  title: "Admin Overview - PlayThorn Admin",
   description: "Platform catalog CMS and legal audit navigation.",
 };
 
@@ -81,7 +81,7 @@ export default function AdminPage() {
         >
           <div>
             <h3 className="text-sm font-bold text-white">Revenue & Play Analytics</h3>
-            <p className="text-xs text-slate-400 mt-0.5">Tracked in your GameMonetize publisher dashboard, not here — PlayNow doesn't run its own ad/analytics stack.</p>
+            <p className="text-xs text-slate-400 mt-0.5">Tracked in your GameMonetize publisher dashboard, not here — PlayThorn doesn't run its own ad/analytics stack.</p>
           </div>
           <ExternalLink className="h-4 w-4 text-slate-400 group-hover:text-white transition-colors" />
         </a>

@@ -3,7 +3,7 @@ import { DiscoverClient } from "./DiscoverClient";
 import { getAllGames } from "@/lib/games";
 
 export const metadata: Metadata = {
-  title: "Store - PlayNow Game Registry",
+  title: "Store - PlayThorn Game Registry",
   description: "Explore the full catalog of HTML5 browser games. Filter by genre, sort by rating, and launch instantly.",
 };
 

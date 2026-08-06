@@ -16,21 +16,21 @@ const DESCRIPTION =
   "Play unblocked games online for free — no downloads, no installs, no Flash or plugins required. Every game runs instantly in your browser on school Chromebooks, work laptops, or your phone.";
 const H1 = "Unblocked Games";
 const INTRO =
-  "Every game on PlayNow is pure HTML5 — no Flash, no plugins, no installer, nothing for a network filter to flag as an executable download. That's what \"unblocked\" really means here: these games run entirely inside the browser tab you already have open, the same as any other webpage. Pick one below and it loads instantly.";
+  "Every game on PlayThorn is pure HTML5 — no Flash, no plugins, no installer, nothing for a network filter to flag as an executable download. That's what \"unblocked\" really means here: these games run entirely inside the browser tab you already have open, the same as any other webpage. Pick one below and it loads instantly.";
 
 export const metadata: Metadata = {
   title: TITLE,
   description: DESCRIPTION,
   alternates: { canonical: "/unblocked-games" },
   openGraph: {
-    title: `${H1} - PlayNow`,
+    title: `${H1} - PlayThorn`,
     description: DESCRIPTION,
     type: "website",
     url: `${SITE_URL}/unblocked-games`,
   },
   twitter: {
     card: "summary_large_image",
-    title: `${H1} - PlayNow`,
+    title: `${H1} - PlayThorn`,
     description: DESCRIPTION,
   },
 };

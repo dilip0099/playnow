@@ -57,7 +57,7 @@ export function ComplianceDashboardClient({ initialData }: ComplianceDashboardCl
 
     const sourceNetworks = new Set(games.map((g) => g?.sourceNetwork).filter(Boolean));
     const totalAssets = assetRegistry.length;
-    const ownedAssets = assetSources.filter((s) => s?.ownershipStatus === "OWNED" || s?.creator === "PlayNow Studios").length;
+    const ownedAssets = assetSources.filter((s) => s?.ownershipStatus === "OWNED" || s?.creator === "PlayThorn Studios").length;
     const thirdPartyAssets = totalAssets - ownedAssets;
     const missingRecords = totalAssets - assetSources.length;
 
@@ -118,7 +118,7 @@ export function ComplianceDashboardClient({ initialData }: ComplianceDashboardCl
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `playnow-compliance-report-${new Date().toISOString().split("T")[0]}.json`;
+    a.download = `PlayThorn-compliance-report-${new Date().toISOString().split("T")[0]}.json`;
     a.click();
     URL.revokeObjectURL(url);
   };
@@ -135,9 +135,9 @@ export function ComplianceDashboardClient({ initialData }: ComplianceDashboardCl
               <span>Internal Admin System</span>
             </span>
           </div>
-          <h1 className="text-3xl font-black tracking-tight text-foreground">PlayNow Compliance Dashboard</h1>
+          <h1 className="text-3xl font-black tracking-tight text-foreground">PlayThorn Compliance Dashboard</h1>
           <p className="text-sm text-muted-foreground mt-1">
-            Legal compliance telemetry for PlayNow's GameMonetize-licensed game catalog — license records, sourcing, and trademark screening.
+            Legal compliance telemetry for PlayThorn's GameMonetize-licensed game catalog — license records, sourcing, and trademark screening.
           </p>
         </div>
 

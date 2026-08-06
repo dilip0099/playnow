@@ -117,21 +117,21 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
   const { slug } = await params;
   const normalized = slug.toLowerCase() as GameCategory;
   const seo = CATEGORY_SEO[normalized];
-  if (!seo) return { title: "Games - PlayNow" };
+  if (!seo) return { title: "Games - PlayThorn" };
 
   return {
     title: seo.title,
     description: seo.description,
     alternates: { canonical: `/category/${slug}` },
     openGraph: {
-      title: `${seo.h1} - PlayNow`,
+      title: `${seo.h1} - PlayThorn`,
       description: seo.description,
       type: "website",
       url: `${SITE_URL}/category/${slug}`,
     },
     twitter: {
       card: "summary_large_image",
-      title: `${seo.h1} - PlayNow`,
+      title: `${seo.h1} - PlayThorn`,
       description: seo.description,
     },
   };

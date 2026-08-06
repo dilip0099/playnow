@@ -5,7 +5,7 @@ import { GameGrid } from "@/components/games/GameGrid";
 import { ContinuePlayingRail } from "@/components/games/ContinuePlayingRail";
 
 export const metadata: Metadata = {
-  title: "My Library - PlayNow",
+  title: "My Library - PlayThorn",
   description: "Your personal game collection, saved bookmarks, and recent play sessions.",
 };
 

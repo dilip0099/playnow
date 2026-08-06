@@ -13,7 +13,7 @@ interface GamesLikePageProps {
 
 interface FranchiseSeo {
   // The real, trademarked franchise being referenced for search-intent purposes only.
-  // PlayNow has no affiliation with any of these rights holders — see the mandatory
+  // PlayThorn has no affiliation with any of these rights holders — see the mandatory
   // disclaimer baked into every `intro` string below.
   franchise: string;
   h1: string;
@@ -41,7 +41,7 @@ const FRANCHISE_SEO: Record<string, FranchiseSeo> = {
     description:
       "Play free browser games with mining, crafting, and blocky sandbox gameplay similar to Minecraft — no download required. Independent alternatives, not affiliated with Mojang or Microsoft.",
     intro:
-      "Minecraft (Mojang Studios / Microsoft) turned block-based mining, crafting, and sandbox building into one of the biggest games ever made. PlayNow doesn't host Minecraft itself, but our own catalog has independently developed games that share that same core loop — digging for resources, crafting upgrades, fighting off mobs, and building out your own blocky world — all playable instantly in your browser, no install required. PlayNow is an independent site and is not affiliated with, sponsored by, or endorsed by Mojang Studios, Microsoft, or Minecraft in any way. These are simply similar free alternatives for fans of that style of game.",
+      "Minecraft (Mojang Studios / Microsoft) turned block-based mining, crafting, and sandbox building into one of the biggest games ever made. PlayThorn doesn't host Minecraft itself, but our own catalog has independently developed games that share that same core loop — digging for resources, crafting upgrades, fighting off mobs, and building out your own blocky world — all playable instantly in your browser, no install required. PlayThorn is an independent site and is not affiliated with, sponsored by, or endorsed by Mojang Studios, Microsoft, or Minecraft in any way. These are simply similar free alternatives for fans of that style of game.",
     gameSlugs: [
       "minetap-merge-clicker",
       "mineclicker",
@@ -58,7 +58,7 @@ const FRANCHISE_SEO: Record<string, FranchiseSeo> = {
     description:
       "Play free browser games with the high-speed driving, police chases, and chaotic action GTA is known for — no download required. Independent alternatives, not affiliated with Rockstar Games or Take-Two.",
     intro:
-      "Grand Theft Auto (Rockstar Games / Take-Two Interactive) is famous for open-world driving chaos, police chases, and mayhem across a sprawling city. PlayNow doesn't have an open-world crime sandbox, but our catalog has plenty of the same high-speed driving thrills GTA fans come for — outrunning cops, tearing through neon city streets, and surviving demolition-derby destruction — every one a real, independently developed game, playable instantly with no install. PlayNow is an independent site and is not affiliated with, sponsored by, or endorsed by Rockstar Games, Take-Two Interactive, or the Grand Theft Auto franchise in any way. These are simply similar free alternatives.",
+      "Grand Theft Auto (Rockstar Games / Take-Two Interactive) is famous for open-world driving chaos, police chases, and mayhem across a sprawling city. PlayThorn doesn't have an open-world crime sandbox, but our catalog has plenty of the same high-speed driving thrills GTA fans come for — outrunning cops, tearing through neon city streets, and surviving demolition-derby destruction — every one a real, independently developed game, playable instantly with no install. PlayThorn is an independent site and is not affiliated with, sponsored by, or endorsed by Rockstar Games, Take-Two Interactive, or the Grand Theft Auto franchise in any way. These are simply similar free alternatives.",
     gameSlugs: [
       "endless-car-chase",
       "road-madness",
@@ -75,7 +75,7 @@ const FRANCHISE_SEO: Record<string, FranchiseSeo> = {
     description:
       "Play free browser FPS and military shooter games with combat similar to Call of Duty — sniper missions, frontline assaults, and tactical firefights. No download. Independent alternatives, not affiliated with Activision.",
     intro:
-      "Call of Duty (Activision) set the standard for fast-paced military first-person shooters — sniper missions, frontline assaults, and tactical firefights. You won't find the Call of Duty games themselves here, but PlayNow's catalog has a deep bench of independently developed FPS and war-shooter titles that scratch the same itch: stealth sniping, commando raids, and battlefield combat, all playable instantly with no install. PlayNow is an independent site and is not affiliated with, sponsored by, or endorsed by Activision or the Call of Duty franchise in any way. These are simply similar free alternatives.",
+      "Call of Duty (Activision) set the standard for fast-paced military first-person shooters — sniper missions, frontline assaults, and tactical firefights. You won't find the Call of Duty games themselves here, but PlayThorn's catalog has a deep bench of independently developed FPS and war-shooter titles that scratch the same itch: stealth sniping, commando raids, and battlefield combat, all playable instantly with no install. PlayThorn is an independent site and is not affiliated with, sponsored by, or endorsed by Activision or the Call of Duty franchise in any way. These are simply similar free alternatives.",
     gameSlugs: [
       "fps-sniper-shooting",
       "frontline-assault",
@@ -95,7 +95,7 @@ const FRANCHISE_SEO: Record<string, FranchiseSeo> = {
     description:
       "Play free browser tank warfare games with combat similar to World of Tanks — command tanks, upgrade your armor, and battle across war-torn fronts. No download. Independent alternatives, not affiliated with Wargaming.",
     intro:
-      "World of Tanks (Wargaming) turned tank warfare into one of the biggest multiplayer franchises around. PlayNow's catalog has its own deep roster of independently developed tank battle games — command real tanks, upgrade your armor and firepower, and battle across WWII-style fronts and modern arenas, all instantly in your browser with no install. PlayNow is an independent site and is not affiliated with, sponsored by, or endorsed by Wargaming or World of Tanks in any way. These are simply similar free alternatives.",
+      "World of Tanks (Wargaming) turned tank warfare into one of the biggest multiplayer franchises around. PlayThorn's catalog has its own deep roster of independently developed tank battle games — command real tanks, upgrade your armor and firepower, and battle across WWII-style fronts and modern arenas, all instantly in your browser with no install. PlayThorn is an independent site and is not affiliated with, sponsored by, or endorsed by Wargaming or World of Tanks in any way. These are simply similar free alternatives.",
     gameSlugs: [
       "world-of-wartanks",
       "war-of-tanks-3d",
@@ -118,7 +118,7 @@ const FRANCHISE_SEO: Record<string, FranchiseSeo> = {
     description:
       "Play free browser match-3 and matching-puzzle games with the same satisfying gameplay as Candy Crush — no download, no app store, no signup. Independent alternatives, not affiliated with King.",
     intro:
-      "Candy Crush Saga (King) turned match-3 puzzles into a global phenomenon. PlayNow's catalog has its own independently developed match-3 and matching-puzzle games that deliver that same swap-match-clear satisfaction, playable instantly in your browser with no app install or account. PlayNow is an independent site and is not affiliated with, sponsored by, or endorsed by King or Candy Crush in any way. These are simply similar free alternatives.",
+      "Candy Crush Saga (King) turned match-3 puzzles into a global phenomenon. PlayThorn's catalog has its own independently developed match-3 and matching-puzzle games that deliver that same swap-match-clear satisfaction, playable instantly in your browser with no app install or account. PlayThorn is an independent site and is not affiliated with, sponsored by, or endorsed by King or Candy Crush in any way. These are simply similar free alternatives.",
     gameSlugs: ["prism-match-3d", "match-mystery", "skibidi-match-master", "merge-royal"],
   },
   "subway-surfers": {
@@ -128,7 +128,7 @@ const FRANCHISE_SEO: Record<string, FranchiseSeo> = {
     description:
       "Play free browser endless-runner games with the same dodge-and-dash gameplay as Subway Surfers — no download, no app store. Independent alternatives, not affiliated with SYBO Games.",
     intro:
-      "Subway Surfers (SYBO Games) is one of the most-played endless runners ever made — dodging obstacles, dashing down lanes, and chasing a high score. PlayNow's catalog has its own independently developed endless-runner and one-touch arcade dodgers that capture that same fast-reflex, obstacle-dodging rush, playable instantly in your browser with no install. PlayNow is an independent site and is not affiliated with, sponsored by, or endorsed by SYBO Games or Subway Surfers in any way. These are simply similar free alternatives.",
+      "Subway Surfers (SYBO Games) is one of the most-played endless runners ever made — dodging obstacles, dashing down lanes, and chasing a high score. PlayThorn's catalog has its own independently developed endless-runner and one-touch arcade dodgers that capture that same fast-reflex, obstacle-dodging rush, playable instantly in your browser with no install. PlayThorn is an independent site and is not affiliated with, sponsored by, or endorsed by SYBO Games or Subway Surfers in any way. These are simply similar free alternatives.",
     gameSlugs: ["wear-the-helmet", "ran-and-jump-jambo-runner", "canjump", "going-right"],
   },
 };
@@ -146,21 +146,21 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: GamesLikePageProps): Promise<Metadata> {
   const { slug } = await params;
   const seo = FRANCHISE_SEO[slug];
-  if (!seo) return { title: "Games - PlayNow" };
+  if (!seo) return { title: "Games - PlayThorn" };
 
   return {
     title: seo.title,
     description: seo.description,
     alternates: { canonical: `/games-like/${slug}` },
     openGraph: {
-      title: `${seo.h1} - PlayNow`,
+      title: `${seo.h1} - PlayThorn`,
       description: seo.description,
       type: "website",
       url: `${SITE_URL}/games-like/${slug}`,
     },
     twitter: {
       card: "summary_large_image",
-      title: `${seo.h1} - PlayNow`,
+      title: `${seo.h1} - PlayThorn`,
       description: seo.description,
     },
   };
