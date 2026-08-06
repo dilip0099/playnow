@@ -14,8 +14,8 @@ const ATTRIBUTIONS_FILE = path.join(process.cwd(), "ATTRIBUTIONS.md");
 // Docs: https://gamemonetize.com/feed.php?format=0&num=100&page=N
 const GM_FEED_BASE = "https://gamemonetize.com/feed.php?format=0&num=100&page=";
 const TOTAL_PAGES = 80;           // 80 × 100 = up to 8,000 games, safe for curl rate limits
-const TARGET_PER_CATEGORY = 120;
-const TARGET_CLASSIC_GAMES = 80;
+const TARGET_PER_CATEGORY = 300;
+const TARGET_CLASSIC_GAMES = 150;
 
 const VALID_CATEGORIES: GameCategory[] = [
   "action", "puzzle", "arcade", "racing", "adventure", "strategy", "sports", "multiplayer", "classic",
