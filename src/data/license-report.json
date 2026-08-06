@@ -1,349 +1,384 @@
 {
-  "timestamp": "2026-08-04T18:09:46.393Z",
-  "totalImported": 211,
-  "sourceNetwork": "GamePix",
+  "timestamp": "2026-08-06T07:25:46.484Z",
+  "totalImported": 232,
+  "sourceNetwork": "GameDistribution",
   "categoryDistribution": {
-    "action": 23,
-    "puzzle": 25,
-    "arcade": 23,
-    "racing": 22,
-    "adventure": 22,
-    "strategy": 22,
-    "sports": 22,
-    "multiplayer": 22,
-    "classic": 30
+    "action": 24,
+    "puzzle": 24,
+    "arcade": 24,
+    "racing": 24,
+    "adventure": 24,
+    "strategy": 24,
+    "sports": 24,
+    "multiplayer": 24,
+    "classic": 40
   },
   "rejectedForBrandRisk": [
     {
-      "title": "TenTrix",
-      "conflicts": [
-        "TETRIS"
-      ]
-    },
-    {
-      "title": "Idle Craft 3D",
-      "conflicts": [
-        "MARVEL"
-      ]
-    },
-    {
-      "title": "Catch Huggy Wuggy!",
-      "conflicts": [
-        "HUGGY WUGGY",
-        "HUGGY"
-      ]
-    },
-    {
-      "title": "Basketball Stars",
-      "conflicts": [
-        "BASKETBALL STARS"
-      ]
-    },
-    {
-      "title": "Speakerman Revenge",
-      "conflicts": [
-        "SONIC"
-      ]
-    },
-    {
-      "title": "Cut the Rope 2",
-      "conflicts": [
-        "CUT THE ROPE",
-        "OM NOM"
-      ]
-    },
-    {
-      "title": "Monster School Challenges",
-      "conflicts": [
-        "MINECRAFT"
-      ]
-    },
-    {
-      "title": "Flying Grimace",
-      "conflicts": [
-        "GRIMACE"
-      ]
-    },
-    {
-      "title": "Candy Match Saga 2",
-      "conflicts": [
-        "CANDY MATCH SAGA"
-      ]
-    },
-    {
-      "title": "Cut The Rope",
-      "conflicts": [
-        "CUT THE ROPE",
-        "OM NOM"
-      ]
-    },
-    {
-      "title": "Red and Blue Stickman Huggy",
-      "conflicts": [
-        "HUGGY"
-      ]
-    },
-    {
-      "title": "Among Us",
-      "conflicts": [
-        "AMONG US"
-      ]
-    },
-    {
-      "title": "Baby Chicco Adventures",
-      "conflicts": [
-        "MARIO"
-      ]
-    },
-    {
-      "title": "Cut the Rope Experiments",
-      "conflicts": [
-        "CUT THE ROPE",
-        "OM NOM"
-      ]
-    },
-    {
-      "title": "Grimace Penalty",
-      "conflicts": [
-        "GRIMACE"
-      ]
-    },
-    {
-      "title": "Minecraft Skibidi Hidden Toilet",
-      "conflicts": [
-        "MINECRAFT"
-      ]
-    },
-    {
-      "title": "Cut the Rope: Magic",
-      "conflicts": [
-        "CUT THE ROPE",
-        "OM NOM"
-      ]
-    },
-    {
-      "title": "Poppy Strike 3",
-      "conflicts": [
-        "HUGGY WUGGY",
-        "HUGGY"
-      ]
-    },
-    {
-      "title": "Rainbow Friends VS Skibidi Toilet",
-      "conflicts": [
-        "RAINBOW FRIENDS"
-      ]
-    },
-    {
-      "title": "Boxing Stars",
-      "conflicts": [
-        "BOXING STARS"
-      ]
-    },
-    {
-      "title": "Killer Escape Huggy",
-      "conflicts": [
-        "HUGGY"
-      ]
-    },
-    {
-      "title": "Labubu Shooter",
-      "conflicts": [
-        "LABUBU"
-      ]
-    },
-    {
-      "title": "DD Blocky",
-      "conflicts": [
-        "TETRIS"
-      ]
-    },
-    {
-      "title": "Red Stickman vs Monster School",
-      "conflicts": [
-        "MINECRAFT"
-      ]
-    },
-    {
-      "title": "Tung Tung Sahur GTA Miami",
-      "conflicts": [
-        "GTA"
-      ]
-    },
-    {
-      "title": "Sprunki Games Player 456",
-      "conflicts": [
-        "SPRUNKI"
-      ]
-    },
-    {
-      "title": "Cubetopia Parkour",
-      "conflicts": [
-        "MINECRAFT"
-      ]
-    },
-    {
-      "title": "Sprunki Stunt Driving Simulator",
-      "conflicts": [
-        "SPRUNKI"
-      ]
-    },
-    {
-      "title": "Noob Huggy Kissiy",
-      "conflicts": [
-        "HUGGY"
-      ]
-    },
-    {
-      "title": "Cut The Rope: Time Travel",
-      "conflicts": [
-        "CUT THE ROPE",
-        "OM NOM"
-      ]
-    },
-    {
-      "title": "Sprunki Coloring Book",
-      "conflicts": [
-        "SPRUNKI"
-      ]
-    },
-    {
-      "title": "Head Soccer 2023",
-      "conflicts": [
-        "HEAD SOCCER"
-      ]
-    },
-    {
-      "title": "Noob Huggy Winter",
-      "conflicts": [
-        "HUGGY"
-      ]
-    },
-    {
-      "title": "Dominations Idle",
-      "conflicts": [
-        "DOMINATIONS"
-      ]
-    },
-    {
-      "title": "Mini Huggy - 2 Players",
-      "conflicts": [
-        "HUGGY"
-      ]
-    },
-    {
-      "title": "Sprunki Memory Card Match",
-      "conflicts": [
-        "SPRUNKI"
-      ]
-    },
-    {
-      "title": "Pictures by Numbers - Nubik and Mobs Mine",
-      "conflicts": [
-        "MINECRAFT"
-      ]
-    },
-    {
-      "title": "Stickman Huggy 2",
-      "conflicts": [
-        "HUGGY"
-      ]
-    },
-    {
-      "title": "Tralalero Tralala Red Light Squid Game",
-      "conflicts": [
-        "SQUID GAME"
-      ]
-    },
-    {
-      "title": "Rainbow Friends Coloring Book",
-      "conflicts": [
-        "RAINBOW FRIENDS"
-      ]
-    },
-    {
-      "title": "The dead among us",
-      "conflicts": [
-        "AMONG US"
-      ]
-    },
-    {
-      "title": "Sprunki Horror",
-      "conflicts": [
-        "SPRUNKI"
-      ]
-    },
-    {
-      "title": "Roblox Flip",
+      "title": "Obby Escape from Tsunami Brainrot",
       "conflicts": [
         "ROBLOX"
       ]
     },
     {
-      "title": "Garten of Banban 3 Drag and Drop game",
+      "title": "Blocks and that's it",
       "conflicts": [
-        "GARTEN OF BANBAN",
-        "BANBAN"
+        "TETRIS"
       ]
     },
     {
-      "title": "Sprunki Ice Mod - Aqua",
+      "title": "Garten Of BanBan 1 Escape",
       "conflicts": [
-        "SPRUNKI"
+        "GARTEN OF BANBAN"
       ]
     },
     {
-      "title": "Counter Craft Zombies",
+      "title": "Pubg Hack",
+      "conflicts": [
+        "PUBG"
+      ]
+    },
+    {
+      "title": "Jewel Link",
+      "conflicts": [
+        "BEJEWELED"
+      ]
+    },
+    {
+      "title": "Rainbow Friends. Survival",
+      "conflicts": [
+        "RAINBOW FRIENDS"
+      ]
+    },
+    {
+      "title": "Chroma Tower",
+      "conflicts": [
+        "TETRIS"
+      ]
+    },
+    {
+      "title": "Seat Puzzle Cut The Rope",
+      "conflicts": [
+        "CUT THE ROPE"
+      ]
+    },
+    {
+      "title": "Rainbow Friends Hide And Seek",
+      "conflicts": [
+        "RAINBOW FRIENDS"
+      ]
+    },
+    {
+      "title": "Find the Vampire",
+      "conflicts": [
+        "AMONG US"
+      ]
+    },
+    {
+      "title": "Sudoku Brain Blocks",
+      "conflicts": [
+        "TETRIS"
+      ]
+    },
+    {
+      "title": "Tetro Merge",
+      "conflicts": [
+        "TETRIS"
+      ]
+    },
+    {
+      "title": "Stickman Zombie vs Stickman Hero",
+      "conflicts": [
+        "MINECRAFT",
+        "ROBLOX"
+      ]
+    },
+    {
+      "title": "Craft of Wars",
       "conflicts": [
         "MINECRAFT"
       ]
     },
     {
-      "title": "NoobLOX Rainbow Friends",
+      "title": "Elementz",
       "conflicts": [
-        "RAINBOW FRIENDS"
+        "CANDY CRUSH",
+        "BEJEWELED"
       ]
     },
     {
-      "title": "Stickman Huggy Escape",
+      "title": "Winter Tetrix Trails",
       "conflicts": [
-        "HUGGY"
+        "TETRIS"
       ]
     },
     {
-      "title": "Rainbow Friends Chapter 2",
+      "title": "Impostor among us: Escape from prison",
       "conflicts": [
-        "RAINBOW FRIENDS"
+        "AMONG US"
       ]
     },
     {
-      "title": "Skibidi Toilet Squid Game Red Light",
+      "title": "Monster School 2",
+      "conflicts": [
+        "MINECRAFT"
+      ]
+    },
+    {
+      "title": "Associations",
+      "conflicts": [
+        "WORDLE"
+      ]
+    },
+    {
+      "title": "Blox Fruits",
+      "conflicts": [
+        "ROBLOX"
+      ]
+    },
+    {
+      "title": "Noob: Skyblock Survival",
+      "conflicts": [
+        "MINECRAFT"
+      ]
+    },
+    {
+      "title": "Noob archer vs Stickman Zombie: zombie shooter",
+      "conflicts": [
+        "MINECRAFT"
+      ]
+    },
+    {
+      "title": "Counter Craft Sniper",
+      "conflicts": [
+        "MINECRAFT"
+      ]
+    },
+    {
+      "title": "Fire Ball and Water Ball: Parkour Love Balls",
+      "conflicts": [
+        "MARIO"
+      ]
+    },
+    {
+      "title": "Obby Blox Hook",
+      "conflicts": [
+        "ROBLOX"
+      ]
+    },
+    {
+      "title": "Noob vs Zombie Apocalypse: shooting pro",
+      "conflicts": [
+        "MINECRAFT",
+        "FNAF"
+      ]
+    },
+    {
+      "title": "Flow Block",
+      "conflicts": [
+        "TETRIS"
+      ]
+    },
+    {
+      "title": "Obby Modes! Online Mini-Games",
       "conflicts": [
         "SQUID GAME"
       ]
     },
     {
-      "title": "Noob Huggy",
+      "title": "Red Stickman vs Craftmans 2",
       "conflicts": [
-        "HUGGY"
+        "MINECRAFT"
       ]
     },
     {
-      "title": "Head Soccer 2022",
+      "title": "Cool Orange Ball: Bounce Adventure",
       "conflicts": [
-        "HEAD SOCCER"
+        "MARIO",
+        "SONIC"
       ]
     },
     {
-      "title": "Two Impostor Squid Challenge",
+      "title": "Noob: parkour tricks",
+      "conflicts": [
+        "MINECRAFT"
+      ]
+    },
+    {
+      "title": "Math Wall Simulator",
+      "conflicts": [
+        "ROBLOX"
+      ]
+    },
+    {
+      "title": "Minecraft Battle Party",
+      "conflicts": [
+        "MINECRAFT"
+      ]
+    },
+    {
+      "title": "Murderers VS Sheriffs Duels",
+      "conflicts": [
+        "ROBLOX"
+      ]
+    },
+    {
+      "title": "Math Lava: Tower Race",
+      "conflicts": [
+        "ROBLOX"
+      ]
+    },
+    {
+      "title": "Squid Game Hunter",
       "conflicts": [
         "SQUID GAME"
       ]
     },
     {
-      "title": "Grimace Shake Hidden Skibidi Toilet",
+      "title": "Stickman Mega Boss: Battles!",
       "conflicts": [
-        "GRIMACE"
+        "MINECRAFT"
+      ]
+    },
+    {
+      "title": "Space Survival Rainbow Friends Monster",
+      "conflicts": [
+        "RAINBOW FRIENDS"
+      ]
+    },
+    {
+      "title": "Sprunki Quiz",
+      "conflicts": [
+        "SPRUNKI"
+      ]
+    },
+    {
+      "title": "Sprunki Link",
+      "conflicts": [
+        "SPRUNKI"
+      ]
+    },
+    {
+      "title": "Sprunki Monster Music Beats",
+      "conflicts": [
+        "SPRUNKI"
+      ]
+    },
+    {
+      "title": "Minecraft Pixel Warfare",
+      "conflicts": [
+        "MINECRAFT"
+      ]
+    },
+    {
+      "title": "Natural disaster survival Obby",
+      "conflicts": [
+        "ROBLOX"
+      ]
+    },
+    {
+      "title": "Poppy Strike 5",
+      "conflicts": [
+        "HUGGY WUGGY",
+        "HUGGY"
+      ]
+    },
+    {
+      "title": "FNF Unblocked​ Italian Brainrot",
+      "conflicts": [
+        "SPRUNKI"
+      ]
+    },
+    {
+      "title": "Sprunki Match",
+      "conflicts": [
+        "SPRUNKI"
+      ]
+    },
+    {
+      "title": "Cross the Road",
+      "conflicts": [
+        "ROBLOX"
+      ]
+    },
+    {
+      "title": "Red Stickman vs Craftmans",
+      "conflicts": [
+        "MINECRAFT"
+      ]
+    },
+    {
+      "title": "Squid Game: Craft Runner",
+      "conflicts": [
+        "MINECRAFT",
+        "SQUID GAME"
+      ]
+    },
+    {
+      "title": "Sprunki Garden",
+      "conflicts": [
+        "SPRUNKI"
+      ]
+    },
+    {
+      "title": "Squid Game: Playground Shooter",
+      "conflicts": [
+        "SQUID GAME"
+      ]
+    },
+    {
+      "title": "Last to leave circle Obby",
+      "conflicts": [
+        "ROBLOX"
+      ]
+    },
+    {
+      "title": "Craft Man Vs Giant TNT",
+      "conflicts": [
+        "MINECRAFT"
+      ]
+    },
+    {
+      "title": "Fly Fly Fly",
+      "conflicts": [
+        "FLAPPY BIRD"
+      ]
+    },
+    {
+      "title": "Sprunki Torches Maze",
+      "conflicts": [
+        "SPRUNKI"
+      ]
+    },
+    {
+      "title": "CraftMart",
+      "conflicts": [
+        "MINECRAFT"
+      ]
+    },
+    {
+      "title": "Hunting underwater spearfishing",
+      "conflicts": [
+        "MARVEL"
+      ]
+    },
+    {
+      "title": "Sprunki Space Challenge",
+      "conflicts": [
+        "SPRUNKI"
+      ]
+    },
+    {
+      "title": "Sprunky Incredibox Mods",
+      "conflicts": [
+        "SPRUNKI"
+      ]
+    },
+    {
+      "title": "DTA: Best Thief",
+      "conflicts": [
+        "GTA",
+        "ROBLOX"
       ]
     },
     {
@@ -353,213 +388,302 @@
       ]
     },
     {
-      "title": "Poppy Playtime Chapter 3 jigsaw puzzle",
-      "conflicts": [
-        "POPPY PLAYTIME"
-      ]
-    },
-    {
-      "title": "Archery King",
-      "conflicts": [
-        "ARCHERY KING"
-      ]
-    },
-    {
-      "title": "Super Huggie Bros",
-      "conflicts": [
-        "HUGGY WUGGY",
-        "HUGGY"
-      ]
-    },
-    {
-      "title": "Falling Blocks 2048 - 2D",
-      "conflicts": [
-        "TETRIS"
-      ]
-    },
-    {
-      "title": "Squid Game 3D Survival Squad",
-      "conflicts": [
-        "SQUID GAME"
-      ]
-    },
-    {
-      "title": "Huggy Wuggy - Quiz",
-      "conflicts": [
-        "HUGGY WUGGY",
-        "HUGGY"
-      ]
-    },
-    {
-      "title": "Roblox Obbi Only Up",
-      "conflicts": [
-        "ROBLOX"
-      ]
-    },
-    {
-      "title": "Red and Blue Stickman Huggy 2",
-      "conflicts": [
-        "HUGGY"
-      ]
-    },
-    {
-      "title": "Huggy Wuggy Escape",
-      "conflicts": [
-        "HUGGY WUGGY",
-        "HUGGY"
-      ]
-    },
-    {
-      "title": "Rainbow Friends Among Survival Adventures",
-      "conflicts": [
-        "PAC-MAN",
-        "RAINBOW FRIENDS"
-      ]
-    },
-    {
-      "title": "Grimace Shake - Escape Skibidi and Cameraman",
-      "conflicts": [
-        "GRIMACE"
-      ]
-    },
-    {
-      "title": "Stickman Huggy",
-      "conflicts": [
-        "HUGGY"
-      ]
-    },
-    {
-      "title": "Poppy Playtime Chapter 4 Safe Haven",
-      "conflicts": [
-        "POPPY PLAYTIME"
-      ]
-    },
-    {
-      "title": "Sprunki Coloring Books",
+      "title": "Sprunki Easter Coloring",
       "conflicts": [
         "SPRUNKI"
       ]
     },
     {
-      "title": "Draw and Create Sprunki Road",
-      "conflicts": [
-        "SPRUNKI"
-      ]
-    },
-    {
-      "title": "Squid Game Craft Runner",
-      "conflicts": [
-        "SQUID GAME"
-      ]
-    },
-    {
-      "title": "2048 - FNAF",
-      "conflicts": [
-        "FIVE NIGHTS AT FREDDY",
-        "FNAF"
-      ]
-    },
-    {
-      "title": "When Granny Met Grimace Shake",
-      "conflicts": [
-        "GRIMACE"
-      ]
-    },
-    {
-      "title": "FNAF Freddy Sliding Puzzle",
-      "conflicts": [
-        "FNAF"
-      ]
-    },
-    {
-      "title": "Flappy FootChinko",
-      "conflicts": [
-        "FLAPPY BIRD"
-      ]
-    },
-    {
-      "title": "Brain IQ test Mincraft Quiz",
+      "title": "Parkour Obby",
       "conflicts": [
         "MINECRAFT"
       ]
     },
     {
-      "title": "Flappy Bird 3D",
+      "title": "Squid Game Original",
       "conflicts": [
-        "FLAPPY BIRD"
+        "SQUID GAME"
       ]
     },
     {
-      "title": "Garten of Banban Obby",
-      "conflicts": [
-        "GARTEN OF BANBAN",
-        "BANBAN"
-      ]
-    },
-    {
-      "title": "Minecraft Drift Simulator",
-      "conflicts": [
-        "MINECRAFT"
-      ]
-    },
-    {
-      "title": "8 Ball Pool Multiplayer",
-      "conflicts": [
-        "8 BALL POOL"
-      ]
-    },
-    {
-      "title": "Scream Sprunki",
-      "conflicts": [
-        "SPRUNKI"
-      ]
-    },
-    {
-      "title": "Flappy Bird 2D Game",
-      "conflicts": [
-        "FLAPPY BIRD"
-      ]
-    },
-    {
-      "title": "Chocolate Tetris Game",
-      "conflicts": [
-        "TETRIS"
-      ]
-    },
-    {
-      "title": "Sprunki Super Hero",
-      "conflicts": [
-        "SPRUNKI"
-      ]
-    },
-    {
-      "title": "Grimace Vs Skibidi",
-      "conflicts": [
-        "GRIMACE"
-      ]
-    },
-    {
-      "title": "Roblox Halloween Costume Party",
+      "title": "Roblox Craft Run",
       "conflicts": [
         "ROBLOX"
       ]
     },
     {
-      "title": "Sprunki Tung Sahur",
+      "title": "sprunki character maker OC",
       "conflicts": [
         "SPRUNKI"
       ]
     },
     {
-      "title": "8 Ball Pool Multiplayer",
+      "title": "Sprunki Lava Escape 2Player",
       "conflicts": [
-        "8 BALL POOL"
+        "SPRUNKI"
       ]
     },
     {
-      "title": "Dominations Idle",
+      "title": "SPRUNKI GETS SURGERY",
       "conflicts": [
-        "DOMINATIONS"
+        "SPRUNKI"
+      ]
+    },
+    {
+      "title": "Sprunki Shooter 2025",
+      "conflicts": [
+        "SPRUNKI"
+      ]
+    },
+    {
+      "title": "Quiz Squid Round",
+      "conflicts": [
+        "SQUID GAME"
+      ]
+    },
+    {
+      "title": "sprunki clicker & merge phase 3",
+      "conflicts": [
+        "SPRUNKI"
+      ]
+    },
+    {
+      "title": "GTA: Grand Vegas Crime",
+      "conflicts": [
+        "GTA"
+      ]
+    },
+    {
+      "title": "Sprunki 3D Shooter",
+      "conflicts": [
+        "SPRUNKI"
+      ]
+    },
+    {
+      "title": "Huggy Mix Sprunki Music Box",
+      "conflicts": [
+        "HUGGY",
+        "SPRUNKI"
+      ]
+    },
+    {
+      "title": "Merge Run Battle",
+      "conflicts": [
+        "MINECRAFT",
+        "ROBLOX"
+      ]
+    },
+    {
+      "title": "Astral Escape",
+      "conflicts": [
+        "MINECRAFT",
+        "ROBLOX"
+      ]
+    },
+    {
+      "title": "Building Mods For Minecraft",
+      "conflicts": [
+        "MINECRAFT"
+      ]
+    },
+    {
+      "title": "Obby 3D Sprunki Parkour",
+      "conflicts": [
+        "SPRUNKI"
+      ]
+    },
+    {
+      "title": "Smash The Bottle",
+      "conflicts": [
+        "MINECRAFT",
+        "ROBLOX"
+      ]
+    },
+    {
+      "title": "Find the Sprunki",
+      "conflicts": [
+        "SPRUNKI"
+      ]
+    },
+    {
+      "title": "Sprunki Beats",
+      "conflicts": [
+        "SPRUNKI"
+      ]
+    },
+    {
+      "title": "DTA 2: Maniac",
+      "conflicts": [
+        "GTA"
+      ]
+    },
+    {
+      "title": "Squid Game Memory Card Match",
+      "conflicts": [
+        "SQUID GAME"
+      ]
+    },
+    {
+      "title": "Killer Escape Huggy Extreme",
+      "conflicts": [
+        "HUGGY"
+      ]
+    },
+    {
+      "title": "Sprunki Puzzles and Singing",
+      "conflicts": [
+        "SPRUNKI"
+      ]
+    },
+    {
+      "title": "Color Race Obby",
+      "conflicts": [
+        "ROBLOX"
+      ]
+    },
+    {
+      "title": "Obby The Legendary Dragon",
+      "conflicts": [
+        "POKÉMON",
+        "ROBLOX"
+      ]
+    },
+    {
+      "title": "Robby The Lava Tsunami",
+      "conflicts": [
+        "ROBLOX"
+      ]
+    },
+    {
+      "title": "Sprunki Coloring Book",
+      "conflicts": [
+        "SPRUNKI"
+      ]
+    },
+    {
+      "title": "Jailbreak. Roblox jumper",
+      "conflicts": [
+        "ROBLOX"
+      ]
+    },
+    {
+      "title": "Scary BanBan Escape",
+      "conflicts": [
+        "HUGGY"
+      ]
+    },
+    {
+      "title": "Madness Cars Destroy",
+      "conflicts": [
+        "ROBLOX"
+      ]
+    },
+    {
+      "title": "Sprunki Memory Card Match",
+      "conflicts": [
+        "SPRUNKI"
+      ]
+    },
+    {
+      "title": "Squid Sprunki Slither Game 2",
+      "conflicts": [
+        "SPRUNKI"
+      ]
+    },
+    {
+      "title": "Nubik in the Monster World",
+      "conflicts": [
+        "HUGGY"
+      ]
+    },
+    {
+      "title": "Sprunki Mini Games",
+      "conflicts": [
+        "SPRUNKI"
+      ]
+    },
+    {
+      "title": "Horror Minecraft Partytime",
+      "conflicts": [
+        "MINECRAFT"
+      ]
+    },
+    {
+      "title": "Sprunki Jigsaw Puzzle",
+      "conflicts": [
+        "SPRUNKI"
+      ]
+    },
+    {
+      "title": "SPRUNKI 3D Escape",
+      "conflicts": [
+        "SPRUNKI"
+      ]
+    },
+    {
+      "title": "Roblox Christmas Dressup",
+      "conflicts": [
+        "ROBLOX"
+      ]
+    },
+    {
+      "title": "Escape the Horror Craft",
+      "conflicts": [
+        "MINECRAFT"
+      ]
+    },
+    {
+      "title": "Sprunki PopIt",
+      "conflicts": [
+        "SPRUNKI"
+      ]
+    },
+    {
+      "title": "Friday Night Sprunki",
+      "conflicts": [
+        "SPRUNKI"
+      ]
+    },
+    {
+      "title": "Sprunki Challenge",
+      "conflicts": [
+        "SPRUNKI"
+      ]
+    },
+    {
+      "title": "Super Sprunki Clicker",
+      "conflicts": [
+        "SPRUNKI"
+      ]
+    },
+    {
+      "title": "Block Craft 3D School",
+      "conflicts": [
+        "MINECRAFT"
+      ]
+    },
+    {
+      "title": "Block Puzzle - Frozen Jewel",
+      "conflicts": [
+        "TETRIS"
+      ]
+    },
+    {
+      "title": "Sprunki",
+      "conflicts": [
+        "SPRUNKI"
+      ]
+    },
+    {
+      "title": "Stickman vs Zombies: Epic Fight",
+      "conflicts": [
+        "MINECRAFT"
+      ]
+    },
+    {
+      "title": "Squid Game 3D",
+      "conflicts": [
+        "SQUID GAME"
       ]
     }
   ]

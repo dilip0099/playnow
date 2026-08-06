@@ -67,7 +67,7 @@ export default function UnblockedGamesPage() {
   };
 
   return (
-    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+    <div className="mx-auto max-w-[1800px] px-3 sm:px-6 lg:px-8 py-3.5 sm:py-8 space-y-3.5 sm:space-y-8">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -83,16 +83,16 @@ export default function UnblockedGamesPage() {
         <span className="text-foreground font-bold">{H1}</span>
       </nav>
 
-      {/* Header Banner */}
-      <div className="relative overflow-hidden rounded-3xl border border-primary/20 bg-gradient-to-r from-primary/10 via-card to-card p-8 sm:p-10 shadow-xl">
-        <div className="relative z-10 space-y-2">
-          <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-bold text-primary border border-primary/20 uppercase tracking-wider">
-            No Download, No Plugins
+      {/* Header Banner - Compact & Responsive */}
+      <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl border border-border/80 bg-card p-4 sm:p-6 lg:p-8 shadow-sm">
+        <div className="relative z-10 space-y-1.5 sm:space-y-2.5">
+          <span className="inline-block rounded-full bg-primary/10 px-2.5 py-0.5 sm:px-3 sm:py-1 text-[10px] sm:text-xs font-bold text-primary border border-primary/20 uppercase tracking-wider">
+            No Download • Instant HTML5
           </span>
-          <h1 className="text-3xl sm:text-4xl font-black text-foreground tracking-tight">
+          <h1 className="text-xl sm:text-3xl lg:text-4xl font-black text-foreground tracking-tight leading-tight">
             {H1}
           </h1>
-          <p className="text-sm text-foreground/80 max-w-2xl leading-relaxed">
+          <p className="text-xs sm:text-sm text-muted-foreground max-w-2xl leading-relaxed">
             {INTRO}
           </p>
         </div>

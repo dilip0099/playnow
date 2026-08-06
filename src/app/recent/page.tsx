@@ -12,8 +12,8 @@ export default function RecentPage() {
   const allGames = getAllGames();
 
   return (
-    <div className="min-h-screen bg-background text-foreground py-10">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-8">
+    <div className="min-h-screen bg-background text-foreground py-3.5 sm:py-10">
+      <div className="mx-auto max-w-[1800px] px-3 sm:px-6 lg:px-8 space-y-3.5 sm:space-y-8">
 
         <div className="space-y-2 border-b border-border pb-6">
           <div className="flex items-center space-x-2">

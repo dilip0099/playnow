@@ -48,7 +48,7 @@ export const SUPPORTED_LICENSES: Record<SupportedLicense, LicenseRules> = {
   },
   "Network-Licensed": {
     id: "Network-Licensed",
-    name: "Third-Party Publisher Network License (e.g. GamePix)",
+    name: "Third-Party Publisher Network License (e.g. GameDistribution)",
     commercialUse: true,
     attributionRequired: false,
     isPermissive: true,

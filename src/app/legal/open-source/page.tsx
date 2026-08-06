@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge";
 
 export const metadata: Metadata = {
   title: "Catalog Changelog - PlayNow Legal",
-  description: "Full list of every PlayNow game licensed via GamePix, with category, quality signal, and publish/update dates.",
+  description: "Full list of every PlayNow game licensed via GameDistribution, with category, quality signal, and publish/update dates.",
 };
 
 export default function LegalOpenSourcePage() {
@@ -38,7 +38,7 @@ export default function LegalOpenSourcePage() {
           </div>
           <h1 className="text-3xl sm:text-4xl font-black text-foreground">Catalog Changelog</h1>
           <p className="text-sm text-muted-foreground leading-relaxed">
-            Every game below is licensed via GamePix — PlayNow does not author this code. Publish and update dates are GamePix's own catalog timestamps.
+            Every game below is licensed via GameDistribution (Azerion) — PlayNow does not author this code. Publish and update dates are GameDistribution's own catalog timestamps.
           </p>
         </div>
 
@@ -67,7 +67,7 @@ export default function LegalOpenSourcePage() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center space-x-1.5 rounded-xl bg-slate-900 border border-border/60 px-3.5 py-2 text-xs font-bold text-cyan-400 hover:bg-slate-800 transition-colors"
                 >
-                  <span>View on GamePix</span>
+                  <span>View Source</span>
                   <ExternalLink className="h-3.5 w-3.5" />
                 </a>
               </div>

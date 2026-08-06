@@ -20,10 +20,23 @@ function tagline(description: string): string {
 }
 
 export function HeroCarousel({ games, intervalMs = 6500 }: HeroCarouselProps) {
+  const [carouselGames, setCarouselGames] = useState<GameMetadata[]>(() => games.slice(0, 5));
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const { isFavorite, toggleFavorite } = useFavorites();
-  const slideCount = games.length;
+
+  // Randomly select 5 top-tier games from the best games pool on client mount
+  useEffect(() => {
+    if (games && games.length > 5) {
+      // Fisher-Yates shuffle or sort random copy
+      const shuffled = [...games].sort(() => Math.random() - 0.5);
+      setCarouselGames(shuffled.slice(0, 5));
+    } else if (games) {
+      setCarouselGames(games);
+    }
+  }, [games]);
+
+  const slideCount = carouselGames.length;
 
   const goTo = useCallback(
     (index: number) => setActiveIndex(((index % slideCount) + slideCount) % slideCount),
@@ -44,13 +57,13 @@ export function HeroCarousel({ games, intervalMs = 6500 }: HeroCarouselProps) {
 
   return (
     <section
-      className="relative w-full h-[75vh] min-h-[500px] max-h-[720px] overflow-hidden bg-background"
+      className="relative w-full h-[35vh] min-h-[240px] sm:h-[65vh] sm:min-h-[450px] lg:h-[75vh] lg:min-h-[500px] max-h-[720px] overflow-hidden bg-background"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       aria-roledescription="carousel"
       aria-label="Featured games"
     >
-      {games.map((game, idx) => {
+      {carouselGames.map((game, idx) => {
         const isActive = idx === activeIndex;
         return (
           <div
@@ -70,33 +83,33 @@ export function HeroCarousel({ games, intervalMs = 6500 }: HeroCarouselProps) {
               loading={idx === 0 ? undefined : "lazy"}
               className="object-cover object-center"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-r from-background/90 via-background/50 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-background/90 via-background/60 to-transparent" />
 
-            <div className="absolute bottom-0 left-0 right-0 max-w-3xl space-y-5 p-8 sm:p-12 lg:p-16">
-              <div className="flex items-center space-x-3 font-mono text-xs font-bold uppercase tracking-wider">
-                <span className="rounded bg-secondary px-3 py-1 text-secondary-foreground">Featured</span>
+            <div className="absolute bottom-0 left-0 right-0 max-w-3xl space-y-1.5 sm:space-y-5 p-3.5 sm:p-12 lg:p-16">
+              <div className="flex items-center space-x-2 sm:space-x-3 font-mono text-[9px] sm:text-xs font-bold uppercase tracking-wider">
+                <span className="rounded bg-secondary px-2 py-0.5 sm:px-3 sm:py-1 text-secondary-foreground">Featured</span>
                 <span className="flex items-center space-x-1 text-primary">
-                  <Star className="h-3.5 w-3.5 fill-current" aria-hidden="true" />
+                  <Star className="h-2.5 w-2.5 sm:h-3.5 sm:w-3.5 fill-current" aria-hidden="true" />
                   <span className="text-foreground">{game.rating.toFixed(1)}</span>
                 </span>
                 <span className="text-muted-foreground">{game.category}</span>
               </div>
 
-              <h1 className="font-display text-4xl font-black uppercase leading-[1.05] tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+              <h1 className="font-display text-lg sm:text-5xl lg:text-6xl font-black uppercase leading-tight tracking-tight text-foreground truncate">
                 {game.derivedTitle || game.title}
               </h1>
 
-              <p className="max-w-xl text-sm leading-relaxed text-foreground/80">
+              <p className="max-w-xl text-[11px] sm:text-sm leading-snug sm:leading-relaxed text-foreground/80 line-clamp-1 sm:line-clamp-none">
                 {tagline(game.description)}
               </p>
 
-              <div className="flex items-center space-x-3 pt-1">
+              <div className="flex items-center space-x-2 sm:space-x-3 pt-0.5 sm:pt-1">
                 <Link
                   href={`/game/${game.slug}`}
-                  className="inline-flex items-center space-x-2.5 rounded-lg bg-primary px-8 py-4 text-sm font-black uppercase tracking-wider text-primary-foreground transition-all hover:bg-primary-hover hover:shadow-glow-primary"
+                  className="inline-flex items-center space-x-1.5 sm:space-x-2 rounded-lg bg-primary px-4 py-2 sm:px-8 sm:py-4 text-[11px] sm:text-sm font-black uppercase tracking-wider text-primary-foreground transition-all hover:bg-primary-hover hover:shadow-glow-primary"
                 >
-                  <Play className="h-4 w-4 fill-current" />
+                  <Play className="h-3 w-3 sm:h-4 sm:w-4 fill-current" />
                   <span>PLAY NOW</span>
                 </Link>
 
@@ -104,13 +117,13 @@ export function HeroCarousel({ games, intervalMs = 6500 }: HeroCarouselProps) {
                   onClick={() => toggleFavorite(game.id)}
                   aria-label={isFavorite(game.id) ? `Remove ${game.title} from favorites` : `Add ${game.title} to favorites`}
                   aria-pressed={isFavorite(game.id)}
-                  className={`flex h-[52px] w-[52px] items-center justify-center rounded-lg border transition-colors ${
+                  className={`flex h-[34px] w-[34px] sm:h-[52px] sm:w-[52px] items-center justify-center rounded-lg border transition-colors ${
                     isFavorite(game.id)
                       ? "border-rose-500/40 bg-rose-500/20 text-rose-400"
                       : "border-white/20 bg-white/5 text-foreground hover:bg-white/10"
                   }`}
                 >
-                  <Heart className={`h-5 w-5 ${isFavorite(game.id) ? "fill-rose-400" : ""}`} />
+                  <Heart className={`h-3.5 w-3.5 sm:h-5 sm:w-5 ${isFavorite(game.id) ? "fill-rose-400" : ""}`} />
                 </button>
               </div>
             </div>
@@ -140,16 +153,16 @@ export function HeroCarousel({ games, intervalMs = 6500 }: HeroCarouselProps) {
           <div
             role="group"
             aria-label="Select featured game"
-            className="absolute bottom-6 right-6 z-20 flex items-center space-x-2 sm:bottom-8 sm:right-10"
+            className="absolute bottom-3 right-3 z-20 flex items-center space-x-1.5 sm:bottom-8 sm:right-10 sm:space-x-2"
           >
-            {games.map((game, idx) => (
+            {carouselGames.map((game, idx) => (
               <button
                 key={game.id}
                 onClick={() => goTo(idx)}
                 aria-label={`Show ${game.title}`}
                 aria-current={idx === activeIndex}
                 className={`h-1.5 rounded-full transition-all ${
-                  idx === activeIndex ? "w-6 bg-primary" : "w-1.5 bg-white/30 hover:bg-white/50"
+                  idx === activeIndex ? "w-5 sm:w-6 bg-primary" : "w-1.5 bg-white/30 hover:bg-white/50"
                 }`}
               />
             ))}

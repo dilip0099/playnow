@@ -13,8 +13,8 @@ export default function LibraryPage() {
   const allGames = getAllGames();
 
   return (
-    <div className="min-h-screen bg-background text-foreground py-10">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-10">
+    <div className="min-h-screen bg-background text-foreground py-4 sm:py-8">
+      <div className="mx-auto max-w-[1800px] px-3 sm:px-6 lg:px-8 space-y-6 sm:space-y-10">
 
         {/* Header */}
         <div className="space-y-2 border-b border-border pb-6">
@@ -24,7 +24,7 @@ export default function LibraryPage() {
               <span>Personal Vault</span>
             </span>
           </div>
-          <h1 className="font-display text-3xl sm:text-4xl font-black text-foreground uppercase">My Game Library</h1>
+          <h1 className="font-display text-xl sm:text-3xl lg:text-4xl font-black text-foreground uppercase">My Game Library</h1>
           <p className="text-xs text-muted-foreground font-mono">
             Access your saved games, favorites, and recent play sessions in one place.
           </p>
@@ -32,8 +32,8 @@ export default function LibraryPage() {
 
         {/* Continue Playing */}
         <div className="space-y-4">
-          <h2 className="font-display text-xl font-black text-foreground uppercase flex items-center">
-            <Clock className="h-5 w-5 text-primary mr-2" aria-hidden="true" />
+          <h2 className="font-display text-sm sm:text-xl lg:text-2xl font-black text-foreground uppercase flex items-center">
+            <Clock className="h-4 w-4 sm:h-5 sm:w-5 text-primary mr-2" aria-hidden="true" />
             Continue Playing
           </h2>
 

@@ -4,10 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npm run import-gamepix && next build",
+    "build": "npm run import-gamedistribution && next build",
     "start": "next start",
     "lint": "next lint",
-    "import-gamepix": "tsx --env-file-if-exists=.env.local src/scripts/import-gamepix.ts"
+    "import-gamedistribution": "tsx --env-file-if-exists=.env.local src/scripts/import-gamedistribution.ts"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",

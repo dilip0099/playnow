@@ -1,15 +1,21 @@
 import type { NextConfig } from "next";
+import path from "path";
 
 const nextConfig: NextConfig = {
+  outputFileTracingRoot: path.join(__dirname),
   reactStrictMode: true,
   images: {
     formats: ["image/avif", "image/webp"],
-    // All game artwork (thumbnails, covers, hero images, screenshots) comes from GamePix's
-    // CDN — see higherResImage() in src/scripts/import-gamepix.ts.
+    // All game artwork (thumbnails, covers, hero images, screenshots) comes from GameDistribution's
+    // CDN — see src/scripts/import-gamedistribution.ts.
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "img.gamepix.com",
+        hostname: "img.gamedistribution.com",
+      },
+      {
+        protocol: "https",
+        hostname: "html5.gamedistribution.com",
       },
     ],
   },

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import {
   Maximize2,
@@ -12,14 +12,14 @@ import {
   Loader2,
   Play,
   ShieldCheck,
-  Smartphone
+  Smartphone,
+  Zap
 } from "lucide-react";
 import { GameMetadata } from "@/types/game";
 import { useFavorites } from "@/hooks/useFavorites";
 import { useFullscreen } from "@/hooks/useFullscreen";
 import { useRecentlyPlayed } from "@/hooks/useRecentlyPlayed";
 import { useGamification } from "@/hooks/useGamification";
-import { useEffect } from "react";
 import { ShareModal } from "./ShareModal";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ASPECT_RATIO_CLASS, resolveAspectRatio } from "@/lib/aspect-ratio";
@@ -38,13 +38,12 @@ export function GamePlayer({ game, onPlay }: GamePlayerProps) {
   const [isTheaterMode, setIsTheaterMode] = useState(false);
   const [isShareOpen, setIsShareOpen] = useState(false);
 
-  // Play the game in its real shape — a portrait game (e.g. most "puzzle"/"casual"
-  // titles from GamePix) forced into a landscape 16:9 box renders tiny and
-  // unplayable. Portrait titles also get a narrower centered column instead of
-  // stretching full-width-then-absurdly-tall on wide screens.
   const aspectRatio = resolveAspectRatio(game.aspectRatio);
   const isPortrait = aspectRatio === "3/4";
   const isLandscapeGame = aspectRatio === "16/9";
+
+  const [isAdPlaying, setIsAdPlaying] = useState(false);
+  const [rewardToast, setRewardToast] = useState<string | null>(null);
 
   const { isFavorite, toggleFavorite } = useFavorites();
   const { isFullscreen, toggleFullscreen } = useFullscreen(containerRef, isLandscapeGame ? "landscape" : undefined);
@@ -53,7 +52,100 @@ export function GamePlayer({ game, onPlay }: GamePlayerProps) {
   const favorited = isFavorite(game.id);
   const coverImage = game.heroImage || game.coverImage || game.thumbnailUrl;
 
-  // Passive XP reward while game is actively being played (every 90s)
+  const [effectiveGameUrl, setEffectiveGameUrl] = useState(game.gameUrl);
+
+  // Smart Game Lifecycle Hooks: Listen to GameDistribution & HTML5 SDK postMessage events
+  useEffect(() => {
+    if (!isPlaying || typeof window === "undefined") return;
+
+    const handleSdkMessage = (event: MessageEvent) => {
+      // Validate string message or object event data from iframe SDKs
+      const data = typeof event.data === "string" ? event.data : event.data?.action || event.data?.type || "";
+
+      if (data.includes("SDK_GAME_PAUSE") || data.includes("SDK_AD_STARTED")) {
+        setIsAdPlaying(true);
+      } else if (data.includes("SDK_GAME_START") || data.includes("SDK_AD_COMPLETE") || data.includes("SDK_AD_DISMISSED")) {
+        setIsAdPlaying(false);
+      } else if (data.includes("SDK_REWARDED_WATCH_COMPLETE") || data.includes("SDK_REWARD_GRANTED")) {
+        setIsAdPlaying(false);
+        addXp(50, "Watched Rewarded Ad / Bonus Granted!");
+        setRewardToast("🎉 Bonus Granted! +50 XP Earned");
+        setTimeout(() => setRewardToast(null), 4000);
+      }
+    };
+
+    // Tab visibility handling: pause/resume awareness
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        // Tab switched away - notify iframe if supported
+        if (iframeRef.current?.contentWindow) {
+          iframeRef.current.contentWindow.postMessage("SDK_GAME_PAUSE", "*");
+        }
+      } else {
+        if (iframeRef.current?.contentWindow) {
+          iframeRef.current.contentWindow.postMessage("SDK_GAME_START", "*");
+        }
+      }
+    };
+
+    window.addEventListener("message", handleSdkMessage);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+      window.removeEventListener("message", handleSdkMessage);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, [isPlaying, addXp]);
+
+  // Dynamically ensure gd_sdk_referrer_url matches current origin
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      try {
+        const currentOrigin = encodeURIComponent(window.location.origin);
+        const updated = game.gameUrl.replace(
+          /gd_sdk_referrer_url=[^&]+/,
+          `gd_sdk_referrer_url=${currentOrigin}`
+        );
+        setEffectiveGameUrl(updated);
+      } catch {
+        setEffectiveGameUrl(game.gameUrl);
+      }
+    }
+  }, [game.gameUrl]);
+
+  // Network warming for low-latency iframe startup
+  useEffect(() => {
+    if (typeof window === "undefined" || !game.gameUrl) return;
+    try {
+      const urlObj = new URL(game.gameUrl);
+      const domain = urlObj.origin;
+      
+      const preconnect = document.createElement("link");
+      preconnect.rel = "preconnect";
+      preconnect.href = domain;
+      preconnect.crossOrigin = "anonymous";
+      
+      const dnsPrefetch = document.createElement("link");
+      dnsPrefetch.rel = "dns-prefetch";
+      dnsPrefetch.href = domain;
+
+      document.head.appendChild(preconnect);
+      document.head.appendChild(dnsPrefetch);
+
+      return () => {
+        try {
+          document.head.removeChild(preconnect);
+          document.head.removeChild(dnsPrefetch);
+        } catch {
+          // Silent fallback
+        }
+      };
+    } catch {
+      // Fallback
+    }
+  }, [game.gameUrl]);
+
+  // Passive XP reward while playing
   useEffect(() => {
     if (!isPlaying) return;
     const interval = setInterval(() => {
@@ -66,55 +158,90 @@ export function GamePlayer({ game, onPlay }: GamePlayerProps) {
     setIsPlaying(true);
     addRecentlyPlayed(game.id);
     recordGameSession();
+
+    if (typeof window !== "undefined" && isLandscapeGame && window.innerWidth < 768) {
+      toggleFullscreen();
+    }
+
     if (onPlay) onPlay();
   };
 
   const handleReload = () => {
     if (iframeRef.current) {
       setIsLoading(true);
-      iframeRef.current.src = game.gameUrl;
+      iframeRef.current.src = effectiveGameUrl;
     }
   };
 
-  // Fullscreen overrides everything else: a fixed aspect-ratio box sized off the
-  // pre-rotation viewport width is what caused the reported "cut off at the bottom after
-  // rotating" bug — e.g. a 16:9 box computed from a 390px-wide portrait phone is ~219px
-  // tall, but after rotating to landscape the box stays 219px tall against a now much
-  // shorter *screen*, so the toolbar below it gets pushed off-screen. Filling all
-  // available space with flex instead of a fixed ratio makes it correct at any rotation.
   const widthClass = isFullscreen
     ? "max-w-none rounded-none border-none shadow-none"
     : isTheaterMode
-    ? "max-w-none rounded-none border-none shadow-none"
+    ? "fixed inset-4 sm:inset-10 z-50 max-w-6xl mx-auto my-auto h-[calc(100vh-5rem)] shadow-2xl border-2 border-primary/50"
     : isPortrait
-    ? "max-w-xs sm:max-w-sm mx-auto"
+    ? "w-full max-w-sm mx-auto"
     : "";
+
+  // Keyboard shortcuts listener for gaming power-users (F = Fullscreen, T = Theater, R = Reload)
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Don't trigger shortcuts if user is typing in an input or textarea
+      if (["INPUT", "TEXTAREA"].includes((e.target as HTMLElement)?.tagName)) return;
+
+      if (e.key === "f" || e.key === "F") {
+        e.preventDefault();
+        toggleFullscreen();
+      } else if (e.key === "t" || e.key === "T") {
+        e.preventDefault();
+        setIsTheaterMode((prev) => !prev);
+      } else if ((e.key === "r" || e.key === "R") && isPlaying) {
+        e.preventDefault();
+        handleReload();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isPlaying, toggleFullscreen]);
 
   return (
     <>
-      {/* Rotate hint — only meaningful for landscape games viewed on a narrow portrait
-          screen; disappears the instant the device is actually rotated (pure CSS media
-          query, no JS orientation listener needed) or the viewport is desktop-sized. */}
-      {isLandscapeGame && (
-        <div className="mb-3 hidden items-center justify-center space-x-2 rounded-xl border border-border bg-muted px-4 py-2.5 text-xs text-muted-foreground portrait:flex md:!hidden">
-          <Smartphone className="h-4 w-4 rotate-90 text-primary" aria-hidden="true" />
-          <span>Rotate your device for the best experience</span>
-        </div>
+      {/* Theater Mode Dimmed Backdrop */}
+      {isTheaterMode && (
+        <div
+          onClick={() => setIsTheaterMode(false)}
+          className="fixed inset-0 z-40 bg-black/85 backdrop-blur-md transition-opacity duration-300 animate-in fade-in"
+        />
       )}
 
       <div
         ref={containerRef}
-        className={`relative flex w-full flex-col overflow-hidden rounded-3xl border border-border bg-background shadow-2xl transition-all duration-base ${
+        className={`relative flex w-full flex-col overflow-hidden rounded-2xl sm:rounded-3xl border border-border bg-background shadow-2xl transition-all duration-base ${
           isFullscreen ? "h-full" : ""
         } ${widthClass}`}
       >
-        {/* Aspect Ratio Container — matches the real game's shape so portrait titles
-            aren't squeezed into a landscape box (reserves space up front to avoid layout
-            shift); in fullscreen it fills all remaining space instead, since a fixed
-            ratio is exactly what breaks on rotation (see note above). */}
-        <div className={`relative w-full bg-background ${isFullscreen ? "min-h-0 flex-1" : ASPECT_RATIO_CLASS[aspectRatio]}`}>
+        {/* Aspect Ratio Container */}
+        <div className={`relative w-full bg-background min-h-[280px] sm:min-h-0 ${isFullscreen ? "min-h-0 flex-1" : ASPECT_RATIO_CLASS[aspectRatio]}`}>
 
-          {/* Pre-play Cover Overlay */}
+          {/* CrazyGames-style Mobile Landscape Rotate Prompt Overlay */}
+          {isPlaying && isLandscapeGame && (
+            <div className="absolute inset-0 z-30 hidden flex-col items-center justify-center bg-background/95 p-6 text-center backdrop-blur-md portrait:flex md:!hidden">
+              <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/20 text-primary border border-primary/30 shadow-glow-primary">
+                <Smartphone className="h-7 w-7 animate-bounce rotate-90" />
+              </div>
+              <h3 className="mb-2 font-display text-base font-black text-foreground uppercase tracking-wide">Please Rotate Your Device</h3>
+              <p className="mb-5 max-w-xs text-xs text-muted-foreground">
+                This title is designed for landscape widescreen mode. Rotate sideways for optimal gameplay.
+              </p>
+              <button
+                onClick={toggleFullscreen}
+                className="rounded-full bg-primary px-6 py-2.5 text-xs font-bold text-primary-foreground uppercase shadow-glow-primary transition-all hover:bg-primary-hover active:scale-95"
+              >
+                Enter Widescreen Mode
+              </button>
+            </div>
+          )}
+
+          {/* Pre-play Cover Overlay — Launchpad */}
           {!isPlaying ? (
             <>
               {!isCoverLoaded && <Skeleton className="absolute inset-0 rounded-none" />}
@@ -123,48 +250,69 @@ export function GamePlayer({ game, onPlay }: GamePlayerProps) {
                 alt=""
                 aria-hidden="true"
                 fill
-                sizes="(max-width: 640px) 100vw, 900px"
+                sizes="(max-width: 640px) 100vw, 1200px"
                 priority
                 onLoad={() => setIsCoverLoaded(true)}
-                className={`object-cover transition-opacity duration-slow ${
-                  isCoverLoaded ? "opacity-100" : "opacity-0"
+                className={`object-cover transition-all duration-slow ${
+                  isCoverLoaded ? "opacity-100 scale-100" : "opacity-0 scale-105"
                 }`}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-background/40" />
+              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
+              <div className="absolute inset-0 bg-black/25 backdrop-blur-[1px]" />
 
-              <div className="absolute inset-0 z-20 flex flex-col items-center justify-center p-6 text-center">
-                <div className="mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-primary shadow-glow-primary">
-                  <Play className="ml-1.5 h-9 w-9 fill-current text-primary-foreground" />
+              <div className="absolute inset-0 z-20 flex flex-col items-center justify-center p-4 sm:p-6 text-center">
+                {/* Micro-badge */}
+                <div className="mb-3.5 flex items-center space-x-1.5 rounded-full border border-border bg-card/80 px-3 py-1 text-[11px] font-bold text-foreground backdrop-blur-md">
+                  <Zap className="h-3.5 w-3.5 text-primary fill-primary" />
+                  <span>Instant Play • Free Browser Game</span>
                 </div>
-                <h2 className="mb-2 font-display text-2xl font-black text-foreground sm:text-3xl">
-                  Ready to play {game.title}?
+
+                <h2 className="mb-1.5 sm:mb-2 font-display text-2xl sm:text-3xl lg:text-4xl font-black text-white drop-shadow-md leading-tight max-w-sm sm:max-w-none">
+                  {game.title}
                 </h2>
-                <p className="mb-6 max-w-md text-xs text-muted-foreground sm:text-sm">
-                  Click below to start playing immediately in high definition. No downloads needed.
+                <p className="mb-5 max-w-xs sm:max-w-md text-xs sm:text-sm text-white/90 font-medium line-clamp-2">
+                  Click below to load game engine directly in your browser.
                 </p>
+
                 <button
                   onClick={handleStartPlay}
-                  className="flex items-center space-x-2 rounded-full bg-primary px-8 py-3.5 text-sm font-black text-primary-foreground shadow-glow-primary transition-all hover:scale-105 hover:bg-primary-hover"
+                  className="flex items-center space-x-2.5 rounded-full bg-primary px-8 py-3.5 text-xs sm:text-sm font-black text-primary-foreground shadow-glow-primary transition-all duration-200 hover:scale-105 hover:bg-primary-hover active:scale-95 uppercase tracking-wider"
                 >
                   <Play className="h-4 w-4 fill-current" />
-                  <span>PLAY GAME NOW</span>
+                  <span>PLAY NOW</span>
                 </button>
               </div>
             </>
           ) : (
             /* Active Iframe Container */
             <>
+              {/* Active Rewarded Toast Notification */}
+              {rewardToast && (
+                <div className="absolute top-4 left-1/2 -translate-x-1/2 z-40 flex items-center space-x-2 rounded-full bg-emerald-500/90 px-4 py-2 text-xs font-black text-white shadow-xl backdrop-blur-md animate-in slide-in-from-top duration-300">
+                  <span>{rewardToast}</span>
+                </div>
+              )}
+
+              {/* Ad Break Indicator Banner */}
+              {isAdPlaying && (
+                <div className="absolute top-4 right-4 z-40 flex items-center space-x-2 rounded-full bg-amber-500/90 px-3 py-1.5 text-[11px] font-bold text-black shadow-lg backdrop-blur-md animate-pulse">
+                  <span className="h-2 w-2 rounded-full bg-black animate-ping" />
+                  <span>Ad Break Active</span>
+                </div>
+              )}
+
               {isLoading && (
-                <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-background">
-                  <Loader2 className="mb-3 h-10 w-10 animate-spin text-primary" />
-                  <p className="text-xs font-semibold text-muted-foreground">Loading HTML5 Engine...</p>
+                <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-background/95 backdrop-blur-md">
+                  <Loader2 className="h-10 w-10 animate-spin text-primary" />
+                  <p className="mt-4 font-display text-xs font-bold uppercase tracking-wider text-muted-foreground">Loading Game Engine...</p>
                 </div>
               )}
               <iframe
                 ref={iframeRef}
-                src={game.gameUrl}
+                src={effectiveGameUrl}
                 title={game.title}
-                sandbox="allow-scripts allow-same-origin allow-forms"
+                allow="autoplay; fullscreen; microphone; camera; midi; geolocation; accelerometer; gyroscope; payment"
+                referrerPolicy="no-referrer-when-downgrade"
                 onLoad={() => setIsLoading(false)}
                 className="h-full w-full border-0"
               />
@@ -173,24 +321,28 @@ export function GamePlayer({ game, onPlay }: GamePlayerProps) {
 
         </div>
 
-        {/* Toolbar Controls Bar */}
-        <div className="flex items-center justify-between border-t border-border bg-card px-4 py-3 backdrop-blur-md">
+        {/* PlayThorn Modern Control Bar */}
+        <div className="flex items-center justify-between border-t border-border bg-card px-3 py-2.5 sm:px-5 sm:py-3">
+          {/* Left: Security Badge & Title */}
           <div className="flex items-center space-x-2">
-            <span className="flex items-center space-x-1 rounded-full border border-primary/20 bg-primary/10 px-2.5 py-1 text-xs font-semibold text-primary">
+            <span className="flex items-center space-x-1.5 rounded-full border border-primary/30 bg-primary/10 px-2.5 py-1 text-[11px] font-bold text-primary">
               <ShieldCheck className="h-3.5 w-3.5" />
-              <span className="hidden sm:inline">HTML5 Safe</span>
+              <span className="hidden sm:inline">HTML5 Verified</span>
             </span>
-            <span className="hidden text-xs text-muted-foreground md:inline">{game.title}</span>
+            <span className="hidden font-display text-xs font-bold text-foreground/80 md:inline truncate max-w-[200px]">
+              {game.title}
+            </span>
           </div>
 
-          <div className="flex items-center space-x-2">
+          {/* Right: Control Buttons matching site theme */}
+          <div className="flex items-center space-x-1.5 sm:space-x-2">
             {/* Reload button */}
             {isPlaying && (
               <button
                 onClick={handleReload}
-                title="Restart Game"
+                title="Restart Game (Press R)"
                 aria-label="Restart game"
-                className="flex h-9 w-9 items-center justify-center rounded-xl bg-muted text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+                className="flex h-9 w-9 items-center justify-center rounded-xl border border-border bg-muted text-muted-foreground transition-all hover:bg-accent hover:text-foreground active:scale-95"
               >
                 <RotateCcw className="h-4 w-4" />
               </button>
@@ -201,21 +353,21 @@ export function GamePlayer({ game, onPlay }: GamePlayerProps) {
               onClick={() => toggleFavorite(game.id)}
               aria-pressed={favorited}
               title={favorited ? "Remove from Favorites" : "Add to Favorites"}
-              className={`flex items-center space-x-1.5 rounded-xl px-3 py-1.5 text-xs font-bold transition-colors ${
+              className={`flex h-9 items-center space-x-1.5 rounded-xl border px-3 text-xs font-bold transition-all active:scale-95 ${
                 favorited
-                  ? "border border-rose-500/30 bg-rose-500/20 text-rose-400"
-                  : "bg-muted text-muted-foreground hover:bg-accent hover:text-foreground"
+                  ? "border-rose-500/40 bg-rose-500/10 text-rose-400"
+                  : "border-border bg-muted text-muted-foreground hover:bg-accent hover:text-foreground"
               }`}
             >
-              <Heart className={`h-4 w-4 ${favorited ? "fill-rose-400" : ""}`} />
-              <span className="hidden sm:inline">{favorited ? "Favorited" : "Favorite"}</span>
+              <Heart className={`h-4 w-4 ${favorited ? "fill-rose-400 text-rose-400" : ""}`} />
+              <span className="hidden sm:inline">{favorited ? "Saved" : "Save"}</span>
             </button>
 
             {/* Share button */}
             <button
               onClick={() => setIsShareOpen(true)}
               title="Share Game"
-              className="flex items-center space-x-1.5 rounded-xl bg-muted px-3 py-1.5 text-xs font-bold text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+              className="flex h-9 items-center space-x-1.5 rounded-xl border border-border bg-muted px-3 text-xs font-bold text-muted-foreground transition-all hover:bg-accent hover:text-foreground active:scale-95"
             >
               <Share2 className="h-4 w-4" />
               <span className="hidden sm:inline">Share</span>
@@ -224,25 +376,25 @@ export function GamePlayer({ game, onPlay }: GamePlayerProps) {
             {/* Theater Mode */}
             <button
               onClick={() => setIsTheaterMode(!isTheaterMode)}
-              title="Theater Mode"
+              title="Theater Mode (Press T)"
               aria-pressed={isTheaterMode}
-              className={`flex h-9 w-9 items-center justify-center rounded-xl transition-colors ${
+              className={`hidden sm:flex h-9 w-9 items-center justify-center rounded-xl border transition-all active:scale-95 ${
                 isTheaterMode
-                  ? "bg-secondary text-secondary-foreground"
-                  : "bg-muted text-muted-foreground hover:bg-accent hover:text-foreground"
+                  ? "border-primary bg-primary/20 text-primary"
+                  : "border-border bg-muted text-muted-foreground hover:bg-accent hover:text-foreground"
               }`}
             >
               <Tv className="h-4 w-4" />
             </button>
 
-            {/* Fullscreen */}
+            {/* Fullscreen Button — Icon Only */}
             <button
               onClick={toggleFullscreen}
-              title="Fullscreen Mode"
-              className="flex items-center space-x-1.5 rounded-xl bg-primary px-3.5 py-1.5 text-xs font-bold text-primary-foreground shadow-glow-primary transition-all hover:scale-105 hover:bg-primary-hover"
+              title={isFullscreen ? "Exit Fullscreen (Press F)" : "Fullscreen Mode (Press F)"}
+              aria-label={isFullscreen ? "Exit Fullscreen" : "Fullscreen Mode"}
+              className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-glow-primary transition-all hover:bg-primary-hover active:scale-95"
             >
               {isFullscreen ? <Minimize2 className="h-4 w-4" /> : <Maximize2 className="h-4 w-4" />}
-              <span className="hidden sm:inline">{isFullscreen ? "Exit" : "Fullscreen"}</span>
             </button>
           </div>
         </div>

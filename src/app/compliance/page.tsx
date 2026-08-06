@@ -70,7 +70,7 @@ export default function PublicCompliancePage() {
           </h1>
 
           <p className="text-muted-foreground text-sm sm:text-base max-w-3xl leading-relaxed">
-            PlayNow's game catalog is provided through <strong className="text-foreground">GamePix</strong>, a third-party HTML5 game publisher network, under a standard publisher agreement. PlayNow does not author, host, or claim ownership of this game code — every title is embedded directly from GamePix's platform, which is responsible for the underlying game's content and its own developer relationships.
+            PlayNow's game catalog is provided through <strong className="text-foreground">GameDistribution (Azerion)</strong>, a third-party HTML5 game publisher network, under a standard publisher agreement. PlayNow does not author, host, or claim ownership of this game code — every title is embedded directly from GameDistribution's platform, which is responsible for the underlying game's content and its own developer relationships.
           </p>
 
           <div className="flex flex-wrap items-center gap-4 pt-2 text-xs font-semibold text-muted-foreground">
@@ -103,7 +103,7 @@ export default function PublicCompliancePage() {
               <Key className="h-4 w-4 text-purple-400" />
             </div>
             <div className="text-3xl font-black text-purple-300">{data.networkLicensedCount} Licensed</div>
-            <div className="text-xs font-semibold text-muted-foreground">via GamePix Publisher Network</div>
+            <div className="text-xs font-semibold text-muted-foreground">via GameDistribution Network</div>
           </Card>
 
           <Card className="p-6 border-border/60 bg-card/60 backdrop-blur-md space-y-2">
@@ -147,7 +147,7 @@ export default function PublicCompliancePage() {
                   <ArrowRight className="h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </h3>
                 <p className="text-xs text-muted-foreground leading-relaxed">
-                  How PlayNow licenses games via GamePix, and the rules for any open-source code we host directly.
+                  How PlayNow licenses games via GameDistribution, and the rules for any open-source code we host directly.
                 </p>
               </Card>
             </Link>
@@ -162,7 +162,7 @@ export default function PublicCompliancePage() {
                   <ArrowRight className="h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </h3>
                 <p className="text-xs text-muted-foreground leading-relaxed">
-                  Every title's GamePix catalog ID and embed source, for full transparency on where each game comes from.
+                  Every title's GameDistribution catalog ID and embed source, for full transparency on where each game comes from.
                 </p>
               </Card>
             </Link>
@@ -177,7 +177,7 @@ export default function PublicCompliancePage() {
                   <ArrowRight className="h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </h3>
                 <p className="text-xs text-muted-foreground leading-relaxed">
-                  Game assets (art, audio, code) are hosted and managed by GamePix, not stored on PlayNow's own servers.
+                  Game assets (art, audio, code) are hosted and managed by GameDistribution, not stored on PlayNow's own servers.
                 </p>
               </Card>
             </Link>
@@ -228,7 +228,7 @@ export default function PublicCompliancePage() {
                     <th className="px-5 py-4">Game Title</th>
                     <th className="px-5 py-4">Source</th>
                     <th className="px-5 py-4">License</th>
-                    <th className="px-5 py-4">GamePix ID</th>
+                    <th className="px-5 py-4">Catalog ID</th>
                     <th className="px-5 py-4">Trademark Risk</th>
                     <th className="px-5 py-4 text-right">Legal Status</th>
                   </tr>

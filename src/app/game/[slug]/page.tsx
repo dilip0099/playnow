@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { getGameBySlug, getRelatedGames, getAllGames } from "@/lib/games";
 import { GamePlayer } from "@/components/games/GamePlayer";
+import { GameGallery } from "@/components/games/GameGallery";
 import { GameCard } from "@/components/games/GameCard";
 import { EmbedGameButton } from "@/components/games/EmbedGameButton";
 import { GameCategory } from "@/types/game";
@@ -166,7 +167,7 @@ export default async function GamePage({ params }: GamePageProps) {
   ];
 
   // Deliberately omits aggregateRating/review — that requires a genuine per-site review
-  // count, which we don't have (the star rating shown in our UI is derived from GamePix's
+  // count, which we don't have (the star rating shown in our UI is derived from GameDistribution's
   // quality_score, not real user reviews on PlayNow). Fabricating one for richer search
   // snippets would violate Google's structured-data policy on reviews.
   const jsonLd = {
@@ -186,7 +187,7 @@ export default async function GamePage({ params }: GamePageProps) {
         datePublished: game.releaseDate,
         publisher: {
           "@type": "Organization",
-          name: "GamePix",
+          name: "GameDistribution",
         },
         offers: {
           "@type": "Offer",
@@ -218,6 +219,12 @@ export default async function GamePage({ params }: GamePageProps) {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      {/* Network warming resource hints for low latency instant iframe loading */}
+      <link rel="preconnect" href="https://html5.gamedistribution.com" crossOrigin="anonymous" />
+      <link rel="dns-prefetch" href="https://html5.gamedistribution.com" />
+      <link rel="preconnect" href="https://img.gamedistribution.com" crossOrigin="anonymous" />
+      <link rel="dns-prefetch" href="https://img.gamedistribution.com" />
+
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -225,21 +232,21 @@ export default async function GamePage({ params }: GamePageProps) {
 
       {/* ═══ COMPACT HEADER — a visitor clicking through wants to play, not scroll past
             a cinematic banner first. The player is the very next thing on the page. ═══ */}
-      <div className="mx-auto max-w-7xl space-y-2 px-4 pt-6 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-[1800px] space-y-1.5 sm:space-y-2 px-3 pt-3 sm:px-6 sm:pt-6 lg:px-8">
         <div className="flex items-center space-x-2">
-          <span className="rounded bg-secondary px-2.5 py-1 font-mono text-[10px] font-bold text-secondary-foreground uppercase">
+          <span className="rounded bg-secondary px-2.5 py-0.5 sm:py-1 font-mono text-[10px] font-bold text-secondary-foreground uppercase">
             INSTANT LAUNCH
           </span>
-          <span className="rounded bg-muted px-2.5 py-1 font-mono text-[10px] font-bold text-muted-foreground uppercase capitalize">
+          <span className="rounded bg-muted px-2.5 py-0.5 sm:py-1 font-mono text-[10px] font-bold text-muted-foreground uppercase capitalize">
             {game.category}
           </span>
         </div>
-        <h1 className="font-display text-2xl font-black uppercase tracking-tight text-foreground sm:text-3xl lg:text-4xl">
+        <h1 className="font-display text-lg sm:text-3xl lg:text-4xl font-black uppercase tracking-tight text-foreground">
           {displayTitle}
         </h1>
       </div>
 
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6 space-y-12">
+      <div className="mx-auto max-w-[1800px] px-3 sm:px-6 lg:px-8 py-4 sm:py-6 space-y-8 sm:space-y-12">
 
         {/* ═══ GAME PLAYER — first thing in the viewport, no scrolling required ═══ */}
         <div id="player">
@@ -249,28 +256,25 @@ export default async function GamePage({ params }: GamePageProps) {
         {/* ═══ ABOUT + GAME INFO ═══ */}
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
 
-          {/* Left: About The Game + How To Play */}
+          {/* Left: Game Gallery + About The Game + How To Play */}
           <div className="lg:col-span-2 space-y-8">
-            <div className="space-y-4">
-              <h2 className="font-display text-xl font-black text-foreground uppercase flex items-center">
-                <span className="w-1 h-5 bg-primary rounded-full mr-3" />
-                ABOUT THE GAME
-              </h2>
-              <p className="text-sm text-foreground/80 leading-relaxed">
-                {game.description}
-              </p>
-            </div>
+            {/* Game Screenshots & Preview Showcase */}
+            <GameGallery game={game} />
 
+            {/* How To Play */}
             {game.instructions && (
               <div className="space-y-3">
-                <h3 className="font-display text-sm font-black text-foreground uppercase">How To Play</h3>
-                <p className="text-sm text-foreground/80 leading-relaxed">{game.instructions}</p>
+                <h2 className="font-display text-sm sm:text-xl lg:text-2xl font-black text-foreground uppercase flex items-center">
+                  <span className="w-1 h-4 sm:h-6 bg-primary rounded-full mr-2 sm:mr-3" />
+                  HOW TO PLAY
+                </h2>
+                <p className="text-xs sm:text-sm text-foreground/80 leading-relaxed">{game.instructions}</p>
                 {game.controls.length > 0 && (
                   <div className="flex flex-wrap gap-2 pt-1">
                     {game.controls.map((control, idx) => (
                       <span
                         key={idx}
-                        className="rounded-lg border border-border bg-muted px-3 py-1.5 font-mono text-[11px] text-foreground/80"
+                        className="rounded-lg border border-border bg-muted px-2.5 py-1 sm:px-3 sm:py-1.5 font-mono text-[10px] sm:text-[11px] text-foreground/80"
                       >
                         <span className="font-bold text-foreground">{control.key}</span> — {control.action}
                       </span>
@@ -280,28 +284,61 @@ export default async function GamePage({ params }: GamePageProps) {
               </div>
             )}
 
-            {/* Real, factual highlight cards — no invented specs */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <div className="rounded-2xl border border-border bg-card p-5 space-y-2">
-                <Star className="h-5 w-5 text-primary fill-current" aria-hidden="true" />
-                <h4 className="font-display text-xs font-bold text-foreground">{game.rating.toFixed(1)} / 5</h4>
-                <p className="font-mono text-[10px] text-muted-foreground">Rated via {game.sourceNetwork || "our catalog"}</p>
+            {/* About The Game */}
+            <div className="space-y-4">
+              <h2 className="font-display text-sm sm:text-xl lg:text-2xl font-black text-foreground uppercase flex items-center">
+                <span className="w-1 h-4 sm:h-6 bg-primary rounded-full mr-2 sm:mr-3" />
+                ABOUT THE GAME
+              </h2>
+              <p className="text-xs sm:text-sm text-foreground/80 leading-relaxed">
+                {game.description}
+              </p>
+            </div>
+
+            {/* Factual highlight cards — compact 3-card row centered on mobile */}
+            <div className="grid grid-cols-3 gap-2 sm:gap-4">
+              <div className="flex flex-col items-center justify-center text-center rounded-xl sm:rounded-2xl border border-border bg-card p-3 sm:p-4 space-y-1 sm:space-y-1.5">
+                <Star className="h-4 w-4 sm:h-5 sm:w-5 text-primary fill-current" aria-hidden="true" />
+                <h4 className="font-display text-[11px] sm:text-xs font-bold text-foreground">{game.rating.toFixed(1)} / 5</h4>
+                <p className="font-mono text-[9px] sm:text-[10px] text-muted-foreground truncate w-full">Rating</p>
               </div>
-              <div className="rounded-2xl border border-border bg-card p-5 space-y-2">
-                <Layers className="h-5 w-5 text-primary" aria-hidden="true" />
-                <h4 className="font-display text-xs font-bold text-foreground capitalize">{game.category}</h4>
-                <p className="font-mono text-[10px] text-muted-foreground">Genre</p>
+              <div className="flex flex-col items-center justify-center text-center rounded-xl sm:rounded-2xl border border-border bg-card p-3 sm:p-4 space-y-1 sm:space-y-1.5">
+                <Layers className="h-4 w-4 sm:h-5 sm:w-5 text-primary" aria-hidden="true" />
+                <h4 className="font-display text-[11px] sm:text-xs font-bold text-foreground capitalize truncate w-full">{game.category}</h4>
+                <p className="font-mono text-[9px] sm:text-[10px] text-muted-foreground truncate w-full">Genre</p>
               </div>
-              <div className="rounded-2xl border border-border bg-card p-5 space-y-2">
-                <Smartphone className="h-5 w-5 text-primary" aria-hidden="true" />
-                <h4 className="font-display text-xs font-bold text-foreground">{game.mobileSupport ? "Mobile Ready" : "Desktop Only"}</h4>
-                <p className="font-mono text-[10px] text-muted-foreground">Play anywhere</p>
+              <div className="flex flex-col items-center justify-center text-center rounded-xl sm:rounded-2xl border border-border bg-card p-3 sm:p-4 space-y-1 sm:space-y-1.5">
+                <Smartphone className="h-4 w-4 sm:h-5 sm:w-5 text-primary" aria-hidden="true" />
+                <h4 className="font-display text-[11px] sm:text-xs font-bold text-foreground truncate w-full">{game.mobileSupport ? "Mobile" : "Desktop"}</h4>
+                <p className="font-mono text-[9px] sm:text-[10px] text-muted-foreground truncate w-full">Support</p>
               </div>
             </div>
           </div>
 
           {/* Right: Game Info Sidebar — factual metadata only */}
           <div className="space-y-5">
+            {/* Game Poster / Media Preview Card (Desktop only to prevent mobile image duplication) */}
+            <div className="hidden lg:block overflow-hidden rounded-2xl border border-border bg-card shadow-md">
+              <div className="relative aspect-video w-full">
+                <Image
+                  src={game.heroImage || game.coverImage || game.thumbnailUrl}
+                  alt={displayTitle}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 400px"
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-transparent" />
+                <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
+                  <span className="rounded-md bg-primary/90 px-2 py-0.5 text-[10px] font-bold text-primary-foreground uppercase backdrop-blur-sm">
+                    {game.category}
+                  </span>
+                  <span className="text-[10px] font-mono font-bold text-foreground">
+                    ★ {game.rating.toFixed(1)}
+                  </span>
+                </div>
+              </div>
+            </div>
+
             <div className="rounded-2xl border border-border bg-card p-5 space-y-4">
               <h3 className="font-display text-sm font-bold text-foreground">Game Info</h3>
 
@@ -337,7 +374,7 @@ export default async function GamePage({ params }: GamePageProps) {
 
               {game.tags.length > 0 && (
                 <div className="flex flex-wrap gap-1.5 border-t border-border pt-4">
-                  {game.tags.map((tag) => (
+                  {Array.from(new Set(game.tags)).map((tag) => (
                     <span
                       key={tag}
                       className="rounded-full bg-muted px-2.5 py-1 font-mono text-[10px] font-bold capitalize text-muted-foreground"
@@ -361,76 +398,54 @@ export default async function GamePage({ params }: GamePageProps) {
         </div>
 
         {/* ═══ STRATEGY & TIPS — generic, category-appropriate advice, no invented specifics ═══ */}
-        <section className="space-y-5">
-          <h2 className="font-display text-xl font-black text-foreground uppercase flex items-center">
-            <span className="w-1 h-5 bg-primary rounded-full mr-3" />
+        <section className="space-y-3 sm:space-y-5">
+          <h2 className="font-display text-sm sm:text-xl lg:text-2xl font-black text-foreground uppercase flex items-center">
+            <span className="w-1 h-4 sm:h-6 bg-primary rounded-full mr-2 sm:mr-3" />
             STRATEGY & TIPS
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             {tips.map((tip, idx) => (
-              <div key={idx} className="flex items-start space-x-3 rounded-2xl border border-border bg-card p-4">
+              <div key={idx} className="flex items-start space-x-2.5 sm:space-x-3 rounded-xl sm:rounded-2xl border border-border bg-card p-3 sm:p-4">
                 <Lightbulb className="h-4 w-4 mt-0.5 shrink-0 text-primary" aria-hidden="true" />
-                <p className="text-sm text-foreground/80 leading-relaxed">{tip}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* ═══ GALLERY ═══ */}
-        <section className="space-y-5">
-          <h2 className="font-display text-xl font-black text-foreground uppercase flex items-center">
-            <span className="w-1 h-5 bg-primary rounded-full mr-3" />
-            GALLERY
-          </h2>
-
-          <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
-            {(game.screenshots.length > 0 ? game.screenshots : [game.thumbnailUrl, game.coverImage || game.thumbnailUrl]).map((img, idx) => (
-              <div key={idx} className="relative overflow-hidden rounded-2xl border border-border bg-card aspect-[16/9]">
-                <Image
-                  src={img}
-                  alt={`${displayTitle} screenshot ${idx + 1}`}
-                  fill
-                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 400px"
-                  className="object-cover hover:scale-105 transition-transform duration-slow"
-                />
+                <p className="text-xs sm:text-sm text-foreground/80 leading-relaxed">{tip}</p>
               </div>
             ))}
           </div>
         </section>
 
         {/* ═══ FAQ ═══ */}
-        <section className="space-y-5">
-          <h2 className="font-display text-xl font-black text-foreground uppercase flex items-center">
-            <span className="w-1 h-5 bg-primary rounded-full mr-3" />
+        <section className="space-y-3 sm:space-y-5">
+          <h2 className="font-display text-sm sm:text-xl lg:text-2xl font-black text-foreground uppercase flex items-center">
+            <span className="w-1 h-4 sm:h-6 bg-primary rounded-full mr-2 sm:mr-3" />
             FREQUENTLY ASKED QUESTIONS
           </h2>
-          <div className="space-y-3">
+          <div className="space-y-2.5 sm:space-y-3">
             {faqs.map((faq, idx) => (
               <details
                 key={idx}
-                className="group rounded-2xl border border-border bg-card p-5"
+                className="group rounded-xl sm:rounded-2xl border border-border bg-card p-3.5 sm:p-5"
               >
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-3 font-display text-sm font-bold text-foreground marker:content-none [&::-webkit-details-marker]:hidden">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-3 font-display text-xs sm:text-sm font-bold text-foreground marker:content-none [&::-webkit-details-marker]:hidden">
                   <span>{faq.question}</span>
                   <ChevronDown
-                    className="h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-base group-open:rotate-180"
+                    className="h-3.5 w-3.5 sm:h-4 sm:w-4 shrink-0 text-muted-foreground transition-transform duration-base group-open:rotate-180"
                     aria-hidden="true"
                   />
                 </summary>
-                <p className="mt-3 text-sm text-foreground/80 leading-relaxed">{faq.answer}</p>
+                <p className="mt-2.5 sm:mt-3 text-xs sm:text-sm text-foreground/80 leading-relaxed">{faq.answer}</p>
               </details>
             ))}
           </div>
         </section>
 
         {/* ═══ RECOMMENDED FOR YOU ═══ */}
-        <section className="space-y-5">
-          <h2 className="font-display text-xl font-black text-foreground uppercase flex items-center">
-            <span className="w-1 h-5 bg-primary rounded-full mr-3" />
+        <section className="space-y-3 sm:space-y-5">
+          <h2 className="font-display text-sm sm:text-xl lg:text-2xl font-black text-foreground uppercase flex items-center">
+            <span className="w-1 h-4 sm:h-6 bg-primary rounded-full mr-2 sm:mr-3" />
             RECOMMENDED FOR YOU
           </h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
             {relatedGames.map((relGame) => (
               <GameCard key={relGame.id} game={relGame} />
             ))}

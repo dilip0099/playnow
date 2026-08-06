@@ -15,7 +15,7 @@ import { SITE_URL, SITE_NAME } from "@/lib/site";
 
 const TITLE = "About PlayNow - Free Browser Games, No Download Required";
 const DESCRIPTION =
-  "PlayNow is an independent HTML5 browser games site. Learn how our catalog is licensed via GamePix, how the site is funded, and what we store about you.";
+  "PlayNow is an independent HTML5 browser games site. Learn how our catalog is licensed via GameDistribution, how the site is funded, and what we store about you.";
 const H1 = "About PlayNow";
 
 export const metadata: Metadata = {
@@ -120,21 +120,21 @@ export default function AboutPage() {
         <p className="text-sm text-muted-foreground leading-relaxed">
           Every game on PlayNow is licensed through{" "}
           <a
-            href="https://www.gamepix.com"
+            href="https://gamedistribution.com"
             target="_blank"
             rel="noopener noreferrer"
             className="text-primary hover:underline"
           >
-            GamePix
+            GameDistribution (Azerion)
           </a>
-          , a third-party HTML5 game publisher network, under a standard publisher agreement.
-          GamePix — not PlayNow — owns and is responsible for the underlying game code; each
-          title is embedded directly from GamePix&apos;s platform. Before a game is added to our
+          , a leading HTML5 game publisher network, under a standard publisher agreement.
+          GameDistribution — not PlayNow — owns and is responsible for the underlying game code; each
+          title is embedded directly from GameDistribution&apos;s network. Before a game is added to our
           catalog it&apos;s screened for trademark and brand-conflict risk, and we keep a fully
           public record of that process.
         </p>
         <p className="text-sm text-muted-foreground leading-relaxed">
-          For the complete, real-time sourcing data — per-game GamePix IDs, license terms,
+          For the complete, real-time sourcing data — per-game GameDistribution MD5 IDs, license terms,
           and trademark-risk screening results — see our{" "}
           <Link href="/compliance" className="text-primary hover:underline">
             Public Legal Compliance &amp; Sourcing
@@ -191,7 +191,7 @@ export default function AboutPage() {
               Transparent sourcing
             </div>
             <p className="text-xs text-muted-foreground leading-relaxed">
-              Every game links back to its real GamePix catalog entry. Nothing in our catalog
+              Every game links back to its real GameDistribution catalog entry. Nothing in our catalog
               is presented as our own original work.
             </p>
           </div>

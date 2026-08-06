@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 
 export const metadata: Metadata = {
   title: "Game Sourcing Credits - PlayNow Legal",
-  description: "Every game on PlayNow is licensed via GamePix. This page lists the source, license, and catalog ID for each title.",
+  description: "Every game on PlayNow is licensed via GameDistribution. This page lists the source, license, and catalog ID for each title.",
 };
 
 export default function LegalAttributionsPage() {
@@ -37,7 +37,7 @@ export default function LegalAttributionsPage() {
           </div>
           <h1 className="text-3xl sm:text-4xl font-black text-foreground">Game Sourcing Credits</h1>
           <p className="text-sm text-muted-foreground leading-relaxed">
-            Every game on PlayNow is licensed through <strong className="text-foreground">GamePix</strong>, a third-party HTML5 game publisher network — PlayNow does not author this game code, only embeds it under a publisher agreement. Each title below links to its real GamePix catalog entry and ID so its origin is fully traceable.
+            Every game on PlayNow is licensed through <strong className="text-foreground">GameDistribution (Azerion)</strong>, a third-party HTML5 game publisher network — PlayNow does not author this game code, only embeds it under a publisher agreement. Each title below links to its real GameDistribution catalog entry and ID so its origin is fully traceable.
           </p>
         </div>
 

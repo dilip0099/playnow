@@ -12,7 +12,7 @@ interface CategoryRailProps {
   limit?: number;
 }
 
-export function CategoryRail({ category, label, games, excludeIds, limit = 6 }: CategoryRailProps) {
+export function CategoryRail({ category, label, games, excludeIds, limit = 7 }: CategoryRailProps) {
   const visible = [...games]
     .filter((g) => !excludeIds?.has(g.id))
     .sort((a, b) => b.rating - a.rating)
@@ -21,18 +21,18 @@ export function CategoryRail({ category, label, games, excludeIds, limit = 6 }: 
   if (visible.length === 0) return null;
 
   return (
-    <section className="space-y-5">
+    <section className="space-y-3 sm:space-y-5">
       <div className="flex items-center justify-between">
-        <h2 className="flex items-center font-display text-xl font-black uppercase tracking-tight text-foreground sm:text-2xl">
-          <span className="mr-3 h-6 w-1 rounded-full bg-primary" />
+        <h2 className="flex items-center font-display text-sm sm:text-xl lg:text-2xl font-black uppercase tracking-tight text-foreground">
+          <span className="mr-2 sm:mr-3 h-4 sm:h-6 w-1 rounded-full bg-primary" />
           {label}
         </h2>
         <Link
           href={`/category/${category}`}
-          className="flex items-center space-x-1 font-mono text-xs font-bold text-muted-foreground transition-colors hover:text-primary"
+          className="flex items-center space-x-1 font-mono text-[10px] sm:text-xs font-bold text-muted-foreground transition-colors hover:text-primary"
         >
           <span>VIEW ALL</span>
-          <ArrowRight className="h-3.5 w-3.5" />
+          <ArrowRight className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
         </Link>
       </div>
 

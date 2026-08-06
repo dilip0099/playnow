@@ -78,7 +78,7 @@ export function DiscoverClient({ initialGames }: DiscoverClientProps) {
   const [topRatedOnly, setTopRatedOnly] = useState(false);
   const [sortBy, setSortBy] = useState<SortOption>("popular");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
-  const [visibleCount, setVisibleCount] = useState(12);
+  const [visibleCount, setVisibleCount] = useState(21);
   const [isFilterDialogOpen, setIsFilterDialogOpen] = useState(false);
 
   const activeFilterCount = (selectedGenre ? 1 : 0) + (topRatedOnly ? 1 : 0);
@@ -112,7 +112,7 @@ export function DiscoverClient({ initialGames }: DiscoverClientProps) {
 
       {/* ═══ CATALOG STATUS BAR ═══ */}
       <div className="border-b border-border bg-shell px-4 sm:px-6 lg:px-8 py-3">
-        <div className="mx-auto max-w-7xl flex flex-wrap items-center justify-between gap-4 font-mono text-xs">
+        <div className="mx-auto max-w-[1800px] flex flex-wrap items-center justify-between gap-4 font-mono text-xs">
           <div className="flex items-center space-x-8">
             <div>
               <span className="text-primary text-[10px] font-bold uppercase tracking-widest block">CATALOG</span>
@@ -179,7 +179,7 @@ export function DiscoverClient({ initialGames }: DiscoverClientProps) {
         </button>
       </Dialog>
 
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+      <div className="mx-auto max-w-[1800px] px-3 sm:px-6 lg:px-8 py-3.5 sm:py-8">
         <div className="flex gap-8">
 
           {/* ═══ LEFT SIDEBAR: Genre Registry + Filters (desktop only) ═══ */}

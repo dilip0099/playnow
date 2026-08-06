@@ -5,7 +5,6 @@ import { GameCard } from "@/components/games/GameCard";
 import { ContinuePlayingRail } from "@/components/games/ContinuePlayingRail";
 import { HeroCarousel } from "@/components/games/HeroCarousel";
 import { CategoryRail } from "@/components/games/CategoryRail";
-import { DailyChallengeCard } from "@/components/gamification/DailyChallengeCard";
 import { GAME_GRID_COLS } from "@/lib/game-grid";
 import { GameCategory } from "@/types/game";
 import { SITE_URL, SITE_NAME } from "@/lib/site";
@@ -25,24 +24,29 @@ const CATEGORY_RAILS: { category: GameCategory; label: string }[] = [
 ];
 
 export default function HomePage() {
-  const heroGames = [...gamesData].sort((a, b) => b.rating - a.rating || b.playsCount - a.playsCount).slice(0, HERO_SLIDE_COUNT);
-  const heroIds = new Set(heroGames.map((g) => g.id));
+  // Select a pool of the top 30 highest-rated & most popular games for the hero carousel
+  const bestGamesPool = [...gamesData]
+    .sort((a, b) => b.rating - a.rating || b.playsCount - a.playsCount)
+    .slice(0, 30);
 
-  const trendingGames = gamesData.filter((g) => g.trending && !heroIds.has(g.id)).slice(0, 6);
-  const fallbackTrending = trendingGames.length >= 2 ? trendingGames : gamesData.filter((g) => !heroIds.has(g.id)).slice(0, 6);
+  const initialHeroGames = bestGamesPool.slice(0, 5);
+  const heroIds = new Set(initialHeroGames.map((g) => g.id));
+
+  const trendingGames = gamesData.filter((g) => g.trending && !heroIds.has(g.id)).slice(0, 7);
+  const fallbackTrending = trendingGames.length >= 2 ? trendingGames : gamesData.filter((g) => !heroIds.has(g.id)).slice(0, 7);
 
   // Every rail below the hero must show distinct games — reusing a card the visitor
   // already scrolled past (with the same badge) reads as broken/repetitive content.
   const shownIds = new Set([...heroIds, ...fallbackTrending.map((g) => g.id)]);
 
-  const newGames = gamesData.filter((g) => g.isNew && !shownIds.has(g.id)).slice(0, 6);
+  const newGames = gamesData.filter((g) => g.isNew && !shownIds.has(g.id)).slice(0, 7);
   const fallbackNew =
     newGames.length >= 2
       ? newGames
       : [...gamesData]
           .filter((g) => !shownIds.has(g.id))
           .sort((a, b) => new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime())
-          .slice(0, 6);
+          .slice(0, 7);
 
   const genreIcons = [
     { name: "UNBLOCKED", href: "/unblocked-games", icon: Unlock, count: gamesData.length },
@@ -89,20 +93,17 @@ export default function HomePage() {
       />
 
       {/* ═══ FEATURED GAMES CAROUSEL ═══ */}
-      <HeroCarousel games={heroGames} />
+      <HeroCarousel games={bestGamesPool} />
 
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 space-y-14">
+      <div className="mx-auto max-w-[1800px] px-3 sm:px-6 lg:px-8 py-6 sm:py-10 space-y-8 sm:space-y-14">
 
         {/* ═══ CONTINUE PLAYING (hidden until there's real history) ═══ */}
-        <ContinuePlayingRail allGames={gamesData} title="CONTINUE PLAYING" emptyState="hide" limit={3} />
-
-        {/* ═══ DAILY CHALLENGE BONUS ═══ */}
-        <DailyChallengeCard />
+        <ContinuePlayingRail allGames={gamesData} title="CONTINUE PLAYING" emptyState="hide" limit={10} />
 
         {/* ═══ TRENDING NOW ═══ */}
-        <section className="space-y-5">
-          <h2 className="font-display text-xl sm:text-2xl font-black text-foreground uppercase tracking-tight flex items-center">
-            <span className="w-1 h-6 bg-primary rounded-full mr-3" />
+        <section className="space-y-3 sm:space-y-5">
+          <h2 className="font-display text-sm sm:text-xl lg:text-2xl font-black text-foreground uppercase tracking-tight flex items-center">
+            <span className="w-1 h-4 sm:h-6 bg-primary rounded-full mr-2 sm:mr-3" />
             TRENDING NOW
           </h2>
 
@@ -114,9 +115,9 @@ export default function HomePage() {
         </section>
 
         {/* ═══ NEW RELEASES ═══ */}
-        <section className="space-y-5">
-          <h2 className="font-display text-xl sm:text-2xl font-black text-foreground uppercase tracking-tight flex items-center">
-            <span className="w-1 h-6 bg-primary rounded-full mr-3" />
+        <section className="space-y-3 sm:space-y-5">
+          <h2 className="font-display text-sm sm:text-xl lg:text-2xl font-black text-foreground uppercase tracking-tight flex items-center">
+            <span className="w-1 h-4 sm:h-6 bg-primary rounded-full mr-2 sm:mr-3" />
             NEW RELEASES
           </h2>
 
@@ -128,32 +129,31 @@ export default function HomePage() {
         </section>
 
         {/* ═══ POPULAR GENRES ═══ */}
-        <section className="space-y-5">
-          <div className="space-y-1">
-            <span className="font-mono text-[10px] font-bold text-primary tracking-widest uppercase">SELECT YOUR CLUB</span>
-            <h2 className="font-display text-xl sm:text-2xl font-black text-foreground uppercase tracking-tight">POPULAR GENRES</h2>
+        <section className="space-y-3 sm:space-y-5">
+          <div className="space-y-0.5 sm:space-y-1">
+            <span className="font-mono text-[9px] sm:text-[10px] font-bold text-primary tracking-widest uppercase">SELECT YOUR CLUB</span>
+            <h2 className="font-display text-sm sm:text-xl lg:text-2xl font-black text-foreground uppercase tracking-tight">POPULAR GENRES</h2>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3">
+          <div className="grid grid-cols-4 sm:grid-cols-4 lg:grid-cols-8 gap-2 sm:gap-3">
             {genreIcons.map((genre) => {
               const Icon = genre.icon;
               return (
                 <Link
                   key={genre.name}
                   href={genre.href}
-                  className="flex flex-col items-center justify-center rounded-2xl border border-border bg-card p-5 aspect-square hover:border-primary/50 hover:-translate-y-1 transition-all group"
+                  className="flex flex-col items-center justify-center rounded-xl sm:rounded-2xl border border-border bg-card py-2.5 px-1 sm:p-4 aspect-square hover:border-primary/50 hover:-translate-y-1 transition-all group"
                 >
-                  <Icon className="h-7 w-7 mb-2 text-muted-foreground group-hover:text-primary transition-colors" aria-hidden="true" />
-                  <span className="font-display text-[11px] font-black text-foreground tracking-wider group-hover:text-primary transition-colors">{genre.name}</span>
-                  <span className="font-mono text-[9px] text-muted-foreground mt-0.5">{genre.count} GAMES</span>
+                  <Icon className="h-4 w-4 sm:h-6 sm:w-6 mb-1 sm:mb-2 text-muted-foreground group-hover:text-primary transition-colors" aria-hidden="true" />
+                  <span className="font-display text-[9px] sm:text-[11px] font-black text-foreground tracking-tight sm:tracking-wider group-hover:text-primary transition-colors text-center line-clamp-1">{genre.name}</span>
+                  <span className="font-mono text-[7.5px] sm:text-[9px] text-muted-foreground mt-0.5">{genre.count} GMS</span>
                 </Link>
               );
             })}
           </div>
         </section>
 
-        {/* ═══ PER-CATEGORY RAILS — the bulk of the 181-game catalog, browsable right
-              on the homepage instead of requiring a trip to Discover first ═══ */}
+        {/* ═══ PER-CATEGORY RAILS ═══ */}
         {CATEGORY_RAILS.map(({ category, label }) => (
           <CategoryRail
             key={category}
@@ -165,26 +165,26 @@ export default function HomePage() {
         ))}
 
         {/* ═══ READY TO PLAY? CTA BANNER ═══ */}
-        <section className="rounded-3xl bg-primary p-8 sm:p-12 flex flex-col lg:flex-row items-center justify-between gap-8">
-          <div className="space-y-3 max-w-md">
-            <h2 className="font-display text-3xl sm:text-4xl font-black text-primary-foreground uppercase leading-tight">
-              READY<br />TO PLAY?
+        <section className="rounded-3xl bg-primary p-6 sm:p-12 flex flex-col lg:flex-row items-center justify-between gap-6 sm:gap-8">
+          <div className="space-y-2 sm:space-y-3 max-w-md text-center lg:text-left">
+            <h2 className="font-display text-xl sm:text-3xl lg:text-4xl font-black text-primary-foreground uppercase leading-tight">
+              READY TO PLAY?
             </h2>
-            <p className="text-xs text-primary-foreground/70 leading-relaxed font-mono">
+            <p className="text-[11px] sm:text-xs text-primary-foreground/80 leading-relaxed font-mono">
               No downloads, no plugins, no waiting. Every game runs instantly in your browser — click and play.
             </p>
           </div>
 
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-3 sm:space-x-4">
             <Link
               href="/discover"
-              className="rounded-xl bg-primary-foreground px-8 py-4 text-sm font-black text-primary uppercase tracking-wider hover:opacity-90 transition-opacity"
+              className="rounded-xl bg-primary-foreground px-5 py-2.5 sm:px-8 sm:py-4 text-xs sm:text-sm font-black text-primary uppercase tracking-wider hover:opacity-90 transition-opacity"
             >
               START PLAYING
             </Link>
             <Link
               href="/library"
-              className="rounded-xl border-2 border-primary-foreground/30 px-8 py-4 text-sm font-black text-primary-foreground uppercase tracking-wider hover:bg-primary-foreground/10 transition-colors"
+              className="rounded-xl border-2 border-primary-foreground/30 px-5 py-2.5 sm:px-8 sm:py-4 text-xs sm:text-sm font-black text-primary-foreground uppercase tracking-wider hover:bg-primary-foreground/10 transition-colors"
             >
               VIEW LIBRARY
             </Link>

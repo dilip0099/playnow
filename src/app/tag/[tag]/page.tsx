@@ -181,7 +181,7 @@ export default async function TagPage({ params }: TagPageProps) {
   };
 
   return (
-    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+    <div className="mx-auto max-w-[1800px] px-3 sm:px-6 lg:px-8 py-3.5 sm:py-8 space-y-3.5 sm:space-y-8">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -197,16 +197,16 @@ export default async function TagPage({ params }: TagPageProps) {
         <span className="text-foreground font-bold">{seo.h1}</span>
       </nav>
 
-      {/* Tag Banner Header */}
-      <div className="relative overflow-hidden rounded-3xl border border-secondary/20 bg-gradient-to-r from-secondary/20 via-card to-card p-8 sm:p-10 shadow-xl">
-        <div className="relative z-10 space-y-2">
-          <span className="rounded-full bg-secondary/10 px-3 py-1 text-xs font-bold text-violet-300 border border-secondary/20 uppercase tracking-wider">
+      {/* Tag Banner Header - Compact & Responsive */}
+      <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl border border-border/80 bg-card p-4 sm:p-6 lg:p-8 shadow-sm">
+        <div className="relative z-10 space-y-1.5 sm:space-y-2.5">
+          <span className="inline-block rounded-full bg-primary/10 px-2.5 py-0.5 sm:px-3 sm:py-1 text-[10px] sm:text-xs font-bold text-primary border border-primary/20 uppercase tracking-wider">
             Tag Collection
           </span>
-          <h1 className="text-3xl sm:text-4xl font-black text-foreground tracking-tight">
+          <h1 className="text-xl sm:text-3xl lg:text-4xl font-black text-foreground tracking-tight leading-tight">
             {seo.h1}
           </h1>
-          <p className="text-sm text-foreground/80 max-w-xl leading-relaxed">
+          <p className="text-xs sm:text-sm text-muted-foreground max-w-xl leading-relaxed">
             {seo.intro}
           </p>
         </div>

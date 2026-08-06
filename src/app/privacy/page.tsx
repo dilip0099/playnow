@@ -190,19 +190,19 @@ export default function PrivacyPage() {
         <p className="text-sm text-muted-foreground leading-relaxed">
           Games themselves are embedded from{" "}
           <a
-            href="https://www.gamepix.com"
+            href="https://gamedistribution.com"
             target="_blank"
             rel="noopener noreferrer"
             className="text-primary hover:underline"
           >
-            GamePix
+            GameDistribution (Azerion)
           </a>
           , a third-party game publisher network (see our{" "}
           <Link href="/compliance" className="text-primary hover:underline">
             sourcing &amp; compliance portal
           </Link>{" "}
           for details). The embedded game player may load its own ads, analytics, or cookies
-          from GamePix&apos;s advertising partners — this is governed by GamePix&apos;s own
+          from GameDistribution&apos;s advertising partners — this is governed by GameDistribution&apos;s own
           privacy policy, not this one, since PlayNow does not control what runs inside that
           embedded player.
         </p>
@@ -218,7 +218,7 @@ export default function PrivacyPage() {
           PlayNow itself doesn&apos;t set authentication or tracking cookies, since there are
           no user accounts. Cookies you may encounter while using the site come from the
           third-party services described above (Google Analytics, Google AdSense, and
-          GamePix&apos;s embedded game player). You can control or delete cookies through your
+          GameDistribution&apos;s embedded game player). You can control or delete cookies through your
           browser&apos;s settings at any time.
         </p>
       </section>

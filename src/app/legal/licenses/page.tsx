@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge";
 
 export const metadata: Metadata = {
   title: "Licensing Policy - PlayNow Legal",
-  description: "How PlayNow licenses its game catalog via GamePix, plus the open-source license rules for any code we host directly.",
+  description: "How PlayNow licenses its game catalog via GameDistribution, plus the open-source license rules for any code we host directly.",
 };
 
 export default function LegalLicensesPage() {
@@ -38,7 +38,7 @@ export default function LegalLicensesPage() {
           </div>
           <h1 className="text-3xl sm:text-4xl font-black text-foreground">Licensing Policy</h1>
           <p className="text-sm text-muted-foreground leading-relaxed">
-            PlayNow's game catalog is currently sourced entirely through a <strong className="text-foreground">GamePix publisher agreement</strong> — a licensed, commercial arrangement, not open-source code we've copied. If PlayNow ever hosts original or open-source-derived code directly in the future, it will only accept the permissive licenses below.
+            PlayNow's game catalog is currently sourced entirely through a <strong className="text-foreground">GameDistribution publisher agreement</strong> — a licensed, commercial arrangement, not open-source code we've copied. If PlayNow ever hosts original or open-source-derived code directly in the future, it will only accept the permissive licenses below.
           </p>
         </div>
 
@@ -49,9 +49,9 @@ export default function LegalLicensesPage() {
             <span>Current Sourcing Model</span>
           </h2>
           <Card className="p-5 border-emerald-500/30 bg-emerald-500/5 space-y-2">
-            <Badge className="bg-emerald-500/20 text-emerald-400 border-emerald-500/40">Network-Licensed (GamePix)</Badge>
+            <Badge className="bg-emerald-500/20 text-emerald-400 border-emerald-500/40">Network-Licensed (GameDistribution)</Badge>
             <p className="text-xs text-muted-foreground leading-relaxed">
-              Every game currently on PlayNow is embedded from GamePix's publisher network under their standard terms. GamePix — not PlayNow — owns and is responsible for this game code; PlayNow's role is limited to embedding and screening titles for brand/trademark conflicts before listing them.
+              Every game currently on PlayNow is embedded from GameDistribution's publisher network under their standard terms. GameDistribution — not PlayNow — owns and is responsible for this game code; PlayNow's role is limited to embedding and screening titles for brand/trademark conflicts before listing them.
             </p>
           </Card>
         </div>

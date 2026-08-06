@@ -116,7 +116,7 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-30 w-full border-b border-border bg-background/90 backdrop-blur-xl">
-      <div className="mx-auto flex h-14 items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex h-14 items-center justify-between gap-3 px-4 sm:px-6 lg:px-8 max-w-[1800px]">
 
         {/* Mobile-only Brand Logo — Sidebar (which holds the real logo) is hidden below lg */}
         <Link href="/" className="group flex shrink-0 items-center space-x-2 lg:hidden">

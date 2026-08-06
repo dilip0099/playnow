@@ -6,11 +6,12 @@ export const dynamic = "force-dynamic";
 // `Authorization: Bearer ${CRON_SECRET}` automatically attached — this check
 // is what stops a random visitor from hitting the route and burning a deploy.
 //
-// A serverless function has a read-only filesystem, so it can't run
-// import-gamepix.ts itself; instead it calls the project's Deploy Hook,
-// which makes Vercel rebuild from scratch — and that rebuild's `npm run build`
-// re-runs import-gamepix against the live GamePix feed, exactly like a normal
-// deploy does.
+// This endpoint doesn't run the fetch/parse logic directly because Vercel Serverless
+// functions are limited in execution time and can't easily execute tsx scripts like
+// import-gamedistribution.ts itself; instead it calls the project's Deploy Hook,
+// which triggers a full Vercel build. A fresh Vercel build automatically
+// re-runs import-gamedistribution against the live GameDistribution feed, exactly like a normal
+// git-push deploy.
 export async function GET(request: NextRequest) {
   const authHeader = request.headers.get("authorization");
   if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {

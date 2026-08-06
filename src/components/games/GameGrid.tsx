@@ -48,31 +48,31 @@ export function GameGrid({
     <div className="w-full space-y-6">
       
       {/* Header & Filter Controls */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
-          <h2 className="text-xl sm:text-2xl font-black text-foreground tracking-tight flex items-center space-x-2">
-            <span>{title}</span>
-            <span className="rounded-full bg-secondary/10 px-2.5 py-0.5 text-xs font-bold text-violet-300 border border-secondary/20">
+      <div className="flex items-center justify-between gap-3 flex-wrap sm:flex-nowrap">
+        <div className="min-w-0">
+          <h2 className="text-lg sm:text-2xl font-black text-foreground tracking-tight flex items-center space-x-2">
+            <span className="truncate">{title}</span>
+            <span className="shrink-0 rounded-full bg-secondary/10 px-2 sm:px-2.5 py-0.5 text-[10px] sm:text-xs font-bold text-violet-300 border border-secondary/20">
               {sortedGames.length}
             </span>
           </h2>
         </div>
 
         {showFilters && (
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center space-x-3 ml-auto shrink-0">
             <div className="relative flex items-center">
-              <SlidersHorizontal className="absolute left-3 h-3.5 w-3.5 text-muted-foreground" />
+              <SlidersHorizontal className="absolute left-2.5 h-3.5 w-3.5 text-muted-foreground pointer-events-none" />
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value as SortOption)}
-                className="rounded-xl border border-border/60 bg-card/80 py-1.5 pl-9 pr-8 text-xs font-bold text-foreground shadow-sm focus:border-primary focus:outline-none appearance-none cursor-pointer"
+                className="rounded-xl border border-border/60 bg-card/80 py-1.5 pl-8 pr-7 text-[11px] sm:text-xs font-bold text-foreground shadow-sm focus:border-primary focus:outline-none appearance-none cursor-pointer"
               >
                 <option value="popular">Most Popular</option>
                 <option value="rating">Highest Rated</option>
                 <option value="newest">Newest First</option>
                 <option value="title">Alphabetical</option>
               </select>
-              <ArrowUpDown className="absolute right-2.5 h-3.5 w-3.5 text-muted-foreground pointer-events-none" />
+              <ArrowUpDown className="absolute right-2 h-3.5 w-3.5 text-muted-foreground pointer-events-none" />
             </div>
           </div>
         )}

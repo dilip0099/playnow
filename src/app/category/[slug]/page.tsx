@@ -26,7 +26,7 @@ const VALID_CATEGORIES: GameCategory[] = [
 // Real keyword research (2026), not guessed copy — monthly search volume noted per pick.
 // Multiplayer targets "io games" (201K/mo) over the generic "multiplayer games" (49.5K/mo)
 // because our multiplayer bucket genuinely IS io/two-player/tanks titles (see
-// import-gamepix.ts's CATEGORY_MAP) — the higher-volume term is also the accurate one here,
+// import-gamedistribution.ts's CATEGORY_MAP) — the higher-volume term is also the accurate one here,
 // not just a keyword-stuffing swap.
 const CATEGORY_SEO: Record<GameCategory, { h1: string; title: string; description: string; intro: string }> = {
   action: {
@@ -95,7 +95,7 @@ const CATEGORY_SEO: Record<GameCategory, { h1: string; title: string; descriptio
   },
   // Chess (~4.09M/mo) and Mahjong (~3.35M/mo) are individually bigger search terms than any other
   // category on this site — and unlike Tetris (deliberately excluded, see PROHIBITED_BRAND_TERMS in
-  // import-gamepix.ts), none of these are trademarked: chess/checkers/mahjong/solitaire/tic-tac-toe/
+  // import-gamedistribution.ts), none of these are trademarked: chess/checkers/mahjong/solitaire/tic-tac-toe/
   // ludo/domino/backgammon are public-domain game types.
   classic: {
     h1: "Classic Games: Chess, Mahjong, Solitaire & More",
@@ -177,7 +177,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
   };
 
   return (
-    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+    <div className="mx-auto max-w-[1800px] px-3 sm:px-6 lg:px-8 py-3.5 sm:py-8 space-y-3.5 sm:space-y-8">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -193,16 +193,16 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
         <span className="text-foreground font-bold">{seo.h1}</span>
       </nav>
 
-      {/* Category Banner Header */}
-      <div className="relative overflow-hidden rounded-3xl border border-secondary/20 bg-gradient-to-r from-secondary/20 via-card to-card p-8 sm:p-10 shadow-xl">
-        <div className="relative z-10 space-y-2">
-          <span className="rounded-full bg-secondary/10 px-3 py-1 text-xs font-bold text-violet-300 border border-secondary/20 uppercase tracking-wider">
+      {/* Category Banner Header - Compact & Responsive */}
+      <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl border border-border/80 bg-card p-4 sm:p-6 lg:p-8 shadow-sm">
+        <div className="relative z-10 space-y-1.5 sm:space-y-2.5">
+          <span className="inline-block rounded-full bg-primary/10 px-2.5 py-0.5 sm:px-3 sm:py-1 text-[10px] sm:text-xs font-bold text-primary border border-primary/20 uppercase tracking-wider">
             Category Hub
           </span>
-          <h1 className="text-3xl sm:text-4xl font-black text-foreground tracking-tight">
+          <h1 className="text-xl sm:text-3xl lg:text-4xl font-black text-foreground tracking-tight leading-tight">
             {seo.h1}
           </h1>
-          <p className="text-sm text-foreground/80 max-w-xl leading-relaxed">
+          <p className="text-xs sm:text-sm text-muted-foreground max-w-xl leading-relaxed">
             {seo.intro}
           </p>
         </div>

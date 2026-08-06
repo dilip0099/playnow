@@ -52,7 +52,7 @@ export default async function EmbedGamePage({ params }: EmbedGamePageProps) {
         src={game.gameUrl}
         title={game.title}
         allowFullScreen
-        sandbox="allow-scripts allow-same-origin allow-forms"
+        allow="autoplay; fullscreen; microphone; camera; midi; geolocation; accelerometer; gyroscope; payment"
         className="h-full w-full border-0"
       />
     </div>

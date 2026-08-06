@@ -137,7 +137,7 @@ export function ComplianceDashboardClient({ initialData }: ComplianceDashboardCl
           </div>
           <h1 className="text-3xl font-black tracking-tight text-foreground">PlayNow Compliance Dashboard</h1>
           <p className="text-sm text-muted-foreground mt-1">
-            Legal compliance telemetry for PlayNow's GamePix-licensed game catalog — license records, sourcing, and trademark screening.
+            Legal compliance telemetry for PlayNow's GameDistribution-licensed game catalog — license records, sourcing, and trademark screening.
           </p>
         </div>
 
@@ -190,7 +190,7 @@ export function ComplianceDashboardClient({ initialData }: ComplianceDashboardCl
           </div>
           <div className="text-3xl font-black text-foreground">{metrics.sourceNetworkCount}</div>
           <div className="text-xs font-semibold text-cyan-400 pt-1 border-t border-border/30">
-            All games embedded via GamePix
+            All games embedded via GameDistribution
           </div>
         </Card>
 
@@ -274,7 +274,7 @@ export function ComplianceDashboardClient({ initialData }: ComplianceDashboardCl
                 <th className="px-5 py-4">Game Title & Slug</th>
                 <th className="px-5 py-4">Source</th>
                 <th className="px-5 py-4">License</th>
-                <th className="px-5 py-4">GamePix ID</th>
+                <th className="px-5 py-4">Catalog ID</th>
                 <th className="px-5 py-4">Verification</th>
                 <th className="px-5 py-4">Brand Risk</th>
                 <th className="px-5 py-4 text-right">Commercial Ready</th>

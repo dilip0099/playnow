@@ -39,7 +39,7 @@ export default function AdminPage() {
             </div>
             <h1 className="text-3xl font-black text-white">Admin Overview</h1>
             <p className="text-sm text-slate-400 mt-1">
-              Catalog CMS and legal audit navigation. Real play/revenue analytics live in your GamePix publisher dashboard, not here.
+              Catalog CMS and legal audit navigation. Real play/revenue analytics live in your GameDistribution publisher dashboard, not here.
             </p>
           </div>
 
@@ -56,13 +56,13 @@ export default function AdminPage() {
           <Card className="p-6 border-border/60 bg-card/60 backdrop-blur-md space-y-2">
             <div className="text-xs font-bold text-slate-400 uppercase">Active Games Catalog</div>
             <div className="text-3xl font-black text-white">{games.length} Titles</div>
-            <div className="text-xs text-slate-400 font-semibold">Sourced via GamePix</div>
+            <div className="text-xs text-slate-400 font-semibold">Sourced via GameDistribution</div>
           </Card>
 
           <Card className="p-6 border-border/60 bg-card/60 backdrop-blur-md space-y-2">
             <div className="text-xs font-bold text-slate-400 uppercase">New This Week</div>
             <div className="text-3xl font-black text-purple-300">{newThisWeek} Titles</div>
-            <div className="text-xs text-slate-400 font-semibold">Refreshed weekly from GamePix</div>
+            <div className="text-xs text-slate-400 font-semibold">Refreshed weekly from GameDistribution</div>
           </Card>
 
           <Card className="p-6 border-border/60 bg-card/60 backdrop-blur-md space-y-2">
@@ -72,16 +72,16 @@ export default function AdminPage() {
           </Card>
         </div>
 
-        {/* Real revenue/play data lives on GamePix's side, not ours — link out instead of faking it */}
+        {/* Real revenue/play data lives on GameDistribution's side, not ours — link out instead of faking it */}
         <a
-          href="https://partners.gamepix.com"
+          href="https://gamedistribution.com"
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center justify-between rounded-2xl border border-border/60 bg-card/60 p-5 hover:bg-slate-800/60 transition-colors group"
         >
           <div>
             <h3 className="text-sm font-bold text-white">Revenue & Play Analytics</h3>
-            <p className="text-xs text-slate-400 mt-0.5">Tracked in your GamePix publisher dashboard, not here — PlayNow doesn't run its own ad/analytics stack.</p>
+            <p className="text-xs text-slate-400 mt-0.5">Tracked in your GameDistribution publisher dashboard, not here — PlayNow doesn't run its own ad/analytics stack.</p>
           </div>
           <ExternalLink className="h-4 w-4 text-slate-400 group-hover:text-white transition-colors" />
         </a>
