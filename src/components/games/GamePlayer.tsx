@@ -172,22 +172,7 @@ export function GamePlayer({ game, onPlay }: GamePlayerProps) {
     addRecentlyPlayed(game.id);
     recordGameSession();
 
-    // Feature 2: Send background SDK preload signals to iframe for instant zero-lag ad loading
-    setTimeout(() => {
-      if (iframeRef.current?.contentWindow) {
-        try {
-          iframeRef.current.contentWindow.postMessage(JSON.stringify({ action: "gdsdk.preloadAd", type: "rewarded" }), "*");
-        } catch {
-          // Silent fallback
-        }
-      }
-    }, 1500);
-
-    // Auto fullscreen on mobile for ALL games — portrait locks portrait, landscape locks landscape
-    if (typeof window !== "undefined" && window.innerWidth < 1024) {
-      toggleFullscreen();
-    }
-
+    // Record play session
     if (onPlay) onPlay();
   };
 
