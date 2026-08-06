@@ -18,6 +18,8 @@ import { GameMetadata } from "@/types/game";
 import { useFavorites } from "@/hooks/useFavorites";
 import { useFullscreen } from "@/hooks/useFullscreen";
 import { useRecentlyPlayed } from "@/hooks/useRecentlyPlayed";
+import { useGamification } from "@/hooks/useGamification";
+import { useEffect } from "react";
 import { ShareModal } from "./ShareModal";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ASPECT_RATIO_CLASS, resolveAspectRatio } from "@/lib/aspect-ratio";
@@ -47,12 +49,23 @@ export function GamePlayer({ game, onPlay }: GamePlayerProps) {
   const { isFavorite, toggleFavorite } = useFavorites();
   const { isFullscreen, toggleFullscreen } = useFullscreen(containerRef, isLandscapeGame ? "landscape" : undefined);
   const { addRecentlyPlayed } = useRecentlyPlayed();
+  const { recordGameSession, addXp } = useGamification();
   const favorited = isFavorite(game.id);
   const coverImage = game.heroImage || game.coverImage || game.thumbnailUrl;
+
+  // Passive XP reward while game is actively being played (every 90s)
+  useEffect(() => {
+    if (!isPlaying) return;
+    const interval = setInterval(() => {
+      addXp(15, "Active Gameplay");
+    }, 90000);
+    return () => clearInterval(interval);
+  }, [isPlaying, addXp]);
 
   const handleStartPlay = () => {
     setIsPlaying(true);
     addRecentlyPlayed(game.id);
+    recordGameSession();
     if (onPlay) onPlay();
   };
 

@@ -5,6 +5,7 @@ import { GameCard } from "@/components/games/GameCard";
 import { ContinuePlayingRail } from "@/components/games/ContinuePlayingRail";
 import { HeroCarousel } from "@/components/games/HeroCarousel";
 import { CategoryRail } from "@/components/games/CategoryRail";
+import { DailyChallengeCard } from "@/components/gamification/DailyChallengeCard";
 import { GAME_GRID_COLS } from "@/lib/game-grid";
 import { GameCategory } from "@/types/game";
 import { SITE_URL, SITE_NAME } from "@/lib/site";
@@ -94,6 +95,9 @@ export default function HomePage() {
 
         {/* ═══ CONTINUE PLAYING (hidden until there's real history) ═══ */}
         <ContinuePlayingRail allGames={gamesData} title="CONTINUE PLAYING" emptyState="hide" limit={3} />
+
+        {/* ═══ DAILY CHALLENGE BONUS ═══ */}
+        <DailyChallengeCard />
 
         {/* ═══ TRENDING NOW ═══ */}
         <section className="space-y-5">
