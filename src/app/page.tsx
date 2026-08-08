@@ -1,15 +1,25 @@
 import Link from "next/link";
 import { Swords, Brain, Car, Joystick, Puzzle, Compass, Volleyball, UsersRound, Unlock, Dices } from "lucide-react";
-import { gamesData } from "@/lib/games";
+import { gamesData, isRecentlyAdded } from "@/lib/games";
 import { GameCard } from "@/components/games/GameCard";
 import { ContinuePlayingRail } from "@/components/games/ContinuePlayingRail";
 import { HeroCarousel } from "@/components/games/HeroCarousel";
 import { CategoryRail } from "@/components/games/CategoryRail";
+import { TagRail } from "@/components/games/TagRail";
 import { GAME_GRID_COLS } from "@/lib/game-grid";
 import { GameCategory } from "@/types/game";
 import { SITE_URL, SITE_NAME } from "@/lib/site";
 
 const HERO_SLIDE_COUNT = 5;
+
+// Cross-category "mood" rows — a different lens than the strict genre list below, matching the
+// discovery pattern top platforms (CrazyGames, Poki) use. Each tag here is verified to have real
+// depth in the current catalog (see TAG_SEO in src/app/tag/[tag]/page.tsx for the counts).
+const MOOD_RAILS: { tag: string; label: string }[] = [
+  { tag: "Brain", label: "BRAIN GAMES" },
+  { tag: "3D", label: "3D EXPERIENCE" },
+  { tag: "Relaxation", label: "CHILL & RELAX" },
+];
 
 const CATEGORY_RAILS: { category: GameCategory; label: string }[] = [
   { category: "action", label: "ACTION GAMES" },
@@ -40,7 +50,7 @@ export default function HomePage() {
   // already scrolled past (with the same badge) reads as broken/repetitive content.
   const shownIds = new Set([...heroIds, ...fallbackTrending.map((g) => g.id)]);
 
-  const newGames = gamesData.filter((g) => g.isNew && !shownIds.has(g.id)).slice(0, 7);
+  const newGames = gamesData.filter((g) => isRecentlyAdded(g) && !shownIds.has(g.id)).slice(0, 7);
   const fallbackNew =
     newGames.length >= 2
       ? newGames
@@ -172,6 +182,17 @@ export default function HomePage() {
             })}
           </div>
         </section>
+
+        {/* ═══ DISCOVER BY MOOD — cross-category picks, not another genre list ═══ */}
+        {MOOD_RAILS.map(({ tag, label }) => (
+          <TagRail
+            key={tag}
+            tag={tag}
+            label={label}
+            games={gamesData}
+            excludeIds={heroIds}
+          />
+        ))}
 
         {/* ═══ PER-CATEGORY RAILS ═══ */}
         {CATEGORY_RAILS.map(({ category, label }) => (

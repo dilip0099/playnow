@@ -30,7 +30,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "card",
     "shooter",
     "first-person-shooter",
-    "trivia",
     "io",
     "two-player",
     "car",
@@ -44,6 +43,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "escape",
     "defense",
     "word",
+    "brain",
+    "3d",
+    "relaxation",
   ];
 
   // Franchise slugs with real, genuinely-matching games backing them (see

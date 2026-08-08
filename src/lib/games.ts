@@ -19,8 +19,21 @@ export function getTrendingGames(): GameMetadata[] {
   return gamesData.filter((g) => g.trending);
 }
 
+const NEW_GAME_WINDOW_DAYS = 14;
+
+// Whether a game counts as "new" is derived live from its real releaseDate rather than a
+// stored flag — a stored boolean would need re-touching on every deploy to expire correctly,
+// which conflicts with the catalog import being additive-only (existing entries are never
+// rewritten). Deriving it live means the badge naturally stops showing after the window passes,
+// with no extra logic needed.
+export function isRecentlyAdded(game: GameMetadata, days = NEW_GAME_WINDOW_DAYS): boolean {
+  const releasedAt = new Date(game.releaseDate).getTime();
+  if (Number.isNaN(releasedAt)) return false;
+  return Date.now() - releasedAt < days * 24 * 60 * 60 * 1000;
+}
+
 export function getNewGames(): GameMetadata[] {
-  return gamesData.filter((g) => g.isNew);
+  return gamesData.filter((g) => isRecentlyAdded(g));
 }
 
 export function getGamesByCategory(category: GameCategory): GameMetadata[] {

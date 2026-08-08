@@ -344,7 +344,9 @@ export async function importGameMonetizeCatalog() {
       // fabricate a specific-looking statistic when there's no real source for it.
       featured: idx < 6,
       trending: idx % 4 === 0,
-      isNew: idx % 5 === 0,
+      // No isNew flag: "new" is now derived live from releaseDate (see isRecentlyAdded in
+      // lib/games.ts) so the badge naturally expires — a stored flag would need re-touching on
+      // every deploy to stay honest, which additive-only imports deliberately don't do.
       isExclusive: idx % 6 === 0,
       isRewarded: idx % 3 === 0,
       subType: "HTML5",

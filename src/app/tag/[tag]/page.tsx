@@ -10,7 +10,9 @@ interface TagPageProps {
   params: Promise<{ tag: string }>;
 }
 
-// Built directly from the real "tags" values in src/data/games.json (211 games total).
+// Built from the real "tags" values in src/data/games.json — re-verified 2026-08-08 against the
+// current 590-game GameMonetize catalog (counts per tag differ from when this was first written
+// against a 211-game GamePix catalog, but every key below still has real, non-trivial depth).
 // Two kinds of tags were deliberately excluded from this map, both to avoid thin/duplicate pages:
 //   1. "landscape" / "portrait" / "all" — these are device-orientation metadata on each game,
 //      not thematic tags, so a "Landscape Games" page would be meaningless to a visitor.
@@ -19,7 +21,8 @@ interface TagPageProps {
 //      one of these, the tag's game set is 100% identical to /category/[slug]'s game set, so a
 //      /tag/ page would be exact duplicate content of an existing category page.
 // What's left are genuine sub-collections (a themed slice within one or more categories) that each
-// have 4+ real games — the threshold below which a listing page reads as thin/empty.
+// have 4+ real games — the threshold below which a listing page reads as thin/empty. "trivia" was
+// dropped 2026-08-08: the closest real tag is "Quiz" with only 3 games, under that bar.
 const TAG_SEO: Record<string, { h1: string; title: string; description: string; intro: string }> = {
   board: {
     h1: "Board Games",
@@ -84,14 +87,6 @@ const TAG_SEO: Record<string, { h1: string; title: string; description: string; 
       "Play free first-person shooter games online instantly — browser-based FPS action. No download required.",
     intro:
       "First-person shooters that run entirely in the browser tab — no launcher, no patch downloads, just load in and play.",
-  },
-  trivia: {
-    h1: "Trivia Games",
-    title: "Free Trivia Games Online - Quiz & Knowledge Games",
-    description:
-      "Play free trivia games online instantly — quiz and knowledge games playable in your browser. No download needed.",
-    intro:
-      "Quiz-style trivia games for testing what you know, playable instantly with no download or sign-up.",
   },
   io: {
     h1: "IO Games",
@@ -197,9 +192,48 @@ const TAG_SEO: Record<string, { h1: string; title: string; description: string; 
     intro:
       "Challenge your vocabulary and spelling skills with daily word search, anagram, and crossword-style puzzles.",
   },
+  brain: {
+    h1: "Brain Games",
+    title: "Free Brain Games Online - Mind & Memory Training",
+    description:
+      "Play free brain games online instantly — memory, focus, and reasoning games that double as a quick mental workout. No download required.",
+    intro:
+      "A mental workout disguised as a quick browser session — memory, focus, and reasoning games pulled from across every category.",
+  },
+  "3d": {
+    h1: "3D Games",
+    title: "Free 3D Games Online - Play Instantly in Your Browser",
+    description:
+      "Play free 3D games online instantly — real depth and perspective rendered directly in your browser, no download or plugin needed.",
+    intro:
+      "Real 3D environments rendered live in the browser tab — no download, no plugin, no separate launcher.",
+  },
+  relaxation: {
+    h1: "Relaxing Games",
+    title: "Free Relaxing Games Online - Calm, Low-Pressure Play",
+    description:
+      "Play free relaxing games online instantly — low-pressure, no-timer games for winding down. No download required.",
+    intro:
+      "No timers, no fail states chasing you — just low-pressure games for when you want to switch your brain off for a bit.",
+  },
 };
 
 const VALID_TAGS = Object.keys(TAG_SEO);
+
+// GameMonetize's feed returns tags Title-Cased and sometimes multi-word (e.g. "First Person
+// Shooter", ".io"), while every /tag/[tag] URL is lowercase-and-dashed. A plain `tags.includes()`
+// against the raw URL param never matches real data at all — this normalizes both sides the same
+// way links are already generated elsewhere (see the tag-pill slug logic on the game detail page).
+function tagSlug(tag: string): string {
+  return tag.toLowerCase().trim().replace(/^\.+/, "").replace(/\s+/g, "-");
+}
+
+// A couple of URL slugs use a word GameMonetize's feed spells differently ("two-player" vs the
+// feed's "2 Player"/"2 Player Games") — slug normalization alone can't bridge a numeral/word
+// difference, so these map explicitly instead of silently showing zero games.
+const TAG_ALIASES: Record<string, string[]> = {
+  "two-player": ["2-player", "2-player-games"],
+};
 
 export async function generateStaticParams() {
   return VALID_TAGS.map((tag) => ({ tag }));
@@ -238,7 +272,8 @@ export default async function TagPage({ params }: TagPageProps) {
   }
 
   const seo = TAG_SEO[normalizedTag];
-  const games = getAllGames().filter((g) => g.tags.includes(normalizedTag));
+  const acceptedSlugs = [normalizedTag, ...(TAG_ALIASES[normalizedTag] || [])];
+  const games = getAllGames().filter((g) => g.tags.some((t) => acceptedSlugs.includes(tagSlug(t))));
 
   const jsonLd = {
     "@context": "https://schema.org",

@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Play } from "lucide-react";
 import { GameMetadata } from "@/types/game";
 import { ASPECT_RATIO_CLASS, GameAspectRatio } from "@/lib/aspect-ratio";
+import { isRecentlyAdded } from "@/lib/games";
 
 interface GameCardProps {
   game: GameMetadata;
@@ -26,7 +27,7 @@ export function GameCard({
     ? "⚡ REWARD"
     : game.trending
     ? "TRENDING"
-    : game.isNew
+    : isRecentlyAdded(game)
     ? "NEW"
     : null;
 

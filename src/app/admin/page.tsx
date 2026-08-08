@@ -22,7 +22,8 @@ function loadOverviewData() {
 export default function AdminPage() {
   const { games } = loadOverviewData();
   const commercialReadyCount = games.filter((g) => g.commercialReady).length;
-  const newThisWeek = games.filter((g) => g.isNew).length;
+  const oneWeekAgo = Date.now() - 7 * 24 * 60 * 60 * 1000;
+  const newThisWeek = games.filter((g) => new Date(g.releaseDate).getTime() > oneWeekAgo).length;
 
   return (
     <div className="min-h-screen bg-background text-foreground py-10">
