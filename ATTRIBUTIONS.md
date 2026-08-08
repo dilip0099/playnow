@@ -495,3 +495,102 @@ PlayThorn's game catalog is licensed through **GameMonetize** (https://gamemonet
 | **Maya Brick Breaker-3** | classic | `16108` | [GameMonetize](https://html5.gamemonetize.co/ggwbqld7554cwejjmtjtz196vxasdjmt/) |
 | **Classic Match3** | classic | `80091` | [GameMonetize](https://html5.gamemonetize.co/1w0bymsiei48gz26ck4vwhcpbg5ls3xs/) |
 | **Dungeon Solitaire** | classic | `80037` | [GameMonetize](https://html5.gamemonetize.co/typvb39i68hb41c0rzlf1bh6w7wd1ohv/) |
+| **Tank Strike Wasteland Rogue** | action | `79920` | [GameMonetize](https://html5.gamemonetize.co/pd4jq4ikzsg0fsk18vs6ofyhpbfiimem/) |
+| **Car Parking Simulator 3** | action | `79890` | [GameMonetize](https://html5.gamemonetize.co/l85o0eds3415tw2hv8ki8cp70jknqcup/) |
+| **Crime Wars San Andreas** | action | `79777` | [GameMonetize](https://html5.gamemonetize.co/zgkpu22p8qekzct8z4b95lv69rh6s58c/) |
+| **Zombie Grave Yard** | action | `79699` | [GameMonetize](https://html5.gamemonetize.co/5k1yi3sk6s1oc2walu3po2ujxylbvjb6/) |
+| **Neck Stack Rush** | action | `79701` | [GameMonetize](https://html5.gamemonetize.co/da91ozg3wbzs01514505puzfnmw0zl62/) |
+| **Rainbow Friends Survival FPS** | action | `79740` | [GameMonetize](https://html5.gamemonetize.co/epxqbbbq6vmci2as75d2rlx5b23c20os/) |
+| **SliceStorm** | action | `79776` | [GameMonetize](https://html5.gamemonetize.co/1hwhdlx3ryyql1pi7w43z2wce5t3rcjc/) |
+| **Parking Puzzle Escape Challenge** | action | `64698` | [GameMonetize](https://html5.gamemonetize.co/edxmfvrkaajbglmw5djpohp4yd134fac/) |
+| **I Scream IceCream** | puzzle | `79609` | [GameMonetize](https://html5.gamemonetize.co/9radhkzhl8wdfihe9wi1mqp6w4l06em2/) |
+| **House Paint Challenge** | puzzle | `76295` | [GameMonetize](https://html5.gamemonetize.co/d5yymum1ygbx4ft8az81lg4ogpdbsno5/) |
+| **Crystal Treasures: Match 3** | puzzle | `80086` | [GameMonetize](https://html5.gamemonetize.co/t10ve3df3y6uyua2e8lyy082fwlyoo4z/) |
+| **HueHearts** | puzzle | `80109` | [GameMonetize](https://html5.gamemonetize.co/b2lg38duvcy66q4uuroz7kvntgo1gv8c/) |
+| **Lion Prince** | puzzle | `80071` | [GameMonetize](https://html5.gamemonetize.co/deynybt6gzxrgoy6llrb9gcp81k9gb4a/) |
+| **Good Sorting Puzzle Game** | puzzle | `79896` | [GameMonetize](https://html5.gamemonetize.co/swrwfm3bfntgiwmx3sz9zubj31pc2eh0/) |
+| **Good Sort ** | puzzle | `79986` | [GameMonetize](https://html5.gamemonetize.co/jidxua3lyxswg0zsnwabjd625bc0azsr/) |
+| **Girl Explorer: Jigsaw Puzzles** | puzzle | `79999` | [GameMonetize](https://html5.gamemonetize.co/h3dh8itd30fsjhu1a3jt3lgblx3wfo9u/) |
+| **Candy Cutter Saga Kids** | puzzle | `80060` | [GameMonetize](https://html5.gamemonetize.co/h288kgac1u15kzi490tc2e0yzy0qgrn1/) |
+| **Plane Escape Puzzle** | puzzle | `79934` | [GameMonetize](https://html5.gamemonetize.co/kqgk4524prmj8pnjdzwvmxso1z6t9jaq/) |
+| **Snake Sorting** | puzzle | `79958` | [GameMonetize](https://html5.gamemonetize.co/trnvxes4eiaadodofilpk5s2gjbrpbyy/) |
+| **Car Chasing** | puzzle | `79983` | [GameMonetize](https://html5.gamemonetize.co/48npnes12qonl33ssaya3866khs9gt98/) |
+| **Summer Spot the Differense** | puzzle | `80061` | [GameMonetize](https://html5.gamemonetize.co/k860hj8k0q05slrsmukwtoxwhs7nynmb/) |
+| **Sliding Tile Puzzle Game** | puzzle | `77659` | [GameMonetize](https://html5.gamemonetize.co/v48ve1i2snfou1bv4yidv7pup1en4zu2/) |
+| **Memory** | puzzle | `16101` | [GameMonetize](https://html5.gamemonetize.co/feq5hkgxjhww8p1a98xiev9wpxqyixyy/) |
+| **Moving Magnet** | puzzle | `79887` | [GameMonetize](https://html5.gamemonetize.co/7pmla0dtaz56alpxp7bnit4fvh3y2y9a/) |
+| **Match Ten Number Puzzle** | puzzle | `79888` | [GameMonetize](https://html5.gamemonetize.co/8yk0k3knlu7f9pc69vymxlbxcyb90l67/) |
+| **Candy Boom Links** | puzzle | `79014` | [GameMonetize](https://html5.gamemonetize.co/tcw8zcv5f9a2svuc4wyvkittiq96m1bp/) |
+| **Cloudline Connect** | puzzle | `77730` | [GameMonetize](https://html5.gamemonetize.co/aqhi5a6heileaylxr4itvv5hliitqvsj/) |
+| **Kidz Coloring Book** | puzzle | `78759` | [GameMonetize](https://html5.gamemonetize.co/t8yr1m2z4f3xc9ppolvn8irtpi9etp1s/) |
+| **Viking Guard Game** | puzzle | `79869` | [GameMonetize](https://html5.gamemonetize.co/qteywuzz059jjbifx42x8t8e6889o3jn/) |
+| **Mini Shape Shifting** | puzzle | `79892` | [GameMonetize](https://html5.gamemonetize.co/kkf14nyj6ymft8581265ab1j5fyf15xx/) |
+| **Bubble Sorting Game** | puzzle | `77262` | [GameMonetize](https://html5.gamemonetize.co/za3thnder4piit44rhppx3v7kyqngcdg/) |
+| **The Forest Friends** | puzzle | `77643` | [GameMonetize](https://html5.gamemonetize.co/72wz3tk3ps63d57cffzh9apgndznugkm/) |
+| **Color Ring Sorting Match** | puzzle | `79848` | [GameMonetize](https://html5.gamemonetize.co/36ykfhfneaz9d16ms2hguj7kp3pvzbc6/) |
+| **Go monkey &amp; Banana** | puzzle | `79847` | [GameMonetize](https://html5.gamemonetize.co/c4jmppg52m3t4g8z8rd7h0587ivf6qka/) |
+| **Baby Taylor Memory Quest** | puzzle | `79821` | [GameMonetize](https://html5.gamemonetize.co/qr42xtuoh3mir3ecsm0ebov3snpljf8o/) |
+| **Water Flow Happy Glass** | puzzle | `79605` | [GameMonetize](https://html5.gamemonetize.co/rmkn63s02xxxhx6c2rj62h1r2ng7zp8r/) |
+| **Wool Sort: Yarn Color Puzzle** | puzzle | `79686` | [GameMonetize](https://html5.gamemonetize.co/q8pn8dmqx4cc9tqrkay8dx89d64j8pl2/) |
+| **Toy Factory Conveyor ** | puzzle | `79597` | [GameMonetize](https://html5.gamemonetize.co/g6sxwnsg51ug2qtm71np780ws0ncsuzh/) |
+| **Block Escape 2** | puzzle | `79738` | [GameMonetize](https://html5.gamemonetize.co/cokd5ro0vi3i2nbdil01rtuu0wu94qlii/) |
+| **Line Runners** | puzzle | `77816` | [GameMonetize](https://html5.gamemonetize.co/hz79oxukxeh58p3pzohr6jwiq2uy8iff/) |
+| **Divide Puzzle Arcade** | puzzle | `77631` | [GameMonetize](https://html5.gamemonetize.co/8m8kz4h74n7l19a75bqurn4fb34witu0/) |
+| **Rainbow Jump Puzzle** | puzzle | `77584` | [GameMonetize](https://html5.gamemonetize.co/7vwm7p02sjatzn0beutyobzvrmof2s0m/) |
+| **Island Merge war** | puzzle | `79670` | [GameMonetize](https://html5.gamemonetize.co/e6v3o7qbx6wqw6h4w2nwakemc0l2a91w/) |
+| **Arrow Tap Game** | puzzle | `79645` | [GameMonetize](https://html5.gamemonetize.co/ovzl9tvyuf57i590httyfykwpz3m7m6x/) |
+| **Haunted Sweets** | puzzle | `79255` | [GameMonetize](https://html5.gamemonetize.co/k4gnq84hto05yu1ag8powiom4k6fb7iy/) |
+| **Hole Upper For 2 Players** | arcade | `80121` | [GameMonetize](https://html5.gamemonetize.co/fwwj2mbch9lwce11ghcnmy9mp2mn86om/) |
+| **Cocktail Run** | arcade | `79996` | [GameMonetize](https://html5.gamemonetize.co/8qxph9epgx7wgcmfcmlh4cebydvtivq8/) |
+| **2 Player Games Princess Design Party** | arcade | `80104` | [GameMonetize](https://html5.gamemonetize.co/tur68ugi2tcl3qv9oingkqr1ht5kq2lz/) |
+| **Diana S City Fashion Beauty** | arcade | `80101` | [GameMonetize](https://html5.gamemonetize.co/4642r8665kprf9ro93k21yukzeojxwed/) |
+| **Cooking Clash** | arcade | `79849` | [GameMonetize](https://html5.gamemonetize.co/b8oh3al9pfcfq6ji4iryba3peehvymod/) |
+| **Sniper Shooting Game** | arcade | `80036` | [GameMonetize](https://html5.gamemonetize.co/bordkcb0sx5wuh4gd7le2h1i4ih2msmi/) |
+| **Orbit Ring 2** | arcade | `77644` | [GameMonetize](https://html5.gamemonetize.co/bwypthrw0byg591j9ym80loc08pgixr8/) |
+| **GlowFall** | arcade | `80052` | [GameMonetize](https://html5.gamemonetize.co/r3pb3r0almr6wa3ltjub0ei54k6ib1ot/) |
+| **Truck Slam** | arcade | `79933` | [GameMonetize](https://html5.gamemonetize.co/zzkoub6xkzrqd9v58hl50i25hk86dcjm/) |
+| **Ocean Match Puzzle** | arcade | `77316` | [GameMonetize](https://html5.gamemonetize.co/aosox6ysmr96mpeteubtsnrfh2gqadei/) |
+| **Words Search Puzzle Game** | arcade | `73209` | [GameMonetize](https://html5.gamemonetize.co/wd81id0cpe8pmaig7aliq1pf01os7gtw/) |
+| **Crazy Truck Stunt i.o** | arcade | `79982` | [GameMonetize](https://html5.gamemonetize.co/hjbz6sh30wwjrhbom6ld7o33sruhq40g/) |
+| **ASMR Cat Doctor Clinic** | arcade | `79702` | [GameMonetize](https://html5.gamemonetize.co/qfpr226dj5yd9ayrll38hjesj3b6ymsa/) |
+| **DinoHop** | arcade | `79624` | [GameMonetize](https://html5.gamemonetize.co/eil1kxl3uy8b0vi39238spdctoqz9r0o/) |
+| **FireBoom** | arcade | `79643` | [GameMonetize](https://html5.gamemonetize.co/l37tqemv234y6n8i9f2kwn3g3m020ngx/) |
+| **Triple Car Jam** | arcade | `79683` | [GameMonetize](https://html5.gamemonetize.co/entlpcg6ar9dpg23gi130rxdom4tu0op/) |
+| **Disc Battle Ultimate** | arcade | `79713` | [GameMonetize](https://html5.gamemonetize.co/yt8s3oimt2vvpxfwyktrqv4om5hq9uu6/) |
+| **Snash Master: Snail Fun Game** | arcade | `79669` | [GameMonetize](https://html5.gamemonetize.co/fa0uhqpk6iywyzimffzccgy80iosayar/) |
+| **Fish Hunting ** | arcade | `77238` | [GameMonetize](https://html5.gamemonetize.co/neo8zjr4p90ypklgzcypeltsuxszkjl8/) |
+| **Crazy Moto** | racing | `80103` | [GameMonetize](https://html5.gamemonetize.co/s74g69865ye0ps8z2bvoc4cyu7r5iock/) |
+| **Monster Truck Offroad** | racing | `79960` | [GameMonetize](https://html5.gamemonetize.co/a3jgsz6mwp6ygkkc79pga3s4k9st3i43/) |
+| **Car Stunt Racing Stylized** | racing | `79943` | [GameMonetize](https://html5.gamemonetize.co/wc1jkzey2mu15um074zx1mgujcp2nc8l/) |
+| **Go Kart Racing Game** | racing | `79646` | [GameMonetize](https://html5.gamemonetize.co/op8z87x6dltznob1zzs7yu2n3xqxktlg/) |
+| **Shoot Them Down** | adventure | `78357` | [GameMonetize](https://html5.gamemonetize.co/nhqhyqsn6u0uc1rkvoh3zh581q1nug7z/) |
+| **Geometry Man Dash Lite** | adventure | `80042` | [GameMonetize](https://html5.gamemonetize.co/vy1y98okjee38uizkyjsql41gak66b8a/) |
+| **Gunship Strike Helicopter Game** | adventure | `79981` | [GameMonetize](https://html5.gamemonetize.co/r3lsomv35849vk879eck7rph9zdhydk4/) |
+| **Tanks 1944** | adventure | `79868` | [GameMonetize](https://html5.gamemonetize.co/e3u0gb0n19xb1rq5dbpmg1e7zf8lvjau/) |
+| **Forest Survivor Challenge** | adventure | `75633` | [GameMonetize](https://html5.gamemonetize.co/3b94kcpo5w3tl4knnj27ahvqsvd8bc5j/) |
+| **Zombie swarm** | strategy | `80107` | [GameMonetize](https://html5.gamemonetize.co/jgbxplcymt6ccgoo4j724csv030uthxd/) |
+| **Resource Empire** | strategy | `80108` | [GameMonetize](https://html5.gamemonetize.co/suh0t5ba29tw7m38daqzscuhfspi93e1/) |
+| **Nexusorbiter** | strategy | `79970` | [GameMonetize](https://html5.gamemonetize.co/0etcllezum2v9nl4hc3syd7rlp600x3w/) |
+| **Tower Blocks Deluxe 3D** | strategy | `80067` | [GameMonetize](https://html5.gamemonetize.co/vwcbboa75ji33lig3y44imwjyi8k4v7r/) |
+| **Fitness Club Tycoon** | strategy | `79901` | [GameMonetize](https://html5.gamemonetize.co/0gwziijg25edelf4k9e5r0nfxogwo2bt/) |
+| **Dream Restaurant Tycoon** | strategy | `79882` | [GameMonetize](https://html5.gamemonetize.co/b5n4s4akhv1ch6rpuffdr9deo3xnastd/) |
+| **Melon Sandbox Online** | strategy | `79576` | [GameMonetize](https://html5.gamemonetize.co/efoxwtdtls927pvhs87y0t895n7esdf8/) |
+| **Police Bus Simulation** | strategy | `79681` | [GameMonetize](https://html5.gamemonetize.co/8bj8ydqwu9vy28zeoa34bvv3sump5adx/) |
+| **Family Pet Dog Games** | strategy | `79779` | [GameMonetize](https://html5.gamemonetize.co/jsppow7mm7n51w3m3k9laq4dw1t0ka4w/) |
+| **SUPER SAVING FOOTBALL** | sports | `79913` | [GameMonetize](https://html5.gamemonetize.co/ldwjgalpmfkuoqpgt93yws5lns4n8ky8/) |
+| **Moon League Sports Season** | sports | `80094` | [GameMonetize](https://html5.gamemonetize.co/do2pfp3azyubgjle7m5ag1exl9rv5gcr/) |
+| **Sporty Viper** | sports | `80097` | [GameMonetize](https://html5.gamemonetize.co/gd7itozno5q3yf140ztoiy3uxmwo3211/) |
+| **SportLoop** | sports | `80053` | [GameMonetize](https://html5.gamemonetize.co/gn0ceaxhgylhpx8uivtwqfxwtuxvjm8j/) |
+| **Bike Stunt Game** | sports | `79898` | [GameMonetize](https://html5.gamemonetize.co/rvu226yu1yfb6bwg5bzr927lxo1rdeea/) |
+| **Mini Tennis 3D** | sports | `79616` | [GameMonetize](https://html5.gamemonetize.co/rpjz3ekcnuu2pswrxlsy7dbr5bo5mi1e/) |
+| **Battle of the Minds** | sports | `64667` | [GameMonetize](https://html5.gamemonetize.co/exixzssmyx10a506n8o5og5yo8ahwlc3/) |
+| **2 Player Games Design Salon** | multiplayer | `80054` | [GameMonetize](https://html5.gamemonetize.co/5wy6cu57w7in9vd5j0tibut3ywi2g7zw/) |
+| **Cute Tiles Mahjong** | classic | `79490` | [GameMonetize](https://html5.gamemonetize.co/tax82wd1avoqh3qoku06q08f2rk7z8jm/) |
+| **Alphabet Mahjong** | classic | `79955` | [GameMonetize](https://html5.gamemonetize.co/blmge6fwfpytpcmx7gygprx9arxft009/) |
+| **Maze Runner Ball** | classic | `80038` | [GameMonetize](https://html5.gamemonetize.co/qhole4l6skz8fpkkd1tce1a2nvyen36v/) |
+| **Summer Triple Mahjong** | classic | `79580` | [GameMonetize](https://html5.gamemonetize.co/ixs7iswh4e6jxxmxz36f8p5yiijpksmq/) |
+| **Food Conveyor** | classic | `80006` | [GameMonetize](https://html5.gamemonetize.co/63ifxa9nn05tmzc9mngg3od70myguzwk/) |
+| **Batting Kings** | classic | `79916` | [GameMonetize](https://html5.gamemonetize.co/iiu9y60li6t68v8ox31mg6o5rz990xhq/) |
+| **Happy Fruit Link** | classic | `79581` | [GameMonetize](https://html5.gamemonetize.co/clxv28usb56woorznr1f9jhoxhi1k7nn/) |
+| **Lovely Princess** | classic | `16097` | [GameMonetize](https://html5.gamemonetize.co/erjngi2cbuwkk5bc1qg0ukh49nirqd14/) |
+| **Hazel Tic Tac Toe** | classic | `79778` | [GameMonetize](https://html5.gamemonetize.co/httpo6vbpzf2lkrd1bo1uazuvuanhayw/) |

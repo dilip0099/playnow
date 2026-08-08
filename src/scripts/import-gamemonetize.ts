@@ -254,8 +254,26 @@ export async function importGameMonetizeCatalog() {
   console.log("🎮 Fetching game catalog from GameMonetize (no domain whitelist)...");
   const rejectedForBrandRisk: { title: string; conflicts: string[] }[] = [];
 
+  // Additive-only: a game already in the catalog stays, even if it later drops out of the
+  // live feed or a category's quota — dropping it would 404 an already-indexed URL with no
+  // possible redirect (unlike the hash-slug→readable-slug migration, there's no mapping for a
+  // game that's simply gone). This run only ever adds new games on top of what's already here.
+  let existingGames: GameMetadata[] = [];
+  try {
+    existingGames = JSON.parse(fs.readFileSync(OUTPUT_DATA_FILE, "utf-8")) as GameMetadata[];
+  } catch {
+    existingGames = [];
+  }
+  const existingIds = new Set(existingGames.map((g) => g.id));
+  const usedSlugs = new Set(existingGames.map((g) => g.slug));
+  const existingCountByCategory = VALID_CATEGORIES.reduce((acc, cat) => {
+    acc[cat] = existingGames.filter((g) => g.category === cat).length;
+    return acc;
+  }, {} as Record<GameCategory, number>);
+
   function qualifies(i: GameMonetizeItem): boolean {
     if (!i.title || !i.url) return false;
+    if (existingIds.has(crypto.createHash("md5").update(i.url).digest("hex"))) return false;
     const conflicts = hasBrandRisk(`${i.title} ${i.description}`);
     if (conflicts.length > 0) {
       rejectedForBrandRisk.push({ title: i.title, conflicts });
@@ -266,7 +284,7 @@ export async function importGameMonetizeCatalog() {
 
   const rawPool = await fetchPages(TOTAL_PAGES);
   const qualityPool = dedupeById(rawPool).filter(qualifies);
-  console.log(`   ${qualityPool.length} valid games after dedup & brand-risk filtering.`);
+  console.log(`   ${qualityPool.length} new candidate games after dedup, brand-risk & already-imported filtering.`);
 
   const byCategory: Record<GameCategory, GameMonetizeItem[]> = {
     action: [], puzzle: [], arcade: [], racing: [], adventure: [],
@@ -282,16 +300,16 @@ export async function importGameMonetizeCatalog() {
 
   VALID_CATEGORIES.forEach((cat) => {
     const quota = CATEGORY_QUOTA[cat] ?? TARGET_PER_CATEGORY;
-    byCategory[cat].slice(0, quota).forEach((item) => {
+    const room = Math.max(0, quota - existingCountByCategory[cat]);
+    byCategory[cat].slice(0, room).forEach((item) => {
       selected.push({ item, siteCategory: cat });
     });
   });
 
-  console.log(`✅ Selected ${selected.length} games across ${VALID_CATEGORIES.length} categories.`);
+  console.log(`✅ Adding ${selected.length} new games on top of ${existingGames.length} already in the catalog.`);
 
   const now = new Date().toISOString();
-  const usedSlugs = new Set<string>();
-  const games: GameMetadata[] = selected.map(({ item, siteCategory }, idx) => {
+  const newGames: GameMetadata[] = selected.map(({ item, siteCategory }, idx) => {
     const scanResult = scanGameForTrademarks(item.title, item.description, "", "Open Licensed");
     const thumbnailUrl = item.thumb || `https://img.gamemonetize.com/${item.url.split("/").filter(Boolean).pop()}/512x384.jpg`;
     // GameMonetize only hosts 512x384.jpg thumbnail; use it for cover, hero, and screenshots as well
@@ -368,16 +386,20 @@ export async function importGameMonetizeCatalog() {
     return game;
   });
 
-  if (games.length === 0) {
-    console.warn("⚠️ No games fetched (rate limited or API error). Skipping games.json overwrite to preserve existing catalog.");
-    return { games: [] };
+  if (newGames.length === 0) {
+    console.log("ℹ️  No new qualifying games found this run — catalog unchanged.");
   }
+
+  // Additive-only: existing entries are carried through completely untouched (same slug, id,
+  // releaseDate, flags — nothing about an already-live game is ever rewritten by a later run).
+  const games: GameMetadata[] = [...existingGames, ...newGames];
 
   fs.writeFileSync(OUTPUT_DATA_FILE, JSON.stringify(games, null, 2), "utf-8");
 
   const report = {
     timestamp: now,
-    totalImported: games.length,
+    totalGames: games.length,
+    newlyAdded: newGames.length,
     sourceNetwork: "GameMonetize",
     categoryDistribution: VALID_CATEGORIES.reduce((acc, cat) => {
       acc[cat] = games.filter((g) => g.category === cat).length;
@@ -397,7 +419,7 @@ export async function importGameMonetizeCatalog() {
   });
   fs.writeFileSync(ATTRIBUTIONS_FILE, md, "utf-8");
 
-  console.log(`🚀 Wrote ${games.length} games from GameMonetize to games.json`);
+  console.log(`🚀 games.json now has ${games.length} games (${newGames.length} newly added this run).`);
   return { games };
 }
 

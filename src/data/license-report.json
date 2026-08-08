@@ -1,17 +1,18 @@
 {
-  "timestamp": "2026-08-08T13:05:09.540Z",
-  "totalImported": 491,
+  "timestamp": "2026-08-08T13:53:03.124Z",
+  "totalGames": 590,
+  "newlyAdded": 99,
   "sourceNetwork": "GameMonetize",
   "categoryDistribution": {
-    "action": 21,
-    "puzzle": 176,
-    "arcade": 132,
-    "racing": 21,
-    "adventure": 35,
-    "strategy": 46,
-    "sports": 26,
-    "multiplayer": 7,
-    "classic": 27
+    "action": 29,
+    "puzzle": 213,
+    "arcade": 151,
+    "racing": 25,
+    "adventure": 40,
+    "strategy": 55,
+    "sports": 33,
+    "multiplayer": 8,
+    "classic": 36
   },
   "rejectedForBrandRisk": [
     {
@@ -66,6 +67,12 @@
       "title": "Bird Obstacle Flappy",
       "conflicts": [
         "FLAPPY BIRD"
+      ]
+    },
+    {
+      "title": "FNAF Strike Shooter",
+      "conflicts": [
+        "FNAF"
       ]
     }
   ]
