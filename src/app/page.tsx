@@ -24,10 +24,11 @@ const CATEGORY_RAILS: { category: GameCategory; label: string }[] = [
 ];
 
 export default function HomePage() {
-  // Select a pool of the top 30 highest-rated & most popular games for the hero carousel
-  const bestGamesPool = [...gamesData]
-    .sort((a, b) => b.rating - a.rating || b.playsCount - a.playsCount)
-    .slice(0, 30);
+  // Select a pool of games for the hero carousel — GameMonetize's feed doesn't expose a real
+  // per-game popularity/rating signal, so this trusts the feed/import's own category-quality
+  // ordering (the array order games.json was written in) rather than sorting by a fabricated
+  // number.
+  const bestGamesPool = gamesData.slice(0, 30);
 
   const initialHeroGames = bestGamesPool.slice(0, 5);
   const heroIds = new Set(initialHeroGames.map((g) => g.id));

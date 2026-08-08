@@ -17,9 +17,7 @@ const QUICK_CATEGORIES = [
 ];
 
 export default function NotFound() {
-  const popularGames = [...gamesData]
-    .sort((a, b) => b.rating - a.rating || b.playsCount - a.playsCount)
-    .slice(0, 10);
+  const popularGames = gamesData.slice(0, 10);
 
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 space-y-12">

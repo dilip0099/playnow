@@ -44,8 +44,11 @@ export interface GameMetadata {
   controls: GameControl[];
   author: string;
   version: string;
-  rating: number; // 0.0 to 5.0
-  playsCount: number;
+  // Both optional: GameMonetize's feed doesn't provide real per-game rating or play-count data.
+  // Never fabricate a value for either — leave unset rather than invent a number (see the
+  // deliberate aggregateRating omission elsewhere in this codebase for the same principle).
+  rating?: number; // 0.0 to 5.0, only set when sourced from a real per-game signal
+  playsCount?: number;
   views?: number;
   plays?: number;
   favorites?: number;

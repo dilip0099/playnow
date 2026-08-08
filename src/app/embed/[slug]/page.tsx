@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import { getGameBySlug, getAllGames } from "@/lib/games";
 
 interface EmbedGamePageProps {
@@ -45,6 +45,9 @@ export default async function EmbedGamePage({ params }: EmbedGamePageProps) {
   const { slug } = await params;
   const game = getGameBySlug(slug);
   if (!game) notFound();
+  // Same id-fallback redirect as /game/[slug] — old hash-based embed URLs already live on
+  // third-party sites should keep working, but point at the canonical slug going forward.
+  if (game.slug !== slug) permanentRedirect(`/embed/${game.slug}`);
 
   return (
     <div className="fixed inset-0 z-[999] h-screen w-screen overflow-hidden bg-background">

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Star, Eye, Play } from "lucide-react";
+import { Play } from "lucide-react";
 import { GameMetadata } from "@/types/game";
 import { ASPECT_RATIO_CLASS, GameAspectRatio } from "@/lib/aspect-ratio";
 
@@ -69,18 +69,9 @@ export function GameCard({
 
           {/* Card Details */}
           <div className="flex flex-col space-y-1 min-w-0 flex-1">
-            <div className="flex items-center space-x-2 sm:space-x-3">
-              <div className="flex items-center space-x-1 text-primary text-[10px] sm:text-xs font-mono font-bold">
-                <Star className="h-3 w-3 sm:h-3.5 sm:w-3.5 fill-current" />
-                <span className="text-foreground">{game.rating.toFixed(1)}</span>
-              </div>
-              {game.playsCount > 0 && (
-                <div className="flex items-center space-x-1 text-muted-foreground text-[10px] sm:text-xs font-mono">
-                  <Eye className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
-                  <span>{(game.playsCount / 1000).toFixed(1)}k plays</span>
-                </div>
-              )}
-            </div>
+            <span className="font-mono text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
+              {game.category}
+            </span>
 
             <h3 className="font-display text-xs sm:text-base font-bold text-foreground truncate transition-colors group-hover:text-primary">
               {displayTitle}
@@ -151,22 +142,9 @@ export function GameCard({
         <h3 className="font-display text-[11px] sm:text-sm font-bold text-foreground truncate transition-colors group-hover:text-primary">
           {displayTitle}
         </h3>
-
-        <div className="flex items-center justify-between font-mono text-[9px] sm:text-[11px] text-muted-foreground">
-          {/* Star Rating */}
-          <div className="flex items-center space-x-1 text-primary">
-            <Star className="h-2.5 w-2.5 sm:h-3 sm:w-3 fill-current" />
-            <span className="font-bold text-foreground">{game.rating.toFixed(1)}</span>
-          </div>
-
-          {/* Plays Count */}
-          {game.playsCount > 0 && (
-            <div className="flex items-center space-x-1 text-muted-foreground">
-              <Eye className="h-2.5 w-2.5 sm:h-3 sm:w-3" />
-              <span>{(game.playsCount / 1000).toFixed(1)}k</span>
-            </div>
-          )}
-        </div>
+        <span className="font-mono text-[9px] sm:text-[11px] font-bold uppercase tracking-wider text-muted-foreground">
+          {game.category}
+        </span>
       </div>
     </Link>
   );

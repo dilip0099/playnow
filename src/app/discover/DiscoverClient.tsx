@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { LayoutGrid, List, Star, SlidersHorizontal } from "lucide-react";
+import { LayoutGrid, List, SlidersHorizontal } from "lucide-react";
 import { GameMetadata, SortOption } from "@/types/game";
 import { GameCard } from "@/components/games/GameCard";
 import { Dialog } from "@/components/ui/dialog";
@@ -26,8 +26,6 @@ const GENRE_FILTERS = [
 interface FilterControlsProps {
   selectedGenre: string | null;
   setSelectedGenre: (value: string | null) => void;
-  topRatedOnly: boolean;
-  setTopRatedOnly: (value: boolean) => void;
   selectedTag: string | null;
   setSelectedTag: (value: string | null) => void;
   webGlOnly: boolean;
@@ -37,8 +35,6 @@ interface FilterControlsProps {
 function FilterControls({
   selectedGenre,
   setSelectedGenre,
-  topRatedOnly,
-  setTopRatedOnly,
   selectedTag,
   setSelectedTag,
   webGlOnly,
@@ -83,18 +79,6 @@ function FilterControls({
           >
             <span>🎮 3D WebGL HD</span>
           </button>
-          <button
-            onClick={() => setTopRatedOnly(!topRatedOnly)}
-            aria-pressed={topRatedOnly}
-            className={`flex items-center space-x-1.5 rounded-full border px-2.5 py-1 font-mono font-bold text-[10px] transition-colors ${
-              topRatedOnly
-                ? "border-primary bg-primary/10 text-primary"
-                : "border-border text-muted-foreground hover:text-foreground"
-            }`}
-          >
-            <Star className={`h-3 w-3 ${topRatedOnly ? "fill-current" : ""}`} aria-hidden="true" />
-            <span>4.5+ Top Rated</span>
-          </button>
         </div>
       </div>
 
@@ -123,7 +107,6 @@ function FilterControls({
 
 export function DiscoverClient({ initialGames }: DiscoverClientProps) {
   const [selectedGenre, setSelectedGenre] = useState<string | null>(null);
-  const [topRatedOnly, setTopRatedOnly] = useState(false);
   const [webGlOnly, setWebGlOnly] = useState(false);
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
   const [sortBy, setSortBy] = useState<SortOption>("popular");
@@ -131,20 +114,12 @@ export function DiscoverClient({ initialGames }: DiscoverClientProps) {
   const [visibleCount, setVisibleCount] = useState(21);
   const [isFilterDialogOpen, setIsFilterDialogOpen] = useState(false);
 
-  const activeFilterCount = (selectedGenre ? 1 : 0) + (topRatedOnly ? 1 : 0) + (webGlOnly ? 1 : 0) + (selectedTag ? 1 : 0);
-
-  const topTrending = useMemo(
-    () => [...initialGames].sort((a, b) => b.playsCount - a.playsCount)[0],
-    [initialGames]
-  );
+  const activeFilterCount = (selectedGenre ? 1 : 0) + (webGlOnly ? 1 : 0) + (selectedTag ? 1 : 0);
 
   const filteredGames = useMemo(() => {
     let result = [...initialGames];
     if (selectedGenre) {
       result = result.filter((g) => g.category.toLowerCase() === selectedGenre.toLowerCase());
-    }
-    if (topRatedOnly) {
-      result = result.filter((g) => g.rating >= 4.5);
     }
     if (webGlOnly) {
       result = result.filter((g) => (g.subType || "").toLowerCase().includes("webgl"));
@@ -154,13 +129,13 @@ export function DiscoverClient({ initialGames }: DiscoverClientProps) {
         (g.tags || []).some((t) => t.toLowerCase() === selectedTag.toLowerCase())
       );
     }
+    // "popular"/"rating" intentionally fall through to catalog order — no real per-game
+    // popularity or rating data exists to sort by (see src/types/game.ts).
     switch (sortBy) {
-      case "popular": return result.sort((a, b) => b.playsCount - a.playsCount);
-      case "rating": return result.sort((a, b) => b.rating - a.rating);
-      case "newest": return result.sort((a, b) => new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime());
+      case "newest": return result.sort((a, b) => new Date(b.releaseDate || 0).getTime() - new Date(a.releaseDate || 0).getTime());
       default: return result;
     }
-  }, [initialGames, selectedGenre, topRatedOnly, sortBy]);
+  }, [initialGames, selectedGenre, webGlOnly, selectedTag, sortBy]);
 
   const visibleGames = filteredGames.slice(0, visibleCount);
   const remainingCount = Math.max(0, filteredGames.length - visibleCount);
@@ -177,10 +152,6 @@ export function DiscoverClient({ initialGames }: DiscoverClientProps) {
               <span className="text-foreground font-black text-lg flex items-center">
                 {initialGames.length} <span className="text-muted-foreground font-normal ml-1.5 text-xs">Games Available</span>
               </span>
-            </div>
-            <div className="hidden sm:block">
-              <span className="text-muted-foreground text-[10px] block uppercase">MOST PLAYED</span>
-              <span className="text-foreground/80 font-bold">{topTrending?.derivedTitle || topTrending?.title}</span>
             </div>
           </div>
 
@@ -226,8 +197,6 @@ export function DiscoverClient({ initialGames }: DiscoverClientProps) {
         <FilterControls
           selectedGenre={selectedGenre}
           setSelectedGenre={setSelectedGenre}
-          topRatedOnly={topRatedOnly}
-          setTopRatedOnly={setTopRatedOnly}
           selectedTag={selectedTag}
           setSelectedTag={setSelectedTag}
           webGlOnly={webGlOnly}
@@ -249,8 +218,6 @@ export function DiscoverClient({ initialGames }: DiscoverClientProps) {
             <FilterControls
               selectedGenre={selectedGenre}
               setSelectedGenre={setSelectedGenre}
-              topRatedOnly={topRatedOnly}
-              setTopRatedOnly={setTopRatedOnly}
               selectedTag={selectedTag}
               setSelectedTag={setSelectedTag}
               webGlOnly={webGlOnly}

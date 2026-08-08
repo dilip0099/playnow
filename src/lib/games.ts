@@ -65,23 +65,16 @@ export function filterAndSortGames(options: GameFilterOptions): GameMetadata[] {
     result = result.filter((g) => g.trending);
   }
 
-  // Sort
+  // Sort — "popular"/"rating" intentionally fall through to catalog order: GameMonetize's
+  // feed doesn't expose a real per-game popularity or rating signal to sort by.
   switch (options.sortBy) {
-    case "popular":
-      result.sort((a, b) => b.playsCount - a.playsCount);
-      break;
-    case "rating":
-      result.sort((a, b) => b.rating - a.rating);
-      break;
     case "newest":
-      result.sort((a, b) => new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime());
+      result.sort((a, b) => new Date(b.releaseDate || 0).getTime() - new Date(a.releaseDate || 0).getTime());
       break;
     case "title":
       result.sort((a, b) => a.title.localeCompare(b.title));
       break;
     default:
-      // Default to popular
-      result.sort((a, b) => b.playsCount - a.playsCount);
       break;
   }
 

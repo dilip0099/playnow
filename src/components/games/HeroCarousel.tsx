@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight, Play, Heart, Star } from "lucide-react";
+import { ChevronLeft, ChevronRight, Play, Heart } from "lucide-react";
 import { GameMetadata } from "@/types/game";
 import { useFavorites } from "@/hooks/useFavorites";
 
@@ -89,10 +89,6 @@ export function HeroCarousel({ games, intervalMs = 6500 }: HeroCarouselProps) {
             <div className="absolute bottom-0 left-0 right-0 max-w-3xl space-y-1.5 sm:space-y-5 p-3.5 sm:p-12 lg:p-16">
               <div className="flex items-center space-x-2 sm:space-x-3 font-mono text-[9px] sm:text-xs font-bold uppercase tracking-wider">
                 <span className="rounded bg-secondary px-2 py-0.5 sm:px-3 sm:py-1 text-secondary-foreground">Featured</span>
-                <span className="flex items-center space-x-1 text-primary">
-                  <Star className="h-2.5 w-2.5 sm:h-3.5 sm:w-3.5 fill-current" aria-hidden="true" />
-                  <span className="text-foreground">{game.rating.toFixed(1)}</span>
-                </span>
                 <span className="text-muted-foreground">{game.category}</span>
               </div>
 

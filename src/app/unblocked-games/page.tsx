@@ -36,7 +36,7 @@ export const metadata: Metadata = {
 };
 
 export default function UnblockedGamesPage() {
-  const games = [...getAllGames()].sort((a, b) => b.rating - a.rating || b.playsCount - a.playsCount);
+  const games = getAllGames();
 
   const jsonLd = {
     "@context": "https://schema.org",

@@ -26,10 +26,8 @@ export function GameGrid({
   const sortedGames = useMemo(() => {
     const list = [...games];
     switch (sortBy) {
-      case "popular":
-        return list.sort((a, b) => (b.playsCount || 0) - (a.playsCount || 0));
-      case "rating":
-        return list.sort((a, b) => (b.rating || 0) - (a.rating || 0));
+      // "popular"/"rating" intentionally behave as catalog order (no real per-game popularity
+      // or rating data exists to sort by — see src/types/game.ts).
       case "newest":
         return list.sort(
           (a, b) => new Date(b.releaseDate || 0).getTime() - new Date(a.releaseDate || 0).getTime()
@@ -67,8 +65,7 @@ export function GameGrid({
                 onChange={(e) => setSortBy(e.target.value as SortOption)}
                 className="rounded-xl border border-border/60 bg-card/80 py-1.5 pl-8 pr-7 text-[11px] sm:text-xs font-bold text-foreground shadow-sm focus:border-primary focus:outline-none appearance-none cursor-pointer"
               >
-                <option value="popular">Most Popular</option>
-                <option value="rating">Highest Rated</option>
+                <option value="popular">Recommended</option>
                 <option value="newest">Newest First</option>
                 <option value="title">Alphabetical</option>
               </select>

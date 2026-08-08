@@ -13,9 +13,8 @@ interface CategoryRailProps {
 }
 
 export function CategoryRail({ category, label, games, excludeIds, limit = 7 }: CategoryRailProps) {
-  const visible = [...games]
+  const visible = games
     .filter((g) => !excludeIds?.has(g.id))
-    .sort((a, b) => b.rating - a.rating)
     .slice(0, limit);
 
   if (visible.length === 0) return null;

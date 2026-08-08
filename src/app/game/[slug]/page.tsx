@@ -1,9 +1,9 @@
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import {
-  Star,
+  Zap,
   Layers,
   Smartphone,
   Calendar,
@@ -121,6 +121,10 @@ export default async function GamePage({ params }: GamePageProps) {
   const { slug } = await params;
   const game = getGameBySlug(slug);
   if (!game) notFound();
+  // getGameBySlug falls back to matching by id, so an old hash-based slug still resolves to
+  // the right game — redirect it to the current canonical slug instead of serving duplicate
+  // content at two URLs.
+  if (game.slug !== slug) permanentRedirect(`/game/${game.slug}`);
 
   const relatedGames = getRelatedGames(game, 4);
   const displayTitle = game.derivedTitle || game.title;
@@ -168,9 +172,8 @@ export default async function GamePage({ params }: GamePageProps) {
   ];
 
   // Deliberately omits aggregateRating/review — that requires a genuine per-site review
-  // count, which we don't have (the star rating shown in our UI is derived from GameMonetize's
-  // quality_score, not real user reviews on PlayThorn). Fabricating one for richer search
-  // snippets would violate Google's structured-data policy on reviews.
+  // count, which we don't have. Fabricating one for richer search snippets would violate
+  // Google's structured-data policy on reviews.
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
@@ -299,9 +302,9 @@ export default async function GamePage({ params }: GamePageProps) {
             {/* Factual highlight cards — compact 3-card row centered on mobile */}
             <div className="grid grid-cols-3 gap-2 sm:gap-4">
               <div className="flex flex-col items-center justify-center text-center rounded-xl sm:rounded-2xl border border-border bg-card p-3 sm:p-4 space-y-1 sm:space-y-1.5">
-                <Star className="h-4 w-4 sm:h-5 sm:w-5 text-primary fill-current" aria-hidden="true" />
-                <h4 className="font-display text-[11px] sm:text-xs font-bold text-foreground">{game.rating.toFixed(1)} / 5</h4>
-                <p className="font-mono text-[9px] sm:text-[10px] text-muted-foreground truncate w-full">Rating</p>
+                <Zap className="h-4 w-4 sm:h-5 sm:w-5 text-primary" aria-hidden="true" />
+                <h4 className="font-display text-[11px] sm:text-xs font-bold text-foreground">Free</h4>
+                <p className="font-mono text-[9px] sm:text-[10px] text-muted-foreground truncate w-full">No download</p>
               </div>
               <div className="flex flex-col items-center justify-center text-center rounded-xl sm:rounded-2xl border border-border bg-card p-3 sm:p-4 space-y-1 sm:space-y-1.5">
                 <Layers className="h-4 w-4 sm:h-5 sm:w-5 text-primary" aria-hidden="true" />
@@ -332,9 +335,6 @@ export default async function GamePage({ params }: GamePageProps) {
                 <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
                   <span className="rounded-md bg-primary/90 px-2 py-0.5 text-[10px] font-bold text-primary-foreground uppercase backdrop-blur-sm">
                     {game.category}
-                  </span>
-                  <span className="text-[10px] font-mono font-bold text-foreground">
-                    ★ {game.rating.toFixed(1)}
                   </span>
                 </div>
               </div>

@@ -69,6 +69,21 @@ const PROHIBITED_BRAND_TERMS = [
   "FIVE NIGHTS AT FREDDY", "SLITHER.IO", "AGAR.IO",
 ];
 
+// Readable, SEO-meaningful slugs beat raw hashes for both rankings and CTR (a URL like
+// /game/forest-dash is legible in a search snippet; /game/6f7f369778e2... is not). The stable
+// md5 `id` is kept separately so getGameBySlug's id-fallback (src/lib/games.ts) can still resolve
+// any already-indexed hash-slug URL and redirect it to the new canonical slug — see the
+// redirect logic in src/app/game/[slug]/page.tsx.
+function slugify(title: string): string {
+  return title
+    .toLowerCase()
+    .normalize("NFKD")
+    .replace(/[̀-ͯ]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 60) || "game";
+}
+
 interface GameMonetizeItem {
   id: string;
   title: string;
@@ -275,6 +290,7 @@ export async function importGameMonetizeCatalog() {
   console.log(`✅ Selected ${selected.length} games across ${VALID_CATEGORIES.length} categories.`);
 
   const now = new Date().toISOString();
+  const usedSlugs = new Set<string>();
   const games: GameMetadata[] = selected.map(({ item, siteCategory }, idx) => {
     const scanResult = scanGameForTrademarks(item.title, item.description, "", "Open Licensed");
     const thumbnailUrl = item.thumb || `https://img.gamemonetize.com/${item.url.split("/").filter(Boolean).pop()}/512x384.jpg`;
@@ -284,10 +300,19 @@ export async function importGameMonetizeCatalog() {
     const aspectRatio = bucketAspectRatio(item);
     const id = crypto.createHash("md5").update(item.url).digest("hex");
 
+    const baseSlug = slugify(item.title);
+    let slug = baseSlug;
+    let suffix = 2;
+    while (usedSlugs.has(slug)) {
+      slug = `${baseSlug}-${suffix}`;
+      suffix += 1;
+    }
+    usedSlugs.add(slug);
+
     const game: GameMetadata = {
       id,
       title: item.title,
-      slug: id,
+      slug,
       description: item.description || `Play ${item.title} online for free on PlayThorn.`,
       instructions: item.instructions || "Use mouse, keyboard, or touch controls as shown in-game.",
       category: siteCategory,
@@ -296,8 +321,9 @@ export async function importGameMonetizeCatalog() {
       controls: parseControlsFromInstructions(item.instructions, siteCategory),
       author: "Licensed via GameMonetize",
       version: "1.0.0",
-      rating: Math.round((4.2 + (idx % 8) * 0.1) * 10) / 10,
-      playsCount: Math.floor(1200 + (idx * 350) % 15000),
+      // No rating/playsCount fields: GameMonetize's feed doesn't provide real per-game engagement
+      // data. Previously this generated a fake number from array position — removed, never
+      // fabricate a specific-looking statistic when there's no real source for it.
       featured: idx < 6,
       trending: idx % 4 === 0,
       isNew: idx % 5 === 0,
