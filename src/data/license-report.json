@@ -1,15 +1,15 @@
 {
-  "timestamp": "2026-08-06T13:56:04.307Z",
+  "timestamp": "2026-08-08T13:05:09.540Z",
   "totalImported": 491,
   "sourceNetwork": "GameMonetize",
   "categoryDistribution": {
-    "action": 20,
-    "puzzle": 175,
-    "arcade": 135,
-    "racing": 20,
-    "adventure": 33,
+    "action": 21,
+    "puzzle": 176,
+    "arcade": 132,
+    "racing": 21,
+    "adventure": 35,
     "strategy": 46,
-    "sports": 28,
+    "sports": 26,
     "multiplayer": 7,
     "classic": 27
   },

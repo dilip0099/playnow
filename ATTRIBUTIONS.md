@@ -4,6 +4,7 @@ PlayThorn's game catalog is licensed through **GameMonetize** (https://gamemonet
 
 | Title | Category | ID | Embed Source |
 | :--- | :---: | :---: | :--- |
+| **HEROES BEWARE** | action | `83151` | [GameMonetize](https://html5.gamemonetize.co/5q7rgv3nxbtcx1doq963t8t8ax6sc0ss/) |
 | **forest dash** | action | `82826` | [GameMonetize](https://html5.gamemonetize.co/rz9ba6bfxnv8xaujk5p4hhcz58k5cy6j/) |
 | **Undead Walking 3D** | action | `82876` | [GameMonetize](https://html5.gamemonetize.co/66bos2g1jhk2r1ja7d9m1w8bx5in42wm/) |
 | **Sniper Corps** | action | `80860` | [GameMonetize](https://html5.gamemonetize.co/awoa5hf68467okwkcqntdqo7kzuvx2bq/) |
@@ -24,6 +25,9 @@ PlayThorn's game catalog is licensed through **GameMonetize** (https://gamemonet
 | **spil clash 3D Ultimate Arena** | action | `80838` | [GameMonetize](https://html5.gamemonetize.co/kswiks42mmj9scrxkheg483ftji2mx3b/) |
 | **ASTRO CHICKENS** | action | `80740` | [GameMonetize](https://html5.gamemonetize.co/6jwaemwcybdksn8n7yuqfs416vcevd9u/) |
 | ** Stickman3D Shooter ** | action | `80243` | [GameMonetize](https://html5.gamemonetize.co/xkvcj122fc5jpxjc6070xrjlm8i72fvf/) |
+| **Pixel Adventure 3D** | puzzle | `80362` | [GameMonetize](https://html5.gamemonetize.co/dumvc6z862n04xjv48090drqcaor6et6/) |
+| **Season Change** | puzzle | `80449` | [GameMonetize](https://html5.gamemonetize.co/6xui5nnxg3d3r3frxs2003f38hjeig7r/) |
+| **Charade 3D Game** | puzzle | `83116` | [GameMonetize](https://html5.gamemonetize.co/10dabbd39zsp9uc54do0jcue8az0nnjw/) |
 | **Draw And Save The Stickman** | puzzle | `83049` | [GameMonetize](https://html5.gamemonetize.co/pmx1eru5umr6kwl8vcqknra7b68kw5v7/) |
 | **Wolfoo 2048** | puzzle | `83036` | [GameMonetize](https://html5.gamemonetize.co/cqhr41iqvtf0q7h3am54cv2oe48tu15f/) |
 | **Football Legends Sliding Puzzle** | puzzle | `83074` | [GameMonetize](https://html5.gamemonetize.co/i0gwshzyncwhxd9q9hyprkrn7b0fwhrz/) |
@@ -197,8 +201,8 @@ PlayThorn's game catalog is licensed through **GameMonetize** (https://gamemonet
 | **Bubble Shooter Vale** | puzzle | `80137` | [GameMonetize](https://html5.gamemonetize.co/vwmoxyobbpr9nkeeiw0n2ha9rl77aba0/) |
 | **Big Space Adventure** | puzzle | `79607` | [GameMonetize](https://html5.gamemonetize.co/p3pq2lgzdazpxai3ihkztbfozifwy5vb/) |
 | **Pet Salon: Cute Doctor** | puzzle | `79706` | [GameMonetize](https://html5.gamemonetize.co/zf5vyp77c2wy4wzdq4jz7jghktiiq0zl/) |
-| **I Scream IceCream** | puzzle | `79609` | [GameMonetize](https://html5.gamemonetize.co/9radhkzhl8wdfihe9wi1mqp6w4l06em2/) |
-| **House Paint Challenge** | puzzle | `76295` | [GameMonetize](https://html5.gamemonetize.co/d5yymum1ygbx4ft8az81lg4ogpdbsno5/) |
+| **Scale the Depths** | arcade | `83183` | [GameMonetize](https://html5.gamemonetize.co/vdyzczweogljzhl0f47jjbrfx87ja163/) |
+| **Sports Escape Mania** | arcade | `82715` | [GameMonetize](https://html5.gamemonetize.co/o4jhld3o20iw8xkebxopw5m862zf9w2t/) |
 | **Mystery Dumpling Squishy Slime** | arcade | `83097` | [GameMonetize](https://html5.gamemonetize.co/hujgreo2k9msq6exf17c6akxykhqu0tc/) |
 | **Girl Dream House DIY Fun** | arcade | `83142` | [GameMonetize](https://html5.gamemonetize.co/3fp0vy8h0x5lhp1jjo2xohxux00a14kz/) |
 | **Kamal Click and Dance** | arcade | `82620` | [GameMonetize](https://html5.gamemonetize.co/jyq3b3dyvqkkj5hr0b34q6ozef996lsw/) |
@@ -329,11 +333,8 @@ PlayThorn's game catalog is licensed through **GameMonetize** (https://gamemonet
 | **Popit World** | arcade | `79885` | [GameMonetize](https://html5.gamemonetize.co/oo3qtnwr2sorafoqwb3akkfxdj4zm4h0/) |
 | **Abyssborn** | arcade | `80130` | [GameMonetize](https://html5.gamemonetize.co/qv8g0ne21hzat8o54xlshery2tm5mrij/) |
 | **Thronehold Kids** | arcade | `80049` | [GameMonetize](https://html5.gamemonetize.co/jcyrzxguny3l4gyoa9ri6e84yq2v7qiw/) |
-| **Hole Upper For 2 Players** | arcade | `80121` | [GameMonetize](https://html5.gamemonetize.co/fwwj2mbch9lwce11ghcnmy9mp2mn86om/) |
-| **Cocktail Run** | arcade | `79996` | [GameMonetize](https://html5.gamemonetize.co/8qxph9epgx7wgcmfcmlh4cebydvtivq8/) |
-| **2 Player Games Princess Design Party** | arcade | `80104` | [GameMonetize](https://html5.gamemonetize.co/tur68ugi2tcl3qv9oingkqr1ht5kq2lz/) |
-| **Diana S City Fashion Beauty** | arcade | `80101` | [GameMonetize](https://html5.gamemonetize.co/4642r8665kprf9ro93k21yukzeojxwed/) |
-| **Cooking Clash** | arcade | `79849` | [GameMonetize](https://html5.gamemonetize.co/b8oh3al9pfcfq6ji4iryba3peehvymod/) |
+| **Obby Cart Rush** | racing | `83065` | [GameMonetize](https://html5.gamemonetize.co/tmhj9i3trg8ot0u7h9qahh6flzn9zkjp/) |
+| **Car Evolution Game** | racing | `83113` | [GameMonetize](https://html5.gamemonetize.co/rrflwl9gzd8jw3wpk6mzgwfzi32pvnlp/) |
 | **Shifted Realms** | racing | `83130` | [GameMonetize](https://html5.gamemonetize.co/ou0bfqy1ejiobw4yb4ozvj23t85x2xxj/) |
 | **Car Stunt Master Game** | racing | `82878` | [GameMonetize](https://html5.gamemonetize.co/gixytcyqjodb9t1bd6z6c2bhuc0n2zqi/) |
 | **Police Car Parking 2026** | racing | `82962` | [GameMonetize](https://html5.gamemonetize.co/zo8ocq9uu0gjavl3iazgiessapj6ov6n/) |
@@ -353,7 +354,8 @@ PlayThorn's game catalog is licensed through **GameMonetize** (https://gamemonet
 | **Pony : My Little Race** | racing | `16114` | [GameMonetize](https://html5.gamemonetize.co/nwnzqmvhozo38btrlmyjsqrc4xiztjah/) |
 | **Drift Car Driving** | racing | `80293` | [GameMonetize](https://html5.gamemonetize.co/psaxcnaaudnghwtus0rvv9lsb3gczzxv/) |
 | **Draw a road** | racing | `80105` | [GameMonetize](https://html5.gamemonetize.co/vwlxxpvqaxkoz2zmb8l842w1fo0aoafq/) |
-| **Crazy Moto** | racing | `80103` | [GameMonetize](https://html5.gamemonetize.co/s74g69865ye0ps8z2bvoc4cyu7r5iock/) |
+| **Tuk Tuk Auto Rikshaw** | adventure | `83006` | [GameMonetize](https://html5.gamemonetize.co/e3nqbd83zbz64dri00qtgftk6ke4reds/) |
+| **Mud Truck Driving** | adventure | `83008` | [GameMonetize](https://html5.gamemonetize.co/fz2a4g1h9hdohgcyd7em6c6n3wggsfw0/) |
 | **Offroad Truck Driving Game** | adventure | `83003` | [GameMonetize](https://html5.gamemonetize.co/xtiazo4pxkvapm95lenz2ig6mwrdaqks/) |
 | **Police Transport Game** | adventure | `83004` | [GameMonetize](https://html5.gamemonetize.co/sn3ro971fse3r2cuk735a3depwknvlgy/) |
 | **Taxi Parking Driving** | adventure | `83005` | [GameMonetize](https://html5.gamemonetize.co/bto0ovlde51yx8nw71mei1b5lplfuanl/) |
@@ -387,6 +389,9 @@ PlayThorn's game catalog is licensed through **GameMonetize** (https://gamemonet
 | **Combat Guardian: Under Attack** | adventure | `80120` | [GameMonetize](https://html5.gamemonetize.co/7kb5xtsokqk2b8l53qusboljc3ou9sx6/) |
 | **Highway Car Racer ** | adventure | `79991` | [GameMonetize](https://html5.gamemonetize.co/f4lvfpv3zrdbhppc1e6vhj8x9gbwisvw/) |
 | **Jump Up Game** | adventure | `79905` | [GameMonetize](https://html5.gamemonetize.co/s7jawugpf9gtff49fkpxpb5w00ftoif6/) |
+| **Offroad Jeep Simulation** | strategy | `83009` | [GameMonetize](https://html5.gamemonetize.co/q6u8ghlmkx9rhy48udltwan4cqmmoxxm/) |
+| **Jungle Tube Sort** | strategy | `83046` | [GameMonetize](https://html5.gamemonetize.co/gc27b80jq4qszm6es9mqtmy8fyavty8l/) |
+| **Supermarket Management Simulator** | strategy | `83186` | [GameMonetize](https://html5.gamemonetize.co/ouls855hcgyq823g2n8bm2w6z45obsdm/) |
 | **Pixel Tower** | strategy | `83035` | [GameMonetize](https://html5.gamemonetize.co/fgwp6eo5az9y4heu3l3aw8zwtuctsca4/) |
 | **Farming Simulation Game** | strategy | `82997` | [GameMonetize](https://html5.gamemonetize.co/4wqbtp9q2umsv9k703yokgau6c8abtra/) |
 | **Girl Game Organizing Fun** | strategy | `82970` | [GameMonetize](https://html5.gamemonetize.co/eeqq13dbzr5okbzutdhl8hq0fplrouxs/) |
@@ -430,9 +435,6 @@ PlayThorn's game catalog is licensed through **GameMonetize** (https://gamemonet
 | **Vehicle Masters** | strategy | `80134` | [GameMonetize](https://html5.gamemonetize.co/k516anavcz2cqqtuee6aa5gjst8m0vxn/) |
 | **Bike Master** | strategy | `80124` | [GameMonetize](https://html5.gamemonetize.co/v5elwxsocdpy75472qmb82fq80vzej90/) |
 | **Defense Base 2** | strategy | `80111` | [GameMonetize](https://html5.gamemonetize.co/5gtp0i71i1ahpcmuto0f0exps7cfszep/) |
-| **Zombie swarm** | strategy | `80107` | [GameMonetize](https://html5.gamemonetize.co/jgbxplcymt6ccgoo4j724csv030uthxd/) |
-| **Resource Empire** | strategy | `80108` | [GameMonetize](https://html5.gamemonetize.co/suh0t5ba29tw7m38daqzscuhfspi93e1/) |
-| **Nexusorbiter** | strategy | `79970` | [GameMonetize](https://html5.gamemonetize.co/0etcllezum2v9nl4hc3syd7rlp600x3w/) |
 | **Dart Duell: Timing Champion** | sports | `83070` | [GameMonetize](https://html5.gamemonetize.co/61chjn7t8hxotsfbkngwexcggusvsiy3/) |
 | **Paper Stick Figures** | sports | `82974` | [GameMonetize](https://html5.gamemonetize.co/3didn90hfvkoy0ib84zl67x4jfbd0bla/) |
 | **PlayPair** | sports | `82590` | [GameMonetize](https://html5.gamemonetize.co/m80zl2zju526tsbt8e43e8ugzq8334wo/) |
@@ -459,8 +461,6 @@ PlayThorn's game catalog is licensed through **GameMonetize** (https://gamemonet
 | **Wiggly Worm Race** | sports | `80236` | [GameMonetize](https://html5.gamemonetize.co/l0nqbs09szfpxezuy44h886ecqpomll5/) |
 | **Never Fall Pinball** | sports | `80046` | [GameMonetize](https://html5.gamemonetize.co/jf1otzxglus9exwqgp5qbez8l174j7fo/) |
 | **Line to Goal : Draw The Path** | sports | `80082` | [GameMonetize](https://html5.gamemonetize.co/e58bbxx9n6v054fc6yj26lslq4gvqn28/) |
-| **SUPER SAVING FOOTBALL** | sports | `79913` | [GameMonetize](https://html5.gamemonetize.co/ldwjgalpmfkuoqpgt93yws5lns4n8ky8/) |
-| **Moon League Sports Season** | sports | `80094` | [GameMonetize](https://html5.gamemonetize.co/do2pfp3azyubgjle7m5ag1exl9rv5gcr/) |
 | **Rocketcar Cup** | multiplayer | `83114` | [GameMonetize](https://html5.gamemonetize.co/y771xcn0bnakil1525c08uyvt7mfqv9l/) |
 | **imposter Duck : Online** | multiplayer | `82965` | [GameMonetize](https://html5.gamemonetize.co/mucxqqhaoah9q6mt60k70clzjzesy1cc/) |
 | **Speen** | multiplayer | `82411` | [GameMonetize](https://html5.gamemonetize.co/fwiozook1vr9lw7duxy81zup5676u7bj/) |
@@ -468,6 +468,7 @@ PlayThorn's game catalog is licensed through **GameMonetize** (https://gamemonet
 | **Pixel Gun Apocalypse 6 Remastered** | multiplayer | `77528` | [GameMonetize](https://html5.gamemonetize.co/2n1fjjb60t0qm1my4j5eq2idayb36r4j/) |
 | **Magic Knife** | multiplayer | `80434` | [GameMonetize](https://html5.gamemonetize.co/hp0gxzl1kc29lx4ayopwwumtjxbv59hw/) |
 | **Gun Shooting Game** | multiplayer | `80033` | [GameMonetize](https://html5.gamemonetize.co/ft7ejczl0cd4bqtrgbj2k67nyika12ft/) |
+| **Grass Flip** | classic | `83181` | [GameMonetize](https://html5.gamemonetize.co/6cdsdemxa8b63nsto687dfu8ha4ofutv/) |
 | **STORMHAWK** | classic | `83011` | [GameMonetize](https://html5.gamemonetize.co/xluntt2g2ij4zf2lrthjozqe4vhx8qi3/) |
 | **Zappy** | classic | `83083` | [GameMonetize](https://html5.gamemonetize.co/77tx1079mf5yk5ecl4piy52muxop4zyn/) |
 | **Solitaire Treasures** | classic | `82869` | [GameMonetize](https://html5.gamemonetize.co/cvo7qzcqvzazded1373rfy54p2jzvqcw/) |
@@ -494,4 +495,3 @@ PlayThorn's game catalog is licensed through **GameMonetize** (https://gamemonet
 | **Maya Brick Breaker-3** | classic | `16108` | [GameMonetize](https://html5.gamemonetize.co/ggwbqld7554cwejjmtjtz196vxasdjmt/) |
 | **Classic Match3** | classic | `80091` | [GameMonetize](https://html5.gamemonetize.co/1w0bymsiei48gz26ck4vwhcpbg5ls3xs/) |
 | **Dungeon Solitaire** | classic | `80037` | [GameMonetize](https://html5.gamemonetize.co/typvb39i68hb41c0rzlf1bh6w7wd1ohv/) |
-| **Cute Tiles Mahjong** | classic | `79490` | [GameMonetize](https://html5.gamemonetize.co/tax82wd1avoqh3qoku06q08f2rk7z8jm/) |
