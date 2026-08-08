@@ -26,62 +26,120 @@ interface GamePageProps {
 // Generic, category-appropriate gameplay advice — not invented specifics about any single
 // game's levels/scores (which we can't verify), just the kind of honest strategy guidance
 // that applies to any real title in that genre. Keys must cover every GameCategory value.
+//
+// Each pool has 8 tips, not the 4 actually shown per page — pickTips() below selects and
+// orders a 4-tip subset per game from a stable hash of its id. Google's Deduplication and
+// Scaled Content Abuse systems specifically flag many pages sharing byte-identical sections;
+// with a fixed 4-tip list, every game in a category (dozens of pages) rendered the exact same
+// paragraph. This keeps the advice equally honest (still nothing invented per-game) while
+// making each page's actual text differ from its category-mates.
 const CATEGORY_TIPS: Record<GameCategory, string[]> = {
   action: [
     "Learn enemy attack patterns before rushing in — most action games telegraph a wind-up before every hit, so reacting to that cue beats memorizing combos.",
     "Keep moving. Standing still to line up the perfect shot is usually riskier than firing while repositioning.",
     "Save your strongest resource (health, ammo, special move) for when you actually need it, not the first tough moment you see.",
     "Practice a level's opening section until the controls feel automatic — most of the skill jump comes from muscle memory, not raw reflexes.",
+    "Use cover and terrain instead of trading hits in the open — a fight you can break line of sight in is a fight you can control.",
+    "Identify the one enemy type that's actually dangerous in a crowd and deal with it first instead of clearing nearest-to-farthest.",
+    "Upgrade survivability before damage early on — staying alive longer usually earns more total damage than a bigger hit that ends your run.",
+    "Replay a failed encounter immediately while it's fresh — you'll remember exactly what went wrong more clearly than after a break.",
   ],
   puzzle: [
     "Scan the whole board or level before making your first move — many puzzles punish acting before you've seen the full picture.",
     "Look for forced moves first — spots where only one piece or tile can go — solving those narrows down everything else.",
     "If you get stuck, undo a few moves and try a different approach rather than grinding the same path.",
     "Take a short break when stuck. Puzzle games usually reward a fresh perspective more than raw speed.",
+    "Work from the edges or corners inward — constrained spaces usually have fewer valid options, making them easier to lock down first.",
+    "Say your reasoning out loud (or in your head) before committing to a move — puzzles often break on an assumption you didn't realize you'd made.",
+    "Notice which moves are reversible and which aren't — spend more time thinking before a one-way move than before one you can undo.",
+    "If a level feels impossible, double-check the rules — many puzzle games have one mechanic you're not using yet that unlocks the solution.",
   ],
   arcade: [
     "Survive first, score second — most arcade games hand out points for staying alive, so protect your run before chasing risky combos.",
     "Learn the pattern and timing of obstacles or enemies — arcade games are often built on repeating cycles once you notice them.",
     "Chain small, safe wins instead of gambling on an ambitious play that resets your progress.",
     "Practice one tricky section at a time instead of replaying the whole game from the start every attempt.",
+    "Play a few rounds purely to learn the layout before trying for a high score — memorizing what's coming beats reacting blind.",
+    "Watch for a rhythm in the difficulty ramp — most arcade games speed up in predictable steps, not randomly.",
+    "Keep your eyes on where you're going, not on your own character — peripheral awareness of hazards matters more than watching yourself.",
+    "Accept that an early death is often the cheapest way to learn a section — treat the first few tries as scouting, not scoring.",
   ],
   racing: [
     "Brake before the turn, not during it, so you're already at the right speed when you turn in.",
     "Look ahead to the next corner rather than at the car in front of you — reacting late causes most crashes.",
     "Aim for a smooth racing line — wide on entry, tight at the apex, wide again on exit — instead of cutting hard corners.",
     "Learn the track's layout over a lap or two before pushing for your fastest time.",
+    "Ease off the accelerator gradually through a turn rather than snapping off it — sudden inputs are what cause a spin.",
+    "Use any boost or nitro on the straights, not mid-corner, so the extra speed doesn't fight the turn you're already making.",
+    "A clean, consistent lap usually beats one perfect lap with a crash — steady laps compound into a better overall time.",
+    "Watch which surface changes (dirt, water, ice) actually affect handling in this game, since not every title treats them the same way.",
   ],
   adventure: [
     "Explore fully before moving on — adventure games often hide useful items or shortcuts just off the main path.",
     "Pay attention to environmental clues like color, sound, or camera framing — they usually hint at what to do next.",
     "If you hit a locked door or gap you can't cross, backtrack later once you've likely gained the tool or ability to get past it.",
     "Save or checkpoint often if the game allows it, especially before a risky jump or fight.",
+    "Interact with everything that looks interactive at least once — a lot of adventure games hide progress behind an object that's easy to walk past.",
+    "If you're stuck, retrace your last few screens rather than pushing forward — the answer to a blocked path is usually already behind you.",
+    "Manage your inventory or resources deliberately — running out of a key item mid-area is a more common failure than mistimed combat.",
+    "Take note of any recurring symbol, color, or sound cue early — adventure games often reuse the same signal to mean the same thing later.",
   ],
   strategy: [
     "Scout before you commit — knowing what you're up against is worth more than an early aggressive move.",
     "Balance economy and offense; over-investing in one usually leaves you exposed on the other.",
     "Think a move or two ahead and consider your opponent's likely response before committing.",
     "Defend key positions rather than spreading your forces thin across the whole board or map.",
+    "Secure your resource generation before expanding your army or territory — a stronger economy compounds every turn after that.",
+    "Don't commit your whole force to one engagement — keep a reserve for whatever the fight leaves exposed afterward.",
+    "Identify your single biggest vulnerability each turn and address that before optimizing something that's already working.",
+    "Slow down on your first few turns — early strategic mistakes are usually the hardest ones to recover from later in the game.",
   ],
   sports: [
     "Learn the timing window for your sport's key action — shot, swing, or tackle — since most sports games reward precise timing over button-mashing.",
     "Position yourself where you're strongest instead of forcing a risky play out of position.",
     "Watch your opponent's positioning before committing to a move; predictable patterns get punished.",
     "Drill the fundamentals in a low-pressure moment before relying on them in a close match.",
+    "Mix up your approach rather than repeating the same winning move — opponents (and AI) adapt once they've seen it a few times.",
+    "Manage stamina or momentum if the game tracks it — going all-out early often costs you the close moments late in a match.",
+    "Take the high-percentage play over the flashy one when the score is close — style points don't usually count toward the win.",
+    "Study the exact moment a play succeeds or fails in a replay if the game offers one — precise timing is easier to see after the fact.",
   ],
   multiplayer: [
     "Spectate for a minute first if the game allows it — you'll pick up the map and common strategies fast.",
     "Stick near safer areas early on rather than exploring alone; isolated positions are usually the most exposed.",
     "Grow or level up steadily and avoid unnecessary risks — many multiplayer and .io-style games make you more vulnerable right after a gain, not less.",
     "Watch how experienced players open a round — you'll see the same effective patterns repeat.",
+    "Communicate or signal intent if the game supports it — a coordinated simple plan usually beats an uncoordinated clever one.",
+    "Pick fights you can win, not fights you can survive — retreating from a bad matchup is rarely wasted time.",
+    "Learn the map's dangerous chokepoints and contested areas before you have anything worth losing there.",
+    "Play a few rounds just to learn other players' common habits on this specific game before trying to out-strategize them.",
   ],
   classic: [
     "Learn the fundamental rules cold before trying advanced tactics — classic games like chess, mahjong, and solitaire reward solid basics over clever tricks.",
     "Think about your opponent's (or the board's) best response before committing to a move.",
     "Replay the same match or deal if the game allows it — recognizing recurring patterns is most of the skill here.",
     "Don't rush; classic games are generally won on patience and calculation, not speed.",
+    "Count your remaining safe moves before committing to a risky one — classic games often punish running out of options more than a single bad move.",
+    "Play through a loss slowly afterward if you can — spotting the exact turn things went wrong teaches more than a dozen quick rounds.",
+    "Keep your options open early rather than committing to one plan — flexibility matters more in the opening than in the endgame.",
+    "Favor the move that limits your opponent's best response over the move that looks strongest in isolation.",
   ],
 };
+
+// Selects and orders a 4-tip subset per game from a stable hash of its id (not Math.random —
+// must be deterministic across builds and identical for server/client rendering). Two games in
+// the same category land on different rotations of the same honest pool instead of the same
+// literal paragraph.
+function pickTips(category: GameCategory, gameId: string, count = 4): string[] {
+  const pool = CATEGORY_TIPS[category] || CATEGORY_TIPS.arcade;
+  let hash = 0;
+  for (let i = 0; i < gameId.length; i++) {
+    hash = (hash * 31 + gameId.charCodeAt(i)) >>> 0;
+  }
+  const offset = hash % pool.length;
+  const rotated = [...pool.slice(offset), ...pool.slice(0, offset)];
+  return rotated.slice(0, count);
+}
 
 export async function generateStaticParams() {
   const games = getAllGames();
@@ -128,7 +186,7 @@ export default async function GamePage({ params }: GamePageProps) {
 
   const relatedGames = getRelatedGames(game, 4);
   const displayTitle = game.derivedTitle || game.title;
-  const tips = CATEGORY_TIPS[game.category] || CATEGORY_TIPS.arcade;
+  const tips = pickTips(game.category, game.id);
 
   // Every answer below is derived directly from real GameMetadata fields (mobileSupport,
   // controls, category, tags) — nothing here is a claim we can't verify from the data.
