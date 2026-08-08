@@ -32,11 +32,11 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap"
 });
 
-// Title/description lead with "free online games" (368K/mo) and "online games" (450K/mo) —
-// real, verified 2026 search volume — not "Kinetic Obsidian", which is our internal design-
-// system codename and something literally zero users search for. The single most valuable
-// piece of on-page SEO real estate should never be spent on internal jargon.
-const DEFAULT_TITLE = "Free Online Games - Play 180+ Games Instantly, No Download";
+// Title/description lead with "free online games" (368K/mo verified search volume) — not
+// "unblocked games" (3.35M-4.09M/mo, the single highest-volume term in this niche), because that
+// term already has its own dedicated /unblocked-games landing page; having the homepage target
+// the same keyword would cannibalize both pages' rankings for it.
+const DEFAULT_TITLE = "Free Online Games - Play Instantly, No Download";
 const DEFAULT_DESCRIPTION =
   "Play free online games instantly in your browser — no downloads, no installs, no signup. Action, puzzle, arcade, racing, strategy, sports, and .io multiplayer games.";
 

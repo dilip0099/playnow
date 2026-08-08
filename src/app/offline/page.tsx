@@ -4,7 +4,7 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "You are Offline - PlayThorn Games",
-  description: "It looks like you've lost your internet connection. Reconnect to resume playing 180+ free games.",
+  description: "It looks like you've lost your internet connection. Reconnect to resume playing free games.",
 };
 
 export default function OfflinePage() {

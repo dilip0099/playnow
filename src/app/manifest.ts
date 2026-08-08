@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: `${SITE_NAME} - Free Instant Games`,
     short_name: SITE_NAME,
-    description: "Play 180+ free HTML5 browser games instantly — no downloads, no installs. High-speed action, puzzle, racing & arcade games.",
+    description: "Play free HTML5 browser games instantly — no downloads, no installs. High-speed action, puzzle, racing & arcade games.",
     start_url: "/",
     id: "/",
     scope: "/",
