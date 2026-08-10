@@ -3,3 +3,4 @@ docs/
 *.md
 !README.md
 playthorn-*.json
+moviebox-stream/
