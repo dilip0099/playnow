@@ -1,5 +1,5 @@
 {
-  "ignoreCommand": "git diff HEAD^ HEAD --quiet . ':!moviebox-stream' ':!.vercelignore'",
+  "ignoreCommand": "git diff HEAD^ HEAD --quiet . ':!.vercelignore'",
   "crons": [
     {
       "path": "/api/cron/refresh-catalog",
