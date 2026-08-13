@@ -1,0 +1,264 @@
+# PLAYTHORN DREAM 100 — ROUND 2 (Part 3)
+
+## TOP 50 RETURN GAMES (Retention-First)
+
+Games most likely to make users come back repeatedly.
+
+| Rank | Game | Retention Mechanism | Est. Session Depth | Return Frequency |
+|---|---|---|---|---|
+| 1 | **Cookie Clicker** | INFINITE progression, prestige resets, golden cookies | Months | Daily |
+| 2 | **Melvor Idle** | RuneScape-depth skills, combat, crafting, 1000+ hours | Months | Daily |
+| 3 | **The Perfect Tower II** | TD + idle hybrid, research tree, automation | Months | Daily |
+| 4 | **Universal Paperclips** | Mind-bending 3-act arc, but single-play (repeat worthy) | 4-6 hours | Occasional |
+| 5 | **Retro Bowl** | Season management, draft picks, championship runs | Weeks | Daily |
+| 6 | **Tetr.io** | Competitive ranking, speed improvement, multiplayer | Indefinite | Daily |
+| 7 | **Krunker.io** | Custom maps, mods, skins, competitive ladder | Indefinite | Daily |
+| 8 | **Subway Surfers** | Daily challenges, character collection, endless runs | Indefinite | Daily |
+| 9 | **Territorial.io** | Territory conquest strategy, multiplayer depth | Indefinite | Weekly |
+| 10 | **PolyTrack** | Track builder + community sharing + time trials | Indefinite | Weekly |
+| 11 | **Bloxd.io** | 10+ game modes, building, social | Indefinite | Daily |
+| 12 | **Shell Shockers** | Skins, seasons, multiplayer FPS | Indefinite | Daily |
+| 13 | **8 Ball Pool** | Skill-based ranking, coin progression | Indefinite | Daily |
+| 14 | **Drift Hunters** | 25+ cars, tuning, drift scoring | Weeks | Weekly |
+| 15 | **Kingdom Rush** | 50+ levels, hero unlocks, challenge modes | 20+ hours | Weekly |
+| 16 | **Geometry Dash** | Level mastery, music sync, user levels | Indefinite | Daily |
+| 17 | **Slow Roads** | Zen exploration, procedural terrain | Indefinite | Weekly |
+| 18 | **BuildNow GG** | Build + shoot skill improvement | Indefinite | Daily |
+| 19 | **Venge.io** | Tactical abilities, competitive | Indefinite | Daily |
+| 20 | **Cut the Rope** (series) | 3-star challenges, 500+ levels across series | 30+ hours | Weekly |
+| 21 | **Temple Run 2** | Endless runs, character collection | Indefinite | Daily |
+| 22 | **Smash Karts** | Chaotic multiplayer, quick rounds | Indefinite | Daily |
+| 23 | **Moto X3M** | Level progression, 3-star time trials | 15+ hours | Weekly |
+| 24 | **A Dark Room** | Deep narrative arc with resource loop | 3-5 hours | One + replay |
+| 25 | **Skribbl.io** | Social fun, unlimited words | Indefinite | Weekly |
+| 26-50 | Ev.io, Kour.io, Iron Snout, Level Devil, Red Ball 4, Brain Test, Dadish, Apple Knight, House of Hazards, Bad Ice-Cream, Tunnel Rush, Time Shooter 2, Penalty Shooters, Basketball Stars, Football Legends, Stickman Hook, Fireboy & Watergirl, Idle Train Empire, DodecaDragons, Gartic Phone, EvoWars.io, Rooftop Snipers, Duck Life, Sort the Court!, Deepest Sword | Various | Various | Various |
+
+---
+
+## TOP 50 WOW GAMES (Visual / Tech Impressiveness)
+
+| Rank | Game | Why WOW | Engine |
+|---|---|---|---|
+| 1 | **Slow Roads** | Infinite procedural 3D terrain, dynamic weather, atmospheric lighting | Three.js/WebGL2 |
+| 2 | **Krunker.io** | Desktop-class FPS at 120+ FPS in browser | Custom WebGL |
+| 3 | **PolyTrack** | Smooth low-poly 3D with track builder | Custom WASM |
+| 4 | **Shell Shockers** | Polished 3D multiplayer world | WebGL |
+| 5 | **Drift Hunters** | Full 3D drift physics, detailed cars | Unity WebGL |
+| 6 | **Venge.io** | Tactical 3D FPS with particle effects | PlayCanvas |
+| 7 | **Smash Karts** | 3D kart arena with weapon effects | WebGL |
+| 8 | **BuildNow GG** | Full Fortnite-style 3D in browser | WebGL |
+| 9 | **Bloxd.io** | Minecraft-style voxel rendering | WebGL |
+| 10 | **Madalin Stunt Cars 3** | Open-world 3D supercar driving | Unity WebGL |
+| 11 | **Moped Mayhem** | Dense city, WebGPU rendering | WebGPU |
+| 12 | **Corru.observer** | Non-Euclidean geometry, cel-shaded art | Custom |
+| 13 | **Mini Royale: Nations** | Browser battle royale FPS | PlayCanvas |
+| 14 | **Fields of Fury** | WW2 FPS with character animation | PlayCanvas |
+| 15 | **Ev.io** | Futuristic arena with clean 3D | WebGL |
+| 16 | **Kour.io** | Modern FPS with fluid movement | WebGL |
+| 17 | **Kirka.io** | Vibrant low-poly 3D arena | WebGL |
+| 18 | **Cryzen.io** | Clean 3D graphics | WebGL |
+| 19 | **Robostorm** | Robot particles and physics | PlayCanvas |
+| 20 | **Subway Surfers** | Iconic art style running smoothly in browser | HTML5/WebGL |
+| 21-50 | Burnout Drift, Polycraft, Repuls.io, Passenger Airplane 3D, School Bus Sim, Rally Point, Kingdom Rush (art direction), Temple Run 2 (3D adaptation), SWOOOP, Danger Mouse, Geometry Dash (visual sync), PokeRogue (Pokémon art), Angry Birds Friends (HD art), Cut the Rope (animation quality), Stickman Hook (smooth physics), Iron Snout (fluid animation), Level Devil (clever visual design), Bad Ice-Cream (Nitrome pixel art), Time Shooter (SUPERHOT aesthetic), Deepest Sword (funny physics) | Various | Various |
+
+---
+
+## TOP 50 PURE GAMEPLAY GEMS (Fun-First)
+
+| Rank | Game | Why It's Incredibly Fun |
+|---|---|---|
+| 1 | **Cookie Clicker** | "Just one more upgrade" — the defining addictive loop |
+| 2 | **Universal Paperclips** | Starts simple, becomes the most mind-bending game ever |
+| 3 | **Retro Bowl** | Perfect sports simulation in 5-minute sessions |
+| 4 | **Tetr.io** | Competitive Tetris perfected — pure skill expression |
+| 5 | **Subway Surfers** | Instant fun, perfect controls, "one more run" |
+| 6 | **Krunker.io** | Fastest, most responsive browser FPS |
+| 7 | **Kingdom Rush** | Best tower defense gameplay ever made |
+| 8 | **PolyTrack** | TrackMania-style racing + building your own tracks |
+| 9 | **Smash Karts** | Chaotic fun with friends |
+| 10 | **Moto X3M** | Perfect difficulty curve, satisfying physics |
+| 11 | **Skribbl.io** | Guaranteed laughs with friends |
+| 12 | **Gartic Phone** | Funniest party game ever |
+| 13 | **Shell Shockers** | Unique concept (eggs with guns), surprisingly deep |
+| 14 | **A Dark Room** | Emotional journey disguised as a text game |
+| 15 | **Deepest Sword** | Hilarious physics + clever puzzle design |
+| 16 | **Sort the Court!** | Addictive Yes/No kingdom building |
+| 17 | **Level Devil** | Rage-inducing but you CAN'T stop |
+| 18 | **Iron Snout** | Deceptively deep combat in a silly package |
+| 19 | **Cut the Rope** | Perfect physics puzzle satisfaction |
+| 20 | **CELESTE Classic** | Precision platforming perfection |
+| 21 | **Brain Test** | "Aha!" moments that make you feel clever |
+| 22 | **Territorial.io** | Grand strategy in your browser |
+| 23 | **2048** | "Just one more tile" — pure addiction |
+| 24 | **Drift Hunters** | Perfect drift feel, car customization |
+| 25 | **Slow Roads** | Meditative driving therapy |
+| 26-50 | House of Hazards, Bad Ice-Cream, Time Shooter 2, BuildNow GG, Venge.io, Geometry Dash, Red Ball 4, Apple Knight, Dadish, Rooftop Snipers, A Small World Cup, Temple Run 2, Stickman Hook, Tunnel Rush, Penalty Shooters 2, Football Legends, Basketball Stars, Don't Escape, Melvor Idle, The Perfect Tower II, Corru.observer, Duo Survival, Fireboy & Watergirl, EvoWars.io, Bloxd.io | Various |
+
+---
+
+## FAMOUS IP RESEARCH (Corrected Chain)
+
+| Famous Title | Original Dev | Browser Available? | Where? | Official/Authorized? | Distributor | PlayThorn Self-Host? | PlayThorn Embed? | PlayThorn License? | Best Alt if Impossible |
+|---|---|---|---|---|---|---|---|---|---|
+| **Subway Surfers** | SYBO | ✅ YES | Poki | AUTHORIZED — Official SYBO partnership | Poki | NO | UNKNOWN — Poki likely exclusive | INVESTIGATE — Contact SYBO | N/A (original available) |
+| **Temple Run 2** | Imangi | ✅ YES | Poki | AUTHORIZED — since Nov 2020 | Poki | NO | UNKNOWN — Poki likely exclusive | INVESTIGATE — Contact Imangi | N/A |
+| **Minecraft** | Mojang/Microsoft | ❌ NO official | Eaglercraft = unauthorized | UNAUTHORIZED | N/A | NO | NO | RED — Microsoft IP | **Bloxd.io** |
+| **Fortnite** | Epic Games | ❌ NO browser | Cloud only (Xbox/GeForce) | N/A | N/A | NO | NO | RED | **BuildNow GG** |
+| **PUBG/Free Fire** | Tencent/Garena | ❌ NO browser | N/A | N/A | N/A | NO | NO | RED | **Krunker.io, Venge.io** |
+| **Roblox** | Roblox Corp | ❌ Client only | N/A | N/A | N/A | NO | NO | RED | **Bloxd.io** |
+| **GTA** | Rockstar | ❌ NO | N/A | N/A | N/A | NO | NO | RED | Open-world driving sims |
+| **Call of Duty** | Activision | ❌ NO | N/A | N/A | N/A | NO | NO | RED | **Krunker.io, Shell Shockers** |
+| **Valorant** | Riot Games | ❌ NO | N/A | N/A | N/A | NO | NO | RED | **Venge.io** |
+| **FIFA/EA FC** | EA Sports | ❌ NO browser | N/A | N/A | N/A | NO | NO | RED | **Penalty Shooters 2, Football Legends** |
+| **Need for Speed** | EA | ❌ NO | N/A | N/A | N/A | NO | NO | RED | **Drift Hunters, Madalin Stunt Cars** |
+| **Geometry Dash** | RobTop | ⚠️ DEMO | geometrydash.com | AUTHORIZED demo | RobTop | UNKNOWN | UNKNOWN | INVESTIGATE | Rhythm platformers |
+| **Angry Birds** | Rovio/Sega | ✅ YES | Red's Club | AUTHORIZED — Rovio HTML5 | Rovio | NO | UNKNOWN | INVESTIGATE — Rovio B2B | N/A |
+| **Cut the Rope** | ZeptoLab | ✅ YES | Famobi | AUTHORIZED — Famobi B2B | Famobi | YES (via B2B) | YES (via B2B) | GREEN — Famobi sales | N/A |
+| **Candy Crush** | King/ABK | ⚠️ | king.com/Facebook | Limited | King | NO | NO | RED | Match-3 via Famobi |
+| **Among Us** | Innersloth | ❌ NO browser | now.gg cloud | N/A | N/A | NO | NO | RED | Social deduction games |
+| **Tetris** | Tetris Company | ⚠️ | tetris.com (licensed) | AUTHORIZED (tetris.com) | Tetris Company | NO | NO | RED — Strict trademark | **Tetr.io** (inspired, legal) |
+| **Pac-Man** | Bandai Namco | ⚠️ | Google Doodle, others | Mixed | Various | NO | NO | RED | Maze/arcade games |
+| **Clash Royale** | Supercell | ❌ NO | N/A | N/A | N/A | NO | NO | RED | Browser TD/strategy |
+| **Plants vs Zombies** | PopCap/EA | ❌ NO | N/A | N/A | N/A | NO | NO | RED | **Kingdom Rush** |
+
+---
+
+## COMPETITOR PRESENCE MATRIX
+
+| Game | Poki | CrazyGames | Y8 | Own Site | Exclusive? | Classification |
+|---|---|---|---|---|---|---|
+| Subway Surfers | ✅ | ❌ | ❌ | ❌ | Poki EXCLUSIVE | **RARE** |
+| Temple Run 2 | ✅ | ❌ | ❌ | ❌ | Poki EXCLUSIVE | **RARE** |
+| Krunker.io | ✅ | ❌ | ❌ | ✅ | Split | **LIMITED** |
+| Shell Shockers | ✅ | ✅ | ❌ | ✅ | No | **LIMITED** |
+| Smash Karts | ❌ | ✅ | ❌ | ❌ | CG Partnership | **RARE** |
+| PolyTrack | ❌ | ✅ | ❌ | ✅ itch | CG Deal | **LIMITED** |
+| Slow Roads | ❌ | ❌ | ❌ | ✅ | NOT ON ANY PORTAL | **UNIQUE** |
+| Universal Paperclips | ❌ | ❌ | ❌ | ✅ | NOT ON ANY PORTAL | **UNIQUE** |
+| Cookie Clicker | ❌ | ❌ | ❌ | ✅ | Self-hosted only | **UNIQUE** |
+| Tetr.io | ❌ | ❌ | ❌ | ✅ | Own site only | **UNIQUE** |
+| Territorial.io | ❌ | ✅ | ❌ | ✅ | Partial | **LIMITED** |
+| Kingdom Rush | ❌ | ✅ | ❌ | ❌ | CG/AG | **COMMON** |
+| Drift Hunters | ✅ | ✅ | ✅ | ❌ | No | **COMMON** |
+| Cut the Rope | ❌ | ✅ | ❌ | ❌ | Via Famobi | **COMMON** |
+| Retro Bowl | ✅ | ❌ | ❌ | ❌ | Poki authorized | **RARE** |
+
+---
+
+## B2B PREMIUM PUBLISHER: FAMOBI DEEP DIVE
+
+### Top 20 Famobi Games Worth Having
+
+| # | Game | Genre | Famous IP? | Quality | Why Worth It |
+|---|---|---|---|---|---|
+| 1 | **Cut the Rope** | Physics Puzzle | ✅ YES | 91 | Globally recognized IP |
+| 2 | **Cut the Rope 2** | Physics Puzzle | ✅ YES | 89 | Series continuation |
+| 3 | **Cut the Rope: Time Travel** | Physics Puzzle | ✅ YES | 88 | Series variety |
+| 4 | **Cut the Rope Experiments** | Physics Puzzle | ✅ YES | 87 | Series variety |
+| 5 | **Om Nom: Run** | Endless Runner | ✅ YES (Om Nom) | 87 | Famous character |
+| 6 | **8 Ball Billiards Classic** | Billiards | Captures "8 Ball" demand | 82 | Alternative to Miniclip |
+| 7 | **Color Tunnel** | Reflex | No | 79 | Addictive speed game |
+| 8 | **Bubble Woods** | Bubble Shooter | No | 78 | Casual staple |
+| 9 | **Basketball Superstars** | Sports | No | 80 | Sports variety |
+| 10 | **Word Solitaire** | Word/Card | No | 79 | Daily word challenge |
+| 11 | **TNT Bomb** | Puzzle | No | 77 | Physics destruction |
+| 12 | **Smarty Bubbles 2** | Bubble Shooter | No | 77 | Casual depth |
+| 13 | **Stack Smash** | Casual | No | 76 | Satisfying loop |
+| 14 | **Thread Fever** | Puzzle | No | 78 | Unique mechanic |
+| 15-20 | Various casual titles | Various | No | 72-78 | Catalog depth |
+
+**Licensing Model**: B2B packages (S/M/L/Enterprise), ad-free premium available, iframe or self-host options.
+**Contact**: sales@famobi.com
+**PlayThorn Value**: HIGH — Famous IP (Cut the Rope) + 50+ polished casual games in one deal.
+
+---
+
+## PLAYTHORN FLAGSHIP 50
+
+The 50 games that define the PlayThorn brand.
+
+### Homepage Heroes (10)
+1. Subway Surfers, 2. Krunker.io, 3. Retro Bowl, 4. Shell Shockers, 5. PolyTrack, 6. Slow Roads, 7. Drift Hunters, 8. Smash Karts, 9. Kingdom Rush, 10. Cookie Clicker
+
+### Featured Collection (15)
+11. Temple Run 2, 12. Venge.io, 13. BuildNow GG, 14. Tetr.io, 15. Bloxd.io, 16. Cut the Rope, 17. Moto X3M, 18. Universal Paperclips, 19. Geometry Dash (demo), 20. Territorial.io, 21. A Dark Room, 22. CELESTE Classic, 23. Skribbl.io, 24. Ev.io, 25. Melvor Idle
+
+### Must-Have Depth (25)
+26. Stickman Hook, 27. Level Devil, 28. Iron Snout, 29. Brain Test, 30. House of Hazards, 31. Madalin Stunt Cars, 32. Red Ball 4, 33. Deepest Sword, 34. Bad Ice-Cream, 35. Time Shooter 2, 36. Fireboy & Watergirl, 37. Om Nom: Run, 38. Dadish, 39. Apple Knight, 40. Sort the Court!, 41. The Perfect Tower II, 42. Corru.observer, 43. Don't Escape, 44. Kour.io, 45. 8 Ball Billiards (Famobi), 46. Rooftop Snipers, 47. Penalty Shooters 2, 48. Basketball Stars, 49. Duo Survival, 50. 2048
+
+---
+
+## FIRST 25 ACQUISITION WAVE
+
+### Wave A: 10 Premium Easy Wins (Deploy Week 1-2)
+
+| # | Game | User Value | Route | Est. Timeline |
+|---|---|---|---|---|
+| 1 | **Cut the Rope** (series) | 91 | Famobi B2B — email sales@famobi.com | 1-2 weeks |
+| 2 | **Om Nom: Run** | 87 | Famobi B2B (same deal) | 1-2 weeks |
+| 3 | **8 Ball Billiards Classic** | 82 | Famobi B2B (same deal) | 1-2 weeks |
+| 4 | **Color Tunnel** | 79 | Famobi B2B (same deal) | 1-2 weeks |
+| 5 | **A Dark Room** | 92 | MIT GitHub — self-host | 1 day |
+| 6 | **CELESTE Classic** | 91 | itch.io embed — attribution | 1 day |
+| 7 | **2048** | 84 | MIT GitHub — self-host | 1 day |
+| 8 | **Deepest Sword** | 86 | itch.io dev contact | 1 week |
+| 9 | **Sort the Court!** | 84 | itch.io dev contact | 1 week |
+| 10 | **Kingdom Rush** | 94 | Contact Ironhide / authorized embed | 2 weeks |
+
+### Wave B: 10 Strategic Partnership Targets (Week 2-6)
+
+| # | Game | User Value | Route | Est. Timeline |
+|---|---|---|---|---|
+| 1 | **Slow Roads** | 95 | Email hello@slowroads.io | 2-4 weeks |
+| 2 | **Cookie Clicker** | 95 | Contact Orteil directly | 2-4 weeks |
+| 3 | **Universal Paperclips** | 95 | Contact Frank Lantz via NYU | 2-4 weeks |
+| 4 | **Drift Hunters** | 93 | Contact Ilya Kaminetsky | 2-4 weeks |
+| 5 | **Territorial.io** | 92 | Contact David Tschacher | 2-4 weeks |
+| 6 | **Ev.io** | 91 | Contact Addicting Games | 2-4 weeks |
+| 7 | **Iron Snout** | 87 | Contact SnoutUp | 2 weeks |
+| 8 | **The Perfect Tower II** | 87 | Contact FireSquid | 2-4 weeks |
+| 9 | **Melvor Idle** | 90 | Contact Malcs | 2-4 weeks |
+| 10 | **Don't Escape: 4 Days** | 87 | Contact scriptwelder | 2 weeks |
+
+### Wave C: 5 High-Risk / High-Reward Targets (Week 4-12)
+
+| # | Game | User Value | Why High-Risk | Route |
+|---|---|---|---|---|
+| 1 | **Subway Surfers** | 97 | Poki likely has web exclusivity | Contact SYBO Games directly |
+| 2 | **Retro Bowl** | 96 | Authorized portals only, NFL license | Contact New Star Games |
+| 3 | **Krunker.io** | 96 | FRVR owned, major publisher | Contact FRVR partnership team |
+| 4 | **PolyTrack** | 96 | CrazyGames distribution deal | Contact Kodub via itch.io |
+| 5 | **Shell Shockers** | 95 | EULA-controlled, publisher partnership | Contact Blue Wizard Digital |
+
+---
+
+## WHAT NOT TO WASTE TIME ACQUIRING
+
+| Category | Why NOT | Examples |
+|---|---|---|
+| **Unauthorized famous IP ports** | DMCA risk, legal liability | Eaglercraft (Minecraft), any unofficial Subway Surfers clones |
+| **Very low-quality filler games** | Damages brand perception | Random GameDistribution filler below quality 70 |
+| **Games requiring desktop clients** | Not browser-playable | RuneScape, Roblox, any Java-dependent game |
+| **Subscription-gated games** | Cannot embed/redistribute | GeoGuessr, Wordle/NYT Games |
+| **Games with heavy mobile-only UX** | Bad browser experience | Games designed for touch-only with no keyboard fallback |
+| **CrazyGames Originals** | CrazyGames exclusive IP | Ragdoll Archers, Block Blaster, Tower Swap |
+| **PokeRogue** | Pokémon IP infringement risk | Fan game — Nintendo/TPC could C&D |
+
+---
+
+## LEGAL / LICENSING UNKNOWNS
+
+| Question | Impact | How to Resolve |
+|---|---|---|
+| Does Poki's Subway Surfers deal include web exclusivity? | If yes, PlayThorn CANNOT get Subway Surfers | Contact SYBO directly to ask about multi-portal licensing |
+| Does Poki's Temple Run 2 deal include web exclusivity? | Same as above | Contact Imangi Studios |
+| Can Famobi's Cut the Rope license be used for ad-supported portals? | Critical for monetization later | Ask sales@famobi.com about ad-supported B2B tier |
+| Are Poki SDK games technically re-distributable? | SDK locks games to Poki domain | NO — Poki SDK games only work on Poki |
+| Can Kingdom Rush be legally embedded from CrazyGames/ArmorGames? | Ironhide may not have granted re-embedding rights | Contact Ironhide Game Studio directly |
+| What are FRVR's partnership terms for Krunker? | FRVR may have strategic distribution programs | Contact FRVR business development |
+| Is Geometry Dash demo redistributable? | RobTop may allow or restrict | Contact RobTop |
+| Miniclip B2B licensing — does it exist for web portals? | Miniclip licenses to telcos/ISPs | Contact Miniclip B2B |
+
+---
+
+*All data sourced from live web research, August 13, 2026. Evidence labels: VERIFIED = confirmed from official/authoritative source. PARTIALLY VERIFIED = confirmed from secondary source. INFERRED = reasonable inference from available data. UNKNOWN = insufficient evidence.*

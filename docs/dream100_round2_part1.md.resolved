@@ -1,0 +1,82 @@
+# PLAYTHORN DREAM 100 — ROUND 2
+
+> Research Date: August 13, 2026 | Evidence-based from live web research
+> Methodology: USER VALUE FIRST. Acquisition difficulty scored separately.
+
+---
+
+## ROUND 1 ERROR CORRECTIONS
+
+| Title | Round 1 Claim | CORRECTED Status | Evidence |
+|---|---|---|---|
+| **Subway Surfers** | "NO official web version → RED" | **WRONG.** SYBO has an OFFICIAL PARTNERSHIP with Poki. Subway Surfers IS officially playable in browser via Poki. SYBO CEO publicly confirmed. Spin-offs Subway Surfers Blast & Match also on Poki. | VERIFIED: GamesBeat, PocketGamer.biz, poki.com |
+| **Temple Run 2** | "NO official web version → RED" | **WRONG.** Imangi Studios officially released a web version on Poki in November 2020. This is an authorized distribution. | VERIFIED: Wikipedia, poki.com |
+| **Geometry Dash** | "NO official web version → RED" | **PARTIALLY WRONG.** RobTop launched an official web demo at geometrydash.com. Third-party browser ports also exist on CrazyGames. | VERIFIED: geometrydash.com, YouTube |
+| **Angry Birds** | "Limited web availability" | **CORRECTED.** Rovio has an official HTML5 web version — Angry Birds Friends — playable via Red's Club (redsclub.com). | VERIFIED: rovio.com, GamesBeat |
+| **Kingdom Rush** | "VERIFIED browser version" (vague) | **CORRECTED with specifics.** Available on CrazyGames, Armor Games, Kongregate via Ruffle emulation. Ironhide does NOT host browser version themselves. | VERIFIED: CrazyGames, ArmorGames |
+| **Bloons TD 5** | "VERIFIED browser version" (vague) | **CORRECTED.** No official browser version of modern Bloons games. Classic Bloons TD 1-5 available via Ninja Kiwi Archive (desktop app), or unauthorized Ruffle ports on third-party sites. BTD6 has NO browser version. | VERIFIED: ninjakiwi.com |
+| **RuneScape** | Listed as browser game | **CORRECTED.** OSRS/RuneScape NO LONGER playable in browser. Requires dedicated client. Browser era ended years ago. | VERIFIED: runescape.com, Reddit |
+
+### New discoveries from Round 2 research:
+- **Wordle/NYT Games**: 4-12M daily active users — THE most played browser game by DAU
+- **GeoGuessr**: Massive competitive scene (363K peak viewers at World Championship), subscription-based
+- **PokeRogue**: Viral Pokémon fan roguelite, browser-native, massive community
+- **Poki distribution model**: Default 5-year web exclusivity, 50/50 revenue share (Poki traffic), 100% (dev traffic)
+
+---
+
+## SCORING MODEL
+
+### User Value Score /100 (NO acquisition weighting)
+
+| Component | Weight |
+|---|---|
+| Gameplay quality & depth | 25% |
+| Retention / Replayability | 20% |
+| Visual / Presentation quality | 15% |
+| Polish / UX | 10% |
+| Performance / Browser experience | 10% |
+| Popularity / Demand signal | 10% |
+| Originality / Differentiation | 10% |
+
+### Acquisition Difficulty /100 (Higher = Harder)
+
+0-20 Very Easy | 21-40 Easy | 41-60 Moderate | 61-80 Difficult | 81-100 Very Difficult
+
+### Strategic Value /100
+
+Combines user demand, quality, retention, differentiation, brand impact, genre importance, repeat-visit potential.
+
+---
+
+## THE PLAYTHORN DREAM 100
+
+### Rank 1-25: MUST HAVE
+
+| Rank | Game | Developer | Genre | User Value | Acq Diff | Strategic Value | Browser Status | Distribution | PlayThorn Rights | Retention Mechanism | Competitors |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | **Subway Surfers** | SYBO Games | Endless Runner | 97 | 85 | 99 | VERIFIED AVAILABLE on Poki | AUTHORIZED — Official SYBO × Poki partnership | UNKNOWN — Poki likely has web exclusivity (5yr default) | Endless runs, coin collection, character unlocks, daily challenges | Poki (EXCLUSIVE?), not on CrazyGames |
+| 2 | **Krunker.io** | Sidney de Vries / FRVR | FPS | 96 | 80 | 98 | VERIFIED at krunker.io + Poki | AUTHORIZED — FRVR owned, also on Poki | YELLOW — FRVR proprietary, Poki partnership | Rankings, custom maps, mods, skins, competitive scene | krunker.io (own site), Poki |
+| 3 | **Retro Bowl** | New Star Games | Sports/Football | 96 | 75 | 97 | VERIFIED on Poki | AUTHORIZED — New Star Games × Poki deal | YELLOW — Authorized portals only, contact New Star Games | Season management, draft, progression, NFL license | Poki, Kongregate |
+| 4 | **Shell Shockers** | Blue Wizard Digital | FPS | 95 | 78 | 96 | VERIFIED at shellshock.io | AUTHORIZED — Blue Wizard Digital proprietary | YELLOW — EULA-controlled, publisher partnership needed | Skins, seasons, competitive | shellshock.io, CrazyGames, Poki |
+| 5 | **PolyTrack** | Kodub | Racing/Builder | 96 | 65 | 96 | VERIFIED on itch.io + CrazyGames | AUTHORIZED — Kodub → CrazyGames deal (Aug 2024) | YELLOW — Solo dev, contact via itch.io | Track builder + sharing, time trials, community tracks | CrazyGames, itch.io |
+| 6 | **Slow Roads** | Anslo / Topograph Interactive | Driving/Zen | 95 | 60 | 94 | VERIFIED at slowroads.io | AUTHORIZED — Topograph Interactive Ltd (UK) | YELLOW — Contact hello@slowroads.io | Procedural terrain, zen driving, infinite exploration | slowroads.io (own site), Steam |
+| 7 | **Temple Run 2** | Imangi Studios | Endless Runner | 94 | 82 | 95 | VERIFIED on Poki | AUTHORIZED — Imangi × Poki (since Nov 2020) | UNKNOWN — Poki likely has web exclusivity | Endless runs, power-ups, character unlocks | Poki (LIKELY EXCLUSIVE) |
+| 8 | **Cookie Clicker** | Orteil / DashNet | Idle/Clicker | 95 | 55 | 93 | VERIFIED at cookieclicker.com | AUTHORIZED — Self-published by Orteil | YELLOW — Proprietary, Steam version exists | INFINITE progression, upgrades, golden cookies, prestige | cookieclicker.com, Steam |
+| 9 | **Smash Karts** | Tall Team (Dublin) | Kart Battle | 94 | 80 | 95 | VERIFIED on CrazyGames | AUTHORIZED — Tall Team × CrazyGames partnership | YELLOW — Likely CrazyGames exclusive | Weapons, chaos, multiplayer mayhem | CrazyGames (LIKELY EXCLUSIVE) |
+| 10 | **Venge.io** | Onrush Studio | Tactical FPS | 94 | 70 | 94 | VERIFIED at venge.io + Poki | AUTHORIZED — Onrush Studio, on Poki via SDK | YELLOW — Available on Poki, own site exists | Abilities, tactical play, competitive ranking | venge.io, Poki, CrazyGames |
+| 11 | **Drift Hunters** | Ilya Kaminetsky | Drift Racing | 93 | 55 | 93 | VERIFIED on multiple portals | VERIFIED AUTHORIZED DISTRIBUTION | YELLOW — Contact developer for licensing | 25+ cars, JDM tuning, drift scoring, track variety | CrazyGames, Poki, many portals — COMMON |
+| 12 | **BuildNow GG** | BattleLab | Build & Shoot | 93 | 72 | 93 | VERIFIED at buildnow.gg | AUTHORIZED — BattleLab proprietary | YELLOW — Proprietary platform | Build mechanics + shooting, skill ceiling, modes | buildnow.gg, Poki |
+| 13 | **Tetr.io** | osk | Competitive Puzzle | 95 | 70 | 92 | VERIFIED at tetr.io | AUTHORIZED — osk solo dev | YELLOW — Passion project, unlikely to license out | Competitive ranking, speed records, multiplayer | tetr.io (OWN SITE ONLY) — RARE |
+| 14 | **Bloxd.io** | Unknown Studio | Voxel Sandbox | 91 | 75 | 93 | VERIFIED at bloxd.io | AUTHORIZED — Proprietary | YELLOW — Custom platform with API | 10+ game modes, building, multiplayer | bloxd.io, Poki |
+| 15 | **Territorial.io** | David Tschacher | Strategy | 92 | 60 | 91 | VERIFIED at territorial.io | AUTHORIZED — Solo dev | YELLOW — Contact developer | Territory conquest, multiplayer strategy depth | territorial.io, CrazyGames |
+| 16 | **Moto X3M** | MadPuffers | Bike Stunt | 93 | 75 | 93 | VERIFIED on Poki | AUTHORIZED — MadPuffers × Poki SDK | UNKNOWN — Poki may hold web exclusivity | Level progression, time trials, 3-star challenges | Poki (LIKELY EXCLUSIVE) |
+| 17 | **8 Ball Pool** | Miniclip | Billiards | 92 | 88 | 92 | VERIFIED on miniclip.com | AUTHORIZED — Miniclip proprietary | VERY DIFFICULT — Miniclip controls all distribution | Skill-based 1v1, coin stakes, tournament progression | Miniclip (EXCLUSIVE) |
+| 18 | **Skribbl.io** | ticedev | Drawing/Party | 90 | 75 | 91 | VERIFIED at skribbl.io | AUTHORIZED — ticedev proprietary | YELLOW — Standalone platform | Social fun, word guessing, private rooms | skribbl.io (OWN SITE) — RARE |
+| 19 | **Cut the Rope** (series) | ZeptoLab / Famobi | Physics Puzzle | 91 | 35 | 90 | VERIFIED on Famobi portals | AUTHORIZED — ZeptoLab → Famobi B2B license | GREEN — Famobi B2B licensing available | Level progression, 3-star challenges, cute characters | Famobi partners, CrazyGames — COMMON |
+| 20 | **Gartic Phone** | Onrizon | Party/Social | 89 | 78 | 90 | VERIFIED at garticphone.com | AUTHORIZED — Onrizon proprietary | YELLOW — Standalone platform | Hilarity, group play, viral social | garticphone.com (OWN SITE) — RARE |
+| 21 | **Agar.io** | Matheus Valadares / Miniclip | .io Classic | 85 | 85 | 89 | VERIFIED at agar.io | AUTHORIZED — Miniclip owned | VERY DIFFICULT — Miniclip proprietary | Eat or be eaten, growth, leaderboard | agar.io, Miniclip — LIMITED |
+| 22 | **Slither.io** | Steve Howse | .io Snake | 84 | 82 | 88 | VERIFIED at slither.io | AUTHORIZED — Self-published | DIFFICULT — Proprietary | Growth, survival, competitive | slither.io (OWN SITE) — RARE |
+| 23 | **Kingdom Rush** | Ironhide Game Studio | Tower Defense | 94 | 50 | 92 | VERIFIED on CrazyGames, Armor Games | AUTHORIZED via Ruffle — Ironhide does NOT self-host web ver | YELLOW — Contact Ironhide for licensing | Deep strategy, hero progression, multiple towers | CrazyGames, ArmorGames, Kongregate — COMMON |
+| 24 | **Geometry Dash** (demo) | RobTop Games | Rhythm Platformer | 93 | 70 | 91 | VERIFIED — official demo at geometrydash.com | AUTHORIZED — RobTop official demo | UNKNOWN — Demo exists, full version is premium | Level mastery, music sync, user-created levels | geometrydash.com, CrazyGames |
+| 25 | **Universal Paperclips** | Frank Lantz | Idle/Strategy | 95 | 45 | 88 | VERIFIED at decisionproblem.com | AUTHORIZED — Self-published by Frank Lantz | YELLOW — Contact via NYU Game Center | Mind-bending depth, 3-act structure, "one more click" | decisionproblem.com (OWN SITE) — UNIQUE |
