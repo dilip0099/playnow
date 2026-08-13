@@ -135,10 +135,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
+  const getSafeDate = (d?: string) => {
+    if (!d) return new Date();
+    const dateObj = new Date(d);
+    return isNaN(dateObj.getTime()) ? new Date() : dateObj;
+  };
+
   // Game detail routes
   const gameRoutes = games.map((game) => ({
     url: `${baseUrl}/game/${game.slug}`,
-    lastModified: new Date(game.releaseDate),
+    lastModified: getSafeDate(game.releaseDate || game.lastUpdated),
     changeFrequency: "monthly" as const,
     priority: 0.8,
   }));
@@ -146,7 +152,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Individual unblocked game landing routes
   const unblockedGameRoutes = games.map((game) => ({
     url: `${baseUrl}/unblocked-games/${game.slug}`,
-    lastModified: new Date(game.releaseDate),
+    lastModified: getSafeDate(game.releaseDate || game.lastUpdated),
     changeFrequency: "monthly" as const,
     priority: 0.85,
   }));
