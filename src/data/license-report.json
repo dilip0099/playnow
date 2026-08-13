@@ -1,18 +1,18 @@
 {
-  "timestamp": "2026-08-13T05:53:55.313Z",
-  "totalGames": 785,
-  "newlyAdded": 195,
+  "timestamp": "2026-08-13T05:57:41.835Z",
+  "totalGames": 907,
+  "newlyAdded": 122,
   "sourceNetwork": "GameMonetize",
   "categoryDistribution": {
-    "action": 45,
-    "puzzle": 289,
-    "arcade": 190,
-    "racing": 33,
-    "adventure": 58,
-    "strategy": 67,
-    "sports": 44,
-    "multiplayer": 13,
-    "classic": 46
+    "action": 56,
+    "puzzle": 300,
+    "arcade": 237,
+    "racing": 49,
+    "adventure": 66,
+    "strategy": 77,
+    "sports": 53,
+    "multiplayer": 14,
+    "classic": 55
   },
   "rejectedForBrandRisk": [
     {
@@ -101,6 +101,48 @@
     },
     {
       "title": "BTS Minecraft Coloring Time",
+      "conflicts": [
+        "MINECRAFT"
+      ]
+    },
+    {
+      "title": "Candy Crush Blast",
+      "conflicts": [
+        "CANDY CRUSH"
+      ]
+    },
+    {
+      "title": "Minecraft Hole IO",
+      "conflicts": [
+        "MINECRAFT"
+      ]
+    },
+    {
+      "title": "Minecraft Diamond Miner",
+      "conflicts": [
+        "MINECRAFT"
+      ]
+    },
+    {
+      "title": "Minecraft Pixel Gun Shooter",
+      "conflicts": [
+        "MINECRAFT"
+      ]
+    },
+    {
+      "title": "Minecraft Creeper Escape",
+      "conflicts": [
+        "MINECRAFT"
+      ]
+    },
+    {
+      "title": "Blocks and Car",
+      "conflicts": [
+        "TETRIS"
+      ]
+    },
+    {
+      "title": "Minecraft Flappy Creeper",
       "conflicts": [
         "MINECRAFT"
       ]

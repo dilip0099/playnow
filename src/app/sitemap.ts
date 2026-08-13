@@ -143,5 +143,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  return [...staticRoutes, ...categoryRoutes, ...tagRoutes, ...gamesLikeRoutes, ...gameRoutes];
+  // Individual unblocked game landing routes
+  const unblockedGameRoutes = games.map((game) => ({
+    url: `${baseUrl}/unblocked-games/${game.slug}`,
+    lastModified: new Date(game.releaseDate),
+    changeFrequency: "monthly" as const,
+    priority: 0.85,
+  }));
+
+  return [
+    ...staticRoutes,
+    ...categoryRoutes,
+    ...tagRoutes,
+    ...gamesLikeRoutes,
+    ...gameRoutes,
+    ...unblockedGameRoutes,
+  ];
 }
