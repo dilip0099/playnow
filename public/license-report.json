@@ -1,12 +1,12 @@
 {
-  "timestamp": "2026-08-13T05:57:41.835Z",
-  "totalGames": 907,
-  "newlyAdded": 122,
+  "timestamp": "2026-08-13T06:06:53.606Z",
+  "totalGames": 910,
+  "newlyAdded": 0,
   "sourceNetwork": "GameMonetize",
   "categoryDistribution": {
     "action": 56,
-    "puzzle": 300,
-    "arcade": 237,
+    "puzzle": 301,
+    "arcade": 239,
     "racing": 49,
     "adventure": 66,
     "strategy": 77,
@@ -43,108 +43,6 @@
       "title": "Storm Fighter007",
       "conflicts": [
         "FLAPPY BIRD"
-      ]
-    },
-    {
-      "title": "MineCraft TowerDefense!",
-      "conflicts": [
-        "MINECRAFT"
-      ]
-    },
-    {
-      "title": "FNAF Shooter: Metro",
-      "conflicts": [
-        "FNAF"
-      ]
-    },
-    {
-      "title": "Block Tree",
-      "conflicts": [
-        "TETRIS"
-      ]
-    },
-    {
-      "title": "Voxel Frontier",
-      "conflicts": [
-        "MINECRAFT"
-      ]
-    },
-    {
-      "title": "Bird Obstacle Flappy",
-      "conflicts": [
-        "FLAPPY BIRD"
-      ]
-    },
-    {
-      "title": "FNAF Strike Shooter",
-      "conflicts": [
-        "FNAF"
-      ]
-    },
-    {
-      "title": "BTS Roblox Coloring",
-      "conflicts": [
-        "ROBLOX"
-      ]
-    },
-    {
-      "title": "Roblox World Builder",
-      "conflicts": [
-        "ROBLOX"
-      ]
-    },
-    {
-      "title": "Mario 3D Shooter",
-      "conflicts": [
-        "MARIO"
-      ]
-    },
-    {
-      "title": "BTS Minecraft Coloring Time",
-      "conflicts": [
-        "MINECRAFT"
-      ]
-    },
-    {
-      "title": "Candy Crush Blast",
-      "conflicts": [
-        "CANDY CRUSH"
-      ]
-    },
-    {
-      "title": "Minecraft Hole IO",
-      "conflicts": [
-        "MINECRAFT"
-      ]
-    },
-    {
-      "title": "Minecraft Diamond Miner",
-      "conflicts": [
-        "MINECRAFT"
-      ]
-    },
-    {
-      "title": "Minecraft Pixel Gun Shooter",
-      "conflicts": [
-        "MINECRAFT"
-      ]
-    },
-    {
-      "title": "Minecraft Creeper Escape",
-      "conflicts": [
-        "MINECRAFT"
-      ]
-    },
-    {
-      "title": "Blocks and Car",
-      "conflicts": [
-        "TETRIS"
-      ]
-    },
-    {
-      "title": "Minecraft Flappy Creeper",
-      "conflicts": [
-        "MINECRAFT"
       ]
     }
   ]
