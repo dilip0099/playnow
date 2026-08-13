@@ -1,20 +1,26 @@
 {
-  "timestamp": "2026-08-08T13:53:03.124Z",
-  "totalGames": 590,
-  "newlyAdded": 99,
+  "timestamp": "2026-08-13T05:53:55.313Z",
+  "totalGames": 785,
+  "newlyAdded": 195,
   "sourceNetwork": "GameMonetize",
   "categoryDistribution": {
-    "action": 29,
-    "puzzle": 213,
-    "arcade": 151,
-    "racing": 25,
-    "adventure": 40,
-    "strategy": 55,
-    "sports": 33,
-    "multiplayer": 8,
-    "classic": 36
+    "action": 45,
+    "puzzle": 289,
+    "arcade": 190,
+    "racing": 33,
+    "adventure": 58,
+    "strategy": 67,
+    "sports": 44,
+    "multiplayer": 13,
+    "classic": 46
   },
   "rejectedForBrandRisk": [
+    {
+      "title": "Roblox Parkour Adventure",
+      "conflicts": [
+        "ROBLOX"
+      ]
+    },
     {
       "title": "fnaf arcade showdown",
       "conflicts": [
@@ -73,6 +79,30 @@
       "title": "FNAF Strike Shooter",
       "conflicts": [
         "FNAF"
+      ]
+    },
+    {
+      "title": "BTS Roblox Coloring",
+      "conflicts": [
+        "ROBLOX"
+      ]
+    },
+    {
+      "title": "Roblox World Builder",
+      "conflicts": [
+        "ROBLOX"
+      ]
+    },
+    {
+      "title": "Mario 3D Shooter",
+      "conflicts": [
+        "MARIO"
+      ]
+    },
+    {
+      "title": "BTS Minecraft Coloring Time",
+      "conflicts": [
+        "MINECRAFT"
       ]
     }
   ]

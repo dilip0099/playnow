@@ -39,6 +39,13 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      // 301 redirect www.playthorn.com -> playthorn.com to stop duplicate indexation
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.playthorn.com" }],
+        destination: "https://playthorn.com/:path*",
+        permanent: true,
+      },
       // The Vercel-issued subdomain still resolves and serves the same deployment as
       // playthorn.com now that a real domain is connected — without this, Google would see
       // identical content under two hosts (duplicate content), and it's the exact URL this

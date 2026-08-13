@@ -38,7 +38,7 @@ const jetbrainsMono = JetBrains_Mono({
 // the same keyword would cannibalize both pages' rankings for it.
 const DEFAULT_TITLE = "Free Online Games - Play Instantly, No Download";
 const DEFAULT_DESCRIPTION =
-  "Play free online games instantly in your browser — no downloads, no installs, no signup. Action, puzzle, arcade, racing, strategy, sports, and .io multiplayer games.";
+  "Play 590+ free online games instantly in your browser — no downloads, no installs, no signup. Play action, puzzle, arcade, racing, strategy, sports, and .io multiplayer games.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

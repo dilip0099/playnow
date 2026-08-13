@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "import-games": "tsx --env-file-if-exists=.env.local src/scripts/import-gamemonetize.ts",
-    "import-gamemonetize": "tsx --env-file-if-exists=.env.local src/scripts/import-gamemonetize.ts"
+    "import-gamemonetize": "tsx --env-file-if-exists=.env.local src/scripts/import-gamemonetize.ts",
+    "rewrite-descriptions": "npx tsx src/scripts/rewrite-game-descriptions.ts"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",

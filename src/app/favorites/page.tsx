@@ -6,6 +6,10 @@ import { FavoritesClient } from "./FavoritesClient";
 export const metadata: Metadata = {
   title: "Favorite Games - PlayThorn",
   description: "View and play your saved favorite HTML5 browser games.",
+  robots: {
+    index: false,
+    follow: true,
+  },
 };
 
 export default function FavoritesPage() {
