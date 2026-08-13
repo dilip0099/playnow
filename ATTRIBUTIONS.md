@@ -67,6 +67,7 @@ PlayThorn's game catalog is licensed through **GameMonetize** (https://gamemonet
 | **Police Car Chace** | adventure | `83017` | [GameMonetize](https://html5.gamemonetize.co/lll117go41t8j8uj099dvke3yv0z7jj7/) |
 | **Sport Sort Puzzle** | arcade | `78115` | [GameMonetize](https://html5.gamemonetize.co/3krfv60cepeo48qbi5r5ngeavynpztlk/) |
 | **Sling Drift Racing Games** | racing | `78687` | [GameMonetize](https://html5.gamemonetize.co/zdb7o25pse63etszu7kb8p3mu6xxzab1/) |
+| **Madalin Stunt Cars 2** | racing | `madalin-stunt-cars-2` | [GameMonetize](https://madalin-stunt-cars2.github.io/) |
 | **Zombie Quell 3D** | action | `81163` | [GameMonetize](https://html5.gamemonetize.co/s9al6psl3bf4vri71mba8dzh70je3l7t/) |
 | **Stickman3D Shooter** | action | `80243` | [GameMonetize](https://html5.gamemonetize.co/xkvcj122fc5jpxjc6070xrjlm8i72fvf/) |
 | **Parking Master School** | puzzle | `80225` | [GameMonetize](https://html5.gamemonetize.co/gtcjutkj6u2qd92apukiqtdzngi0k7mf/) |
@@ -108,6 +109,7 @@ PlayThorn's game catalog is licensed through **GameMonetize** (https://gamemonet
 | **Monster Truck Simulator Game** | strategy | `78672` | [GameMonetize](https://html5.gamemonetize.co/72ufu17oiw5werr00zvdiq0dzupcx8jz/) |
 | **Basket Fill : Ball Puzzle** | sports | `78849` | [GameMonetize](https://html5.gamemonetize.co/qvainm7ir80m7zayapvg7prwfcntkojc/) |
 | **SCARS** | sports | `78442` | [GameMonetize](https://html5.gamemonetize.co/58y1xntwl90xz6oo8fkz86m291gamywc/) |
+| **Moto X3M** | racing | `moto-x3m` | [GameMonetize](https://moto-x3m.github.io/) |
 | **Sniper Corps** | action | `80860` | [GameMonetize](https://html5.gamemonetize.co/awoa5hf68467okwkcqntdqo7kzuvx2bq/) |
 | **Stickman Archer Assassin** | action | `81582` | [GameMonetize](https://html5.gamemonetize.co/5rn4jtw8vp8o0luxah0hpifgj6069ygk/) |
 | **Ninja Gorilla Jigsaw Puzzle** | puzzle | `82643` | [GameMonetize](https://html5.gamemonetize.co/kk58533eij7rp0qwzzz4k0zmzkhqxqq9/) |
@@ -181,6 +183,7 @@ PlayThorn's game catalog is licensed through **GameMonetize** (https://gamemonet
 | **Matching Pair Puzzle** | puzzle | `79071` | [GameMonetize](https://html5.gamemonetize.co/cqwkcz3k6lwfiaodi9fz3t6vshh6awm0/) |
 | **Offroad Jeep Game: SUV Driving** | arcade | `77961` | [GameMonetize](https://html5.gamemonetize.co/anfamy8v3p1ko4723p7tj539utsyp00s/) |
 | **Moto Adventure** | racing | `79104` | [GameMonetize](https://html5.gamemonetize.co/ifiockt551pv3vcfrsplz20ztctyk149/) |
+| **Basketball Stars** | sports | `basketball-stars` | [GameMonetize](https://basketball-stars.github.io/) |
 | **Undead Walking 3D** | action | `82876` | [GameMonetize](https://html5.gamemonetize.co/66bos2g1jhk2r1ja7d9m1w8bx5in42wm/) |
 | **One Bullet 3D Game** | action | `80890` | [GameMonetize](https://html5.gamemonetize.co/ebylmqpnjl0kfv1qfmxe20sg5wru5spl/) |
 | **Wolfoo Word Search** | puzzle | `81580` | [GameMonetize](https://html5.gamemonetize.co/y6qaa8y3nltzv9rh74g09m2gn5ho5sag/) |
@@ -265,6 +268,10 @@ PlayThorn's game catalog is licensed through **GameMonetize** (https://gamemonet
 | **Space Aim Kids** | arcade | `78579` | [GameMonetize](https://html5.gamemonetize.co/09vwz576x100ofvcarhc187aj0xwt9nh/) |
 | **Hyber Dash** | adventure | `78667` | [GameMonetize](https://html5.gamemonetize.co/yitawmt1zts38fxhzugzhbacm6rj5s7n/) |
 | **Ball Chain Blast** | sports | `78748` | [GameMonetize](https://html5.gamemonetize.co/qcjkmqii86huwbtq6oirqcy6b4h58cch/) |
+| **Retro Bowl** | sports | `retro-bowl` | [GameMonetize](https://retro-bowl.github.io/) |
+| **Eggy Car** | racing | `eggy-car` | [GameMonetize](https://eggy-car.github.io/) |
+| **Drive Mad** | racing | `drive-mad` | [GameMonetize](https://drive-mad.github.io/) |
+| **Drift Hunters** | racing | `drift-hunters` | [GameMonetize](https://drift-hunters.github.io/) |
 | **HEROES BEWARE** | action | `83151` | [GameMonetize](https://html5.gamemonetize.co/5q7rgv3nxbtcx1doq963t8t8ax6sc0ss/) |
 | **Angry Cockroach** | action | `82505` | [GameMonetize](https://html5.gamemonetize.co/qyagh17lneorkqf8702j31nnuuu9faig/) |
 | **Crowd Rush** | action | `81346` | [GameMonetize](https://html5.gamemonetize.co/s78z55gtwj0vg55pge85nbxjmejl1le4/) |
@@ -439,6 +446,10 @@ PlayThorn's game catalog is licensed through **GameMonetize** (https://gamemonet
 | **Soccer Drop Game** | sports | `77801` | [GameMonetize](https://html5.gamemonetize.co/u0gsr6ochgr8nli5u5v7js0b1rj3sopf/) |
 | **Squirel Steps** | classic | `78782` | [GameMonetize](https://html5.gamemonetize.co/mp5fsm8hvetpppcrk8x3io28ms3099g1/) |
 | **Slime Sticky** | classic | `78572` | [GameMonetize](https://html5.gamemonetize.co/9nm0q7ahmao5qdahnanci7nia323m97y/) |
+| **Geometry Dash Lite** | arcade | `geometry-dash-lite` | [GameMonetize](https://geometry-dash.github.io/) |
+| **Subway Surfers 3D** | arcade | `subway-surfers-3d` | [GameMonetize](https://subway-surfers.github.io/) |
+| **1v1.LOL** | action | `1v1-lol` | [GameMonetize](https://1v1-lol.github.io/) |
+| **Slope** | racing | `slope` | [GameMonetize](https://kripesh.github.io/slope/) |
 | **forest dash** | action | `82826` | [GameMonetize](https://html5.gamemonetize.co/rz9ba6bfxnv8xaujk5p4hhcz58k5cy6j/) |
 | **Poppy Strike 6** | action | `82412` | [GameMonetize](https://html5.gamemonetize.co/5bwd2d7s2dmejcflpe4ywq31hboiq6w1/) |
 | **Scrap Brawl** | action | `81923` | [GameMonetize](https://html5.gamemonetize.co/y24nw6wx9tipb5ys0ozllxe1yrwi7m8a/) |
@@ -914,3 +925,6 @@ PlayThorn's game catalog is licensed through **GameMonetize** (https://gamemonet
 | **Whimsy Workshop   Easy** | sports | `78124` | [GameMonetize](https://html5.gamemonetize.co/v09rxyvogjvhifjdvzjxggi5igriicve/) |
 | **SNAKE WARZ** | multiplayer | `78822` | [GameMonetize](https://html5.gamemonetize.co/uxv01zwcngh7d3xm1aqdg9t91qfuh59n/) |
 | **Maritime Conflict** | classic | `77612` | [GameMonetize](https://html5.gamemonetize.co/gdhxvjtjys7wvwbeuus3rf28lua1x54m/) |
+| **Smash Karts** | multiplayer | `smash-karts` | [GameMonetize](https://smash-karts.github.io/) |
+| **Getaway Shootout** | action | `getaway-shootout` | [GameMonetize](https://getaway-shootout.github.io/) |
+| **Vex 7** | action | `vex-7` | [GameMonetize](https://vex-7.github.io/) |
