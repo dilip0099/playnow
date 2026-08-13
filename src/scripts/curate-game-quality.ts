@@ -19,7 +19,9 @@ function cleanTitle(title: string): string {
 const TOP_VIRAL_KEYWORDS = [
   "slope", "retro", "drift", "1v1", "moto", "2048", "subway", "geometry", "drive",
   "car", "racing", "sniper", "stickman", "football", "basketball", "chess", "zombie",
-  "space", "parking", "stunt", "truck", "bike", "merge", "puzzle", "survival"
+  "space", "parking", "stunt", "truck", "bike", "merge", "puzzle", "survival",
+  "vex", "bob", "fireboy", "watergirl", "police", "tank", "obby", "roblox", "slither",
+  "paper", "hero", "penalty", "cut", "runner", "pool"
 ];
 
 // Self-Hosted Open Source Classic Games definition
@@ -127,6 +129,13 @@ export function curateAndSortGames() {
   const now = new Date().toISOString();
   const processed = rawData.map((g) => {
     g.title = cleanTitle(g.title);
+    g.derivedTitle = g.title;
+
+    // Guarantee crisp banner cover images for player & cards
+    const fallbackImage = g.thumbnailUrl || "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&auto=format&fit=crop&q=80";
+    if (!g.heroImage || g.heroImage.length < 5) g.heroImage = fallbackImage;
+    if (!g.coverImage || g.coverImage.length < 5) g.coverImage = fallbackImage;
+    if (!g.thumbnailUrl || g.thumbnailUrl.length < 5) g.thumbnailUrl = fallbackImage;
     
     let score = 0;
     const titleLower = g.title.toLowerCase();
@@ -134,8 +143,8 @@ export function curateAndSortGames() {
 
     // Viral Keyword Bonus
     TOP_VIRAL_KEYWORDS.forEach((kw) => {
-      if (titleLower.includes(kw)) score += 30;
-      else if (descLower.includes(kw)) score += 10;
+      if (titleLower.includes(kw)) score += 40;
+      else if (descLower.includes(kw)) score += 15;
     });
 
     // SubType & Quality Markers
@@ -145,7 +154,7 @@ export function curateAndSortGames() {
     if (g.thumbnailUrl && g.thumbnailUrl.startsWith("https://")) score += 10;
 
     // Assign featured/trending status based on score
-    if (score >= 50) {
+    if (score >= 40) {
       g.featured = true;
       g.trending = true;
     }

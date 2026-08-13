@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-08-13T06:19:15.366Z",
+  "timestamp": "2026-08-13T06:22:42.212Z",
   "totalGames": 911,
   "newlyAdded": 0,
   "sourceNetwork": "GameMonetize",
@@ -14,18 +14,5 @@
     "multiplayer": 14,
     "classic": 55
   },
-  "rejectedForBrandRisk": [
-    {
-      "title": "Roblox Parkour Adventure",
-      "conflicts": [
-        "ROBLOX"
-      ]
-    },
-    {
-      "title": "fnaf arcade showdown",
-      "conflicts": [
-        "FNAF"
-      ]
-    }
-  ]
+  "rejectedForBrandRisk": []
 }

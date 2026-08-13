@@ -34,7 +34,7 @@ interface GamePlayerProps {
 export function GamePlayer({ game, onPlay }: GamePlayerProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const iframeRef = useRef<HTMLIFrameElement>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
   const [isCoverLoaded, setIsCoverLoaded] = useState(false);
   const [isTheaterMode, setIsTheaterMode] = useState(false);
