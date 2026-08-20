@@ -8,6 +8,7 @@ export async function GET() {
   try {
     const games = getAllGames();
     const baseUrl = SITE_URL;
+    const hostname = new URL(baseUrl).hostname;
 
     // Collect all URLs to ping
     const urlList: string[] = [
@@ -19,34 +20,42 @@ export async function GET() {
         (c) => `${baseUrl}/category/${c}`
       ),
       ...games.map((g) => `${baseUrl}/game/${g.slug}`),
+      ...games.map((g) => `${baseUrl}/unblocked-games/${g.slug}`),
     ];
 
-    // Prepare IndexNow Payload
-    const payload = {
-      host: "playthorn.com",
-      key: INDEXNOW_KEY,
-      keyLocation: `${baseUrl}/${INDEXNOW_KEY}.txt`,
-      urlList: urlList.slice(0, 1000), // Max 10,000 URLs per submit
-    };
+    const chunkSize = 500;
+    let successCount = 0;
 
-    // Ping Bing IndexNow endpoint
-    const response = await fetch("https://api.indexnow.org/indexnow", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json; charset=utf-8",
-      },
-      body: JSON.stringify(payload),
-    });
+    for (let i = 0; i < urlList.length; i += chunkSize) {
+      const chunk = urlList.slice(i, i + chunkSize);
+      const payload = {
+        host: hostname,
+        key: INDEXNOW_KEY,
+        keyLocation: `${baseUrl}/${INDEXNOW_KEY}.txt`,
+        urlList: chunk,
+      };
+
+      const res = await fetch("https://api.indexnow.org/indexnow", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json; charset=utf-8",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (res.ok) {
+        successCount += chunk.length;
+      }
+    }
 
     return NextResponse.json({
-      success: response.ok,
-      status: response.status,
+      success: true,
       submittedUrls: urlList.length,
-      message: response.ok
-        ? "Successfully submitted all URLs to IndexNow engine!"
-        : "IndexNow submission failed",
+      successfullyIndexed: successCount,
+      message: `Successfully submitted ${successCount} / ${urlList.length} URLs to IndexNow engine!`,
     });
   } catch (error: any) {
     return NextResponse.json({ success: false, error: error.message }, { status: 500 });
   }
 }
+
